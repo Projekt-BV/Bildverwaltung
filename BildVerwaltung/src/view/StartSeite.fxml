@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="-1.0" prefWidth="-1.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <!-- TODO Add Nodes -->
+  <children>
+    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="494.0" prefWidth="471.0">
+      <left>
+        <TreeView prefHeight="442.0" prefWidth="85.0" />
+      </left>
+      <top>
+        <AnchorPane prefHeight="52.0" prefWidth="471.0">
+          <children>
+            <MenuBar layoutX="0.0" layoutY="2.0" prefWidth="471.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Import" />
+                    <MenuItem mnemonicParsing="false" text="Cut" />
+                    <MenuItem mnemonicParsing="false" text="Copy" />
+                    <MenuItem mnemonicParsing="false" text="Rename" />
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                    <MenuItem mnemonicParsing="false" text="Save" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Rotate Left" />
+                    <MenuItem mnemonicParsing="false" text="Rotate Right" />
+                    <MenuItem mnemonicParsing="false" text="Black/ White" />
+                    <MenuItem mnemonicParsing="false" text="Cut" />
+                    <MenuItem mnemonicParsing="false" text="Resize" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Organize">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="New Folder" />
+                    <MenuItem mnemonicParsing="false" text="New Album" />
+                    <MenuItem mnemonicParsing="false" text="Search" />
+                    <MenuItem mnemonicParsing="false" text="Filter" />
+                    <MenuItem mnemonicParsing="false" text="Sort" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="View">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Detail " />
+                    <MenuItem mnemonicParsing="false" text="Preview" />
+                    <MenuItem mnemonicParsing="false" text="Navigator" />
+                    <MenuItem mnemonicParsing="false" text="Information" />
+                    <MenuItem mnemonicParsing="false" text="" />
+                    <MenuItem mnemonicParsing="false" text="" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <HBox layoutX="0.0" layoutY="26.0" prefHeight="24.0" prefWidth="471.0">
+              <children>
+                <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="41.0" text="UP" />
+                <TextField prefHeight="24.0" prefWidth="172.0" />
+                <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="31.0" text="-&gt;" />
+                <Slider />
+                <Label prefWidth="31.0" text="0%" />
+                <Button mnemonicParsing="false" text="Full Screen" />
+              </children>
+            </HBox>
+          </children>
+        </AnchorPane>
+      </top>
+    </BorderPane>
+  </children>
+</AnchorPane>
