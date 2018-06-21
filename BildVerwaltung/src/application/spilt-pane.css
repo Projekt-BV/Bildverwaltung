@@ -1,0 +1,10 @@
+.split-pane{
+    -fx-background-color: rgb(60, 60, 60);
+    -fx-border-color: rgb(70, 70, 70);
+    -fx-color: rgb(70, 70, 70);
+}
+
+.split-pane.vertical {
+    -fx-background-color: rgb(60, 60, 60);
+    -fx-border-color: rgb(80, 80, 80);
+}

@@ -1,0 +1,15 @@
+.tab-pane{
+    -fx-color: rgb(95,95,95);
+    -fx-border-color: rgb(80, 80, 80);
+    -fx-background-color: rgb(60, 60, 60);
+}
+
+.tap-header-area .tap-header-background{
+    -fx-background-color: rgb(40, 40 ,40);
+    -fx-border-color: rgb(80, 80, 80);
+    -fx-color: rgb(80, 80, 80);
+}
+
+.text{
+    -fx-fill: rgb(220, 220, 220);
+}

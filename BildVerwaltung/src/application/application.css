@@ -1,1 +1,63 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.button{
+    -fx-background-color: rgb(100, 100, 100);
+    -fx-border-color: rgb(80, 80, 80);
+    -fx-text-fill: rgb(220, 220, 220); 
+}
+
+.anchor-pane{
+    -fx-background-color: rgb(40, 40 ,40);
+    -fx-border-color: rgb(80, 80, 80);
+}
+
+.border-pane{
+    -fx-background-color: rgb(95, 95 ,95);
+}
+
+.text-field{
+    -fx-background-color: rgb(150, 150 , 150);
+    -fx-text-fill: rgb(220, 220, 220);
+    -fx-color: rgb(150, 150, 150)
+}
+
+.menu-bar{
+    -fx-background-color: rgb(50, 50, 50);
+    -fx-color: rgb(50, 50, 50);
+}
+
+.grid-pane{
+    -fx-background-color: rgb(75,75,75);
+}
+
+.label{
+    -fx-text-fill: rgb(220, 220, 220);
+}
+
+.text{
+    -fx-fill: rgb(220, 220, 220);
+    -fx-color: rgb(220, 220, 220);
+}
+
+.choice-box{
+
+    -fx-background-color: rgb(100, 100, 100);
+    -fx-border-color: rgb(80, 80, 80);
+    -fx-text-fill: rgb(220, 220, 220);   
+}
+
+.toggle-button{
+    -fx-background-color: rgb(100, 100, 100);
+    -fx-border-color: rgb(80, 80, 80);
+    -fx-text-fill: rgb(220, 220, 220);
+}
+
+.progress-bar{
+    -fx-color: rgb(100, 100, 100);
+    -fx-border-color: rgb(80, 80, 80);
+}
+
+.date-picker {
+    -fx-background-color: rgb(100, 100, 100);
+    -fx-border-color: rgb(80, 80, 80);
+    -fx-text-fill: rgb(220, 220, 220);
+    -fx-color: rgb(100, 100, 100);
+}
