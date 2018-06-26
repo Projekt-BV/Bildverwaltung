@@ -1,0 +1,17 @@
+.tab-pane{
+    -fx-border-color: rgb(80, 80, 80);
+    -fx-background-color: rgb(60, 60, 60);
+}
+
+.tab-header-area .tab-header-background{
+    -fx-background-color: rgb(40, 40 ,40);
+    -fx-border-color: rgb(80, 80, 80);
+}
+
+.tab-pane .tab{
+    -fx-background-color: rgb(100, 100, 100);
+}
+
+.text{
+    -fx-fill: rgb(220, 220, 220);
+}
