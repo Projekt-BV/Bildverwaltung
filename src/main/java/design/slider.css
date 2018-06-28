@@ -5,3 +5,11 @@
 .sliders .thumb{
     -fx-color: rgb(80, 80, 80);
 }
+
+.sliders .thumb:hover{
+    -fx-color: rgb(60, 60, 60);
+}
+
+.sliders .thumb:pressed{
+    -fx-effect: innershadow(two-pass-box, rgb(30, 30 ,30), 10, 0, 3, 0);
+}

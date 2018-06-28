@@ -9,7 +9,17 @@
 }
 
 .tab-pane .tab{
+    -fx-background-color: rgb(80, 80, 80);
+    -fx-border-color: rgb(60, 60, 60);
+}
+
+.tab-pane .tab:hover{
+    -fx-background-color: rgb(60, 60, 60);
+}
+
+.tab-pane .tab:selected{
     -fx-background-color: rgb(100, 100, 100);
+    -fx-border-color: rgb(120, 120, 120);
 }
 
 .text{

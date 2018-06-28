@@ -8,3 +8,13 @@
     -fx-background-color: rgb(60, 60, 60);
     -fx-border-color: rgb(80, 80, 80);
 }
+
+.split-pane .scroll-bar{
+    -fx-background-color: rgb(60, 60, 60);
+}
+
+.spilt-pane .scroll-pane .corner{
+    -fx-background-color: rgb(60, 60, 60);
+    -fx-color: rgb(60, 60, 60);
+    -fx-border-color: rgb(60, 60, 60);
+}
