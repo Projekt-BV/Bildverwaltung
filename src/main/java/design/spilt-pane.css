@@ -4,17 +4,29 @@
     -fx-color: rgb(70, 70, 70);
 }
 
+/*
 .split-pane.vertical {
     -fx-background-color: rgb(60, 60, 60);
     -fx-border-color: rgb(80, 80, 80);
 }
+*/
 
 .split-pane .scroll-bar{
     -fx-background-color: rgb(60, 60, 60);
 }
 
-.spilt-pane .scroll-pane .corner{
+.split-pane .scroll-bar .decrement-button:hover{
     -fx-background-color: rgb(60, 60, 60);
-    -fx-color: rgb(60, 60, 60);
-    -fx-border-color: rgb(60, 60, 60);
+}
+
+.split-pane .scroll-bar .increment-button:hover{
+    -fx-background-color: rgb(60, 60, 60);
+}
+
+.split-pane .scroll-bar .thumb:hover{
+    -fx-background-color: rgb(80, 80, 80);
+}
+
+.scroll-pane .corner{
+    -fx-background-color: rgb(60, 60, 60);
 }

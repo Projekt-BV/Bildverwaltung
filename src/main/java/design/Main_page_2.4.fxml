@@ -27,9 +27,9 @@
 <AnchorPane prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <!-- TODO Add Nodes -->
   <children>
-    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="768.0" prefWidth="1280.0">
+    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css">
       <left>
-        <TreeView prefHeight="716.0" prefWidth="254.0" stylesheets="@tree-view.css" />
+        <TreeView prefHeight="716.0" prefWidth="254.0" />
       </left>
       <top>
         <AnchorPane prefHeight="52.0" prefWidth="471.0" styleClass="anchor-pane" stylesheets="@application.css">
@@ -99,14 +99,14 @@
         </AnchorPane>
       </top>
          <center>
-            <SplitPane dividerPositions="0.0392156862745098" maxWidth="788.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="713.0" prefWidth="788.0" stylesheets="@spilt-pane.css" BorderPane.alignment="CENTER">
+            <SplitPane dividerPositions="0.0392156862745098" maxWidth="788.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="713.0" prefWidth="788.0" BorderPane.alignment="CENTER">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="anchor-pane" stylesheets="@application.css">
                      <children>
                         <Button layoutX="547.0" mnemonicParsing="false" text="Rename All" />
                         <TextField layoutX="623.0" prefHeight="25.0" prefWidth="166.0" styleClass="split-pane" stylesheets="@application.css" />
                         <Button layoutX="150.0" mnemonicParsing="false" text="New Folder" />
-                <Slider layoutX="268.0" layoutY="6.0" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" stylesheets="@slider.css" />
+                <Slider layoutX="268.0" layoutY="6.0" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
                 <Label layoutX="489.0" layoutY="6.0" prefWidth="31.0" text="0%" />
                         <ChoiceBox prefWidth="150.0" />
                      </children></AnchorPane>
@@ -132,7 +132,7 @@
             </SplitPane>
          </center>
          <right>
-            <TabPane prefHeight="713.0" prefWidth="247.0" stylesheets="@tab-pane.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane prefHeight="713.0" prefWidth="247.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
                 <Tab text="Editing">
                   <content>
