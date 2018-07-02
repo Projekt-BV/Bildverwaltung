@@ -1,0 +1,293 @@
+/*Button*/
+/*-------------------------------------------*/
+.button:hover{
+    -fx-background-color: rgb(70, 70, 70);
+    -fx-border-color: rgb(50, 50, 50);
+    -fx-text-fill: rgb(220, 220, 220); 
+}
+
+.button {
+    -fx-background-color: rgb(90, 90, 90);
+    -fx-border-color: rgb(70, 70, 70);
+    -fx-text-fill: rgb(220, 220, 220); 
+}
+
+.button:pressed{
+    -fx-effect: innershadow(two-pass-box, rgb(30, 30 ,30), 10, 0, 3, 0);
+}
+/*-------------------------------------------*/
+/*-------------------------------------------*/
+
+
+.anchor-pane{
+    -fx-background-color: rgb(40, 40 ,40);
+    -fx-border-color: rgb(80, 80, 80);
+}
+
+.border-pane{
+    -fx-background-color: rgb(95, 95 ,95);
+}
+
+.text-field{
+    -fx-background-color: rgb(150, 150 , 150);
+    -fx-text-fill: rgb(220, 220, 220);
+    -fx-color: rgb(150, 150, 150)
+}
+
+
+/* Menu-Bar */
+/*-------------------------------------------*/
+.menu-bar{
+    -fx-background-color: rgb(50, 50, 50);   
+}
+
+.menu-bar .container {
+    -fx-background-color: rgb(50, 50, 50);
+
+}
+.menu-bar .menu-item{
+    -fx-background-color: rgb(60, 60, 60);
+    -fx-border-color: rgb(60, 60, 60);
+}
+
+.menu-bar .menu-open-vertically{
+    -fx-background-color: rgb(80, 80, 80);
+}
+
+/*Hover_____________________________________*/
+.menu-bar .menu:hover{
+    -fx-background-color: rgb(70, 70 ,70);
+}
+
+.menu-bar .menu-item:hover{
+    -fx-background-color: rgb(80, 80, 80);
+    -fx-border-color: rgb(60, 60, 60);
+}
+/*------------------------------------------*/
+/*------------------------------------------*/
+
+
+.grid-pane{
+    -fx-background-color: rgb(75,75,75);
+}
+
+.label{
+    -fx-text-fill: rgb(220, 220, 220);
+}
+
+.text{
+    -fx-fill: rgb(220, 220, 220);
+    -fx-color: rgb(220, 220, 220);
+}
+
+
+/*Choice-box*/
+/*-------------------------------------------*/
+.choice-box{
+
+    -fx-background-color: rgb(100, 100, 100);
+    -fx-border-color: rgb(80, 80, 80);
+    -fx-text-fill: rgb(220, 220, 220); 
+}
+
+.choice-box:hover{
+    -fx-background-color: rgb(70, 70, 70);
+    -fx-text-fill: rgb(220, 220, 220); 
+}
+
+.choice-box:pressed{
+    -fx-effect: innershadow(two-pass-box, rgb(30, 30 ,30), 10, 0, 3, 0);  
+}
+/*-------------------------------------------*/
+/*-------------------------------------------*/
+
+
+
+/*Toggle-Button*/
+/*-------------------------------------------*/
+.toggle-button{
+    -fx-background-color: rgb(90, 90, 90);
+    -fx-border-color: rgb(70, 70, 70);
+    -fx-text-fill: rgb(220, 220, 220);
+}
+
+.toggle-button:hover{
+    -fx-background-color: rgb(70, 70, 70);
+    -fx-border-color: rgb(50, 50, 50);
+    -fx-text-fill: rgb(220, 220, 220);
+}
+
+.toggle-button:selected{
+    -fx-effect: innershadow(two-pass-box, rgb(30, 30 ,30), 10, 0, 3, 0);  
+}
+/*-------------------------------------------*/
+/*-------------------------------------------*/
+
+
+.progress-bar{
+    -fx-color: rgb(100, 100, 100);
+    -fx-border-color: rgb(80, 80, 80);
+}
+
+
+/*Date-Picker*/
+/*-------------------------------------------*/
+.date-picker .arrow-button:hover{
+    -fx-background-color: rgb(70, 70, 70);
+    -fx-border-color: rgb(50, 50, 50);
+}
+.date-picker{
+    -fx-background-color: rgb(100, 100, 100);
+    -fx-border-color: rgb(80, 80, 80);
+    -fx-text-fill: rgb(220, 220, 220);
+    -fx-color: rgb(100, 100, 100);
+}
+
+.date-picker .arrow-button:pressed{
+    -fx-effect: innershadow(two-pass-box, rgb(30, 30 ,30), 10, 0, 3, 0);
+}
+
+.date-picker .date-cell{
+    -fx-background-color: rgb(60, 60, 60);
+}
+
+.date-picker .day-cell{
+     -fx-background-color: rgb(80, 80, 80);
+}
+
+.date-picker{
+    -fx-background-color: rgb(80, 80, 80);
+}
+/*-------------------------------------------*/
+/*-------------------------------------------*/
+
+
+/*Tab-Pane*/
+/*-------------------------------------------*/
+.tab-pane{
+    -fx-border-color: rgb(80, 80, 80);
+    -fx-background-color: rgb(60, 60, 60);
+}
+
+.tab-header-area .tab-header-background{
+    -fx-background-color: rgb(40, 40 ,40);
+    -fx-border-color: rgb(80, 80, 80);
+}
+
+.tab-pane .tab{
+    -fx-background-color: rgb(80, 80, 80);
+    -fx-border-color: rgb(60, 60, 60);
+}
+
+.tab-pane .tab:hover{
+    -fx-background-color: rgb(60, 60, 60);
+}
+
+.tab-pane .tab:selected{
+    -fx-background-color: rgb(100, 100, 100);
+    -fx-border-color: rgb(120, 120, 120);
+}
+
+.text{
+    -fx-fill: rgb(220, 220, 220);
+}
+/*-------------------------------------------*/
+/*-------------------------------------------*/
+
+
+/*Sliders*/
+/*-------------------------------------------*/
+.sliders .track{
+    -fx-background-color: rgb(20, 20, 20);
+}
+
+.sliders .thumb{
+    -fx-color: rgb(80, 80, 80);
+}
+
+.sliders .thumb:hover{
+    -fx-color: rgb(60, 60, 60);
+}
+
+.sliders .thumb:pressed{
+    -fx-effect: innershadow(two-pass-box, rgb(30, 30 ,30), 10, 0, 3, 0);
+}
+/*-------------------------------------------*/
+/*-------------------------------------------*/
+
+
+/*Tree-View*/
+/*-------------------------------------------*/
+.tree-view .tree-cell{
+    -fx-background-color: rgb(60, 60, 60);
+}
+
+.tree-view{
+    -fx-border-color: rgb(90, 90, 90);
+    -fx-background-color: rgb(60, 60, 60);
+}
+
+.tree-view .virtual-flow{
+    -fx-background-color: rgb(60, 60 ,60);
+}
+/*-------------------------------------------*/
+/*-------------------------------------------*/
+
+
+/*Split-Pane*/
+/*-------------------------------------------*/
+.split-pane{
+    -fx-background-color: rgb(60, 60, 60);
+    -fx-border-color: rgb(70, 70, 70);
+    -fx-color: rgb(70, 70, 70);
+}
+
+/*
+.split-pane.vertical {
+    -fx-background-color: rgb(60, 60, 60);
+    -fx-border-color: rgb(80, 80, 80);
+}
+*/
+
+.split-pane .scroll-bar{
+    -fx-background-color: rgb(60, 60, 60);
+}
+
+.split-pane .scroll-bar .decrement-button:hover{
+    -fx-background-color: rgb(60, 60, 60);
+}
+
+.split-pane .scroll-bar .increment-button:hover{
+    -fx-background-color: rgb(60, 60, 60);
+}
+
+.split-pane .scroll-bar .thumb:hover{
+    -fx-background-color: rgb(80, 80, 80);
+}
+
+.scroll-pane .corner{
+    -fx-background-color: rgb(60, 60, 60);
+}
+/*-------------------------------------------*/
+/*-------------------------------------------*/
+
+
+/*Color-Picker*/
+/*-------------------------------------------*/
+.color-picker:hover{
+    -fx-background-color: rgb(70, 70, 70);
+    -fx-border-color: rgb(50, 50, 50);
+    -fx-text-fill: rgb(220, 220, 220); 
+}
+
+.color-picker {
+    -fx-background-color: rgb(90, 90, 90);
+    -fx-border-color: rgb(70, 70, 70);
+    -fx-text-fill: rgb(220, 220, 220); 
+}
+
+.color-picker:pressed{
+    -fx-effect: innershadow(two-pass-box, rgb(30, 30 ,30), 10, 0, 3, 0);
+}
+/*-------------------------------------------*/
+/*-------------------------------------------*/
