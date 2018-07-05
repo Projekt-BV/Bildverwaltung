@@ -21,10 +21,10 @@ public class FXMLDocumentController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 	}
-	
+	/*
 	@FXML
 	private void switchScene(ActionEvent event) {
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("Main_page_edit_mode.fxml"));
 		rootPane.getChildren().setAll(pane);
-	}
+	}*/
 }
