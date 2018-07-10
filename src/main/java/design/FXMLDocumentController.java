@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+
 
 public class FXMLDocumentController implements Initializable {
 	
@@ -21,10 +23,10 @@ public class FXMLDocumentController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 	}
-	/*
+	
 	@FXML
-	private void switchScene(ActionEvent event) {
-		AnchorPane pane = FXMLLoader.load(getClass().getResource("Main_page_edit_mode.fxml"));
+	private void switchScene(ActionEvent event) throws IOException{
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
 		rootPane.getChildren().setAll(pane);
-	}*/
+	}
 }
