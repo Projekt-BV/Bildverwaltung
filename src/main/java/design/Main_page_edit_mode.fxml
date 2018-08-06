@@ -24,7 +24,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="design.FXMLDocumentController">
   <!-- TODO Add Nodes -->
   <children>
     <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css">
@@ -109,6 +109,7 @@
                 <Slider layoutX="268.0" layoutY="6.0" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
                 <Label layoutX="489.0" layoutY="6.0" prefWidth="31.0" text="0%" />
                         <ChoiceBox prefWidth="150.0" />
+                        <Button layoutX="706.0" layoutY="1.0" mnemonicParsing="false" onAction="#switchScene" text="Switchback" />
                      </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="750.0">
                      <children>
