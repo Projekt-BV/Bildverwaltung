@@ -14,7 +14,7 @@ public class Main extends Application {
 		
 		String css = Main.class.getResource("/design/application.css").toExternalForm();
 		scene.getStylesheets().add(css);
-		stage.setTitle("Genuine Coder");
+		stage.setTitle("Bildverwaltung");
 		stage.setScene(scene);
 		stage.show();
 	}
