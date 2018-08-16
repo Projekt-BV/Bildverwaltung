@@ -34,22 +34,17 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Import" />
-                    <MenuItem mnemonicParsing="false" text="Cut" />
-                    <MenuItem mnemonicParsing="false" text="Copy" />
-                    <MenuItem mnemonicParsing="false" text="Rename" />
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                    <MenuItem mnemonicParsing="false" text="Save" />
-                              <MenuItem mnemonicParsing="false" text="Save as ..." />
+                    <MenuItem mnemonicParsing="false" onAction="#importImage" text="Import" />
+                    <MenuItem mnemonicParsing="false" onAction="#copyImage" text="Copy" />
+                    <MenuItem mnemonicParsing="false" onAction="#renameImage" text="Rename" />
+                    <MenuItem mnemonicParsing="false" onAction="#deleteImage" text="Delete" />
+                    <MenuItem mnemonicParsing="false" onAction="#saveImage" text="Save" />
+                              <MenuItem mnemonicParsing="false" onAction="#saveImageAs" text="Save as ..." />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Rotate Left" />
-                    <MenuItem mnemonicParsing="false" text="Rotate Right" />
-                    <MenuItem mnemonicParsing="false" text="Black/ White" />
-                    <MenuItem mnemonicParsing="false" text="Cut" />
-                    <MenuItem mnemonicParsing="false" text="Resize" />
+                    <MenuItem mnemonicParsing="false" onAction="#switchScene" text="Edit Image" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Organize">
@@ -80,17 +75,17 @@
               </menus>
             </MenuBar>
                   <DatePicker layoutX="878.0" layoutY="30.0" prefHeight="25.0" prefWidth="164.0" promptText="to" />
-                  <ToggleButton layoutX="1173.0" layoutY="6.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Auto-Synchro" />
-                  <Button layoutX="1093.0" layoutY="6.0" mnemonicParsing="false" text="Synchronize" />
+                  <ToggleButton layoutX="1173.0" layoutY="6.0" mnemonicParsing="false" onAction="#autoSynchroButtonSet" prefHeight="25.0" prefWidth="100.0" text="Auto-Synchro" />
+                  <Button layoutX="1093.0" layoutY="6.0" mnemonicParsing="false" onAction="#synchronizeButtonPressed" text="Synchronize" />
                   <ProgressBar layoutX="1093.0" layoutY="31.0" prefHeight="18.0" prefWidth="180.0" progress="0.0" stylesheets="@application.css" />
-          <Button layoutY="28.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="41.0" text="Up" />
+          <Button layoutY="28.0" mnemonicParsing="false" onAction="#upButtonPressed" prefHeight="24.0" prefWidth="41.0" text="Up" />
           <TextField layoutX="41.0" layoutY="29.0" prefHeight="25.0" prefWidth="213.0" />
-          <Button layoutX="254.0" layoutY="28.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="31.0" text="-&gt;" />
-          <Button layoutX="285.0" layoutY="28.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
-                  <Button layoutX="660.0" layoutY="30.0" mnemonicParsing="false" text="Filter" />
+          <Button layoutX="254.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="24.0" prefWidth="31.0" text="-&gt;" />
+          <Button layoutX="285.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
+                  <Button layoutX="660.0" layoutY="30.0" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
                   <TextField layoutX="560.0" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" promptText="keyword" />
                   <DatePicker layoutX="704.0" layoutY="30.0" promptText="from" />
-                  <Button layoutX="433.0" layoutY="28.0" mnemonicParsing="false" text="Raster" />
+                  <Button layoutX="433.0" layoutY="28.0" mnemonicParsing="false" onAction="#gridButtonPressed" text="Raster" />
           </children>
         </AnchorPane>
       </top>
@@ -99,12 +94,12 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="anchor-pane" stylesheets="@application.css">
                      <children>
-                        <Button layoutX="547.0" mnemonicParsing="false" text="Rename All" />
+                        <Button layoutX="547.0" mnemonicParsing="false" onAction="#renameAllButtonPressed" text="Rename All" />
                         <TextField layoutX="623.0" prefHeight="25.0" prefWidth="162.0" styleClass="text-field" stylesheets="@application.css" />
-                        <Button layoutX="150.0" mnemonicParsing="false" text="New Folder" />
-                <Slider layoutX="268.0" layoutY="6.0" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
+                        <Button layoutX="150.0" mnemonicParsing="false" onAction="#newFolderButtonPressed" text="New Folder" />
+                <Slider layoutX="268.0" layoutY="6.0" onDragDetected="#sliderMove" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
                 <Label layoutX="489.0" layoutY="6.0" prefWidth="31.0" text="0%" />
-                        <ChoiceBox prefWidth="150.0" />
+                        <ChoiceBox onDragExited="#dropdownButtonChoiceSelected" prefWidth="150.0" />
                         <Button layoutX="861.0" layoutY="-1.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="27.0" prefWidth="98.0" text="Edit Image" />
                      </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="750.0">

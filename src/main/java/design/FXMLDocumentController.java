@@ -47,7 +47,7 @@ public class FXMLDocumentController implements Initializable {
 	
 	@FXML
 	private void upButtonPressed() {
-
+		System.out.println("This is the 'Up' button");
 	}
 	
 	@FXML
@@ -91,7 +91,7 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
-	private void dropdownButtonPressed() {
+	private void dropdownButtonChoiceSelected() {
 
 	}
 //______________________________________________________________
