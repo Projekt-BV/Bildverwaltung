@@ -40,6 +40,7 @@
                     <MenuItem mnemonicParsing="false" onAction="#deleteImage" text="Delete" />
                     <MenuItem mnemonicParsing="false" onAction="#saveImage" text="Save" />
                               <MenuItem mnemonicParsing="false" onAction="#saveImageAs" text="Save as ..." />
+                              <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
@@ -49,27 +50,30 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Organize">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="New Folder" />
+                    <MenuItem mnemonicParsing="false" onAction="#newFolderButtonPressed" text="New Folder" />
                     <MenuItem mnemonicParsing="false" text="New Album" />
-                    <MenuItem mnemonicParsing="false" text="Search" />
-                    <MenuItem mnemonicParsing="false" text="Filter" />
-                    <MenuItem mnemonicParsing="false" text="Sort" />
+                    <MenuItem mnemonicParsing="false" onAction="#searchImage" text="Search" />
+                    <MenuItem mnemonicParsing="false" onAction="#filterImages" text="Filter" />
+                    <MenuItem mnemonicParsing="false" onAction="#sortImages" text="Sort" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="View">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Detail " />
-                    <MenuItem mnemonicParsing="false" text="Preview" />
+                    <MenuItem mnemonicParsing="false" onAction="#showDetail" text="Detail " />
+                    <MenuItem mnemonicParsing="false" onAction="#gridButtonPressed" text="Preview" />
                     <MenuItem mnemonicParsing="false" text="Navigator" />
-                    <MenuItem mnemonicParsing="false" text="Information" />
-                    <MenuItem mnemonicParsing="false" text="" />
-                    <MenuItem mnemonicParsing="false" text="" />
+                    <MenuItem mnemonicParsing="false" onAction="#information" text="Information" />
                   </items>
                 </Menu>
                         <Menu mnemonicParsing="false" text="Help">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Commands" />
-                              <MenuItem mnemonicParsing="false" text="Language" />
+                            <MenuItem mnemonicParsing="false" onAction="#showCommands" text="Commands" />
+                              <Menu mnemonicParsing="false" text="Change Language">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#changeLanguage" text="English" />
+                                    <MenuItem mnemonicParsing="false" onAction="#changeLanguage" text="German" />
+                                </items>
+                              </Menu>
                           </items>
                         </Menu>
               </menus>
@@ -85,7 +89,7 @@
                   <Button layoutX="660.0" layoutY="30.0" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
                   <TextField layoutX="560.0" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" promptText="keyword" />
                   <DatePicker layoutX="704.0" layoutY="30.0" promptText="from" />
-                  <Button layoutX="433.0" layoutY="28.0" mnemonicParsing="false" onAction="#gridButtonPressed" text="Raster" />
+                  <Button layoutX="432.0" layoutY="30.0" mnemonicParsing="false" onAction="#gridButtonPressed" prefHeight="27.0" prefWidth="64.0" text="Grid" />
           </children>
         </AnchorPane>
       </top>

@@ -38,63 +38,66 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Import" />
-                    <MenuItem mnemonicParsing="false" text="Cut" />
-                    <MenuItem mnemonicParsing="false" text="Copy" />
-                    <MenuItem mnemonicParsing="false" text="Rename" />
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                    <MenuItem mnemonicParsing="false" text="Save" />
-                              <MenuItem mnemonicParsing="false" text="Save as ..." />
+                    <MenuItem mnemonicParsing="false" onAction="#importImage" text="Import" />
+                    <MenuItem mnemonicParsing="false" onAction="#copyImage" text="Copy" />
+                    <MenuItem mnemonicParsing="false" onAction="#renameImage" text="Rename" />
+                    <MenuItem mnemonicParsing="false" onAction="#deleteImage" text="Delete" />
+                    <MenuItem mnemonicParsing="false" onAction="#saveImage" text="Save" />
+                              <MenuItem mnemonicParsing="false" onAction="#saveImageAs" text="Save as ..." />
+                              <MenuItem mnemonicParsing="false" text="Exit" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Rotate Left" />
-                    <MenuItem mnemonicParsing="false" text="Rotate Right" />
-                    <MenuItem mnemonicParsing="false" text="Black/ White" />
+                    <MenuItem mnemonicParsing="false" onAction="#rotateClockwise" text="Rotate Clockwise" />
+                    <MenuItem mnemonicParsing="false" onAction="#rotateCounterClockwise" text="Rotate CounterClockwise" />
+                    <MenuItem mnemonicParsing="false" onAction="#monochroneButtonPressed" text="Black/ White" />
                     <MenuItem mnemonicParsing="false" text="Cut" />
                     <MenuItem mnemonicParsing="false" text="Resize" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Organize">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="New Folder" />
+                    <MenuItem mnemonicParsing="false" onAction="#newFolderButtonPressed" text="New Folder" />
                     <MenuItem mnemonicParsing="false" text="New Album" />
-                    <MenuItem mnemonicParsing="false" text="Search" />
-                    <MenuItem mnemonicParsing="false" text="Filter" />
-                    <MenuItem mnemonicParsing="false" text="Sort" />
+                    <MenuItem mnemonicParsing="false" onAction="#searchImage" text="Search" />
+                    <MenuItem mnemonicParsing="false" onAction="#filterImages" text="Filter" />
+                    <MenuItem mnemonicParsing="false" onAction="#sortImages" text="Sort" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="View">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Detail " />
-                    <MenuItem mnemonicParsing="false" text="Preview" />
-                    <MenuItem mnemonicParsing="false" text="Navigator" />
-                    <MenuItem mnemonicParsing="false" text="Information" />
-                    <MenuItem mnemonicParsing="false" text="" />
-                    <MenuItem mnemonicParsing="false" text="" />
+                    <MenuItem mnemonicParsing="false" onAction="#showDetail" text="Detail " />
+                    <MenuItem mnemonicParsing="false" onAction="#gridButtonPressed" text="Preview" />
+                    <MenuItem mnemonicParsing="false" onAction="#navigator" text="Navigator" />
+                    <MenuItem mnemonicParsing="false" onAction="#information" text="Information" />
                   </items>
                 </Menu>
                         <Menu mnemonicParsing="false" text="Help">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Commands" />
-                              <MenuItem mnemonicParsing="false" text="Language" />
+                            <MenuItem mnemonicParsing="false" onAction="#showCommands" text="Commands" />
+                              <Menu mnemonicParsing="false" text="Language">
+                                <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#changeLanguage" text="English" />
+                                  <MenuItem mnemonicParsing="false" onAction="#changeLanguage" text="German" />
+                                </items>
+                              </Menu>
                           </items>
                         </Menu>
               </menus>
             </MenuBar>
                   <DatePicker layoutX="878.0" layoutY="30.0" prefHeight="25.0" prefWidth="164.0" promptText="to" />
-                  <ToggleButton layoutX="1173.0" layoutY="6.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Auto-Synchro" />
-                  <Button layoutX="1093.0" layoutY="6.0" mnemonicParsing="false" text="Synchronize" />
+                  <ToggleButton layoutX="1173.0" layoutY="6.0" mnemonicParsing="false" onAction="#autoSynchroButtonSet" prefHeight="25.0" prefWidth="100.0" text="Auto-Synchro" />
+                  <Button layoutX="1093.0" layoutY="6.0" mnemonicParsing="false" onAction="#synchronizeButtonPressed" text="Synchronize" />
                   <ProgressBar layoutX="1093.0" layoutY="31.0" prefHeight="18.0" prefWidth="180.0" progress="0.0" stylesheets="@application.css" />
-          <Button layoutY="28.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="41.0" text="Up" />
+          <Button layoutY="28.0" mnemonicParsing="false" onAction="#upButtonPressed" prefHeight="24.0" prefWidth="41.0" text="Up" />
           <TextField layoutX="41.0" layoutY="29.0" prefHeight="25.0" prefWidth="213.0" />
-          <Button layoutX="254.0" layoutY="28.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="31.0" text="-&gt;" />
-          <Button layoutX="285.0" layoutY="28.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
-                  <Button layoutX="660.0" layoutY="30.0" mnemonicParsing="false" text="Filter" />
+          <Button layoutX="254.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="24.0" prefWidth="31.0" text="-&gt;" />
+          <Button layoutX="285.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
+                  <Button layoutX="660.0" layoutY="30.0" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
                   <TextField layoutX="560.0" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" promptText="keyword" />
                   <DatePicker layoutX="704.0" layoutY="30.0" promptText="from" />
-                  <Button layoutX="433.0" layoutY="28.0" mnemonicParsing="false" text="Raster" />
+                  <Button layoutX="431.0" layoutY="28.0" mnemonicParsing="false" onAction="#gridButtonPressed" prefHeight="27.0" prefWidth="62.0" text="Grid" />
           </children>
         </AnchorPane>
       </top>
@@ -103,12 +106,12 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="anchor-pane" stylesheets="@application.css">
                      <children>
-                        <Button layoutX="547.0" mnemonicParsing="false" text="Rename All" />
+                        <Button layoutX="547.0" mnemonicParsing="false" onAction="#renameAllButtonPressed" text="Rename All" />
                         <TextField layoutX="623.0" prefHeight="25.0" prefWidth="166.0" styleClass="split-pane" stylesheets="@application.css" />
-                        <Button layoutX="150.0" mnemonicParsing="false" text="New Folder" />
-                <Slider layoutX="268.0" layoutY="6.0" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
+                        <Button layoutX="150.0" mnemonicParsing="false" onAction="#newFolderButtonPressed" text="New Folder" />
+                <Slider layoutX="268.0" layoutY="6.0" onDragDetected="#sliderMove" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
                 <Label layoutX="489.0" layoutY="6.0" prefWidth="31.0" text="0%" />
-                        <ChoiceBox prefWidth="150.0" />
+                        <ChoiceBox onDragExited="#dropdownButtonChoiceSelected" prefWidth="150.0" />
                         <Button layoutX="706.0" layoutY="1.0" mnemonicParsing="false" onAction="#switchScene" text="Switchback" />
                      </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="750.0">
@@ -139,8 +142,8 @@
                   <content>
                     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="247.0">
                            <children>
-                              <Button layoutX="133.0" layoutY="57.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Counter-Clockwise" />
-                              <Button layoutX="133.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Clockwise" />
+                              <Button layoutX="133.0" layoutY="57.0" mnemonicParsing="false" onAction="#rotateCounterClockwise" prefHeight="25.0" prefWidth="100.0" text="Counter-Clockwise" />
+                              <Button layoutX="133.0" layoutY="14.0" mnemonicParsing="false" onAction="#rotateClockwise" prefHeight="25.0" prefWidth="100.0" text="Clockwise" />
                               <ColorPicker layoutX="134.0" layoutY="147.0" prefHeight="25.0" prefWidth="99.0" />
                               <Button layoutX="14.0" layoutY="147.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Filter" />
                               <Button layoutX="16.0" layoutY="301.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="Resize" />
@@ -149,7 +152,7 @@
                               <Text layoutX="135.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Width" />
                               <TextField layoutX="133.0" layoutY="368.0" prefHeight="25.0" prefWidth="100.0" />
                               <Button layoutX="16.0" layoutY="368.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Undo" />
-                              <Button layoutX="133.0" layoutY="191.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Remove Filter" />
+                              <Button layoutX="133.0" layoutY="191.0" mnemonicParsing="false" onAction="#removeFilterButtonPressed" prefHeight="25.0" prefWidth="100.0" text="Remove Filter" />
                               <Button layoutX="136.0" layoutY="474.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Cut" />
                               <Button layoutX="14.0" layoutY="191.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Monochrone" />
                               <Text layoutX="16.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
@@ -158,7 +161,7 @@
                               <Text layoutX="22.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cut image" wrappingWidth="86.13671875" />
                               <Text layoutX="15.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Filter" />
                               <Text layoutX="17.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Resize image" />
-                              <Button layoutX="18.0" layoutY="524.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Undo" />
+                              <Button layoutX="18.0" layoutY="524.0" mnemonicParsing="false" onAction="#undo" prefHeight="25.0" prefWidth="93.0" text="Undo" />
                            </children>
                         </AnchorPane>
                   </content>
