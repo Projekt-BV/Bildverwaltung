@@ -9,23 +9,57 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.beans.property.IntegerProperty;
 import javafx.event.ActionEvent;
 import java.io.IOException;
 
 
 public class FXMLDocumentController implements Initializable {
 	
+	
 	@FXML
 	private AnchorPane rootPane;
+	@FXML	
+	private Pane editImagePane;
+	@FXML
+	private SplitPane imageSplitPane;
+	@FXML
+	private BorderPane borderPane;
+	@FXML
+	private Slider slider;
+	@FXML
+	private Label zoomLabel;
+	@FXML
+	private TextField keywordTextField;
+	@FXML
+	private Button filterButton;
 	
-/*	
+	/*	
 	@FXML public ResourceBundle rb;
 	@FXML public URL url;
 */
 	
 //	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		//slider.layoutXProperty().bind(rootPane.widthProperty().multiply(0.4));
+	}
+	
+	public void stageSizeChangeListener(Stage stage){
+		stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+		     slider.setLayoutX((double) newVal * 0.3);
+		     zoomLabel.setLayoutX(slider.getLayoutX() + 215);
+		     keywordTextField.setLayoutX((double) newVal * 0.43);
+		     filterButton.setLayoutX(keywordTextField.getLayoutX() + 100);
+		});
 	}
 	
 	@FXML
@@ -45,6 +79,7 @@ public class FXMLDocumentController implements Initializable {
 		
 	}
 	
+	
 	@FXML
 	private void upButtonPressed() {
 
@@ -57,7 +92,7 @@ public class FXMLDocumentController implements Initializable {
 	
 	@FXML
 	private void fullScreenButtonPressed() {
-
+		
 	}
 	
 	@FXML

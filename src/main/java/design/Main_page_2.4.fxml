@@ -20,17 +20,21 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="design.FXMLDocumentController">
+<AnchorPane fx:id="rootPane" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="design.FXMLDocumentController">
   <!-- TODO Add Nodes -->
   <children>
-    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css">
+    <BorderPane fx:id="borderPane" layoutX="0.0" layoutY="0.0" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <left>
-        <TreeView prefHeight="716.0" prefWidth="254.0" />
+            <AnchorPane>
+               <children>
+              <TreeView fx:id="directoryView" maxWidth="254.0" minWidth="254.0" prefHeight="716.0" prefWidth="254.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
       </left>
       <top>
-        <AnchorPane prefHeight="52.0" prefWidth="471.0" styleClass="anchor-pane" stylesheets="@application.css">
+        <AnchorPane maxHeight="62.0" minHeight="52.0" prefHeight="62.0" prefWidth="1280.0" styleClass="anchor-pane" stylesheets="@application.css">
           <children>
-            <MenuBar layoutX="0.0" layoutY="2.0" prefHeight="25.0" prefWidth="254.0">
+            <MenuBar maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
@@ -79,39 +83,40 @@
                         </Menu>
               </menus>
             </MenuBar>
-                  <DatePicker layoutX="878.0" layoutY="30.0" prefHeight="25.0" prefWidth="164.0" promptText="to" />
-                  <ToggleButton layoutX="1173.0" layoutY="6.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Auto-Synchro" />
-                  <Button layoutX="1093.0" layoutY="6.0" mnemonicParsing="false" text="Synchronize" />
-                  <ProgressBar layoutX="1093.0" layoutY="31.0" prefHeight="18.0" prefWidth="180.0" progress="0.0" stylesheets="@application.css" />
+                  <DatePicker layoutX="900.0" layoutY="30.0" prefHeight="29.0" prefWidth="150.0" promptText="to" AnchorPane.rightAnchor="230.0" />
+                  <ToggleButton layoutX="1162.0" layoutY="6.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="111.0" text="Auto-Synchro" AnchorPane.rightAnchor="7.0" />
+                  <Button layoutX="1064.0" layoutY="6.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="99.0" text="Synchronize" AnchorPane.rightAnchor="117.0" />
+                  <ProgressBar layoutX="1064.0" layoutY="31.0" maxHeight="8.0" minHeight="8.0" prefHeight="8.0" prefWidth="209.0" progress="0.0" stylesheets="@application.css" AnchorPane.rightAnchor="7.0" />
           <Button layoutY="28.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="41.0" text="Up" />
           <TextField layoutX="41.0" layoutY="29.0" prefHeight="25.0" prefWidth="213.0" />
-          <Button layoutX="254.0" layoutY="28.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="31.0" text="-&gt;" />
-          <Button layoutX="285.0" layoutY="28.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
-                  <Button layoutX="660.0" layoutY="30.0" mnemonicParsing="false" text="Filter" />
-                  <TextField layoutX="560.0" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" promptText="keyword" />
-                  <DatePicker layoutX="704.0" layoutY="30.0" promptText="from" />
+          <Button layoutX="254.0" layoutY="28.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="39.0" text="-&gt;" />
+          <Button layoutX="293.0" layoutY="28.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="95.0" text="Full Screen" />
+                  <Button fx:id="filterButton" layoutX="660.0" layoutY="30.0" mnemonicParsing="false" text="Filter" />
+                  <TextField fx:id="keywordTextField" layoutX="560.0" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" promptText="keyword" />
+                  <DatePicker layoutX="750.0" layoutY="30.0" prefHeight="29.0" prefWidth="150.0" promptText="from" AnchorPane.rightAnchor="380.0" />
                   <Button layoutX="433.0" layoutY="28.0" mnemonicParsing="false" text="Raster" />
           </children>
         </AnchorPane>
       </top>
          <center>
-            <SplitPane dividerPositions="0.0392156862745098" maxWidth="1025.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="713.0" prefWidth="1025.0" BorderPane.alignment="CENTER">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="anchor-pane" stylesheets="@application.css">
-                     <children>
-                        <Button layoutX="547.0" mnemonicParsing="false" text="Rename All" />
-                        <TextField layoutX="623.0" prefHeight="25.0" prefWidth="162.0" styleClass="text-field" stylesheets="@application.css" />
-                        <Button layoutX="150.0" mnemonicParsing="false" text="New Folder" />
-                <Slider layoutX="268.0" layoutY="6.0" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
-                <Label layoutX="489.0" layoutY="6.0" prefWidth="31.0" text="0%" />
-                        <ChoiceBox prefWidth="150.0" />
-                        <Button layoutX="861.0" layoutY="-1.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="27.0" prefWidth="98.0" text="Edit Image" />
-                     </children></AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="750.0">
-                     <children>
-                        <ScrollPane layoutX="-2.0" layoutY="-1.0" prefHeight="682.0" prefWidth="1025.0">
+            <AnchorPane BorderPane.alignment="CENTER">
+               <children>
+                  <SplitPane fx:id="imageSplitPane" dividerPositions="0.0392156862745098" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="713.0" prefWidth="1025.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                        <AnchorPane maxHeight="30.0" minHeight="30.0" prefHeight="30.0">
+                           <children>
+                              <ChoiceBox prefWidth="150.0" />
+                              <Button layoutX="150.0" mnemonicParsing="false" text="New Folder" />
+                      <Slider fx:id="slider" layoutX="309.0" layoutY="8.0" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
+                      <Label fx:id="zoomLabel" layoutX="531.0" layoutY="7.0" prefWidth="31.0" text="0%" />
+                              <Button layoutX="643.0" mnemonicParsing="false" text="Rename All" AnchorPane.rightAnchor="289.0" />
+                              <TextField layoutX="740.0" layoutY="1.0" prefHeight="25.0" prefWidth="162.0" styleClass="text-field" stylesheets="@application.css" AnchorPane.rightAnchor="119.0" />
+                              <Button layoutX="909.0" layoutY="1.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="27.0" prefWidth="98.0" text="Edit Image" AnchorPane.rightAnchor="14.0" />
+                           </children>
+                        </AnchorPane>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="682.0" prefWidth="767.0">
                            <content>
-                              <GridPane prefHeight="683.0" prefWidth="1022.0" styleClass="grid-pane" stylesheets="@application.css">
+                              <GridPane gridLinesVisible="true" styleClass="grid-pane" stylesheets="@application.css">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -124,9 +129,10 @@
                               </GridPane>
                            </content>
                         </ScrollPane>
-                     </children></AnchorPane>
-              </items>
-            </SplitPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
          </center>
     </BorderPane>
   </children>
