@@ -21,6 +21,9 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javafx.scene.layout.Pane;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 public class FXMLDocumentController2 implements Initializable{
 	@FXML
@@ -259,11 +262,14 @@ public class FXMLDocumentController2 implements Initializable{
 	}
 	
 	// TEST
-	//@FXML
-//	private void loadImage() {
-//		paneView.getChildren().clear();
-//		Image image = new Image ("C:\\Users\\Tobi\\Pictures\\FFDP_Logo.jpg");
-//		javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView(image);
-//		paneView.getChildren().add(imageView);
-//	}
+	@FXML
+	private void loadImage() {
+		System.out.println("What");
+		paneView.getChildren().clear();
+		Image image = new Image ("file///C:/Users/Tobi/Pictures/FFDP_Logo.jpg");
+		System.out.println("What");
+		javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView(image);
+		paneView.getChildren().add(imageView);
+		
+	}
 }

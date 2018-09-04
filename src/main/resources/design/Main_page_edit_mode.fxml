@@ -112,7 +112,7 @@
                 <Slider layoutX="268.0" layoutY="6.0" onDragDetected="#sliderMove" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
                 <Label layoutX="489.0" layoutY="6.0" prefWidth="31.0" text="0%" />
                         <ChoiceBox onDragExited="#dropdownButtonChoiceSelected" prefWidth="150.0" />
-                        <Button layoutX="706.0" layoutY="1.0" mnemonicParsing="false" onAction="#switchScene" text="Switchback" />
+                        <Button layoutX="706.0" layoutY="1.0" mnemonicParsing="false" onAction="#switchBack" text="Switchback" />
                      </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="750.0">
                      <children>

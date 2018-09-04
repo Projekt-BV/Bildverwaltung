@@ -13,7 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
-
+import javafx.stage.Stage;
+import javafx.scene.Node;
 
 public class FXMLDocumentController implements Initializable {
 	
@@ -31,19 +32,27 @@ public class FXMLDocumentController implements Initializable {
 	
 	@FXML
 	private void switchScene(ActionEvent event) throws IOException{
-		boolean pageCheck = false;
-		
-		if (pageCheck == false) {
-			pageCheck = true;
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
-			rootPane.getChildren().setAll(pane);
+
+			Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
+			Scene changePane = new Scene(pane);
+	
+			//Show stage information
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setScene(changePane);
+			window.show();
+	}
 			
-		} else {
-			pageCheck = false;
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("/design/Main_page_2.4.fxml"));
-			rootPane.getChildren().setAll(pane);
-		}
-		
+	@FXML
+	private void switchBack(ActionEvent event) throws IOException{
+		System.out.println("Enter");
+			Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_2.4.fxml"));
+			Scene changePane = new Scene(pane);
+			System.out.println("Setted");
+			//Show stage information
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setScene(changePane);
+			window.show();
+			System.out.println("done");
 	}
 	
 	@FXML
