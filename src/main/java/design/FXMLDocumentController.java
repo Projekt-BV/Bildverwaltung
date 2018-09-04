@@ -15,11 +15,18 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+import java.io.File;
+import javafx.scene.image.ImageView;
+
 
 public class FXMLDocumentController implements Initializable {
 	
 	@FXML
 	private AnchorPane rootPane;
+	
+	@FXML
+	private ImageView displayImage;
 	
 /*	
 	@FXML public ResourceBundle rb;
@@ -272,4 +279,37 @@ public class FXMLDocumentController implements Initializable {
 	private void removeFilterButtonPressed() {
 		System.out.println("I am the removeFilter function");
 	}
+
+
+
+// IMAGE TEST
+//-----------------------------------------------------------
+	@FXML
+	private void loadImage() throws IOException{
+		Image image = new Image("/design/Studio.png");
+		displayImage.setImage(image);
+	}
+	
+		
+		//DATA
+  
+//		String url = "http://mariadb/image.png";
+//		 
+//		boolean backgroundLoading = true;
+//		 
+//		// The image is being loaded in the background
+//		Image image = new Image(url, backgroundLoading);
+//		
+//		// An image file on the hard drive.
+//		File file = new File("C:\\Users\\Tobi\\Pictures\\22550006_10210659715665085_3954056403038140095_n.jpg");
+//		 
+//		// --> file:/C:/MyImages/myphoto.jpg
+//		String localUrl = file.toURI().toURL().toString();
+//		 
+//		Image image2 = new Image(localUrl);
+//		ImageView imageView = new ImageView(image);
+//		
+//		FlowPane root = new FlowPane();
+//        root.getChildren().add(imageView);
+
 }

@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="450.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="design.FXMLDocumentController2">
+<AnchorPane prefHeight="450.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="design.FXMLDocumentController">
    <children>
       <AnchorPane prefHeight="492.0" prefWidth="646.0">
          <children>
-            <Pane fx:id="paneView" layoutX="14.0" layoutY="14.0" prefHeight="462.0" prefWidth="561.0">
+            <Pane fx:id="paneView" layoutX="14.0" layoutY="14.0" onDragDetected="#filterColor" prefHeight="462.0" prefWidth="561.0">
                <children>
-                  <ImageView fitHeight="230.0" fitWidth="307.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="displayImage" fitHeight="230.0" fitWidth="307.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../Pictures/09fba80f-4430-4d46-9281-fe78a9671381.jpg" />
                      </image>
