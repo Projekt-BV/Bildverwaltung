@@ -32,7 +32,6 @@ public class FXMLDocumentController implements Initializable {
 	
 	@FXML
 	private void switchScene(ActionEvent event) throws IOException{
-
 			Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
 			Scene changePane = new Scene(pane);
 	
@@ -44,15 +43,13 @@ public class FXMLDocumentController implements Initializable {
 			
 	@FXML
 	private void switchBack(ActionEvent event) throws IOException{
-		System.out.println("Enter");
 			Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_2.4.fxml"));
 			Scene changePane = new Scene(pane);
-			System.out.println("Setted");
 			//Show stage information
+			
 			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 			window.setScene(changePane);
 			window.show();
-			System.out.println("done");
 	}
 	
 	@FXML
