@@ -22,4 +22,12 @@ public class GridController {
 	public static void main (String[] args) {
         new GridController().test();
 	}
+	
+	//DATA
+//	 GridPane gridpane = new GridPane();
+//     gridpane.setPadding(new Insets(5));
+//     gridpane.setHgap(10);
+//     gridpane.setVgap(10);
+//	pictureRegion.getChildren().add(imv);
+//    gridpane.add(pictureRegion, 1, 1);
 }
