@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -16,7 +17,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -26,9 +26,6 @@
   <!-- TODO Add Nodes -->
   <children>
     <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css">
-      <left>
-        <TreeView prefHeight="716.0" prefWidth="254.0" />
-      </left>
       <top>
         <AnchorPane prefHeight="52.0" prefWidth="471.0" styleClass="anchor-pane" stylesheets="@application.css">
           <children>
@@ -180,6 +177,9 @@
               </tabs>
             </TabPane>
          </right>
+         <left>
+            <ListView prefHeight="713.0" prefWidth="246.0" BorderPane.alignment="CENTER" />
+         </left>
     </BorderPane>
   </children>
 </AnchorPane>

@@ -78,7 +78,7 @@ public class SendSQLRequest {
 		}
 		else {
 			//sendSQL_Update(sqlRequest);
-			// Bessere Lösung suchen als null zurückgeben wenn keine ResultSet-Objekt
+			// Bessere Lï¿½sung suchen als null zurï¿½ckgeben wenn keine ResultSet-Objekt
 			return null;
 		}
 	
@@ -113,7 +113,7 @@ public class SendSQLRequest {
 		rs = null;
 		try {
 		
-            // Query ausführen - einfügen
+            // Query ausfï¿½hren - einfï¿½gen
             
             rs = getStatement().executeQuery(sqlRequest);
 
