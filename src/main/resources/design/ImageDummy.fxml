@@ -178,7 +178,7 @@
             </TabPane>
          </right>
          <left>
-            <ListView prefHeight="713.0" prefWidth="246.0" BorderPane.alignment="CENTER" />
+            <ListView fx:id="listView" prefHeight="713.0" prefWidth="246.0" BorderPane.alignment="CENTER" />
          </left>
     </BorderPane>
   </children>

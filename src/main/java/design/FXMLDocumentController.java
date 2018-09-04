@@ -1,14 +1,21 @@
 package design;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import application.Main;
+import database.DB_Connector;
+import database.SendSQLRequest;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.event.ActionEvent;
 import java.io.IOException;
@@ -28,13 +35,30 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private ImageView displayImage;
 	
-/*	
-	@FXML public ResourceBundle rb;
-	@FXML public URL url;
-*/
+	@FXML
+	private ListView<String> listView;
+
 	
 //	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		initializeListView();		
+	}
+	
+	/** 
+	 * Method to initialize the listView containing the album names.
+	 * @author Phillip Persch
+	 */
+	private void initializeListView() {		
+		try {
+			ResultSet albums = SendSQLRequest.sendSQL("SELECT * FROM album");
+			
+			while (albums.next()) {
+				listView.getItems().add(albums.getString("Name"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML

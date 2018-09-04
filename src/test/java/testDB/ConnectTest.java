@@ -15,7 +15,6 @@ public class ConnectTest {
 		
 		try (Connection con = DriverManager.getConnection(url, user, password)) {
 			System.out.println("Verbindung zu " + url + " wurde hergestellt.");
-			ResultSet tmpRs = SendSQLRequest.sendSQL("INSERT INTO foto_metadaten (Titel,Beschreibung,Schluesselwoerter,Datum,Fotoname,Pfad,Ort) VALUES ('Foto1','Testbild1','1','15.05.18','test.jpg','/Users/philpsc/Desktop','Buxdehude');");
 						
 			con.close();
 		} catch (SQLException e) {
