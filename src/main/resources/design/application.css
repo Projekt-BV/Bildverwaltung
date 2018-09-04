@@ -232,6 +232,11 @@
     -fx-background-color: rgb(60, 60, 60);
 }
 
+.list-view .list-cell:empty { 
+	-fx-background-color: rgb(60, 60, 60);
+}
+
+
 .list-view .list-cell:filled:selected {
     -fx-background-color: rgb(90, 90, 90);
     -fx-text-fill: white;
