@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import application.Main;
@@ -17,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
@@ -37,11 +40,14 @@ public class FXMLDocumentController implements Initializable {
 	
 	@FXML
 	private ListView<String> listView;
+	
+	@FXML
+	private GridPane gridPane;
 
 	
 //	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		initializeListView();		
+		initializeListView();	
 	}
 	
 	/** 
@@ -59,6 +65,39 @@ public class FXMLDocumentController implements Initializable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	private void initializeGridPane() {
+		String album = listView.getSelectionModel().getSelectedItem();
+		// Weiter geht es erst sinnvoll, wenn eine Album- und Imageklasse existiert.
+		
+		// Alles Folgende sind Dummies
+		
+		ArrayList<Image> images = new ArrayList<Image>();
+		
+		for (int i = 0; i < 35; i++) {
+			Random random = new Random();
+			int num = random.nextInt(20);
+			images.add(new Image("/design/dummyImages/" + num + ".jpeg"));
+		}
+		
+		int row = 0;
+		int line = 0;
+		for (Image image : images) {
+			ImageView imageView = new ImageView(image);
+			imageView.setFitHeight(130);
+			imageView.setFitWidth(135);
+			gridPane.getChildren().add(imageView);
+			GridPane.setConstraints(imageView, row, line, 1, 1);
+			if (row > 5) {
+				row = 0;
+				line++;
+			} else 
+				row++;
+			 
+		}
+		
 	}
 	
 	@FXML
