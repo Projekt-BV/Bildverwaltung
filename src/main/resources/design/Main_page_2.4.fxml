@@ -8,12 +8,10 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -76,11 +74,8 @@
               </menus>
             </MenuBar>
                   <DatePicker layoutX="878.0" layoutY="30.0" prefHeight="25.0" prefWidth="164.0" promptText="to" />
-                  <ToggleButton layoutX="1173.0" layoutY="6.0" mnemonicParsing="false" onAction="#autoSynchroButtonSet" prefHeight="25.0" prefWidth="100.0" text="Auto-Synchro" />
-                  <Button layoutX="1093.0" layoutY="6.0" mnemonicParsing="false" onAction="#synchronizeButtonPressed" text="Synchronize" />
-                  <ProgressBar layoutX="1093.0" layoutY="31.0" prefHeight="18.0" prefWidth="180.0" progress="0.0" stylesheets="@application.css" />
-          <TextField layoutX="3.0" layoutY="30.0" prefHeight="25.0" prefWidth="193.0" />
-          <Button layoutX="198.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="57.0" text="Suche" />
+          <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="190.0" />
+          <Button layoutX="196.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="59.0" text="Suche" />
           <Button layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
                   <Button layoutX="660.0" layoutY="30.0" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
                   <TextField layoutX="560.0" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" promptText="keyword" />
@@ -93,7 +88,7 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="anchor-pane" stylesheets="@application.css">
                      <children>
-                        <Button layoutX="547.0" mnemonicParsing="false" onAction="#renameAllButtonPressed" text="Rename All" />
+                        <Button layoutX="544.0" mnemonicParsing="false" onAction="#renameAllButtonPressed" text="Rename All" />
                         <TextField layoutX="623.0" prefHeight="25.0" prefWidth="162.0" styleClass="text-field" stylesheets="@application.css" />
                         <Button layoutX="150.0" mnemonicParsing="false" onAction="#newFolderButtonPressed" text="New Folder" />
                 <Slider layoutX="268.0" layoutY="6.0" onDragDetected="#sliderMove" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
