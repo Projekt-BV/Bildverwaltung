@@ -123,11 +123,6 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
-	private void upButtonPressed() {
-		System.out.println("This is the 'Up' button");
-	}
-	
-	@FXML
 	private void browseButtonPressed() {
 		System.out.println("I am the browseButtonPressed function");
 	}
@@ -137,10 +132,6 @@ public class FXMLDocumentController implements Initializable {
 		System.out.println("I am the fullScreenButtonPressed function");
 	}
 	
-	@FXML
-	private void gridButtonPressed() {
-		System.out.println("I am the gridButtonPressed function");
-	}
 	
 	@FXML
 	private void newFolderButtonPressed() {

@@ -79,14 +79,12 @@
                   <ToggleButton layoutX="1173.0" layoutY="6.0" mnemonicParsing="false" onAction="#autoSynchroButtonSet" prefHeight="25.0" prefWidth="100.0" text="Auto-Synchro" />
                   <Button layoutX="1093.0" layoutY="6.0" mnemonicParsing="false" onAction="#synchronizeButtonPressed" text="Synchronize" />
                   <ProgressBar layoutX="1093.0" layoutY="31.0" prefHeight="18.0" prefWidth="180.0" progress="0.0" stylesheets="@application.css" />
-          <Button layoutY="28.0" mnemonicParsing="false" onAction="#upButtonPressed" prefHeight="24.0" prefWidth="41.0" text="Up" />
-          <TextField layoutX="41.0" layoutY="29.0" prefHeight="25.0" prefWidth="213.0" />
-          <Button layoutX="254.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="24.0" prefWidth="31.0" text="-&gt;" />
-          <Button layoutX="285.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
+          <TextField layoutX="3.0" layoutY="30.0" prefHeight="25.0" prefWidth="193.0" />
+          <Button layoutX="198.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="57.0" text="Suche" />
+          <Button layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
                   <Button layoutX="660.0" layoutY="30.0" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
                   <TextField layoutX="560.0" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" promptText="keyword" />
                   <DatePicker layoutX="704.0" layoutY="30.0" promptText="from" />
-                  <Button layoutX="431.0" layoutY="28.0" mnemonicParsing="false" onAction="#gridButtonPressed" prefHeight="27.0" prefWidth="62.0" text="Grid" />
           </children>
         </AnchorPane>
       </top>
@@ -98,7 +96,7 @@
                         <Button layoutX="547.0" mnemonicParsing="false" onAction="#renameAllButtonPressed" text="Rename All" />
                         <TextField layoutX="623.0" prefHeight="25.0" prefWidth="162.0" styleClass="text-field" stylesheets="@application.css" />
                         <Button layoutX="150.0" mnemonicParsing="false" onAction="#newFolderButtonPressed" text="New Folder" />
-                <Slider layoutX="485.0" layoutY="6.0" onDragDetected="#sliderMove" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
+                <Slider layoutX="268.0" layoutY="6.0" onDragDetected="#sliderMove" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
                 <Label layoutX="489.0" layoutY="6.0" prefWidth="31.0" text="0%" />
                         <ChoiceBox onDragExited="#dropdownButtonChoiceSelected" prefWidth="150.0" />
                         <Button layoutX="861.0" layoutY="-1.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="27.0" prefWidth="98.0" text="Edit Image" />
