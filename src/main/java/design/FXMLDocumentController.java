@@ -149,16 +149,6 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
-	private void synchronizeButtonPressed() {
-		System.out.println("I am the synchronizeButtonPressed function");
-	}
-	
-	@FXML
-	private void autoSynchroButtonSet() {
-		System.out.println("I am the autoSynchroButtonSet function");
-	}
-	
-	@FXML
 	private void dropdownButtonChoiceSelected() {
 		System.out.println("I am the dropdownButtonChoiceSelected function");
 	}
