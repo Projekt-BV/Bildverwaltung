@@ -98,7 +98,7 @@
                 <Slider layoutX="268.0" layoutY="6.0" onDragDetected="#sliderMove" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
                 <Label layoutX="489.0" layoutY="6.0" prefWidth="31.0" text="0%" />
                         <ChoiceBox onDragExited="#dropdownButtonChoiceSelected" prefWidth="150.0" />
-                        <Button layoutX="694.0" mnemonicParsing="false" text="Delete Image" />
+                        <Button layoutX="694.0" mnemonicParsing="false" onAction="#deleteImage" text="Delete Image" />
                      </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="750.0">
                      <children>
@@ -173,7 +173,7 @@
                <children>
                   <ListView fx:id="listView" prefHeight="680.0" prefWidth="255.0" />
                   <Button layoutX="44.0" layoutY="682.0" mnemonicParsing="false" onAction="#newFolderButtonPressed" text="Add album" />
-                  <Button layoutX="165.0" layoutY="682.0" mnemonicParsing="false" text="Delete Album" />
+                  <Button layoutX="165.0" layoutY="682.0" mnemonicParsing="false" onAction="#deleteAlbum" text="Delete Album" />
                </children>
             </AnchorPane>
          </left>

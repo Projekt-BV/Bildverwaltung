@@ -324,6 +324,11 @@ public class FXMLDocumentController implements Initializable {
 		//return img to ImagePane
 	}
 	
+	@FXML
+	private void deleteAlbum() {
+		System.out.println("I am the deleteAlbum function");
+	}
+	
 
 // IMAGE TEST
 //-----------------------------------------------------------
