@@ -22,21 +22,21 @@ public class Test_Insert_DB {
 	public void testInsert_Album() {
 		ResultSet tmpRs;
 		try {
-			tmpRs = SendSQLRequest.sendSQL("INSERT INTO album (Name) VALUES ('Urlaub1');");
-			tmpRs = SendSQLRequest.sendSQL("INSERT INTO foto_metadaten (Titel,Beschreibung,Schluesselwoerter,Datum,Fotoname,Pfad,Ort) VALUES ('Foto1','Testbild1','1','15.05.18','test.jpg','C:/tmp','Buxdehude');");
-			tmpRs = SendSQLRequest.sendSQL("INSERT INTO foto_schluesselwoerter (Schluesselwort, Foto_ID) VALUES ('Baum', '1');");
+			tmpRs = SendSQLRequest.sendSQL("INSERT INTO alben (Name) VALUES ('Urlaub1');");
+			tmpRs = SendSQLRequest.sendSQL("INSERT INTO fotos (Schluesselwoerter,Datum,Fotoname,Pfad,Ort) VALUES ('1','15.05.18','test.jpg','C:/tmp','Buxdehude');");
+			tmpRs = SendSQLRequest.sendSQL("INSERT INTO tags (Schluesselwort, Foto_ID) VALUES ('Baum', '1');");
 			tmpRs = SendSQLRequest.sendSQL("INSERT INTO albumfoto (AlbumID, FotoID) VALUES ('1','1');");
 			
-			tmpRs = SendSQLRequest.sendSQL("SELECT * FROM album;");
+			tmpRs = SendSQLRequest.sendSQL("SELECT * FROM alben;");
 			printResultSet(tmpRs);
 			
 			tmpRs = SendSQLRequest.sendSQL("SELECT * FROM albumfoto;");
 			printResultSet(tmpRs);
 			 
-			tmpRs = SendSQLRequest.sendSQL("SELECT * FROM foto_metadaten;");
+			tmpRs = SendSQLRequest.sendSQL("SELECT * FROM fotos;");
 			printResultSet(tmpRs);
 			
-			tmpRs = SendSQLRequest.sendSQL("SELECT * FROM foto_schluesselwoerter;");
+			tmpRs = SendSQLRequest.sendSQL("SELECT * FROM tags;");
 			printResultSet(tmpRs);
 			
 			
