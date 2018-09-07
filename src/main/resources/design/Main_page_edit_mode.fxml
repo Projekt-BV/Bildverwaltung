@@ -60,7 +60,6 @@
                 <Menu mnemonicParsing="false" text="View">
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#showDetail" text="Detail " />
-                    <MenuItem mnemonicParsing="false" onAction="#gridButtonPressed" text="Preview" />
                     <MenuItem mnemonicParsing="false" onAction="#navigator" text="Navigator" />
                     <MenuItem mnemonicParsing="false" onAction="#information" text="Information" />
                   </items>
