@@ -312,6 +312,11 @@ public class FXMLDocumentController implements Initializable {
 	}	
 	
 	@FXML
+	private void addKeyword() {
+		System.out.println("I am the addKeyword function");
+	}
+	
+	@FXML
 	private void monochroneButtonPressed() {
 		BufferedImage img = null;
 		//get image to img
@@ -319,12 +324,6 @@ public class FXMLDocumentController implements Initializable {
 		//return img to ImagePane
 	}
 	
-	@FXML
-	private void removeFilterButtonPressed() {
-		System.out.println("I am the removeFilter function");
-	}
-
-
 
 // IMAGE TEST
 //-----------------------------------------------------------
