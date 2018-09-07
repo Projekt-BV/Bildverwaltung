@@ -49,6 +49,7 @@ public class FXMLDocumentController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeListView();	
 	}
+		
 	
 	/** 
 	 * Method to initialize the listView containing the album names.
@@ -66,6 +67,7 @@ public class FXMLDocumentController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	@FXML
 	private void initializeGridPane() {
@@ -94,10 +96,8 @@ public class FXMLDocumentController implements Initializable {
 				row = 0;
 				line++;
 			} else 
-				row++;
-			 
+				row++;	 
 		}
-		
 	}
 	
 	@FXML
@@ -328,8 +328,8 @@ public class FXMLDocumentController implements Initializable {
 // IMAGE TEST
 //-----------------------------------------------------------
 	@FXML
-	private void loadImage() throws IOException{
-		Image image = new Image("/design/Studio.png");
+	private void loadImage(String picture) throws IOException{
+		Image image = new Image(picture);
 		displayImage.setImage(image);
 	}
 	
