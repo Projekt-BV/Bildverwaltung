@@ -31,28 +31,38 @@ import javafx.scene.image.ImageView;
 import javafx.scene.control.ChoiceBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 
 
-public class FXMLDocumentController implements Initializable {
+public class FXMLDocumentControllerEditMode implements Initializable {
 	
 	@FXML
 	private AnchorPane rootPane;
 	
 	@FXML
-	private ImageView displayImage;
+	private ImageView displayImageEditMode;
 	
 	@FXML
 	private ListView<String> listView;
 	
 	@FXML
 	private GridPane gridPane;
+	
+	@FXML
+	private Button applyFilterButton;
 
-
+	@FXML
+	private ChoiceBox colorChoiceBox;
+	ObservableList<String> colorChoiceList = FXCollections
+				.observableArrayList("Red", "Blue", "Green", 
+								     "Yellow", "Violet", "Aqua");
+	
 	
 	@Override //<-- War auskommentiert?
 	public void initialize(URL url, ResourceBundle rb) {
-		initializeListView();
-		initializeGridPane();  //Hier nicht möglich da die zweite FXML keine Grid hat
+		colorChoiceBox.setItems(colorChoiceList);
+		colorChoiceBox.setValue("Red");
+		initializeListView();	
 	}
 		
 	
@@ -70,38 +80,6 @@ public class FXMLDocumentController implements Initializable {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-	}
-	
-	
-	@FXML
-	private void initializeGridPane() {
-		String album = listView.getSelectionModel().getSelectedItem();
-		// Weiter geht es erst sinnvoll, wenn eine Album- und Imageklasse existiert.
-		
-		// Alles Folgende sind Dummies
-		
-		ArrayList<Image> images = new ArrayList<Image>();
-		
-		for (int i = 0; i < 35; i++) {
-			Random random = new Random();
-			int num = random.nextInt(20);
-			images.add(new Image("/design/dummyImages/" + num + ".jpeg"));
-		}
-		
-		int row = 0;
-		int line = 0;
-		for (Image image : images) {
-			ImageView imageView = new ImageView(image);
-			imageView.setFitHeight(130);
-			imageView.setFitWidth(135);
-			gridPane.getChildren().add(imageView);
-			GridPane.setConstraints(imageView, row, line, 1, 1);
-			if (row > 5) {
-				row = 0;
-				line++;
-			} else 
-				row++;	 
 		}
 	}
 	
@@ -145,7 +123,8 @@ public class FXMLDocumentController implements Initializable {
 
 	@FXML
 	private void filterButtonPressed() {
-		System.out.println("I am the filterButtonPressed function");
+		String color = "RED";
+		model.Filters.filters(color);
 	}
 	
 	@FXML
@@ -281,13 +260,67 @@ public class FXMLDocumentController implements Initializable {
 	private void changeLanguage() {
 		System.out.println("I am the changeLanguage function");
 	}	
+	
+	//--------------------------------------------------------
+	
+	//Edit Mode
+	@FXML
+	private void rotateClockwise() {
+		BufferedImage img = null;
+		//get image to img
+		model.Rotater.rotateClockwise(img);
+		//return img to ImagePane
+	}
+	
+	@FXML
+	private void rotateCounterClockwise() {
+		BufferedImage img = null;
+		//get image to img
+		model.Rotater.rotateAntiClockwise(img);
+		//return img to ImagePane
+	}
+	
+	@FXML
+	private void undo() {
+		System.out.println("I am the undo function");
+	}
+	
+	@FXML
+	private void saveMetadata() {
+		System.out.println("I am the saveMetadata function");
+	}	
+	
+	@FXML
+	private void filterColor() {
+		System.out.println("I am the filterColor function");
+	}	
+	
+	@FXML
+	private void addKeyword() {
+		System.out.println("I am the addKeyword function");
+	}
+	
+	@FXML
+	private void monochroneButtonPressed() {
+		BufferedImage img = null;
+		//get image to img
+		model.GrayScaler.grayScaleImage(img);
+		//return img to ImagePane
+	}
+	
+	@FXML
+	private void deleteAlbum() {
+		System.out.println("I am the deleteAlbum function");
+	}
+	
 
 // IMAGE TEST
 //-----------------------------------------------------------
 	@FXML
-	private void loadImage(String picture) throws IOException{
-		Image image = new Image(picture);
-		displayImage.setImage(image);
+	private void loadImage() throws IOException{
+		displayImageEditMode.setImage(null);
+		Image image = new Image("/design/dummyImages/2.jpeg");
+		displayImageEditMode.setImage(image);
 	}
 	
 		

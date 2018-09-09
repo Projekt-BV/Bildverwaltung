@@ -87,7 +87,7 @@
 
     -fx-background-color: rgb(100, 100, 100);
     -fx-border-color: rgb(80, 80, 80);
-    -fx-text-fill: rgb(220, 220, 220); 
+    -fx-text-fill: rgb(220, 220, 220);
 }
 
 .choice-box:hover{
@@ -98,6 +98,35 @@
 .choice-box:pressed{
     -fx-effect: innershadow(two-pass-box, rgb(30, 30 ,30), 10, 0, 3, 0);  
 }
+
+.choice-box .context-menu { 
+	-fx-background-color: rgb(100, 100, 100);
+}
+
+.choice-box .menu-item:focused { 
+	-fx-background-color: rgb(80, 80, 80);
+}
+/*DATA
+
+// Background color of the whole context menu
+.choice-box .context-menu { -fx-background-color: black; }
+// Focused item background color in the list
+.choice-box .menu-item:focused { -fx-background-color: orange; }
+// Text color of non-focused items in the list
+.choice-box .menu-item > .label { -fx-text-fill: white; }
+// Text color of focused item in the list
+.choice-box .menu-item:focused > .label { -fx-text-fill: black; }
+If you color the ChoiceBox further:
+
+// Background color of the control itself
+.choice-box {
+  -fx-background-color: black;
+  -fx-mark-color: orange; // arrow color
+}
+
+// Selected item text color on the control itself
+.choice-box > .label { -fx-text-fill: white; }
+*/
 /*-------------------------------------------*/
 /*-------------------------------------------*/
 
