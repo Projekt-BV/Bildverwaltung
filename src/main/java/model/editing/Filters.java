@@ -1,7 +1,5 @@
 package model.editing;
 
-import javafx.application.Application;
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.*;
 import javafx.scene.effect.*;

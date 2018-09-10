@@ -1,16 +1,10 @@
-package design;
+package controller;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.ResourceBundle;
 
-import application.Main;
-import database.DB_Connector;
 import database.SendSQLRequest;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +20,6 @@ import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import java.io.File;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.ChoiceBox;
 import javafx.collections.FXCollections;

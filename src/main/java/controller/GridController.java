@@ -1,4 +1,4 @@
-package design;
+package controller;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.ImageView;

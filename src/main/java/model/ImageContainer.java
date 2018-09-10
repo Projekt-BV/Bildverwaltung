@@ -6,8 +6,6 @@ package model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
-import javafx.scene.image.Image;
 
 
 /**
