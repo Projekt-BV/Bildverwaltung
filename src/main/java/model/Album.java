@@ -24,6 +24,12 @@ public class Album {
 		this.images = images;
 	}
 	
+	public Album(String name, int id) {
+		this.name = name;
+		this.id = id;
+		this.images = new ArrayList<ImageContainer>();
+	}
+	
 	public Album(ResultSet album) throws SQLException {
 		this.name = album.getString("Name");
 		this.id = album.getInt("ID");

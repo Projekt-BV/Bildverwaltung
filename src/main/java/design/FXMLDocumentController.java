@@ -24,6 +24,7 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
+import model.Album;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import java.io.File;
@@ -46,13 +47,15 @@ public class FXMLDocumentController implements Initializable {
 	
 	@FXML
 	private GridPane gridPane;
+	
+	ArrayList<Album> albums;
 
 
 	
 	@Override //<-- War auskommentiert?
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeListView();
-		initializeGridPane();  //Hier nicht möglich da die zweite FXML keine Grid hat
+		initializeGridPane();  //Hier nicht mï¿½glich da die zweite FXML keine Grid hat
 	}
 		
 	
@@ -61,22 +64,17 @@ public class FXMLDocumentController implements Initializable {
 	 * @author Phillip Persch
 	 */
 	private void initializeListView() {		
-		try {
-			ResultSet albums = SendSQLRequest.sendSQL("SELECT * FROM album");
-			
-			while (albums.next()) {
-				listView.getItems().add(albums.getString("Name"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
+		albums = SendSQLRequest.fetchAlbums();
+		
+		for (Album album : albums) {
+			listView.getItems().add(album.getName());
 		}
 	}
 	
 	
 	@FXML
 	private void initializeGridPane() {
-		String album = listView.getSelectionModel().getSelectedItem();
+		String albumName = listView.getSelectionModel().getSelectedItem();
 		// Weiter geht es erst sinnvoll, wenn eine Album- und Imageklasse existiert.
 		
 		// Alles Folgende sind Dummies

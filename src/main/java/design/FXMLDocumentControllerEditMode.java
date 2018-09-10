@@ -72,7 +72,7 @@ public class FXMLDocumentControllerEditMode implements Initializable {
 	 */
 	private void initializeListView() {		
 		try {
-			ResultSet albums = SendSQLRequest.sendSQL("SELECT * FROM album");
+			ResultSet albums = SendSQLRequest.sendSQL("SELECT * FROM alben");
 			
 			while (albums.next()) {
 				listView.getItems().add(albums.getString("Name"));

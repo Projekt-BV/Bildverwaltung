@@ -4,6 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.TreeSet;
+
+import model.Album;
+import model.ImageContainer;
+
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 
@@ -17,6 +23,54 @@ public class SendSQLRequest {
 	
 	private static Connection con;
 	
+	// Gerade keine Zeit mehr, aber Kommentare kommen noch!
+	// Stand 10.09. 15:30: Es werden alle Alben geladen und mit ihren Fotos richtig verknüpft. Noch keine Tags an den Fotos.
+	public static ArrayList<Album> fetchAlbums() {
+		ResultSet albumsResultSet; 
+		TreeSet<Integer>albumIDs = new TreeSet<Integer>(); 
+		ArrayList<Album> albums = new ArrayList<Album>();
+		
+		try {			
+			albumsResultSet = SendSQLRequest.sendSQL("SELECT * FROM albumfoto");
+			
+			while (albumsResultSet.next()) {
+				albumIDs.add(albumsResultSet.getInt("AlbumID"));
+			}
+			
+			for (int id : albumIDs) {
+				ResultSet albumResultSet = SendSQLRequest.sendSQL("SELECT * FROM alben WHERE ID=" + id);
+				if (albumResultSet.next()) {
+					Album album = new Album(albumResultSet.getString("Name"), id);
+					albums.add(album);
+				}				
+			}
+			
+			
+			for (Album album : albums) {
+				ResultSet imageIDResultSet = SendSQLRequest.sendSQL("SELECT FotoID FROM albumfoto WHERE AlbumID=" + album.getId());
+				while (imageIDResultSet.next()) {					
+					ResultSet imageResultSet = SendSQLRequest.sendSQL("SELECT * FROM fotos WHERE ID=" + imageIDResultSet.getInt("FotoID"));
+					if (imageResultSet.next()) {
+						int id = imageResultSet.getInt("ID");
+						String name = imageResultSet.getString("Fotoname");
+						String path = imageResultSet.getString("Pfad");
+						String location = imageResultSet.getString("Ort");
+						String date = imageResultSet.getString("Datum");
+						ImageContainer image = new ImageContainer(id, name, path, location, date);
+						album.getImages().add(image);
+						System.out.println(album.getName() + "  " + image.getName());
+					}					
+				}
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		
+		return albums;
+	}
 	
 	/**
 	 * Testet ein uebergebenen SQL-Befehl

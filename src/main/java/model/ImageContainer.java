@@ -21,20 +21,27 @@ public class ImageContainer {
 	private String name;
 	private String path;
 	private String location;
-	private Image image;
 	private ArrayList<String> tags;
 	
 	/**
 	 * Constructor for ImageContainer objects
 	 */
-	public ImageContainer(int id, String name, String path, String location, Image image, String date, ArrayList<String> tags) {
+	public ImageContainer(int id, String name, String path, String location, String date, ArrayList<String> tags) {
 		this.id = id;
 		this.name = name;
 		this.path = path;
 		this.location = location;
-		this.image = image;
 		this.date = date;
 		this.tags = tags;
+	}
+	
+	public ImageContainer(int id, String name, String path, String location, String date) {
+		this.id = id;
+		this.name = name;
+		this.path = path;
+		this.location = location;
+		this.date = date;
+		this.tags = new ArrayList<String>();
 	}
 	
 	public ImageContainer(ResultSet imageResultSet) throws SQLException {
@@ -42,7 +49,6 @@ public class ImageContainer {
 		this.date = imageResultSet.getString("Datum");
 		this.name = imageResultSet.getString("Fotoname");
 		this.path = imageResultSet.getString("Pfad");
-		this.image = new Image(this.path);
 		this.location = imageResultSet.getString("Ort");
 		this.tags = null; //TODO: Vervollständigen
 
@@ -70,14 +76,6 @@ public class ImageContainer {
 
 	public void setLocation(String location) {
 		this.location = location;
-	}
-
-	public Image getImage() {
-		return image;
-	}
-
-	public void setImage(Image image) {
-		this.image = image;
 	}
 
 	public ArrayList<String> getTags() {
