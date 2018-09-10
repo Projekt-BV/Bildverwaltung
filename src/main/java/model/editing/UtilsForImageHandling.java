@@ -1,4 +1,4 @@
-package model;
+package model.editing;
 
 import java.awt.image.BufferedImage;
 

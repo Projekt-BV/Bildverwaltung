@@ -2,8 +2,6 @@ package model.editing;
 
 import java.awt.image.BufferedImage;
 
-import model.UtilsForImageHandling;
-
 /**
  * 
  * @author Julian Einspenner
