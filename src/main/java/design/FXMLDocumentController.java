@@ -1,16 +1,9 @@
 package design;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.ResourceBundle;
 
-import application.Main;
-import database.DB_Connector;
 import database.SendSQLRequest;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,16 +15,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.event.ActionEvent;
 import java.io.IOException;
-import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
 import model.Album;
+import model.ImageContainer;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import java.io.File;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.ChoiceBox;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 
 public class FXMLDocumentController implements Initializable {
@@ -55,7 +44,6 @@ public class FXMLDocumentController implements Initializable {
 	@Override //<-- War auskommentiert?
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeListView();
-		initializeGridPane();  //Hier nicht m�glich da die zweite FXML keine Grid hat
 	}
 		
 	
@@ -71,25 +59,42 @@ public class FXMLDocumentController implements Initializable {
 		}
 	}
 	
-	
+	/** 
+	 * Method to initialize the listView containing the album names.
+	 * @author Phillip Persch
+	 */	
 	@FXML
 	private void initializeGridPane() {
-		String albumName = listView.getSelectionModel().getSelectedItem();
-		// Weiter geht es erst sinnvoll, wenn eine Album- und Imageklasse existiert.
+		gridPane.getChildren().clear(); // clear gridPane
+		String albumName = listView.getSelectionModel().getSelectedItem(); // get name of album that has been clicked on
 		
-		// Alles Folgende sind Dummies
 		
-		ArrayList<Image> images = new ArrayList<Image>();
-		
-		for (int i = 0; i < 35; i++) {
-			Random random = new Random();
-			int num = random.nextInt(20);
-			images.add(new Image("/design/dummyImages/" + num + ".jpeg"));
+		// check if album exists. If it does not, return
+		Album album = null;		
+		for (Album a : albums) {
+			if (a.getName().equals(albumName)) {
+				album = a;
+				break;
+			}				
+		}
+				
+		if (album == null) {
+			return;
 		}
 		
+		
+		// add album's images into grid
+		ArrayList<Image> images = new ArrayList<Image>();
+		
+		for (ImageContainer imageContainer : album.getImages()) {
+			images.add(new Image(imageContainer.getPath()));
+		}
+		
+		
+		// display grid
 		int row = 0;
 		int line = 0;
-		for (Image image : images) {
+		for (Image image : images) {			
 			ImageView imageView = new ImageView(image);
 			imageView.setFitHeight(130);
 			imageView.setFitWidth(135);

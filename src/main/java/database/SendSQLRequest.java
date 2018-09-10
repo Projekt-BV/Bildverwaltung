@@ -11,7 +11,6 @@ import model.Album;
 import model.ImageContainer;
 
 import java.sql.ResultSet;
-import java.sql.PreparedStatement;
 
 
 public class SendSQLRequest {
@@ -23,20 +22,28 @@ public class SendSQLRequest {
 	
 	private static Connection con;
 	
-	// Gerade keine Zeit mehr, aber Kommentare kommen noch!
-	// Stand 10.09. 15:30: Es werden alle Alben geladen und mit ihren Fotos richtig verknüpft. Noch keine Tags an den Fotos.
+	/**
+	 * Loads all albums from database (including images)
+	 * TODO: include tags
+	 * 
+	 * @author Phillip Persch
+	 */
 	public static ArrayList<Album> fetchAlbums() {
 		ResultSet albumsResultSet; 
 		TreeSet<Integer>albumIDs = new TreeSet<Integer>(); 
 		ArrayList<Album> albums = new ArrayList<Album>();
 		
 		try {			
+			
+			// 1. get all album IDs for albums that have at least one image
 			albumsResultSet = SendSQLRequest.sendSQL("SELECT * FROM albumfoto");
 			
 			while (albumsResultSet.next()) {
 				albumIDs.add(albumsResultSet.getInt("AlbumID"));
 			}
 			
+			
+			// 2. get albums using their IDs and make Album objects
 			for (int id : albumIDs) {
 				ResultSet albumResultSet = SendSQLRequest.sendSQL("SELECT * FROM alben WHERE ID=" + id);
 				if (albumResultSet.next()) {
@@ -46,6 +53,7 @@ public class SendSQLRequest {
 			}
 			
 			
+			// 3. search each album's images, write them into a collection, add them to the Album objects
 			for (Album album : albums) {
 				ResultSet imageIDResultSet = SendSQLRequest.sendSQL("SELECT FotoID FROM albumfoto WHERE AlbumID=" + album.getId());
 				while (imageIDResultSet.next()) {					
