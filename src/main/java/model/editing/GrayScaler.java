@@ -1,6 +1,8 @@
-package model;
+package model.editing;
 
 import java.awt.image.BufferedImage;
+
+import model.UtilsForImageHandling;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package model;
+package model.editing;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;

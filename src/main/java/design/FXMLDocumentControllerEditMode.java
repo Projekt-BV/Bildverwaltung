@@ -124,7 +124,7 @@ public class FXMLDocumentControllerEditMode implements Initializable {
 	@FXML
 	private void filterButtonPressed() {
 		String color = "RED";
-		model.Filters.filters(color);
+		model.editing.Filters.filters(color);
 	}
 	
 	@FXML
@@ -268,7 +268,7 @@ public class FXMLDocumentControllerEditMode implements Initializable {
 	private void rotateClockwise() {
 		BufferedImage img = null;
 		//get image to img
-		model.Rotater.rotateClockwise(img);
+		model.editing.Rotater.rotateClockwise(img);
 		//return img to ImagePane
 	}
 	
@@ -276,7 +276,7 @@ public class FXMLDocumentControllerEditMode implements Initializable {
 	private void rotateCounterClockwise() {
 		BufferedImage img = null;
 		//get image to img
-		model.Rotater.rotateAntiClockwise(img);
+		model.editing.Rotater.rotateAntiClockwise(img);
 		//return img to ImagePane
 	}
 	
@@ -304,7 +304,7 @@ public class FXMLDocumentControllerEditMode implements Initializable {
 	private void monochroneButtonPressed() {
 		BufferedImage img = null;
 		//get image to img
-		model.GrayScaler.grayScaleImage(img);
+		model.editing.GrayScaler.grayScaleImage(img);
 		//return img to ImagePane
 	}
 	

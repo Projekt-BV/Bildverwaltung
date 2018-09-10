@@ -1,6 +1,8 @@
-package model;
+package model.editing;
 
 import java.awt.image.BufferedImage;
+
+import model.UtilsForImageHandling;
 
 /**
  * This class is able to rotate a Buffered Image
