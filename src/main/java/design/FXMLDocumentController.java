@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import javafx.stage.Stage;
 import model.Album;
+import model.Database;
 import model.ImageContainer;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -37,7 +38,7 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private GridPane gridPane;
 	
-	ArrayList<Album> albums;
+	Database database;
 
 
 	
@@ -52,9 +53,9 @@ public class FXMLDocumentController implements Initializable {
 	 * @author Phillip Persch
 	 */
 	private void initializeListView() {		
-		albums = SendSQLRequest.fetchAlbums();
+		database = new Database();
 		
-		for (Album album : albums) {
+		for (Album album : database.getAlbums()) {
 			listView.getItems().add(album.getName());
 		}
 	}
@@ -71,7 +72,7 @@ public class FXMLDocumentController implements Initializable {
 		
 		// check if album exists. If it does not, return
 		Album album = null;		
-		for (Album a : albums) {
+		for (Album a : database.getAlbums()) {
 			if (a.getName().equals(albumName)) {
 				album = a;
 				break;
