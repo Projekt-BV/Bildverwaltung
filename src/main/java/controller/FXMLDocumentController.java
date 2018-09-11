@@ -82,7 +82,9 @@ public class FXMLDocumentController implements Initializable {
 			ImageView imageView = new ImageView(image);
 			imageView.setFitHeight(130);
 			imageView.setFitWidth(135);
+			
 			gridPane.getChildren().add(imageView);
+			
 			GridPane.setConstraints(imageView, row, line, 1, 1);
 			if (row > 5) {
 				row = 0;

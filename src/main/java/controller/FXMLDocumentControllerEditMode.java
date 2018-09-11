@@ -1,12 +1,8 @@
 package controller;
 
 import java.net.URL;
-import java.awt.Graphics2D;
-import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.ResourceBundle;
 
 import database.SendSQLRequest;
@@ -22,7 +18,6 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
-import model.Album;
 import model.ImageContainer;
 import model.editing.Filters;
 import model.editing.Rotater;
@@ -40,9 +35,9 @@ import javafx.scene.control.Button;
 public class FXMLDocumentControllerEditMode implements Initializable{
 	
 
-	public static Image image;
+	public static Image image;	// Das Bild, das angezeigt wird
 	public static Image imagePlain;   //Das Bild ohne Editing wird hier festgehalten
-	public static ImageContainer imageContainer;
+	public static ImageContainer imageContainer; //Wrapper für das Bild mit allen Informationen (wird veraendert nach dem Editieren!)
 	
 
 	@FXML
@@ -69,10 +64,10 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	
 	@Override //<-- War auskommentiert?
 	public void initialize(URL url, ResourceBundle rb) {
-		System.out.println(imageContainer.getName());
-		displayImageEditMode.setImage(image);
+		image = new Image(imageContainer.getPath());
+		imagePlain = new Image(imageContainer.getPath());
+		displayImageEditMode.setImage(image);		
 		
-		imagePlain = displayImageEditMode.getImage();
 		colorChoiceBox.setItems(colorChoiceList);
 		colorChoiceBox.setValue("Red");
 		initializeListView();	
