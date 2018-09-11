@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import model.Album;
 import model.Database;
 import model.ImageContainer;
+import model.editing.FileImport;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -145,10 +146,12 @@ public class FXMLDocumentController implements Initializable {
 		System.out.println("I am the fullScreenButtonPressed function");
 	}
 	
-	
+
 	@FXML
 	private void newFolderButtonPressed() {
-		System.out.println("I am the newFolderButtonPressed function");
+		FileImport tmpImp = new FileImport();
+		Stage window = new Stage();
+		tmpImp.start(window);
 	}
 
 	@FXML
