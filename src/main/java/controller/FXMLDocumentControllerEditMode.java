@@ -155,7 +155,7 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	private void filterButtonPressed() {
 		String color = "RED";
 		
-		Image img = Filters.filters(color, displayImageEditMode.getImage(), displayImageEditMode);
+		Image img = Filters.filters(color, displayImageEditMode);
 		
 		displayImageEditMode.setImage(img);
 	}

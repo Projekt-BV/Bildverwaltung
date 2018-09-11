@@ -10,9 +10,8 @@ import javafx.scene.paint.Color;
 public class Filters {
 	
 	
-	public static Image filters(String color, Image img, ImageView displayImageEditMode) {
+	public static Image filters(String color, ImageView displayImageEditMode) {
 		
-		displayImageEditMode.setImage(img);
 		
         ColorAdjust monochrome = new ColorAdjust();
         monochrome.setSaturation(-1.0);
@@ -26,8 +25,8 @@ public class Filters {
 					new ColorInput(
 							0,
 							0,
-							displayImageEditMode.getImage().getWidth(),
-							displayImageEditMode.getImage().getHeight(),
+							displayImageEditMode.getFitWidth(),
+							displayImageEditMode.getFitHeight(),
 							Color.RED
 							)
 					);
