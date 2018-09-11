@@ -1,8 +1,11 @@
 package controller;
 
 import java.net.URL;
+import java.awt.Graphics2D;
+import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.EventListener;
 import java.util.ResourceBundle;
 
 import database.SendSQLRequest;
@@ -19,6 +22,7 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
 import model.editing.Rotater;
+import model.editing.Zoom;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,10 +33,11 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Button;
 
 
-public class FXMLDocumentControllerEditMode implements Initializable {
+public class FXMLDocumentControllerEditMode implements Initializable{
 	
 
 	public static Image image;
+	public static Image imagePlain;   //Das Bild ohne Editing wird hier festgehalten
 
 	@FXML
 	private AnchorPane rootPane;
@@ -59,6 +64,8 @@ public class FXMLDocumentControllerEditMode implements Initializable {
 	@Override //<-- War auskommentiert?
 	public void initialize(URL url, ResourceBundle rb) {
 		displayImageEditMode.setImage(image);
+		imagePlain = displayImageEditMode.getImage();
+		setScrollingToImageView();
 		colorChoiceBox.setItems(colorChoiceList);
 		colorChoiceBox.setValue("Red");
 		initializeListView();	
@@ -285,6 +292,8 @@ public class FXMLDocumentControllerEditMode implements Initializable {
 				SwingFXUtils.toFXImage(bimage, null));
 	}
 	
+	
+	
 	@FXML
 	private void undo() {
 		System.out.println("I am the undo function");
@@ -327,6 +336,23 @@ public class FXMLDocumentControllerEditMode implements Initializable {
 		Image image = new Image("/design/dummyImages/2.jpeg");
 		displayImageEditMode.setImage(image);
 	}
+
+    private void setScrollingToImageView(){
+    	displayImageEditMode.setOnScroll(e -> {
+    		System.out.println(e.getDeltaY());
+    		if(e.getDeltaY() > 0) {
+    			BufferedImage bimg = Zoom.zoomIn(SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null));
+    			System.out.println(bimg.getWidth());
+    			Image img = SwingFXUtils.toFXImage(bimg, null);
+    			
+    			displayImageEditMode.setImage(img);
+    		}else if(e.getDeltaY() < 0) {
+    			
+    		}
+		});
+	}
+
+		
 	
 		
 		//DATA
