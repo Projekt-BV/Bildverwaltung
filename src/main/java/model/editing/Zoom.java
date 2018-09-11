@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.beans.EventHandler;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 
 
 /**
@@ -16,13 +17,12 @@ import javafx.embed.swing.SwingFXUtils;
  */
 public class Zoom{
 	
+	private static int zLev = 10;  //ZoomLevel, Angabe in %
+	
+	
 	public static BufferedImage zoomIn(BufferedImage img) {
 		
 		int w = (int)img.getWidth(), h = (int)img.getHeight();
-		
-		if(w < 180 || h < 180) {
-			return img;
-		}	
 
 		int zLev = 10;    // ZoomLevel: Angabe in Prozent
 		int x1 = w / zLev;
@@ -35,6 +35,13 @@ public class Zoom{
 
 		return img;
 		
+	}
+	
+	
+public static BufferedImage zoomOut(BufferedImage img) {
+		
+		// SOON
+		return img;
 	}
 
 }

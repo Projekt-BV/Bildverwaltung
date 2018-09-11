@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
+import model.editing.Filters;
 import model.editing.Rotater;
 import model.editing.Zoom;
 import javafx.scene.Node;
@@ -38,6 +39,7 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 
 	public static Image image;
 	public static Image imagePlain;   //Das Bild ohne Editing wird hier festgehalten
+	
 
 	@FXML
 	private AnchorPane rootPane;
@@ -64,11 +66,14 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	@Override //<-- War auskommentiert?
 	public void initialize(URL url, ResourceBundle rb) {
 		displayImageEditMode.setImage(image);
+		
 		imagePlain = displayImageEditMode.getImage();
-		setScrollingToImageView();
 		colorChoiceBox.setItems(colorChoiceList);
 		colorChoiceBox.setValue("Red");
 		initializeListView();	
+		
+		setFitDimensions();
+		setScrollingToImageView();
 	}
 		
 	
@@ -86,6 +91,20 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	
+	/**
+	 * Images which are smaller as the imageView will be drawn in their original size
+	 * @author Julian Einspenner
+	 */
+	private void setFitDimensions() {
+		if(image.getWidth() < displayImageEditMode.getFitWidth()) {
+			displayImageEditMode.setFitWidth(image.getWidth());
+		}
+		if(image.getHeight() < displayImageEditMode.getFitHeight()) {
+			displayImageEditMode.setFitHeight(image.getHeight());
 		}
 	}
 	
@@ -130,7 +149,10 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	@FXML
 	private void filterButtonPressed() {
 		String color = "RED";
-		model.editing.Filters.filters(color);
+		
+		Image img = Filters.filters(color, displayImageEditMode.getImage(), displayImageEditMode);
+		
+		displayImageEditMode.setImage(img);
 	}
 	
 	@FXML
@@ -339,15 +361,16 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 
     private void setScrollingToImageView(){
     	displayImageEditMode.setOnScroll(e -> {
-    		System.out.println(e.getDeltaY());
     		if(e.getDeltaY() > 0) {
     			BufferedImage bimg = Zoom.zoomIn(SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null));
-    			System.out.println(bimg.getWidth());
     			Image img = SwingFXUtils.toFXImage(bimg, null);
     			
     			displayImageEditMode.setImage(img);
     		}else if(e.getDeltaY() < 0) {
+    			BufferedImage bimg = Zoom.zoomOut(SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null));
+    			Image img = SwingFXUtils.toFXImage(bimg, null);
     			
+    			displayImageEditMode.setImage(img);
     		}
 		});
 	}

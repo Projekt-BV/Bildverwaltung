@@ -8,10 +8,11 @@ import javafx.scene.paint.Color;
 
 
 public class Filters {
-	@FXML
-	private static ImageView displayImageEditMode;
 	
-	public static void filters(String color) {
+	
+	public static Image filters(String color, Image img, ImageView displayImageEditMode) {
+		
+		displayImageEditMode.setImage(img);
 		
         ColorAdjust monochrome = new ColorAdjust();
         monochrome.setSaturation(-1.0);
@@ -124,5 +125,7 @@ public class Filters {
 
 	displayImageEditMode.setCache(true);
 	displayImageEditMode.setCacheHint(CacheHint.SPEED);
+	
+	return displayImageEditMode.getImage();
 	}
 }
