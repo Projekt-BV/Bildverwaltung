@@ -34,13 +34,14 @@ public class FXMLDocumentController implements Initializable {
 	private ImageView displayImage;
 	
 	@FXML
-	private ListView<String> listView;
+	private ListView<Album> listView;
 	
 	@FXML
 	private GridPane gridPane;
 	
 	Database database;
-
+	ArrayList<Image> imagesInSelectedAlbum;
+	Album selectedAlbum;
 
 	
 	@Override
@@ -56,7 +57,7 @@ public class FXMLDocumentController implements Initializable {
 		database = new Database();
 		
 		for (Album album : database.getAlbums()) {
-			listView.getItems().add(album.getName());
+			listView.getItems().add(album);
 		}
 	}
 	
@@ -66,35 +67,18 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private void initializeGridPane() {
 		gridPane.getChildren().clear(); // clear gridPane
-		String albumName = listView.getSelectionModel().getSelectedItem(); // get name of album that has been clicked on
+		selectedAlbum = listView.getSelectionModel().getSelectedItem(); // get album that has been clicked on
 		
+		// add album's images to collection
+		imagesInSelectedAlbum = new ArrayList<Image>();		
+		for (ImageContainer imageContainer : selectedAlbum.getImages()) {
+			imagesInSelectedAlbum.add(new Image(imageContainer.getPath()));
+		}		
 		
-		// check if album exists. If it does not, return
-		Album album = null;		
-		for (Album a : database.getAlbums()) {
-			if (a.getName().equals(albumName)) {
-				album = a;
-				break;
-			}				
-		}
-				
-		if (album == null) {
-			return;
-		}
-		
-		
-		// add album's images into grid
-		ArrayList<Image> images = new ArrayList<Image>();
-		
-		for (ImageContainer imageContainer : album.getImages()) {
-			images.add(new Image(imageContainer.getPath()));
-		}
-		
-		
-		// display grid
+		// add collection to grid
 		int row = 0;
 		int line = 0;
-		for (Image image : images) {			
+		for (Image image : imagesInSelectedAlbum) {			
 			ImageView imageView = new ImageView(image);
 			imageView.setFitHeight(130);
 			imageView.setFitWidth(135);
@@ -132,8 +116,13 @@ public class FXMLDocumentController implements Initializable {
 	
 	@FXML
 	private void gridPaneImagePressed(MouseEvent e) throws IOException {
-		ImageView imageView = (ImageView)e.getPickResult().getIntersectedNode();		
+		ImageView imageView = (ImageView)e.getPickResult().getIntersectedNode();	
+		
 		FXMLDocumentControllerEditMode.image = imageView.getImage();
+				
+		int index = imagesInSelectedAlbum.indexOf(imageView.getImage());
+		FXMLDocumentControllerEditMode.imageContainer = selectedAlbum.getImages().get(index);
+		
 		Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
 		Scene changePane = new Scene(pane);
 

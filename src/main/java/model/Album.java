@@ -59,5 +59,10 @@ public class Album {
 		this.images = images;
 	}
 	
+	 
+	public String toString() {
+		return this.getName();
+	}
+	
 	
 }

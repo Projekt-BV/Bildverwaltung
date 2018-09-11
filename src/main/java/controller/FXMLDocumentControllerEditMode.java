@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.ResourceBundle;
 
@@ -21,6 +22,8 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
+import model.Album;
+import model.ImageContainer;
 import model.editing.Filters;
 import model.editing.Rotater;
 import model.editing.Zoom;
@@ -39,6 +42,7 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 
 	public static Image image;
 	public static Image imagePlain;   //Das Bild ohne Editing wird hier festgehalten
+	public static ImageContainer imageContainer;
 	
 
 	@FXML
@@ -65,6 +69,7 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	
 	@Override //<-- War auskommentiert?
 	public void initialize(URL url, ResourceBundle rb) {
+		System.out.println(imageContainer.getName());
 		displayImageEditMode.setImage(image);
 		
 		imagePlain = displayImageEditMode.getImage();
