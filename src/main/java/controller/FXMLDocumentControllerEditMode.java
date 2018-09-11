@@ -18,12 +18,14 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
+import model.editing.Rotater;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.ChoiceBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Button;
 
 
@@ -263,18 +265,24 @@ public class FXMLDocumentControllerEditMode implements Initializable {
 	//Edit Mode
 	@FXML
 	private void rotateClockwise() {
-		BufferedImage img = null;
-		//get image to img
-		model.editing.Rotater.rotateClockwise(img);
-		//return img to ImagePane
+		Image image = displayImageEditMode.getImage();
+		BufferedImage bimage = SwingFXUtils.fromFXImage(image, null);
+		
+		bimage = Rotater.rotateClockwise(bimage);
+		
+		displayImageEditMode.setImage(
+				SwingFXUtils.toFXImage(bimage, null));
 	}
 	
 	@FXML
 	private void rotateCounterClockwise() {
-		BufferedImage img = null;
-		//get image to img
-		model.editing.Rotater.rotateAntiClockwise(img);
-		//return img to ImagePane
+		Image image = displayImageEditMode.getImage();
+		BufferedImage bimage = SwingFXUtils.fromFXImage(image, null);
+		
+		bimage = Rotater.rotateAntiClockwise(bimage);
+		
+		displayImageEditMode.setImage(
+				SwingFXUtils.toFXImage(bimage, null));
 	}
 	
 	@FXML
