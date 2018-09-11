@@ -21,10 +21,12 @@ import model.ImageContainer;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 
 public class FXMLDocumentController implements Initializable {
 	
+
 	@FXML
 	private AnchorPane rootPane;
 	
@@ -41,7 +43,7 @@ public class FXMLDocumentController implements Initializable {
 
 
 	
-	@Override //<-- War auskommentiert?
+	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeListView();
 	}
@@ -49,7 +51,6 @@ public class FXMLDocumentController implements Initializable {
 	
 	/** 
 	 * Method to initialize the listView containing the album names.
-	 * @author Phillip Persch
 	 */
 	private void initializeListView() {		
 		database = new Database();
@@ -61,7 +62,6 @@ public class FXMLDocumentController implements Initializable {
 	
 	/** 
 	 * Method to initialize the listView containing the album names.
-	 * @author Phillip Persch
 	 */	
 	@FXML
 	private void initializeGridPane() {
@@ -128,6 +128,20 @@ public class FXMLDocumentController implements Initializable {
 			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 			window.setScene(changePane);
 			window.show();
+	}
+	
+	@FXML
+	private void gridPaneImagePressed(MouseEvent e) throws IOException {
+		ImageView imageView = (ImageView)e.getPickResult().getIntersectedNode();		
+		FXMLDocumentControllerEditMode.image = imageView.getImage();
+		Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
+		Scene changePane = new Scene(pane);
+
+		//Show stage information
+		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+		window.setScene(changePane);
+		window.show();
+		
 	}
 	
 	@FXML

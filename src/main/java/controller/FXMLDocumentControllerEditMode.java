@@ -29,6 +29,9 @@ import javafx.scene.control.Button;
 
 public class FXMLDocumentControllerEditMode implements Initializable {
 	
+
+	public static Image image;
+
 	@FXML
 	private AnchorPane rootPane;
 	
@@ -53,6 +56,7 @@ public class FXMLDocumentControllerEditMode implements Initializable {
 	
 	@Override //<-- War auskommentiert?
 	public void initialize(URL url, ResourceBundle rb) {
+		displayImageEditMode.setImage(image);
 		colorChoiceBox.setItems(colorChoiceList);
 		colorChoiceBox.setValue("Red");
 		initializeListView();	
