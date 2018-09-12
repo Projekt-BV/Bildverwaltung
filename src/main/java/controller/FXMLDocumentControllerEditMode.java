@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
 import model.ImageContainer;
-import model.editing.Filters;
+import model.editing.ColorFilter;
 import model.editing.Rotater;
 import model.editing.Zoom;
 import javafx.scene.Node;
@@ -149,7 +149,7 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	@FXML
 	private void filterButtonPressed() {
 		String color = (String)colorChoiceBox.getValue();
-		Image img = Filters.filterCoulours(displayImageEditMode.getImage(), color);
+		Image img = ColorFilter.filterCoulours(displayImageEditMode.getImage(), color);
 		displayImageEditMode.setImage(img);
 	}
 	

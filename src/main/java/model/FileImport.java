@@ -1,4 +1,4 @@
-package model.editing;
+package model;
 
 import java.io.File;
 import java.sql.ResultSet;
