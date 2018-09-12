@@ -44,7 +44,7 @@
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#rotateClockwise" text="Rotate Clockwise" />
                     <MenuItem mnemonicParsing="false" onAction="#rotateCounterClockwise" text="Rotate CounterClockwise" />
-                    <MenuItem mnemonicParsing="false" onAction="#monochroneButtonPressed" text="Black/ White" />
+                    <MenuItem mnemonicParsing="false" onAction="#monochroneButtonPressed" text="Black And White" />
                     <MenuItem mnemonicParsing="false" text="Cut" />
                     <MenuItem mnemonicParsing="false" text="Resize" />
                   </items>
@@ -129,7 +129,7 @@
                               <TextField layoutX="133.0" layoutY="368.0" prefHeight="25.0" prefWidth="100.0" />
                               <Button layoutX="16.0" layoutY="368.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Undo" />
                               <Button layoutX="136.0" layoutY="474.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Cut" />
-                              <Button layoutX="134.0" layoutY="191.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Monochrone" />
+                              <Button layoutX="134.0" layoutY="191.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Black And White" onAction="#monochroneButtonPressed"/>
                               <Text layoutX="16.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
                               <Text layoutX="16.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
                               <Button layoutX="18.0" layoutY="474.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Mark area" />

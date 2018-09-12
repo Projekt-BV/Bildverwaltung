@@ -20,6 +20,7 @@ import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
 import model.ImageContainer;
 import model.editing.ColorFilter;
+import model.editing.GrayScaler;
 import model.editing.Rotater;
 import model.editing.Zoom;
 import javafx.scene.Node;
@@ -336,10 +337,7 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	
 	@FXML
 	private void monochroneButtonPressed() {
-		BufferedImage img = null;
-		//get image to img
-		model.editing.GrayScaler.grayScaleImage(img);
-		//return img to ImagePane
+		displayImageEditMode.setImage(GrayScaler.grayScaleImage(displayImageEditMode.getImage()));
 	}
 	
 	@FXML
