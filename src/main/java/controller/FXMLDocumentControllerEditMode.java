@@ -66,7 +66,7 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	public void initialize(URL url, ResourceBundle rb) {
 		image = new Image(imageContainer.getPath());
 		imagePlain = new Image(imageContainer.getPath());
-		displayImageEditMode.setImage(image);		
+		displayImageEditMode.setImage(image);	
 		
 		colorChoiceBox.setItems(colorChoiceList);
 		colorChoiceBox.setValue("Red");
@@ -148,10 +148,8 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 
 	@FXML
 	private void filterButtonPressed() {
-		String color = "RED";
-		
-		Image img = Filters.filters(color, displayImageEditMode);
-		
+		String color = (String)colorChoiceBox.getValue();
+		Image img = Filters.filterCoulours(displayImageEditMode.getImage(), color);
 		displayImageEditMode.setImage(img);
 	}
 	
