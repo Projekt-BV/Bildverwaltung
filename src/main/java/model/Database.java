@@ -38,23 +38,36 @@ public class Database {
 				ResultSet imageIDResultSet = SendSQLRequest.sendSQL("SELECT FotoID FROM albumfoto WHERE AlbumID=" + album.getId());
 				while (imageIDResultSet.next()) {					
 					ResultSet imageResultSet = SendSQLRequest.sendSQL("SELECT * FROM fotos WHERE ID=" + imageIDResultSet.getInt("FotoID"));
-					if (imageResultSet.next()) {
+					
+					if (imageResultSet.next()) {						
 						int id = imageResultSet.getInt("ID");
 						String name = imageResultSet.getString("Fotoname");
 						String path = imageResultSet.getString("Pfad");
 						String location = imageResultSet.getString("Ort");
 						String date = imageResultSet.getString("Datum");
-						ImageContainer image = new ImageContainer(id, name, path, location, date);
+						
+						// get tag list
+						ArrayList<String> tags = new ArrayList<String>();
+						ResultSet tagsResult = SendSQLRequest.sendSQL("SELECT Schluesselwort FROM tags WHERE Foto_ID=" + id);
+						while (tagsResult.next()) {
+							tags.add(tagsResult.getString("Schluesselwort"));
+						}
+						
+						// build imageContainer					
+						ImageContainer image = new ImageContainer(id, name, path, location, date, tags);					
+						
+						// add imageContainer to album
 						album.getImages().add(image);
 					}					
 				}
 			}
 			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	public ArrayList<Album> getAlbums() {
 		return albums;
 	}
