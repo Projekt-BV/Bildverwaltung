@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,11 +56,12 @@ public class FXMLDocumentController implements Initializable {
 	 * Method to initialize the listView containing the album names.
 	 */
 	private void initializeListView() {		
-		database.reloadDatabaseContents();
+		database.reloadDatabaseContents();		
 		
-		for (Album album : database.getAlbums()) {
-			listView.getItems().add(album);
-		}
+		database.getAlbums().stream()
+							.forEach(album -> listView.getItems().add(album));
+
+		initializeGridPane();
 	}
 	
 	/** 
@@ -67,15 +69,20 @@ public class FXMLDocumentController implements Initializable {
 	 */	
 	@FXML
 	private void initializeGridPane() {
-		gridPane.getChildren().clear(); // clear gridPane
-		selectedAlbum = listView.getSelectionModel().getSelectedItem(); // get album that has been clicked on
+		if (gridPane.getChildren().isEmpty()) {
+			// get album "All Images"
+			selectedAlbum = database.getAlbums().stream()
+												.filter(album -> album.getName().equals("All Images"))
+												.findFirst()
+												.get();
+		} else {
+			// get album that has been clicked on
+			gridPane.getChildren().clear(); // clear gridPane
+			selectedAlbum = listView.getSelectionModel().getSelectedItem(); 
+		}
 		
 		// add album's images to collection
 		imagesInSelectedAlbum = new ArrayList<Image>();		
-//		for (ImageContainer imageContainer : selectedAlbum.getImages()) {
-//			imagesInSelectedAlbum.add(new Image(imageContainer.getPath()));
-//		}
-		
 		selectedAlbum.getImages().stream().forEach(i -> imagesInSelectedAlbum.add(new Image(i.getPath())));
 		
 		// add collection to grid

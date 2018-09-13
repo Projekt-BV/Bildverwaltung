@@ -49,6 +49,7 @@ public class Database {
 						// get tag list
 						ArrayList<String> tags = new ArrayList<String>();
 						ResultSet tagsResult = SendSQLRequest.sendSQL("SELECT Schluesselwort FROM tags WHERE Foto_ID=" + id);
+						
 						while (tagsResult.next()) {
 							tags.add(tagsResult.getString("Schluesselwort"));
 						}
