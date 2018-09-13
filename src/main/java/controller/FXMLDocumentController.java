@@ -40,7 +40,7 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private GridPane gridPane;
 	
-	Database database;
+	Database database = new Database();
 	ArrayList<Image> imagesInSelectedAlbum;
 	Album selectedAlbum;
 
@@ -55,7 +55,7 @@ public class FXMLDocumentController implements Initializable {
 	 * Method to initialize the listView containing the album names.
 	 */
 	private void initializeListView() {		
-		database = new Database();
+		database.reloadDatabaseContents();
 		
 		for (Album album : database.getAlbums()) {
 			listView.getItems().add(album);
