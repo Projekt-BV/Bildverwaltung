@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.event.ActionEvent;
@@ -19,7 +20,10 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
 import model.ImageContainer;
-import model.editing.Filters;
+import model.editing.ColorFilter;
+import model.editing.Cutter;
+import model.editing.GrayScaler;
+import model.editing.Resizer;
 import model.editing.Rotater;
 import model.editing.Zoom;
 import javafx.scene.Node;
@@ -39,6 +43,8 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	public static Image imagePlain;   //Das Bild ohne Editing wird hier festgehalten
 	public static ImageContainer imageContainer; //Wrapper für das Bild mit allen Informationen (wird veraendert nach dem Editieren!)
 	
+	private int initFitWidth, initFitHeight;
+	private boolean cutMode = false;
 
 	@FXML
 	private AnchorPane rootPane;
@@ -56,24 +62,33 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	private Button applyFilterButton;
 
 	@FXML
-	private ChoiceBox colorChoiceBox;
+	private ChoiceBox<String> colorChoiceBox;
 	ObservableList<String> colorChoiceList = FXCollections
-				.observableArrayList("Red", "Blue", "Green", 
+				.observableArrayList("Red", "Green", "Blue", 
 								     "Yellow", "Violet", "Aqua");
 	
+	@FXML
+	private TextField widthTextField, heightTextField;
 	
-	@Override //<-- War auskommentiert?
+	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		image = new Image(imageContainer.getPath());
 		imagePlain = new Image(imageContainer.getPath());
-		displayImageEditMode.setImage(image);		
+		displayImageEditMode.setImage(image);	
+		
+		initFitWidth = (int)displayImageEditMode.getFitWidth();
+		initFitHeight = (int)displayImageEditMode.getFitHeight();
 		
 		colorChoiceBox.setItems(colorChoiceList);
-		colorChoiceBox.setValue("Red");
+		colorChoiceBox.setValue(colorChoiceList.get(0));
+		
 		initializeListView();	
 		
 		setFitDimensions();
 		setScrollingToImageView();
+		setMouseClickToImageView();
+		
+		setResizeTextFields();
 	}
 		
 	
@@ -106,6 +121,44 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 		if(image.getHeight() < displayImageEditMode.getFitHeight()) {
 			displayImageEditMode.setFitHeight(image.getHeight());
 		}
+	}
+	
+	/**
+	 * Sets the text of the resize textfields width and height
+	 * @author Julian Einspenner
+	 */
+	private void setResizeTextFields() {
+		int width = (int) displayImageEditMode.getImage().getWidth();
+		int height = (int) displayImageEditMode.getImage().getHeight();
+		
+		widthTextField.setText(String.valueOf(width));
+		heightTextField.setText(String.valueOf(height));
+	}
+	
+	
+	double x1, x2, y1, y2;
+	/**
+	 * @author Julian Einspenner
+	 * @param event
+	 * @throws IOException
+	 */
+	private void setMouseClickToImageView() {
+		displayImageEditMode.setOnMousePressed(e -> {
+			x1 = e.getX() / displayImageEditMode.getFitWidth() * displayImageEditMode.getImage().getWidth();   // todo: x1 und x2 muessen rechtestes X des Bildes im Koordinatensystem werden
+			y1 = e.getY() / displayImageEditMode.getFitHeight() * displayImageEditMode.getImage().getHeight();
+		});
+		
+		displayImageEditMode.setOnMouseReleased(e -> {
+			x2 = e.getX() / displayImageEditMode.getFitWidth() * displayImageEditMode.getImage().getWidth();
+			y2 = e.getY() / displayImageEditMode.getFitHeight() * displayImageEditMode.getImage().getHeight();
+			
+			if(cutMode) {
+				System.out.println("x1: " + (int)x1 + " y1: " + (int)y1 + " x2: " + (int)x2 + " y2: " + (int)y2);
+				
+				Image img = Cutter.cutImage((int)x1, (int)y1, (int)x2, (int)y2, displayImageEditMode.getImage());
+				displayImageEditMode.setImage(img);
+			}
+		});
 	}
 	
 	@FXML
@@ -148,10 +201,8 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 
 	@FXML
 	private void filterButtonPressed() {
-		String color = "RED";
-		
-		Image img = Filters.filters(color, displayImageEditMode);
-		
+		String color = (String)colorChoiceBox.getValue();
+		Image img = ColorFilter.filterCoulours(displayImageEditMode.getImage(), color);
 		displayImageEditMode.setImage(img);
 	}
 	
@@ -181,10 +232,14 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 		System.out.println("I am the importImage function");
 	}
 	
-//	@FXML
-//	private void cutImage() {
-//
-//	} Already exist -> Vermeide doppelte Klassen
+	@FXML
+	private void cutModeButtonPressed() {
+		if(cutMode) {
+			cutMode = false;
+			return;
+		}
+		cutMode = true;
+	} 
 	
 	@FXML
 	private void copyImage() {
@@ -217,12 +272,6 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	}
 	//-----------------------
 	
-	//Edit
-	@FXML
-	private void blackWhite() {
-		System.out.println("I am the blackWhite function");
-	}	
-	
 	@FXML
 	private void cutImage() {
 		System.out.println("I am the cutImage function");
@@ -230,7 +279,31 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	
 	@FXML
 	private void resizeImage() {
-		System.out.println("I am the resizeImage function");
+		int width, height;
+		
+		try {
+			width = Integer.parseInt(widthTextField.getText());
+			height = Integer.parseInt(heightTextField.getText());
+		}catch(NumberFormatException e){
+			return;
+		}
+		
+		setFitDimensionsIfSmallerThanImageViewsMaxSize(width, height);
+		
+		displayImageEditMode.setImage(Resizer.resizeImage(width, height, displayImageEditMode.getImage()));
+		
+		setResizeTextFields();
+		
+	}
+	
+	
+	private void setFitDimensionsIfSmallerThanImageViewsMaxSize(int width, int height) {
+		if(initFitWidth >= width) {
+			displayImageEditMode.setFitWidth(width);
+		}
+		if(initFitHeight >= height) {
+			displayImageEditMode.setFitHeight(height);
+		}
 	}
 	
 	//---------------------------
@@ -301,6 +374,9 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 		
 		displayImageEditMode.setImage(
 				SwingFXUtils.toFXImage(bimage, null));
+		
+		setResizeTextFields();
+		swapFitDimensions();
 	}
 	
 	@FXML
@@ -312,6 +388,18 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 		
 		displayImageEditMode.setImage(
 				SwingFXUtils.toFXImage(bimage, null));
+
+		setResizeTextFields();
+		swapFitDimensions();
+	}
+	
+	private void swapFitDimensions() {
+		if(displayImageEditMode.getImage().getWidth() < displayImageEditMode.getFitWidth() ||
+		   displayImageEditMode.getImage().getHeight() < displayImageEditMode.getFitHeight() ) {	
+			int right = (int)displayImageEditMode.getFitWidth();
+			displayImageEditMode.setFitWidth(displayImageEditMode.getFitHeight());
+			displayImageEditMode.setFitHeight(right);
+		}
 	}
 	
 	
@@ -338,10 +426,7 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	
 	@FXML
 	private void monochroneButtonPressed() {
-		BufferedImage img = null;
-		//get image to img
-		model.editing.GrayScaler.grayScaleImage(img);
-		//return img to ImagePane
+		displayImageEditMode.setImage(GrayScaler.grayScaleImage(displayImageEditMode.getImage()));
 	}
 	
 	@FXML

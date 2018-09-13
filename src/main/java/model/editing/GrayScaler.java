@@ -2,6 +2,9 @@ package model.editing;
 
 import java.awt.image.BufferedImage;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+
 /**
  * 
  * @author Julian Einspenner
@@ -15,8 +18,11 @@ public class GrayScaler {
 	 * @param img is the image getting black & white
 	 * @return the black & white image
 	 */
-	public static BufferedImage grayScaleImage(BufferedImage img) {
-		int[] pixels = UtilsForImageHandling.getPixelArray(img);
+	public static Image grayScaleImage(Image img) {
+		
+		BufferedImage bimg = SwingFXUtils.fromFXImage(img, null);
+		
+		int[] pixels = UtilsForImageHandling.getPixelArray(bimg);
 		
 		for(int i = 0; i < pixels.length; i++) {
 			int p = pixels[i];
@@ -33,9 +39,9 @@ public class GrayScaler {
 			pixels[i] = p;
 		}
 		
-		img.setRGB(0, 0, img.getWidth(), img.getHeight(), pixels, 0, img.getWidth());
+		bimg.setRGB(0, 0, bimg.getWidth(), bimg.getHeight(), pixels, 0, bimg.getWidth());
 		
-		return img;
+		return SwingFXUtils.toFXImage(bimg, null);
 	}
 	
 }

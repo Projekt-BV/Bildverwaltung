@@ -44,7 +44,7 @@
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#rotateClockwise" text="Rotate Clockwise" />
                     <MenuItem mnemonicParsing="false" onAction="#rotateCounterClockwise" text="Rotate CounterClockwise" />
-                    <MenuItem mnemonicParsing="false" onAction="#monochroneButtonPressed" text="Black/ White" />
+                    <MenuItem mnemonicParsing="false" onAction="#monochroneButtonPressed" text="Black And White" />
                     <MenuItem mnemonicParsing="false" text="Cut" />
                     <MenuItem mnemonicParsing="false" text="Resize" />
                   </items>
@@ -122,17 +122,17 @@
                               <Button layoutX="133.0" layoutY="57.0" mnemonicParsing="false" onAction="#rotateCounterClockwise" prefHeight="25.0" prefWidth="100.0" text="Counter-Clockwise" />
                               <Button layoutX="133.0" layoutY="14.0" mnemonicParsing="false" onAction="#rotateClockwise" prefHeight="25.0" prefWidth="100.0" text="Clockwise" />
                               <Button fx:id="applyFilterButton" layoutX="14.0" layoutY="147.0" mnemonicParsing="false" onAction="#filterButtonPressed" prefHeight="25.0" prefWidth="100.0" text="Filter" />
-                              <Button layoutX="16.0" layoutY="301.0" mnemonicParsing="false" onAction="#loadImage" prefHeight="25.0" prefWidth="97.0" text="Resize" />
-                              <Text layoutX="134.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Height" />
-                              <TextField layoutX="133.0" layoutY="301.0" prefHeight="25.0" prefWidth="100.0" />
-                              <Text layoutX="135.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Width" />
-                              <TextField layoutX="133.0" layoutY="368.0" prefHeight="25.0" prefWidth="100.0" />
+                              <Button layoutX="16.0" layoutY="301.0" mnemonicParsing="false" onAction="#resizeImage" prefHeight="25.0" prefWidth="97.0" text="Resize" />
+                              <Text layoutX="134.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Width" />
+                              <TextField fx:id="widthTextField" layoutX="133.0" layoutY="301.0" prefHeight="25.0" prefWidth="100.0" />
+                              <Text layoutX="135.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Height" />
+                              <TextField fx:id="heightTextField" layoutX="133.0" layoutY="368.0" prefHeight="25.0" prefWidth="100.0" />
                               <Button layoutX="16.0" layoutY="368.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Undo" />
                               <Button layoutX="136.0" layoutY="474.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Cut" />
-                              <Button layoutX="134.0" layoutY="191.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Monochrone" />
+                              <Button layoutX="134.0" layoutY="191.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Black And White" onAction="#monochroneButtonPressed"/>
                               <Text layoutX="16.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
                               <Text layoutX="16.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
-                              <Button layoutX="18.0" layoutY="474.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Mark area" />
+                              <Button fx:id="cutModeButton" onAction="#cutModeButtonPressed" layoutX="18.0" layoutY="474.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Cut Mode" />
                               <Text layoutX="22.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cut image" wrappingWidth="86.13671875" />
                               <Text layoutX="15.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Filter" />
                               <Text layoutX="17.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Resize image" />
