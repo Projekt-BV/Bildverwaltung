@@ -2,6 +2,7 @@ package model.editing;
 
 import java.io.File;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,7 +34,29 @@ public class FileImport extends Application {
         try {
             ResultSet tmpRs;
         	String sqlrequest ="INSERT INTO fotos (Fotoname,Pfad) VALUES" + "('"+ file.getName() +"', 'file://" +file.toURI().getPath()+ "');";
-            tmpRs = SendSQLRequest.sendSQL(sqlrequest);
+        	tmpRs = SendSQLRequest.sendSQL(sqlrequest);
+        	String foo= "select id from fotos where fotoname='"+file.getName()+"';";
+        	tmpRs = SendSQLRequest.sendSQL(foo);
+        	
+        	
+        	ResultSetMetaData rsmd = tmpRs.getMetaData();
+    	    int cols = rsmd.getColumnCount();
+
+    	    for(int i=1; i<=cols; i++)
+    	        System.out.print(rsmd.getColumnLabel(i)+"\t");
+
+    	    System.out.println("\n-------------------------------");
+
+    	    while(tmpRs.next())
+    	    {
+    	        // eine zeile ausgeben
+    	        for(int i=1; i<=cols; i++)
+    	            //System.out.print(tmpRs.getString(i)+"\t");
+    	        	foo = "INSERT INTO albumfoto (AlbumID, FotoID) VALUES"+ "(1, '"+ tmpRs.getString(i)+ "');";
+    	        	
+    	        System.out.println();
+    	    }
+    	    tmpRs = SendSQLRequest.sendSQL(foo);
         } catch (SQLException ex) {
             Logger.getLogger(
                 FileImport.class.getName()).log(
