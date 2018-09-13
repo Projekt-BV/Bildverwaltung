@@ -72,9 +72,11 @@ public class FXMLDocumentController implements Initializable {
 		
 		// add album's images to collection
 		imagesInSelectedAlbum = new ArrayList<Image>();		
-		for (ImageContainer imageContainer : selectedAlbum.getImages()) {
-			imagesInSelectedAlbum.add(new Image(imageContainer.getPath()));
-		}		
+//		for (ImageContainer imageContainer : selectedAlbum.getImages()) {
+//			imagesInSelectedAlbum.add(new Image(imageContainer.getPath()));
+//		}
+		
+		selectedAlbum.getImages().stream().forEach(i -> imagesInSelectedAlbum.add(new Image(i.getPath())));
 		
 		// add collection to grid
 		int row = 0;
