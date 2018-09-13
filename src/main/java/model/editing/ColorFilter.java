@@ -97,8 +97,6 @@ public class ColorFilter {
 	}
 	
 	private static Color[] makeItYellow(Color[] colors) {
-		System.out.println("yellow");
-		
 		for(int i = 0; i < colors.length; i++) {
 			int red = colors[i].getRed();
 			int green = colors[i].getGreen();

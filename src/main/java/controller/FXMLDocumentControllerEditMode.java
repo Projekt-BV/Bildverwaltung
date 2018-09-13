@@ -21,6 +21,7 @@ import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
 import model.ImageContainer;
 import model.editing.ColorFilter;
+import model.editing.Cutter;
 import model.editing.GrayScaler;
 import model.editing.Resizer;
 import model.editing.Rotater;
@@ -43,7 +44,7 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	public static ImageContainer imageContainer; //Wrapper für das Bild mit allen Informationen (wird veraendert nach dem Editieren!)
 	
 	private int initFitWidth, initFitHeight;
-	
+	private boolean cutMode = false;
 
 	@FXML
 	private AnchorPane rootPane;
@@ -61,7 +62,7 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 	private Button applyFilterButton;
 
 	@FXML
-	private ChoiceBox colorChoiceBox;
+	private ChoiceBox<String> colorChoiceBox;
 	ObservableList<String> colorChoiceList = FXCollections
 				.observableArrayList("Red", "Green", "Blue", 
 								     "Yellow", "Violet", "Aqua");
@@ -85,6 +86,7 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 		
 		setFitDimensions();
 		setScrollingToImageView();
+		setMouseClickToImageView();
 		
 		setResizeTextFields();
 	}
@@ -131,6 +133,32 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 		
 		widthTextField.setText(String.valueOf(width));
 		heightTextField.setText(String.valueOf(height));
+	}
+	
+	
+	double x1, x2, y1, y2;
+	/**
+	 * @author Julian Einspenner
+	 * @param event
+	 * @throws IOException
+	 */
+	private void setMouseClickToImageView() {
+		displayImageEditMode.setOnMousePressed(e -> {
+			x1 = e.getX() / displayImageEditMode.getFitWidth() * displayImageEditMode.getImage().getWidth();   // todo: x1 und x2 muessen rechtestes X des Bildes im Koordinatensystem werden
+			y1 = e.getY() / displayImageEditMode.getFitHeight() * displayImageEditMode.getImage().getHeight();
+		});
+		
+		displayImageEditMode.setOnMouseReleased(e -> {
+			x2 = e.getX() / displayImageEditMode.getFitWidth() * displayImageEditMode.getImage().getWidth();
+			y2 = e.getY() / displayImageEditMode.getFitHeight() * displayImageEditMode.getImage().getHeight();
+			
+			if(cutMode) {
+				System.out.println("x1: " + (int)x1 + " y1: " + (int)y1 + " x2: " + (int)x2 + " y2: " + (int)y2);
+				
+				Image img = Cutter.cutImage((int)x1, (int)y1, (int)x2, (int)y2, displayImageEditMode.getImage());
+				displayImageEditMode.setImage(img);
+			}
+		});
 	}
 	
 	@FXML
@@ -204,10 +232,14 @@ public class FXMLDocumentControllerEditMode implements Initializable{
 		System.out.println("I am the importImage function");
 	}
 	
-//	@FXML
-//	private void cutImage() {
-//
-//	} Already exist -> Vermeide doppelte Klassen
+	@FXML
+	private void cutModeButtonPressed() {
+		if(cutMode) {
+			cutMode = false;
+			return;
+		}
+		cutMode = true;
+	} 
 	
 	@FXML
 	private void copyImage() {
