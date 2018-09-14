@@ -194,6 +194,11 @@ public class MainControllerEditMode implements Initializable{
 		System.out.println("I am the fullScreenButtonPressed function");
 	}
 	
+	
+	/**
+	 * Sets the ratio by the given width of the width textfield
+	 * @author Julian Einspenner
+	 */
 	@FXML
 	private void setRatio() {
 		double ratio = displayImageEditMode.getImage().getWidth() / displayImageEditMode.getImage().getHeight();
@@ -419,6 +424,9 @@ public class MainControllerEditMode implements Initializable{
 		swapFitDimensions();
 	}
 	
+	/**
+	 * Swaps fit dimensions for rotated images
+	 */
 	private void swapFitDimensions() {
 		if(displayImageEditMode.getImage().getWidth() < displayImageEditMode.getFitWidth() ||
 		   displayImageEditMode.getImage().getHeight() < displayImageEditMode.getFitHeight() ) {	
@@ -428,11 +436,21 @@ public class MainControllerEditMode implements Initializable{
 		}
 	}
 	
-	
-	
+	/**
+	 * Current image will be appear in its plain state
+	 * @author Julian Einspenner
+	 */
 	@FXML
 	private void undo() {
-		System.out.println("I am the undo function");
+		image = new Image(imageContainer.getPath());
+		displayImageEditMode.setImage(image);	
+		
+		displayImageEditMode.setFitWidth(initFitWidth);
+		displayImageEditMode.setFitHeight(initFitHeight);
+		
+		setFitDimensions();
+		
+		setResizeTextFields();
 	}
 	
 	@FXML
