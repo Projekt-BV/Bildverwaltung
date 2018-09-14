@@ -60,6 +60,9 @@ public class MainControllerEditMode implements Initializable{
 	
 	@FXML
 	private Button applyFilterButton;
+	
+	@FXML
+	private Button cutModeButton;
 
 	@FXML
 	private ChoiceBox<String> colorChoiceBox;
@@ -263,9 +266,11 @@ public class MainControllerEditMode implements Initializable{
 	@FXML
 	private void cutModeButtonPressed() {
 		if(cutMode) {
+			cutModeButton.setStyle("-fx-background-color: #5a5a5a"); //Standardfarbe aus der css-Datei
 			cutMode = false;
 			return;
 		}
+		cutModeButton.setStyle("-fx-background-color: #005f00");  //saftiges wiesengruen
 		cutMode = true;
 	} 
 	
