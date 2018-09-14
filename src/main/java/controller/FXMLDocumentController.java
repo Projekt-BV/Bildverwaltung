@@ -3,7 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +18,6 @@ import javafx.stage.Stage;
 import model.Album;
 import model.Database;
 import model.FileImport;
-import model.ImageContainer;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,82 +26,48 @@ import javafx.scene.input.MouseEvent;
 
 public class FXMLDocumentController implements Initializable {
 	
-
+	@FXML private ListViewController listViewController;
+	
 	@FXML
 	private AnchorPane rootPane;
 	
 	@FXML
 	private ImageView displayImage;
 	
-	@FXML
-	private ListView<Album> listView;
+	@FXML ListView<Album> listView;
 	
-	@FXML
-	private GridPane gridPane;
+	@FXML GridPane gridPane;
 	
 	Database database = new Database();
-	ArrayList<Image> imagesInSelectedAlbum;
+	ArrayList<Image> imagesInSelectedAlbum = new ArrayList<Image>();
 	Album selectedAlbum;
 
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		initializeListView();
-	}
-		
-	
-	/** 
-	 * Method to initialize the listView containing the album names.
-	 */
-	private void initializeListView() {		
-		database.reloadDatabaseContents();		
-		
-		database.getAlbums().stream()
-							.forEach(album -> listView.getItems().add(album));
-
-		initializeGridPane();
+		listViewController.injectMainController(this);
+		listViewController.initializeListView();
 	}
 	
-	/** 
-	 * Method to initialize the listView containing the album names.
-	 */	
 	@FXML
-	private void initializeGridPane() {
-		if (gridPane.getChildren().isEmpty()) {
-			// get album "All Images"
-			selectedAlbum = database.getAlbums().stream()
-												.filter(album -> album.getName().equals("All Images"))
-												.findFirst()
-												.get();
-		} else {
-			// get album that has been clicked on
-			gridPane.getChildren().clear(); // clear gridPane
-			selectedAlbum = listView.getSelectionModel().getSelectedItem(); 
-		}
+	private void gridPaneImagePressed(MouseEvent e) throws IOException {
+		ImageView imageView = (ImageView)e.getPickResult().getIntersectedNode();	
 		
-		// add album's images to collection
-		imagesInSelectedAlbum = new ArrayList<Image>();		
-		selectedAlbum.getImages().stream().forEach(i -> imagesInSelectedAlbum.add(new Image(i.getPath())));
+		FXMLDocumentControllerEditMode.image = imageView.getImage();
+				
+		int index = imagesInSelectedAlbum.indexOf(imageView.getImage());
+		FXMLDocumentControllerEditMode.imageContainer = selectedAlbum.getImages().get(index);
 		
-		// add collection to grid
-		int row = 0;
-		int line = 0;
-		for (Image image : imagesInSelectedAlbum) {			
-			ImageView imageView = new ImageView(image);
-			imageView.setFitHeight(130);
-			imageView.setFitWidth(135);
-			
-			gridPane.getChildren().add(imageView);
-			
-			GridPane.setConstraints(imageView, row, line, 1, 1);
-			if (row > 5) {
-				row = 0;
-				line++;
-			} else 
-				row++;	 
-		}
+		Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
+		Scene changePane = new Scene(pane);
+
+		//Show stage information
+		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+		window.setScene(changePane);
+		window.show();
+		
 	}
-	
+
 	@FXML
 	private void switchScene(ActionEvent event) throws IOException{
 			Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
@@ -126,24 +90,7 @@ public class FXMLDocumentController implements Initializable {
 			window.show();
 	}
 	
-	@FXML
-	private void gridPaneImagePressed(MouseEvent e) throws IOException {
-		ImageView imageView = (ImageView)e.getPickResult().getIntersectedNode();	
-		
-		FXMLDocumentControllerEditMode.image = imageView.getImage();
-				
-		int index = imagesInSelectedAlbum.indexOf(imageView.getImage());
-		FXMLDocumentControllerEditMode.imageContainer = selectedAlbum.getImages().get(index);
-		
-		Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
-		Scene changePane = new Scene(pane);
-
-		//Show stage information
-		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-		window.setScene(changePane);
-		window.show();
-		
-	}
+	
 	
 	@FXML
 	private void browseButtonPressed() {
