@@ -25,7 +25,7 @@ public class ListViewController implements Initializable {
 	
 	@FXML private ListView<Album> listView;
 	
-	private FXMLDocumentController mainController;
+	private MainController mainController;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -85,7 +85,7 @@ public class ListViewController implements Initializable {
 	}
 	
 	
-	public void injectMainController(FXMLDocumentController fxmlDocumentController) {
+	public void injectMainController(MainController fxmlDocumentController) {
 		this.mainController = fxmlDocumentController;
 	}
 

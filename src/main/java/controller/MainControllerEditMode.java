@@ -36,7 +36,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Button;
 
 
-public class FXMLDocumentControllerEditMode implements Initializable{
+public class MainControllerEditMode implements Initializable{
 	
 
 	public static Image image;	// Das Bild, das angezeigt wird

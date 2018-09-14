@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class GridPaneController implements Initializable {
 
 
-	private FXMLDocumentController mainController;
+	private MainController mainController;
 
 	
 	@FXML private GridPane gridPane;
@@ -31,10 +31,10 @@ public class GridPaneController implements Initializable {
 	private void gridPaneImagePressed(MouseEvent e) throws IOException {
 		ImageView imageView = (ImageView)e.getPickResult().getIntersectedNode();	
 		
-		FXMLDocumentControllerEditMode.image = imageView.getImage();
+		MainControllerEditMode.image = imageView.getImage();
 				
 		int index = mainController.imagesInSelectedAlbum.indexOf(imageView.getImage());
-		FXMLDocumentControllerEditMode.imageContainer = mainController.selectedAlbum.getImages().get(index);
+		MainControllerEditMode.imageContainer = mainController.selectedAlbum.getImages().get(index);
 		
 		Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
 		Scene changePane = new Scene(pane);
@@ -46,7 +46,7 @@ public class GridPaneController implements Initializable {
 		
 	}
 	
-	public void injectMainController(FXMLDocumentController fxmlDocumentController) {
+	public void injectMainController(MainController fxmlDocumentController) {
 		this.mainController = fxmlDocumentController;
 	}
 

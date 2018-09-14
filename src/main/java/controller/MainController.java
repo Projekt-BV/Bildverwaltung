@@ -24,9 +24,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 
-public class FXMLDocumentController implements Initializable {
+public class MainController implements Initializable {
 	
 	@FXML private ListViewController listViewController;
+	@FXML private GridPaneController gridPaneController;
 	
 	@FXML
 	private AnchorPane rootPane;
@@ -46,28 +47,10 @@ public class FXMLDocumentController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		listViewController.injectMainController(this);
+		gridPaneController.injectMainController(this);
 		listViewController.initializeListView();
 	}
 	
-	@FXML
-	private void gridPaneImagePressed(MouseEvent e) throws IOException {
-		ImageView imageView = (ImageView)e.getPickResult().getIntersectedNode();	
-		
-		FXMLDocumentControllerEditMode.image = imageView.getImage();
-				
-		int index = imagesInSelectedAlbum.indexOf(imageView.getImage());
-		FXMLDocumentControllerEditMode.imageContainer = selectedAlbum.getImages().get(index);
-		
-		Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
-		Scene changePane = new Scene(pane);
-
-		//Show stage information
-		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-		window.setScene(changePane);
-		window.show();
-		
-	}
-
 	@FXML
 	private void switchScene(ActionEvent event) throws IOException{
 			Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
