@@ -105,9 +105,7 @@ public class FXMLDocumentController implements Initializable {
 
 	@FXML
 	private void newFolderButtonPressed() {
-		FileImport tmpImp = new FileImport();
-		Stage window = new Stage();
-		tmpImp.start(window);
+		System.out.println("I am the newFolderButtonPressed function");		
 	}
 
 	@FXML
@@ -139,6 +137,9 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private void importImage() {
 		System.out.println("I am the importImage function");
+		FileImport tmpImp = new FileImport();
+		Stage window = new Stage();
+		tmpImp.start(window);
 	}
 	
 //	@FXML

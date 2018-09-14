@@ -5,6 +5,7 @@ import java.io.File;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,7 +37,8 @@ public class FileImport extends Application {
         try {
             ResultSet tmpRs;
             Date tmpDate = new Date();
-            String date = tmpDate.toString();
+            SimpleDateFormat df = new SimpleDateFormat( "dd.MM.yyyy");            
+            String date = df.format(tmpDate);
         	String sqlrequest ="INSERT INTO fotos (Datum,Fotoname,Pfad) VALUES" + "('" + date + "','"+ file.getName() +"', 'file://" +file.toURI().getPath()+ "');";
         	tmpRs = SendSQLRequest.sendSQL(sqlrequest);
         	String foo= "select id from fotos where fotoname='"+file.getName()+"';";
@@ -46,19 +48,13 @@ public class FileImport extends Application {
         	ResultSetMetaData rsmd = tmpRs.getMetaData();
     	    int cols = rsmd.getColumnCount();
 
-    	    for(int i=1; i<=cols; i++)
-    	        System.out.print(rsmd.getColumnLabel(i)+"\t");
-
-    	    System.out.println("\n-------------------------------");
-
     	    while(tmpRs.next())
     	    {
     	        // eine zeile ausgeben
     	        for(int i=1; i<=cols; i++)
     	            //System.out.print(tmpRs.getString(i)+"\t");
     	        	foo = "INSERT INTO albumfoto (AlbumID, FotoID) VALUES"+ "(1, '"+ tmpRs.getString(i)+ "');";
-    	        	
-    	        System.out.println();
+    	 
     	    }
     	    tmpRs = SendSQLRequest.sendSQL(foo);
         } catch (SQLException ex) {
