@@ -25,11 +25,7 @@ public class ListViewController implements Initializable {
 	
 	@FXML private ListView<Album> listView;
 	
-	private GridPane gridPane;
 	private FXMLDocumentController mainController;
-	private ArrayList<Image> imagesInSelectedAlbum;
-	private Album selectedAlbum;
-	private Database database;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -41,8 +37,8 @@ public class ListViewController implements Initializable {
 	 */
 	public void initializeListView() {
 		
-		database.reloadDatabaseContents();			
-		database.getAlbums().stream()
+		mainController.database.reloadDatabaseContents();			
+		mainController.database.getAlbums().stream()
 							.forEach(album -> listView.getItems().add(album));
 
 		initializeGridPane();
@@ -53,31 +49,31 @@ public class ListViewController implements Initializable {
 	 */	
 	@FXML void initializeGridPane() {		
 		
-		if (gridPane.getChildren().isEmpty()) {
+		if (mainController.gridPane.getChildren().isEmpty()) {
 			// get album "All Images"
-			selectedAlbum = database.getAlbums().stream()
+			mainController.selectedAlbum = mainController.database.getAlbums().stream()
 												.filter(album -> album.getName().equals("All Images"))
 												.findFirst()
 												.get();
 		} else {
 			// get album that has been clicked on
-			gridPane.getChildren().clear(); // clear gridPane
-			selectedAlbum = listView.getSelectionModel().getSelectedItem(); 
+			mainController.gridPane.getChildren().clear(); // clear gridPane
+			mainController.selectedAlbum = listView.getSelectionModel().getSelectedItem(); 
 		}
 		
 		// add album's images to collection
-		imagesInSelectedAlbum = new ArrayList<Image>();		
-		selectedAlbum.getImages().stream().forEach(i -> imagesInSelectedAlbum.add(new Image(i.getPath())));
+		mainController.imagesInSelectedAlbum = new ArrayList<Image>();		
+		mainController.selectedAlbum.getImages().stream().forEach(i -> mainController.imagesInSelectedAlbum.add(new Image(i.getPath())));
 		
 		// add collection to grid
 		int row = 0;
 		int line = 0;
-		for (Image image : imagesInSelectedAlbum) {			
+		for (Image image : mainController.imagesInSelectedAlbum) {			
 			ImageView imageView = new ImageView(image);
 			imageView.setFitHeight(130);
 			imageView.setFitWidth(135);
 			
-			gridPane.getChildren().add(imageView);
+			mainController.gridPane.getChildren().add(imageView);
 			
 			GridPane.setConstraints(imageView, row, line, 1, 1);
 			if (row > 5) {
@@ -91,10 +87,6 @@ public class ListViewController implements Initializable {
 	
 	public void injectMainController(FXMLDocumentController fxmlDocumentController) {
 		this.mainController = fxmlDocumentController;
-		this.gridPane = mainController.gridPane;
-		this.database = mainController.database;
-		this.selectedAlbum = mainController.selectedAlbum;
-		this.imagesInSelectedAlbum = mainController.imagesInSelectedAlbum;		
 	}
 
 }
