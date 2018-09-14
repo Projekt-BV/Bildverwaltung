@@ -89,6 +89,7 @@ public class MainControllerEditMode implements Initializable{
 		setMouseClickToImageView();
 		
 		setResizeTextFields();
+		
 	}
 		
 	
@@ -193,6 +194,28 @@ public class MainControllerEditMode implements Initializable{
 		System.out.println("I am the fullScreenButtonPressed function");
 	}
 	
+	@FXML
+	private void setRatio() {
+		double ratio = displayImageEditMode.getImage().getWidth() / displayImageEditMode.getImage().getHeight();
+		
+		try{
+			double width  = Double.valueOf(widthTextField.getText());
+			double height = Double.valueOf(heightTextField.getText());
+			double textFieldRatio = width / height;
+			
+			if(width < 1 ||height < 1) {
+				return;
+			}
+			
+			if(ratio != textFieldRatio) {
+				heightTextField.setText(String.valueOf((int)(width / ratio)));
+			}
+			
+		}catch(NumberFormatException e) {
+			return;
+		}
+	}
+	
 	
 	@FXML
 	private void newFolderButtonPressed() {
@@ -277,6 +300,8 @@ public class MainControllerEditMode implements Initializable{
 		System.out.println("I am the cutImage function");
 	}	
 	
+	
+	
 	@FXML
 	private void resizeImage() {
 		int width, height;
@@ -284,6 +309,7 @@ public class MainControllerEditMode implements Initializable{
 		try {
 			width = Integer.parseInt(widthTextField.getText());
 			height = Integer.parseInt(heightTextField.getText());
+			
 		}catch(NumberFormatException e){
 			return;
 		}

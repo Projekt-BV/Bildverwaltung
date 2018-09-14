@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -125,14 +126,14 @@
                               <Button layoutX="16.0" layoutY="301.0" mnemonicParsing="false" onAction="#resizeImage" prefHeight="25.0" prefWidth="97.0" text="Resize" />
                               <Text layoutX="134.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Width" />
                               <TextField fx:id="widthTextField" layoutX="133.0" layoutY="301.0" prefHeight="25.0" prefWidth="100.0" />
+                              <Button layoutX="16.0" layoutY="368.0" prefHeight="25.0" prefWidth="97.0" mnemonicParsing="false" text="Set Ratio" onAction="#setRatio"/>
                               <Text layoutX="135.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Height" />
                               <TextField fx:id="heightTextField" layoutX="133.0" layoutY="368.0" prefHeight="25.0" prefWidth="100.0" />
-                              <Button layoutX="16.0" layoutY="368.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Undo" />
                               <Button layoutX="136.0" layoutY="474.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Cut" />
-                              <Button layoutX="134.0" layoutY="191.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Black And White" onAction="#monochroneButtonPressed"/>
+                              <Button layoutX="134.0" layoutY="191.0" mnemonicParsing="false" onAction="#monochroneButtonPressed" prefHeight="25.0" prefWidth="99.0" text="Black And White" />
                               <Text layoutX="16.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
                               <Text layoutX="16.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
-                              <Button fx:id="cutModeButton" onAction="#cutModeButtonPressed" layoutX="18.0" layoutY="474.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Cut Mode" />
+                              <Button layoutX="18.0" layoutY="474.0" mnemonicParsing="false" onAction="#cutModeButtonPressed" prefHeight="25.0" prefWidth="94.0" text="Cut Mode" />
                               <Text layoutX="22.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cut image" wrappingWidth="86.13671875" />
                               <Text layoutX="15.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Filter" />
                               <Text layoutX="17.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Resize image" />
