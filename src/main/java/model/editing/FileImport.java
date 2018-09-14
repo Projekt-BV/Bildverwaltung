@@ -1,9 +1,11 @@
 package model.editing;
 
 import java.io.File;
+
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +35,9 @@ public class FileImport extends Application {
     private void openFile(File file) {
         try {
             ResultSet tmpRs;
-        	String sqlrequest ="INSERT INTO fotos (Fotoname,Pfad) VALUES" + "('"+ file.getName() +"', 'file://" +file.toURI().getPath()+ "');";
+            Date tmpDate = new Date();
+            String date = tmpDate.toString();
+        	String sqlrequest ="INSERT INTO fotos (Datum,Fotoname,Pfad) VALUES" + "('" + date + "','"+ file.getName() +"', 'file://" +file.toURI().getPath()+ "');";
         	tmpRs = SendSQLRequest.sendSQL(sqlrequest);
         	String foo= "select id from fotos where fotoname='"+file.getName()+"';";
         	tmpRs = SendSQLRequest.sendSQL(foo);

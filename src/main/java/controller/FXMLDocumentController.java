@@ -17,7 +17,7 @@ import java.io.IOException;
 import javafx.stage.Stage;
 import model.Album;
 import model.Database;
-import model.FileImport;
+import model.editing.FileImport;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,7 +35,7 @@ public class FXMLDocumentController implements Initializable {
 	private ImageView displayImage;
 	
 	@FXML ListView<Album> listView;
-	
+	 
 	@FXML GridPane gridPane;
 	
 	Database database = new Database();
