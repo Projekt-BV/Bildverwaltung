@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import controller.MainController;
+import javafx.fxml.Initializable;
+
 import java.sql.ResultSet;
 
 
@@ -72,7 +76,22 @@ public class SendSQLRequest {
 	public static ResultSet sendSQL(String sqlRequest) throws SQLException {
 		Statement tmpStatement = getStatement();
 		if(testStatement(tmpStatement ,sqlRequest)== true) {
-			
+
+			return sendSQL_Query(sqlRequest);
+		}
+		else {
+			//sendSQL_Update(sqlRequest);
+			// Bessere L�sung suchen als null zur�ckgeben wenn keine ResultSet-Objekt
+			return null;
+		}
+	
+	}
+	
+	public static ResultSet sendSQL(String sqlRequest, Initializable sender) throws SQLException {
+		Statement tmpStatement = getStatement();
+		if(testStatement(tmpStatement ,sqlRequest)== true) {
+			MainController mainController = (MainController)sender;
+			mainController.getDatabase().reloadDatabaseContents();
 			return sendSQL_Query(sqlRequest);
 		}
 		else {

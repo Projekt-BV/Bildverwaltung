@@ -242,6 +242,13 @@ public class MainController implements Initializable {
 	}
 	
 		
+	
+	
+// GETTERS
+	
+	public Database getDatabase() {
+		return this.database;
+	}
 		//DATA
   
 //		String url = "http://mariadb/image.png";

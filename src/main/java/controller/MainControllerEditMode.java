@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
+import model.Album;
 import model.ImageContainer;
 import model.editing.ColorFilter;
 import model.editing.Cutter;
@@ -71,9 +72,7 @@ public class MainControllerEditMode implements Initializable{
 				.observableArrayList("Red", "Green", "Blue", 
 								     "Yellow", "Violet", "Aqua");
 	
-	private ChoiceBox<String> chooseAlbumChoiceBox;
-	ObservableList<String> albumList = FXCollections
-				.observableArrayList("Choose Album");
+	private ChoiceBox<Album> albumChoiceBox;
 	
 	@FXML
 	private TextField widthTextField, heightTextField;
@@ -97,8 +96,8 @@ public class MainControllerEditMode implements Initializable{
 		colorChoiceBox.setItems(colorChoiceList);
 		colorChoiceBox.setValue(colorChoiceList.get(0));
 		
-		chooseAlbumChoiceBox.setItems(albumList);
-		chooseAlbumChoiceBox.setValue(albumList.get(0));
+		//Beladen der ChoiceBox passiert erst nach Umstrukturierung der Controller.
+		//albumChoiceBox.getChildrenUnmodifiable().addAll(c);
 		
 		initializeListView();
 		initializeMetaData();
