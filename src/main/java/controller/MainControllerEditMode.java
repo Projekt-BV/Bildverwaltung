@@ -71,6 +71,10 @@ public class MainControllerEditMode implements Initializable{
 				.observableArrayList("Red", "Green", "Blue", 
 								     "Yellow", "Violet", "Aqua");
 	
+	private ChoiceBox<String> chooseAlbumChoiceBox;
+	ObservableList<String> albumList = FXCollections
+				.observableArrayList("Choose Album");
+	
 	@FXML
 	private TextField widthTextField, heightTextField;
 	
@@ -92,6 +96,9 @@ public class MainControllerEditMode implements Initializable{
 		
 		colorChoiceBox.setItems(colorChoiceList);
 		colorChoiceBox.setValue(colorChoiceList.get(0));
+		
+		chooseAlbumChoiceBox.setItems(albumList);
+		chooseAlbumChoiceBox.setValue(albumList.get(0));
 		
 		initializeListView();
 		initializeMetaData();
