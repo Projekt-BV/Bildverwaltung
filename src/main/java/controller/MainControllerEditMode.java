@@ -30,6 +30,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -73,6 +74,13 @@ public class MainControllerEditMode implements Initializable{
 	@FXML
 	private TextField widthTextField, heightTextField;
 	
+	@FXML
+	private TextField titelTextField, subjectTextField, locationTextField, 
+			          dateTextField , tagsTextField; 
+	
+	@FXML
+	private Label pathLabel;
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		image = new Image(imageContainer.getPath());
@@ -85,7 +93,8 @@ public class MainControllerEditMode implements Initializable{
 		colorChoiceBox.setItems(colorChoiceList);
 		colorChoiceBox.setValue(colorChoiceList.get(0));
 		
-		initializeListView();	
+		initializeListView();
+		initializeMetaData();
 		
 		setFitDimensions();
 		setScrollingToImageView();
@@ -113,6 +122,36 @@ public class MainControllerEditMode implements Initializable{
 		}
 	}
 	
+	/**
+	 * Initializes the metadata and the path of an image in editing mode
+	 * @author Julian Einspenner
+	 */
+	private void initializeMetaData() {
+		titelTextField.setText(imageContainer.getName());
+		subjectTextField.setText("Was ist Subject?");
+		locationTextField.setText(imageContainer.getLocation());
+		dateTextField.setText(imageContainer.getDate());
+		tagsTextField.setText("Datenbankaufruf folgt");
+	    
+	    String text = "Path:\n";
+	    StringBuilder sb = new StringBuilder(imageContainer.getPath());
+	    for(int i = 8; i < imageContainer.getPath().length(); i++) {
+	    	text += sb.charAt(i);
+	    	if(i % 38 == 0) {
+	    		text += "\n";
+	    	}
+	    }
+		pathLabel.setText(text);
+	}
+	
+	/**
+	 * Saves the metadata to the database
+	 * @author Julian Einspenner
+	 */
+	@FXML
+	private void saveMetaDataButtonPressed() {
+		System.out.println("saveMetaData Button");
+	}
 	
 	/**
 	 * Images which are smaller as the imageView will be drawn in their original size
@@ -266,7 +305,7 @@ public class MainControllerEditMode implements Initializable{
 	@FXML
 	private void cutModeButtonPressed() {
 		if(cutMode) {
-			cutModeButton.setStyle("-fx-background-color: #5a5a5a"); //Standardfarbe aus der css-Datei
+			cutModeButton.setStyle("-fx-background-color: #5a5a5a");
 			cutMode = false;
 			return;
 		}
@@ -446,7 +485,7 @@ public class MainControllerEditMode implements Initializable{
 	 * @author Julian Einspenner
 	 */
 	@FXML
-	private void undo() {
+	private void undoButtonPressed() {
 		image = new Image(imageContainer.getPath());
 		displayImageEditMode.setImage(image);	
 		
@@ -456,6 +495,15 @@ public class MainControllerEditMode implements Initializable{
 		setFitDimensions();
 		
 		setResizeTextFields();
+	}
+	
+	/**
+	 * Current image will be appear in its plain state
+	 * @author Julian Einspenner
+	 */
+	@FXML
+	private void saveButtonPressed() {
+		System.out.println("Save Button");
 	}
 	
 	@FXML

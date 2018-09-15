@@ -52,11 +52,6 @@ public class Cutter {
 		
 		BufferedImage bimg2 = bimg.getSubimage(x0, y0, w, h);
 		
-//		try {
-//			ImageIO.write(bimg2, "jpg", new File("C:/Users/Julian/Desktop/img.jpg"));
-//		} catch (IOException e) {
-//		}
-		
 		return SwingFXUtils.toFXImage(bimg2, null);
 	}
 	
