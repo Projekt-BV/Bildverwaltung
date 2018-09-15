@@ -103,7 +103,6 @@
                               <Button layoutX="16.0" layoutY="368.0" mnemonicParsing="false" onAction="#setRatio" prefHeight="25.0" prefWidth="97.0" text="Set Ratio" />
                               <Text layoutX="135.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Height" />
                               <TextField fx:id="heightTextField" layoutX="133.0" layoutY="368.0" prefHeight="25.0" prefWidth="100.0" />
-                              <Button layoutX="136.0" layoutY="474.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Cut" />
                               <Button layoutX="134.0" layoutY="191.0" mnemonicParsing="false" onAction="#monochroneButtonPressed" prefHeight="25.0" prefWidth="99.0" text="Black And White" />
                               <Text layoutX="16.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
                               <Button fx:id="cutModeButton" layoutX="18.0" layoutY="474.0" mnemonicParsing="false" onAction="#cutModeButtonPressed" prefHeight="25.0" prefWidth="94.0" text="Cut Mode" />

@@ -30,6 +30,7 @@ import model.editing.Zoom;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.collections.FXCollections;
@@ -185,29 +186,67 @@ public class MainControllerEditMode implements Initializable{
 	}
 	
 	
-	double x1, x2, y1, y2;
+	private int x1, x2, y1, y2;
 	/**
 	 * @author Julian Einspenner
 	 * @param event
 	 * @throws IOException
 	 */
 	private void setMouseClickToImageView() {
+		
 		displayImageEditMode.setOnMousePressed(e -> {
-			x1 = e.getX() / displayImageEditMode.getFitWidth() * displayImageEditMode.getImage().getWidth();   // todo: x1 und x2 muessen rechtestes X des Bildes im Koordinatensystem werden
-			y1 = e.getY() / displayImageEditMode.getFitHeight() * displayImageEditMode.getImage().getHeight();
+			setMouseEvents(e);
+			x1 = Cutter.x1;
+			y1 = Cutter.y1;
 		});
+			
 		
 		displayImageEditMode.setOnMouseReleased(e -> {
-			x2 = e.getX() / displayImageEditMode.getFitWidth() * displayImageEditMode.getImage().getWidth();
-			y2 = e.getY() / displayImageEditMode.getFitHeight() * displayImageEditMode.getImage().getHeight();
+			setMouseEvents(e);
+			x2 = Cutter.x1;
+			y2 = Cutter.y1;
 			
 			if(cutMode) {
-				System.out.println("x1: " + (int)x1 + " y1: " + (int)y1 + " x2: " + (int)x2 + " y2: " + (int)y2);
-				
-				Image img = Cutter.cutImage((int)x1, (int)y1, (int)x2, (int)y2, displayImageEditMode.getImage());
+				Image img = Cutter.cutImage(x1, y1, x2, y2, displayImageEditMode.getImage());
+				displayImageEditMode.setFitWidth(initFitWidth);
+				displayImageEditMode.setFitHeight(initFitHeight);
 				displayImageEditMode.setImage(img);
+				setFitDimensionsIfSmallerThanImageViewsMaxSize((int)img.getWidth(), (int)img.getHeight());
+				setFitDimensions();
+				setResizeTextFields();
 			}
 		});
+	}
+	
+	/**
+	 * Sets a mousePressed and a mouseReleased Event to the Image View
+	 * @author Julian Einspenner
+	 * @param e is the Mouse Event which will be added to the ImageView
+	 */
+	private void setMouseEvents(MouseEvent e){
+		double fitWidth = displayImageEditMode.getFitWidth();
+		double fitHeight = displayImageEditMode.getFitHeight();
+		double imageWidth = displayImageEditMode.getImage().getWidth();
+		double imageHeight = displayImageEditMode.getImage().getHeight();
+		
+		Cutter.initValues(fitWidth, fitHeight, imageWidth, imageHeight);
+		
+		//1. Fall
+		if(imageWidth <= fitWidth && imageHeight > fitHeight) {
+			Cutter.cutCaseOne(e); 
+		}
+		//2. Fall
+		else if(imageHeight <= fitHeight && imageWidth > fitWidth){
+			Cutter.cutCaseTwo(e);   
+		}
+		//3. Fall
+		else if(imageWidth < initFitWidth && imageHeight < initFitHeight) {
+			Cutter.cutCaseThree(e);
+		}
+		//4. Fall
+		else {
+			Cutter.cutCaseFour(e);
+		}
 	}
 	
 	@FXML
