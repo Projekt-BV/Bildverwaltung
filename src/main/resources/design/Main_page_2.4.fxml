@@ -34,30 +34,9 @@
                               <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#switchScene" text="Edit Image" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Organize">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#newFolderButtonPressed" text="New Folder" />
-                    <MenuItem mnemonicParsing="false" text="New Album" />
-                    <MenuItem mnemonicParsing="false" onAction="#searchImage" text="Search" />
-                    <MenuItem mnemonicParsing="false" onAction="#filterImages" text="Filter" />
-                    <MenuItem mnemonicParsing="false" onAction="#sortImages" text="Sort" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="View">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#showDetail" text="Detail " />
-                    <MenuItem mnemonicParsing="false" text="Navigator" />
-                    <MenuItem mnemonicParsing="false" onAction="#information" text="Information" />
-                  </items>
-                </Menu>
                         <Menu mnemonicParsing="false" text="Help">
                           <items>
-                            <MenuItem mnemonicParsing="false" onAction="#showCommands" text="Commands" />
+                            <MenuItem mnemonicParsing="false" onAction="#showCommands" text="About" />
                               <Menu mnemonicParsing="false" text="Change Language">
                                 <items>
                                   <MenuItem mnemonicParsing="false" onAction="#changeLanguage" text="English" />
