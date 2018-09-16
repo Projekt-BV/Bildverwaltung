@@ -113,10 +113,10 @@ public class MainControllerEditMode implements Initializable{
 		setScrollingToImageView();
 		setMouseClickToImageView();
 		
+		setFitDimensions();
 		
 		resetZooming();
 		setResizeTextFields();
-		
 	}
 		
 	
