@@ -15,6 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.event.ActionEvent;
@@ -356,14 +357,7 @@ public class MainControllerEditMode implements Initializable{
 	private void dropdownButtonChoiceSelected() {
 		System.out.println("I am the dropdownButtonChoiceSelected function");
 	}
-//______________________________________________________________
-
-	@FXML
-	private void sliderMove() {
-		System.out.println("I am the sliderMove function");
-	}
 	
-//______________________________________________________________
 
 // Menue-Bar----------------------------------------------------
 	
@@ -524,8 +518,7 @@ public class MainControllerEditMode implements Initializable{
 		
 		bimage = Rotater.rotateAntiClockwise(bimage);
 		
-		displayImageEditMode.setImage(
-				SwingFXUtils.toFXImage(bimage, null));
+		displayImageEditMode.setImage(SwingFXUtils.toFXImage(bimage, null));
 
 		setResizeTextFields();
 		swapFitDimensions();
@@ -613,6 +606,44 @@ public class MainControllerEditMode implements Initializable{
 		displayImageEditMode.setImage(null);
 		Image image = new Image("/design/dummyImages/2.jpeg");
 		displayImageEditMode.setImage(image);
+	}
+	
+	@FXML
+	private void sliderMove() {
+		int value = (int)zoomSlider.getValue();
+		
+		if(value % 5 <= 2) {
+			value = value - (value % 5);
+		}else {
+			value = value + (5 - (value % 5));
+		}
+		zoomSlider.setValue(value);
+		
+		zoomSliderValueLabel.setText(String.valueOf(value) + " %");
+		zoomStage = value / 5 - 10;
+		
+		double fitWidth    = (int) displayImageEditMode.getFitWidth();
+		double fitHeight   = (int) displayImageEditMode.getFitHeight();
+		int imageWidth     = (int) displayImageEditMode.getImage().getWidth();
+		int imageHeight    = (int) displayImageEditMode.getImage().getHeight();
+		
+		if(zoomStage == 0) {
+			displayImageEditMode.setFitWidth(initFitWidth);
+			displayImageEditMode.setFitHeight(initFitHeight);
+			setFitDimensionsIfSmallerThanImageViewsMaxSize(imageWidth, imageHeight);
+		}else if(zoomStage > 0) {
+			for(int i = 0; i < zoomStage; i++) {
+				fitWidth = fitWidth * 1.1;
+				fitHeight = fitHeight * 1.1;
+			}
+		}else {
+			for(int i = 0; i > zoomStage; i--) {
+				fitWidth = fitWidth / 1.1;
+				fitHeight = fitHeight / 1.1;
+			}
+		}
+		displayImageEditMode.setFitWidth(fitWidth);
+		displayImageEditMode.setFitHeight(fitHeight);
 	}
 
 	private int zoomStage = 0;
