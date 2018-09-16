@@ -5,6 +5,7 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
@@ -19,7 +20,7 @@ public class Database {
 	private ArrayList<Album> albums;
 	
 
-	public void reloadDatabaseContents() {
+	public void reloadDatabaseContents() throws ParseException {
 		ResultSet albumsResultSet; 
 		albums = new ArrayList<Album>();
 		

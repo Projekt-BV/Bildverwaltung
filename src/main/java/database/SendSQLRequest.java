@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 
 import controller.MainController;
 import javafx.fxml.Initializable;
@@ -87,7 +88,7 @@ public class SendSQLRequest {
 	
 	}
 	
-	public static ResultSet sendSQL(String sqlRequest, Initializable sender) throws SQLException {
+	public static ResultSet sendSQL(String sqlRequest, Initializable sender) throws SQLException, ParseException {
 		Statement tmpStatement = getStatement();
 		if(testStatement(tmpStatement ,sqlRequest)== true) {
 			MainController mainController = (MainController)sender;

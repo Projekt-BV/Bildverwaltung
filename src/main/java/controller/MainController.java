@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -48,7 +49,11 @@ public class MainController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		listViewController.injectMainController(this);
 		gridPaneController.injectMainController(this);
-		listViewController.initializeListView();
+		try {
+			listViewController.initializeListView();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML

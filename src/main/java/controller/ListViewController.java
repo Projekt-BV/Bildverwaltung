@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -34,8 +35,9 @@ public class ListViewController implements Initializable {
 	
 	/** 
 	 * Method to initialize the listView containing the album names.
+	 * @throws ParseException 
 	 */
-	public void initializeListView() {
+	public void initializeListView() throws ParseException {
 		
 		mainController.database.reloadDatabaseContents();			
 		mainController.database.getAlbums().stream()

@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 import database.SendSQLRequest;
@@ -150,7 +151,7 @@ public class MainControllerEditMode implements Initializable{
 	private void initializeMetaData() {
 		titelTextField.setText(imageContainer.getName());
 		locationTextField.setText(imageContainer.getLocation());
-		dateTextField.setText(imageContainer.getDate());
+		dateTextField.setText(new SimpleDateFormat("dd.MM.yyyy").format(imageContainer.getDate()));
 		tagsTextField.setText("Datenbankaufruf folgt");
 	    
 	    String text = "Path:\n";

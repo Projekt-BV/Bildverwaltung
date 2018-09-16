@@ -5,7 +5,10 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -15,7 +18,7 @@ import java.util.ArrayList;
 public class ImageContainer {
 
 	private int id;
-	private String date;
+	private Date date;
 	private String name;
 	private String path;
 	private String location;
@@ -23,41 +26,46 @@ public class ImageContainer {
 	
 	/**
 	 * Constructor for ImageContainer objects
+	 * @throws ParseException 
 	 */
-	public ImageContainer(int id, String name, String path, String location, String date, ArrayList<String> tags) {
+	public ImageContainer(int id, String name, String path, String location, String date, ArrayList<String> tags) throws ParseException {
 		this.id = id;
 		this.name = name;
 		this.path = path;
 		this.location = location;
-		this.date = date;
+		this.date = new SimpleDateFormat("dd.MM.yyyy").parse(date);				
+
 		this.tags = tags;
 	}
 	
-	public ImageContainer(int id, String name, String path, String location, String date) {
+	public ImageContainer(int id, String name, String path, String location, String date) throws ParseException {
 		this.id = id;
 		this.name = name;
 		this.path = path;
 		this.location = location;
-		this.date = date;
+		this.date = new SimpleDateFormat("dd.MM.yyyy").parse(date);
 		this.tags = new ArrayList<String>();
 	}
 	
-	public ImageContainer(ResultSet imageResultSet) throws SQLException {
+	public ImageContainer(ResultSet imageResultSet) throws SQLException, ParseException {
 		this.id = imageResultSet.getInt("ID");
-		this.date = imageResultSet.getString("Datum");
+		this.date = new SimpleDateFormat("dd.MM.yyyy").parse(imageResultSet.getString("Datum"));				
 		this.name = imageResultSet.getString("Fotoname");
 		this.path = imageResultSet.getString("Pfad");
 		this.location = imageResultSet.getString("Ort");
-		this.tags = null; //TODO: Vervollständigen
-
+		this.tags = null;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public void setDate(String date) throws ParseException {
+		this.date = new SimpleDateFormat("dd.mm.yyyy").parse(date);
 	}
 
 	public String getName() {
