@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -85,6 +86,12 @@ public class MainControllerEditMode implements Initializable{
 	@FXML
 	private Label pathLabel;
 	
+	@FXML
+	private Slider zoomSlider;
+	
+	@FXML
+	private Label zoomSliderValueLabel;
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		image = new Image(imageContainer.getPath());
@@ -103,10 +110,11 @@ public class MainControllerEditMode implements Initializable{
 		initializeListView();
 		initializeMetaData();
 		
-		setFitDimensions();
 		setScrollingToImageView();
 		setMouseClickToImageView();
 		
+		
+		resetZooming();
 		setResizeTextFields();
 		
 	}
@@ -164,11 +172,24 @@ public class MainControllerEditMode implements Initializable{
 	 * @author Julian Einspenner
 	 */
 	private void setFitDimensions() {
-		if(image.getWidth() < displayImageEditMode.getFitWidth()) {
-			displayImageEditMode.setFitWidth(image.getWidth());
+		int width = (int) displayImageEditMode.getImage().getWidth();
+		int height = (int) displayImageEditMode.getImage().getHeight();
+		if(width < displayImageEditMode.getFitWidth()) {
+			displayImageEditMode.setFitWidth(width);
 		}
-		if(image.getHeight() < displayImageEditMode.getFitHeight()) {
-			displayImageEditMode.setFitHeight(image.getHeight());
+		if(height < displayImageEditMode.getFitHeight()) {
+			displayImageEditMode.setFitHeight(height);
+		}
+	}
+	
+	
+	//Fuer kleine Bilder gedacht
+	private void setFitDimensionsIfSmallerThanImageViewsMaxSize(int width, int height) {
+		if(width < initFitWidth) {
+			displayImageEditMode.setFitWidth(width);
+		}
+		if(height < initFitHeight) {
+			displayImageEditMode.setFitHeight(height);
 		}
 	}
 	
@@ -213,6 +234,7 @@ public class MainControllerEditMode implements Initializable{
 				setFitDimensionsIfSmallerThanImageViewsMaxSize((int)img.getWidth(), (int)img.getHeight());
 				setFitDimensions();
 				setResizeTextFields();
+				resetZooming();
 			}
 		});
 	}
@@ -406,24 +428,16 @@ public class MainControllerEditMode implements Initializable{
 		}catch(NumberFormatException e){
 			return;
 		}
+		displayImageEditMode.setFitWidth(initFitWidth);
+		displayImageEditMode.setFitHeight(initFitHeight);
+		
+		displayImageEditMode.setImage(Resizer.resizeImage(width, height, imagePlain));
 		
 		setFitDimensionsIfSmallerThanImageViewsMaxSize(width, height);
-		
-		displayImageEditMode.setImage(Resizer.resizeImage(width, height, displayImageEditMode.getImage()));
-		
 		setResizeTextFields();
-		
+		resetZooming();
 	}
 	
-	
-	private void setFitDimensionsIfSmallerThanImageViewsMaxSize(int width, int height) {
-		if(initFitWidth >= width) {
-			displayImageEditMode.setFitWidth(width);
-		}
-		if(initFitHeight >= height) {
-			displayImageEditMode.setFitHeight(height);
-		}
-	}
 	
 	//---------------------------
 	
@@ -518,9 +532,9 @@ public class MainControllerEditMode implements Initializable{
 	private void swapFitDimensions() {
 		if(displayImageEditMode.getImage().getWidth() < displayImageEditMode.getFitWidth() ||
 		   displayImageEditMode.getImage().getHeight() < displayImageEditMode.getFitHeight() ) {	
-			int right = (int)displayImageEditMode.getFitWidth();
+			int width = (int)displayImageEditMode.getFitWidth();
 			displayImageEditMode.setFitWidth(displayImageEditMode.getFitHeight());
-			displayImageEditMode.setFitHeight(right);
+			displayImageEditMode.setFitHeight(width);
 		}
 	}
 	
@@ -535,10 +549,21 @@ public class MainControllerEditMode implements Initializable{
 		
 		displayImageEditMode.setFitWidth(initFitWidth);
 		displayImageEditMode.setFitHeight(initFitHeight);
+	
+		resetGUI();
 		
+	}
+	
+	private void resetGUI() {
 		setFitDimensions();
-		
+		resetZooming();
 		setResizeTextFields();
+	}
+	
+	private void resetZooming() {
+		zoomSlider.setValue(50);
+		zoomSliderValueLabel.setText("50 %");
+		zoomStage = 0;
 	}
 	
 	/**
@@ -585,19 +610,59 @@ public class MainControllerEditMode implements Initializable{
 		displayImageEditMode.setImage(image);
 	}
 
+	private int zoomStage = 0;
     private void setScrollingToImageView(){
     	displayImageEditMode.setOnScroll(e -> {
+    		int fitWidth = (int)displayImageEditMode.getFitWidth();
+    		int fitHeight = (int)displayImageEditMode.getFitHeight();
+    		int imageWidth = (int)displayImageEditMode.getImage().getWidth();
+    		int imageHeight = (int)displayImageEditMode.getImage().getHeight();
+    		
+    		double zoomSliderValue = zoomSlider.getValue();
+    		
     		if(e.getDeltaY() > 0) {
-    			BufferedImage bimg = Zoom.zoomIn(SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null));
-    			Image img = SwingFXUtils.toFXImage(bimg, null);
-    			
-    			displayImageEditMode.setImage(img);
-    		}else if(e.getDeltaY() < 0) {
-    			BufferedImage bimg = Zoom.zoomOut(SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null));
-    			Image img = SwingFXUtils.toFXImage(bimg, null);
-    			
-    			displayImageEditMode.setImage(img);
+    			if(zoomSliderValue < 100){
+    				zoomStage--;
+    				
+    				if(zoomStage == 0) {
+    					displayImageEditMode.setFitWidth(initFitWidth);
+        				displayImageEditMode.setFitHeight(initFitHeight);
+        				
+        				System.out.println("image.getWidth(): " + image.getWidth());
+        				
+        				setFitDimensionsIfSmallerThanImageViewsMaxSize(imageWidth, imageHeight);
+    				}else {
+    					displayImageEditMode.setFitWidth(fitWidth * 1.1);
+    					displayImageEditMode.setFitHeight(fitHeight * 1.1);
+    				}
+    				zoomSlider.setValue(zoomSliderValue + 5);
+    			}
     		}
+    		
+    		if(e.getDeltaY() < 0) {
+    			if(zoomSliderValue > 0) {
+    				zoomStage++;
+    				
+    				if(zoomStage == 0) {
+    					displayImageEditMode.setFitWidth(initFitWidth);
+        				displayImageEditMode.setFitHeight(initFitHeight);
+        				
+        				setFitDimensionsIfSmallerThanImageViewsMaxSize((int)displayImageEditMode.getImage().getWidth(), (int)displayImageEditMode.getImage().getHeight());
+    				}else {
+    					displayImageEditMode.setFitWidth(fitWidth / 1.1);
+    					displayImageEditMode.setFitHeight(fitHeight / 1.1);
+    				}
+    				zoomSlider.setValue(zoomSliderValue - 5);
+    			}
+    		}
+    		
+    		fitWidth  = (int)displayImageEditMode.getFitWidth();
+    		fitHeight = (int)displayImageEditMode.getFitHeight();
+    		
+    		System.out.println(fitWidth);
+    		System.out.println(fitHeight + "\n");
+    		
+    		zoomSliderValueLabel.setText(Integer.toString((int) zoomSlider.getValue()) + " %");
 		});
 	}
 

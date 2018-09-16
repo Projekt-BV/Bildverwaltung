@@ -54,22 +54,22 @@ public class Zoom{
 	}
 	
 	
-	public static BufferedImage zoomIn(BufferedImage img) {
-		
-		int w = (int)img.getWidth(), h = (int)img.getHeight();
-
-		int zLev = 10;    // ZoomLevel: Angabe in Prozent
-		int x1 = w / zLev;
-		int x2 = h / zLev;
-		
-		int drawWidth = w - 2 * w / zLev;
-		int drawHeight = h - 2 * h / zLev;
-		
-		img = img.getSubimage(x1, x2, drawWidth, drawHeight);
-
-		return img;
-		
-	}
+//	public static BufferedImage zoomIn(BufferedImage img) {
+//		
+//		int w = (int)img.getWidth(), h = (int)img.getHeight();
+//
+//		int zLev = 10;    // ZoomLevel: Angabe in Prozent
+//		int x1 = w / zLev;
+//		int x2 = h / zLev;
+//		
+//		int drawWidth = w - 2 * w / zLev;
+//		int drawHeight = h - 2 * h / zLev;
+//		
+//		img = img.getSubimage(x1, x2, drawWidth, drawHeight);
+//
+//		return img;
+//		
+//	}
 	
 	
 public static BufferedImage zoomOut(BufferedImage img) {
