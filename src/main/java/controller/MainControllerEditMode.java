@@ -12,11 +12,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.event.ActionEvent;
+
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javafx.stage.Stage;
@@ -52,6 +54,9 @@ public class MainControllerEditMode implements Initializable{
 
 	@FXML
 	private AnchorPane rootPane;
+	
+	@FXML
+	private ScrollPane imageViewScrollPane;
 	
 	@FXML
 	private ImageView displayImageEditMode;
@@ -110,7 +115,7 @@ public class MainControllerEditMode implements Initializable{
 		initializeListView();
 		initializeMetaData();
 		
-		setScrollingToImageView();
+		setScrollingToRootPane();
 		setMouseClickToImageView();
 		
 		setFitDimensions();
@@ -611,12 +616,12 @@ public class MainControllerEditMode implements Initializable{
 	}
 
 	private int zoomStage = 0;
-    private void setScrollingToImageView(){
-    	displayImageEditMode.setOnScroll(e -> {
-    		int fitWidth = (int)displayImageEditMode.getFitWidth();
-    		int fitHeight = (int)displayImageEditMode.getFitHeight();
-    		int imageWidth = (int)displayImageEditMode.getImage().getWidth();
-    		int imageHeight = (int)displayImageEditMode.getImage().getHeight();
+    private void setScrollingToRootPane(){
+    	rootPane.setOnScroll(e -> {
+    		int fitWidth    = (int) displayImageEditMode.getFitWidth();
+    		int fitHeight   = (int) displayImageEditMode.getFitHeight();
+    		int imageWidth  = (int) displayImageEditMode.getImage().getWidth();
+    		int imageHeight = (int) displayImageEditMode.getImage().getHeight();
     		
     		double zoomSliderValue = zoomSlider.getValue();
     		
@@ -627,8 +632,6 @@ public class MainControllerEditMode implements Initializable{
     				if(zoomStage == 0) {
     					displayImageEditMode.setFitWidth(initFitWidth);
         				displayImageEditMode.setFitHeight(initFitHeight);
-        				
-        				System.out.println("image.getWidth(): " + image.getWidth());
         				
         				setFitDimensionsIfSmallerThanImageViewsMaxSize(imageWidth, imageHeight);
     				}else {
@@ -655,12 +658,6 @@ public class MainControllerEditMode implements Initializable{
     				zoomSlider.setValue(zoomSliderValue - 5);
     			}
     		}
-    		
-    		fitWidth  = (int)displayImageEditMode.getFitWidth();
-    		fitHeight = (int)displayImageEditMode.getFitHeight();
-    		
-    		System.out.println(fitWidth);
-    		System.out.println(fitHeight + "\n");
     		
     		zoomSliderValueLabel.setText(Integer.toString((int) zoomSlider.getValue()) + " %");
 		});
