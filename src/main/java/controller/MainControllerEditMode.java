@@ -79,7 +79,7 @@ public class MainControllerEditMode implements Initializable{
 	private TextField widthTextField, heightTextField;
 	
 	@FXML
-	private TextField titelTextField, subjectTextField, locationTextField, 
+	private TextField titelTextField, locationTextField, 
 			          dateTextField , tagsTextField; 
 	
 	@FXML
@@ -135,7 +135,6 @@ public class MainControllerEditMode implements Initializable{
 	 */
 	private void initializeMetaData() {
 		titelTextField.setText(imageContainer.getName());
-		subjectTextField.setText("Was ist Subject?");
 		locationTextField.setText(imageContainer.getLocation());
 		dateTextField.setText(imageContainer.getDate());
 		tagsTextField.setText("Datenbankaufruf folgt");
