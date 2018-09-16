@@ -122,6 +122,9 @@ public class MainControllerEditMode implements Initializable{
 		
 		setFitDimensions();
 		
+		currentImageFitWidth = (int)displayImageEditMode.getFitWidth();
+		currentImageFitHeight = (int)displayImageEditMode.getFitHeight();
+		
 		resetZooming();
 		setResizeTextFields();
 	}
@@ -181,6 +184,7 @@ public class MainControllerEditMode implements Initializable{
 	private void setFitDimensions() {
 		int width = (int) displayImageEditMode.getImage().getWidth();
 		int height = (int) displayImageEditMode.getImage().getHeight();
+		
 		if(width < displayImageEditMode.getFitWidth()) {
 			displayImageEditMode.setFitWidth(width);
 		}
@@ -610,17 +614,25 @@ public class MainControllerEditMode implements Initializable{
 	}
 	
 	@FXML
-	private void sliderMove() {
+	private int setAndGetSliderLabel() {
 		int value = (int)zoomSlider.getValue();
-		
 		if(value % 5 <= 2) {
 			value = value - (value % 5);
 		}else {
 			value = value + (5 - (value % 5));
 		}
 		zoomSlider.setValue(value);
-		
 		zoomSliderValueLabel.setText(String.valueOf(value) + " %");
+		
+		return value;
+	}
+	
+	private int currentImageFitWidth;
+	private int currentImageFitHeight;
+	@FXML
+	private void sliderMove() {
+		
+		int value = setAndGetSliderLabel();
 		zoomStage = value / 5 - 10;
 		
 		double fitWidth    = (int) displayImageEditMode.getFitWidth();
@@ -632,22 +644,20 @@ public class MainControllerEditMode implements Initializable{
 			displayImageEditMode.setFitWidth(initFitWidth);
 			displayImageEditMode.setFitHeight(initFitHeight);
 			setFitDimensionsIfSmallerThanImageViewsMaxSize(imageWidth, imageHeight);
+			return;
 		}else if(zoomStage > 0) {
-			for(int i = 0; i < zoomStage; i++) {
-				fitWidth = fitWidth * 1.1;
-				fitHeight = fitHeight * 1.1;
-			}
+			fitWidth = currentImageFitWidth *  Math.pow(1.1, zoomStage);
+			fitHeight = currentImageFitHeight * Math.pow(1.1, zoomStage);
 		}else {
-			for(int i = 0; i > zoomStage; i--) {
-				fitWidth = fitWidth / 1.1;
-				fitHeight = fitHeight / 1.1;
-			}
+			fitWidth = currentImageFitWidth /  Math.pow(1.1, Math.abs(zoomStage));
+			fitHeight = currentImageFitHeight / Math.pow(1.1, Math.abs(zoomStage));
 		}
 		displayImageEditMode.setFitWidth(fitWidth);
 		displayImageEditMode.setFitHeight(fitHeight);
 	}
 
 	private int zoomStage = 0;
+	
     private void setScrollingToRootPane(){
     	rootPane.setOnScroll(e -> {
     		int fitWidth    = (int) displayImageEditMode.getFitWidth();
@@ -664,7 +674,6 @@ public class MainControllerEditMode implements Initializable{
     				if(zoomStage == 0) {
     					displayImageEditMode.setFitWidth(initFitWidth);
         				displayImageEditMode.setFitHeight(initFitHeight);
-        				
         				setFitDimensionsIfSmallerThanImageViewsMaxSize(imageWidth, imageHeight);
     				}else {
     					displayImageEditMode.setFitWidth(fitWidth * 1.1);
@@ -681,8 +690,7 @@ public class MainControllerEditMode implements Initializable{
     				if(zoomStage == 0) {
     					displayImageEditMode.setFitWidth(initFitWidth);
         				displayImageEditMode.setFitHeight(initFitHeight);
-        				
-        				setFitDimensionsIfSmallerThanImageViewsMaxSize((int)displayImageEditMode.getImage().getWidth(), (int)displayImageEditMode.getImage().getHeight());
+        				setFitDimensionsIfSmallerThanImageViewsMaxSize(imageWidth, imageHeight);
     				}else {
     					displayImageEditMode.setFitWidth(fitWidth / 1.1);
     					displayImageEditMode.setFitHeight(fitHeight / 1.1);
@@ -690,7 +698,6 @@ public class MainControllerEditMode implements Initializable{
     				zoomSlider.setValue(zoomSliderValue - 5);
     			}
     		}
-    		
     		zoomSliderValueLabel.setText(Integer.toString((int) zoomSlider.getValue()) + " %");
 		});
 	}
