@@ -69,7 +69,7 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="25.0" prefWidth="609.0" styleClass="anchor-pane" stylesheets="@application.css">
                      <children>
-                <Slider fx:id="zoomSlider" layoutX="268.0" layoutY="6.0" onMouseReleased="#sliderMove" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
+                <Slider fx:id="zoomSlider" layoutX="268.0" layoutY="6.0" onMouseDragged="#setAndGetSliderLabel" onMouseReleased="#sliderMove" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
                 <Label fx:id="zoomSliderValueLabel" layoutX="489.0" layoutY="6.0" prefWidth="51.0" text="0%" />
                         <ChoiceBox fx:id="chooseAlbumChoiceBox" onDragExited="#dropdownButtonChoiceSelected" prefWidth="150.0" />
                         <Button layoutX="694.0" mnemonicParsing="false" onAction="#deleteImage" text="Delete Image" />

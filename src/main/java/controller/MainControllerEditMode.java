@@ -107,8 +107,6 @@ public class MainControllerEditMode implements Initializable{
 		initFitWidth = (int)displayImageEditMode.getFitWidth();
 		initFitHeight = (int)displayImageEditMode.getFitHeight();
 		
-		System.out.println(initFitWidth);
-		
 		colorChoiceBox.setItems(colorChoiceList);
 		colorChoiceBox.setValue(colorChoiceList.get(0));
 		
@@ -614,11 +612,8 @@ public class MainControllerEditMode implements Initializable{
 		displayImageEditMode.setImage(image);
 	}
 	
-	private int currentImageFitWidth;
-	private int currentImageFitHeight;
 	@FXML
-	private void sliderMove() {
-		
+	private int setAndGetSliderLabel() {
 		int value = (int)zoomSlider.getValue();
 		if(value % 5 <= 2) {
 			value = value - (value % 5);
@@ -627,14 +622,22 @@ public class MainControllerEditMode implements Initializable{
 		}
 		zoomSlider.setValue(value);
 		zoomSliderValueLabel.setText(String.valueOf(value) + " %");
+		
+		return value;
+	}
+	
+	private int currentImageFitWidth;
+	private int currentImageFitHeight;
+	@FXML
+	private void sliderMove() {
+		
+		int value = setAndGetSliderLabel();
 		zoomStage = value / 5 - 10;
 		
 		double fitWidth    = (int) displayImageEditMode.getFitWidth();
 		double fitHeight   = (int) displayImageEditMode.getFitHeight();
 		int imageWidth     = (int) displayImageEditMode.getImage().getWidth();
 		int imageHeight    = (int) displayImageEditMode.getImage().getHeight();
-		
-		System.out.println(zoomStage);
 		
 		if(zoomStage == 0) {
 			displayImageEditMode.setFitWidth(initFitWidth);
@@ -670,7 +673,6 @@ public class MainControllerEditMode implements Initializable{
     				if(zoomStage == 0) {
     					displayImageEditMode.setFitWidth(initFitWidth);
         				displayImageEditMode.setFitHeight(initFitHeight);
-        				
         				setFitDimensionsIfSmallerThanImageViewsMaxSize(imageWidth, imageHeight);
     				}else {
     					displayImageEditMode.setFitWidth(fitWidth * 1.1);
@@ -687,18 +689,14 @@ public class MainControllerEditMode implements Initializable{
     				if(zoomStage == 0) {
     					displayImageEditMode.setFitWidth(initFitWidth);
         				displayImageEditMode.setFitHeight(initFitHeight);
-        				
         				setFitDimensionsIfSmallerThanImageViewsMaxSize(imageWidth, imageHeight);
     				}else {
     					displayImageEditMode.setFitWidth(fitWidth / 1.1);
     					displayImageEditMode.setFitHeight(fitHeight / 1.1);
-    					
-    					System.out.println("fitWidth scroll: " + fitWidth);
     				}
     				zoomSlider.setValue(zoomSliderValue - 5);
     			}
     		}
-    		
     		zoomSliderValueLabel.setText(Integer.toString((int) zoomSlider.getValue()) + " %");
 		});
 	}
