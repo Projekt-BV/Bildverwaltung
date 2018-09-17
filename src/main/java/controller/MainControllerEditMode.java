@@ -123,12 +123,8 @@ public class MainControllerEditMode implements Initializable{
 		initializeListView();
 		initializeMetaData();
 
-		imageStackPane.minWidthProperty().bind(Bindings.createDoubleBinding(() -> 
-        imageViewScrollPane.getViewportBounds().getWidth(), imageViewScrollPane.viewportBoundsProperty()));
-		
-		imageStackPane.minHeightProperty().bind(Bindings.createDoubleBinding(() -> 
-        imageViewScrollPane.getViewportBounds().getHeight(), imageViewScrollPane.viewportBoundsProperty()));
-
+		imageViewScrollPane.setFitToWidth(true);
+		imageViewScrollPane.setFitToHeight(true);
         imageStackPane.setStyle("-fx-background-color: rgb(80,80,80)");
 
         
