@@ -137,7 +137,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 
 	@FXML
-	private void switchScene(MouseEvent event) throws IOException{
+	private void switchScene(Event event) throws IOException{
 			Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
 			Scene changePane = new Scene(pane);
 	
@@ -148,7 +148,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	}
 			
 	@FXML
-	private void switchBack(MouseEvent event) throws IOException{
+	private void switchBack(Event event) throws IOException{
 			selectedAlbum = listView.getSelectionModel().getSelectedItem(); 
 			didSwitchBack = true;
 

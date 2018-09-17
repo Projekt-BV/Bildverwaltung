@@ -52,14 +52,14 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	@FXML void initializeGridPane() {		
 		
 		
-		if (didSwitchBack){			
+		if (didSwitchBack && selectedAlbum != null){			
 			// if we come from Edit mode, leave selectedAlbum as it is and highlight it in listView
+			
 			Album referenceEqualSelectedAlbum = database.getAlbums().stream()
 					   												.filter(album -> album.getName().equals(selectedAlbum.getName()))
 					   												.findFirst()
 					   												.get();
 			listView.getSelectionModel().select(database.getAlbums().indexOf(referenceEqualSelectedAlbum));
-			didSwitchBack = false;
 		} else if (gridPane.getChildren().isEmpty()) {
 			// else if no album has been clicked on, get album "All Images"
 			selectedAlbum = database.getAlbums().stream()
@@ -71,6 +71,9 @@ public class MainControllerGalleryMode extends MainController implements Initial
 			gridPane.getChildren().clear(); // clear gridPane
 			selectedAlbum = listView.getSelectionModel().getSelectedItem(); 
 		}
+		
+		didSwitchBack = false;
+
 		
 		// add album's images to collection
 		imagesInSelectedAlbum = new ArrayList<Image>();		
