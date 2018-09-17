@@ -10,14 +10,12 @@ import database.SendSQLRequest;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.Effect;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -33,14 +31,12 @@ import model.editing.Cutter;
 import model.editing.GrayScaler;
 import model.editing.Resizer;
 import model.editing.Rotater;
-import model.editing.Zoom;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -83,8 +79,6 @@ public class MainControllerEditMode implements Initializable{
 	ObservableList<String> colorChoiceList = FXCollections
 				.observableArrayList("Red", "Green", "Blue", 
 								     "Yellow", "Violet", "Aqua");
-	
-	private ChoiceBox<Album> albumChoiceBox;
 	
 	@FXML
 	private TextField widthTextField, heightTextField;
@@ -138,10 +132,6 @@ public class MainControllerEditMode implements Initializable{
 		
 		currentImageFitWidth = (int)displayImageEditMode.getFitWidth();
 		currentImageFitHeight = (int)displayImageEditMode.getFitHeight();
-		
-		//setPadding();
-		
-		
 		
 		resetZooming();
 		setResizeTextFields();
@@ -222,33 +212,6 @@ public class MainControllerEditMode implements Initializable{
 		}
 	}
 	
-//	private void setPadding() {
-//		double i1 = 0, i2 = 0, i3 = 0, i4 = 0;
-//		
-//		double imageWidth  = displayImageEditMode.getImage().getWidth();
-//		double imageHeight = displayImageEditMode.getImage().getHeight();
-//		
-//		if(imageWidth < initFitWidth && imageHeight < initFitHeight) {
-//			i1 = initFitHeight * 1.0 / 2.0 - imageHeight / 2.0;
-//			i4 = initFitWidth * 1.0 / 2.0 - imageWidth / 2.0;
-////			i3 = i1 + 4;
-////			i2 = i4 + 4;
-//		}
-//		else if(imageWidth <= imageHeight) {
-//			double compressFactor = imageHeight / (initFitHeight * 1.0);
-//			double scaledWidth    = imageWidth / compressFactor;
-//			
-//			i4 = initFitWidth  / 2 - scaledWidth / 2;
-//		}
-//		else{
-//			double compressFactor = imageWidth / (initFitWidth * 1.0);
-//			double scaledHeight    = imageHeight / compressFactor;
-//			
-//			i1 = initFitHeight  / 2 - scaledHeight / 2;
-//		}
-//		Insets insets = new Insets(i1, i2, i3, i4);
-//		imageViewScrollPane.setPadding(insets);
-//	}
 	
 	/**
 	 * Sets the text of the resize textfields width and height
@@ -292,7 +255,6 @@ public class MainControllerEditMode implements Initializable{
 				setFitDimensions();
 				setResizeTextFields();
 				resetZooming();
-				//setPadding();
 			}
 		});
 	}
@@ -561,7 +523,6 @@ public class MainControllerEditMode implements Initializable{
 		
 		setResizeTextFields();
 		swapFitDimensions();
-		//setPadding();
 	}
 	
 	@FXML
@@ -575,7 +536,6 @@ public class MainControllerEditMode implements Initializable{
 
 		setResizeTextFields();
 		swapFitDimensions();
-		//setPadding();
 	}
 	
 	/**
@@ -610,7 +570,6 @@ public class MainControllerEditMode implements Initializable{
 		setFitDimensions();
 		resetZooming();
 		setResizeTextFields();
-		//setPadding();
 	}
 	
 	private void resetZooming() {
@@ -749,33 +708,7 @@ public class MainControllerEditMode implements Initializable{
     				zoomSlider.setValue(zoomSliderValue - 5);
     			}
     		}
-    		//setPadding();
     		zoomSliderValueLabel.setText(Integer.toString((int) zoomSlider.getValue()) + " %");
 		});
 	}
-
-		
-	
-		
-		//DATA
-  
-//		String url = "http://mariadb/image.png";
-//		 
-//		boolean backgroundLoading = true;
-//		 
-//		// The image is being loaded in the background
-//		Image image = new Image(url, backgroundLoading);
-//		
-//		// An image file on the hard drive.
-//		File file = new File("C:\\Users\\Tobi\\Pictures\\22550006_10210659715665085_3954056403038140095_n.jpg");
-//		 
-//		// --> file:/C:/MyImages/myphoto.jpg
-//		String localUrl = file.toURI().toURL().toString();
-//		 
-//		Image image2 = new Image(localUrl);
-//		ImageView imageView = new ImageView(image);
-//		
-//		FlowPane root = new FlowPane();
-//        root.getChildren().add(imageView);
-
 }
