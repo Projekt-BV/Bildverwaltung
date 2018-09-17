@@ -18,6 +18,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="rootPane" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerEditMode">
@@ -78,10 +79,15 @@
                      <children>
                         <ScrollPane fx:id="imageViewScrollPane" layoutX="-2.0" layoutY="-1.0" prefHeight="682.0" prefWidth="789.0">
                            <content>
-                              <ImageView fx:id="displayImageEditMode" fitHeight="678.0" fitWidth="785.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@RGB-Background.png" />
-                                 </image></ImageView>
+                              <StackPane fx:id="imageStackPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: 80,80,80;">
+                                 <children>
+                                    <ImageView fx:id="displayImageEditMode" fitHeight="678.0" fitWidth="785.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                                       <image>
+                                          <Image url="@RGB-Background.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </StackPane>
                            </content></ScrollPane>
                      </children></AnchorPane>
               </items>

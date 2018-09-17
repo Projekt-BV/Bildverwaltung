@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.Effect;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
@@ -39,6 +40,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -100,6 +102,9 @@ public class MainControllerEditMode implements Initializable{
 	@FXML
 	private Label zoomSliderValueLabel;
 	
+	@FXML
+	private StackPane imageStackPane;
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		image = new Image(imageContainer.getPath());
@@ -118,7 +123,17 @@ public class MainControllerEditMode implements Initializable{
 		initializeListView();
 		initializeMetaData();
 
+		imageStackPane.minWidthProperty().bind(Bindings.createDoubleBinding(() -> 
+        imageViewScrollPane.getViewportBounds().getWidth(), imageViewScrollPane.viewportBoundsProperty()));
 		
+		imageStackPane.minHeightProperty().bind(Bindings.createDoubleBinding(() -> 
+        imageViewScrollPane.getViewportBounds().getHeight(), imageViewScrollPane.viewportBoundsProperty()));
+
+        imageStackPane.setStyle("-fx-background-color: rgb(80,80,80)");
+
+        
+
+        
 		
 		setScrollingToRootPane();
 		setMouseClickToImageView();
@@ -128,7 +143,9 @@ public class MainControllerEditMode implements Initializable{
 		currentImageFitWidth = (int)displayImageEditMode.getFitWidth();
 		currentImageFitHeight = (int)displayImageEditMode.getFitHeight();
 		
-		setPadding();
+		//setPadding();
+		
+		
 		
 		resetZooming();
 		setResizeTextFields();
@@ -209,33 +226,33 @@ public class MainControllerEditMode implements Initializable{
 		}
 	}
 	
-	private void setPadding() {
-		double i1 = 0, i2 = 0, i3 = 0, i4 = 0;
-		
-		double imageWidth  = displayImageEditMode.getImage().getWidth();
-		double imageHeight = displayImageEditMode.getImage().getHeight();
-		
-		if(imageWidth < initFitWidth && imageHeight < initFitHeight) {
-			i1 = initFitHeight * 1.0 / 2.0 - imageHeight / 2.0;
-			i4 = initFitWidth * 1.0 / 2.0 - imageWidth / 2.0;
-//			i3 = i1 + 4;
-//			i2 = i4 + 4;
-		}
-		else if(imageWidth <= imageHeight) {
-			double compressFactor = imageHeight / (initFitHeight * 1.0);
-			double scaledWidth    = imageWidth / compressFactor;
-			
-			i4 = initFitWidth  / 2 - scaledWidth / 2;
-		}
-		else{
-			double compressFactor = imageWidth / (initFitWidth * 1.0);
-			double scaledHeight    = imageHeight / compressFactor;
-			
-			i1 = initFitHeight  / 2 - scaledHeight / 2;
-		}
-		Insets insets = new Insets(i1, i2, i3, i4);
-		imageViewScrollPane.setPadding(insets);
-	}
+//	private void setPadding() {
+//		double i1 = 0, i2 = 0, i3 = 0, i4 = 0;
+//		
+//		double imageWidth  = displayImageEditMode.getImage().getWidth();
+//		double imageHeight = displayImageEditMode.getImage().getHeight();
+//		
+//		if(imageWidth < initFitWidth && imageHeight < initFitHeight) {
+//			i1 = initFitHeight * 1.0 / 2.0 - imageHeight / 2.0;
+//			i4 = initFitWidth * 1.0 / 2.0 - imageWidth / 2.0;
+////			i3 = i1 + 4;
+////			i2 = i4 + 4;
+//		}
+//		else if(imageWidth <= imageHeight) {
+//			double compressFactor = imageHeight / (initFitHeight * 1.0);
+//			double scaledWidth    = imageWidth / compressFactor;
+//			
+//			i4 = initFitWidth  / 2 - scaledWidth / 2;
+//		}
+//		else{
+//			double compressFactor = imageWidth / (initFitWidth * 1.0);
+//			double scaledHeight    = imageHeight / compressFactor;
+//			
+//			i1 = initFitHeight  / 2 - scaledHeight / 2;
+//		}
+//		Insets insets = new Insets(i1, i2, i3, i4);
+//		imageViewScrollPane.setPadding(insets);
+//	}
 	
 	/**
 	 * Sets the text of the resize textfields width and height
@@ -279,7 +296,7 @@ public class MainControllerEditMode implements Initializable{
 				setFitDimensions();
 				setResizeTextFields();
 				resetZooming();
-				setPadding();
+				//setPadding();
 			}
 		});
 	}
@@ -548,7 +565,7 @@ public class MainControllerEditMode implements Initializable{
 		
 		setResizeTextFields();
 		swapFitDimensions();
-		setPadding();
+		//setPadding();
 	}
 	
 	@FXML
@@ -562,7 +579,7 @@ public class MainControllerEditMode implements Initializable{
 
 		setResizeTextFields();
 		swapFitDimensions();
-		setPadding();
+		//setPadding();
 	}
 	
 	/**
@@ -597,7 +614,7 @@ public class MainControllerEditMode implements Initializable{
 		setFitDimensions();
 		resetZooming();
 		setResizeTextFields();
-		setPadding();
+		//setPadding();
 	}
 	
 	private void resetZooming() {
@@ -736,7 +753,7 @@ public class MainControllerEditMode implements Initializable{
     				zoomSlider.setValue(zoomSliderValue - 5);
     			}
     		}
-    		setPadding();
+    		//setPadding();
     		zoomSliderValueLabel.setText(Integer.toString((int) zoomSlider.getValue()) + " %");
 		});
 	}
