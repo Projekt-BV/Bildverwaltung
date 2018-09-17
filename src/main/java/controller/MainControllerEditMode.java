@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
@@ -20,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 
 import java.io.IOException;
 import java.awt.image.BufferedImage;
@@ -43,7 +45,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Button;
 
 
-public class MainControllerEditMode implements Initializable{
+public class MainControllerEditMode extends MainController implements Initializable{
 	
 
 	public static Image image;	// Das Bild, das angezeigt wird
@@ -61,13 +63,7 @@ public class MainControllerEditMode implements Initializable{
 	
 	@FXML
 	private ImageView displayImageEditMode;
-	
-	@FXML
-	private ListView<String> listView;
-	
-	@FXML
-	private GridPane gridPane;
-	
+		
 	@FXML
 	private Button applyFilterButton;
 	
@@ -114,16 +110,18 @@ public class MainControllerEditMode implements Initializable{
 		//Beladen der ChoiceBox passiert erst nach Umstrukturierung der Controller.
 		//albumChoiceBox.getChildrenUnmodifiable().addAll(c);
 		
-		initializeListView();
+		try {
+			initializeListView();
+		} catch (ParseException e) {
+			database.getAlbums().stream().forEach(a -> System.out.println(a.getName()));
+			e.printStackTrace();
+		}
 		initializeMetaData();
 
 		imageViewScrollPane.setFitToWidth(true);
 		imageViewScrollPane.setFitToHeight(true);
         imageStackPane.setStyle("-fx-background-color: rgb(80,80,80)");
 
-        
-
-        
 		
 		setScrollingToRootPane();
 		setMouseClickToImageView();
@@ -136,25 +134,37 @@ public class MainControllerEditMode implements Initializable{
 		resetZooming();
 		setResizeTextFields();
 	}
-		
 	
-	/** 
-	 * Method to initialize the listView containing the album names.
-	 * @author Phillip Persch
-	 */
-	private void initializeListView() {		
-		try {
-			ResultSet albums = SendSQLRequest.sendSQL("SELECT * FROM alben");
+
+	@FXML
+	private void switchScene(MouseEvent event) throws IOException{
+			Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
+			Scene changePane = new Scene(pane);
+	
+			//Show stage information
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setScene(changePane);
+			window.show();
+	}
 			
-			while (albums.next()) {
-				listView.getItems().add(albums.getString("Name"));
-			}
+	@FXML
+	private void switchBack(MouseEvent event) throws IOException{
+			selectedAlbum = listView.getSelectionModel().getSelectedItem(); 
+			didSwitchBack = true;
+
+			Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_2.4.fxml"));
+			Scene changePane = new Scene(pane);
+			//Show stage information
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setScene(changePane);
+			window.show();
 	}
 	
+	
+	
+		
+	//-----------------------------------------------------------------------------------------------------------//
 	/**
 	 * Initializes the metadata and the path of an image in editing mode
 	 * @author Julian Einspenner
@@ -290,28 +300,7 @@ public class MainControllerEditMode implements Initializable{
 		}
 	}
 	
-	@FXML
-	private void switchScene(ActionEvent event) throws IOException{
-			Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
-			Scene changePane = new Scene(pane);
-	
-			//Show stage information
-			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-			window.setScene(changePane);
-			window.show();
-	}
-			
-	@FXML
-	private void switchBack(ActionEvent event) throws IOException{
-			Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_2.4.fxml"));
-			Scene changePane = new Scene(pane);
-			//Show stage information
-			
-			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-			window.setScene(changePane);
-			window.show();
-	}
-	
+
 	@FXML
 	private void browseButtonPressed() {
 		System.out.println("I am the browseButtonPressed function");

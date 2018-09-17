@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 
-import controller.MainController;
+import controller.MainControllerGalleryMode;
 import javafx.fxml.Initializable;
 
 import java.sql.ResultSet;
@@ -91,7 +91,7 @@ public class SendSQLRequest {
 	public static ResultSet sendSQL(String sqlRequest, Initializable sender) throws SQLException, ParseException {
 		Statement tmpStatement = getStatement();
 		if(testStatement(tmpStatement ,sqlRequest)== true) {
-			MainController mainController = (MainController)sender;
+			MainControllerGalleryMode mainController = (MainControllerGalleryMode)sender;
 			mainController.getDatabase().reloadDatabaseContents();
 			return sendSQL_Query(sqlRequest);
 		}
