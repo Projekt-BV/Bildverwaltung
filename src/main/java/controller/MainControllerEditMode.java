@@ -10,6 +10,7 @@ import database.SendSQLRequest;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
@@ -116,6 +117,8 @@ public class MainControllerEditMode implements Initializable{
 		
 		initializeListView();
 		initializeMetaData();
+
+		
 		
 		setScrollingToRootPane();
 		setMouseClickToImageView();
@@ -124,6 +127,8 @@ public class MainControllerEditMode implements Initializable{
 		
 		currentImageFitWidth = (int)displayImageEditMode.getFitWidth();
 		currentImageFitHeight = (int)displayImageEditMode.getFitHeight();
+		
+		setPadding();
 		
 		resetZooming();
 		setResizeTextFields();
@@ -204,6 +209,34 @@ public class MainControllerEditMode implements Initializable{
 		}
 	}
 	
+	private void setPadding() {
+		double i1 = 0, i2 = 0, i3 = 0, i4 = 0;
+		
+		double imageWidth  = displayImageEditMode.getImage().getWidth();
+		double imageHeight = displayImageEditMode.getImage().getHeight();
+		
+		if(imageWidth < initFitWidth && imageHeight < initFitHeight) {
+			i1 = initFitHeight * 1.0 / 2.0 - imageHeight / 2.0;
+			i4 = initFitWidth * 1.0 / 2.0 - imageWidth / 2.0;
+//			i3 = i1 + 4;
+//			i2 = i4 + 4;
+		}
+		else if(imageWidth <= imageHeight) {
+			double compressFactor = imageHeight / (initFitHeight * 1.0);
+			double scaledWidth    = imageWidth / compressFactor;
+			
+			i4 = initFitWidth  / 2 - scaledWidth / 2;
+		}
+		else{
+			double compressFactor = imageWidth / (initFitWidth * 1.0);
+			double scaledHeight    = imageHeight / compressFactor;
+			
+			i1 = initFitHeight  / 2 - scaledHeight / 2;
+		}
+		Insets insets = new Insets(i1, i2, i3, i4);
+		imageViewScrollPane.setPadding(insets);
+	}
+	
 	/**
 	 * Sets the text of the resize textfields width and height
 	 * @author Julian Einspenner
@@ -224,11 +257,11 @@ public class MainControllerEditMode implements Initializable{
 	 * @throws IOException
 	 */
 	private void setMouseClickToImageView() {
-		
 		displayImageEditMode.setOnMousePressed(e -> {
 			setMouseEvents(e);
 			x1 = Cutter.x1;
 			y1 = Cutter.y1;
+			System.out.println(e.getX());
 		});
 			
 		
@@ -246,6 +279,7 @@ public class MainControllerEditMode implements Initializable{
 				setFitDimensions();
 				setResizeTextFields();
 				resetZooming();
+				setPadding();
 			}
 		});
 	}
@@ -514,6 +548,7 @@ public class MainControllerEditMode implements Initializable{
 		
 		setResizeTextFields();
 		swapFitDimensions();
+		setPadding();
 	}
 	
 	@FXML
@@ -527,6 +562,7 @@ public class MainControllerEditMode implements Initializable{
 
 		setResizeTextFields();
 		swapFitDimensions();
+		setPadding();
 	}
 	
 	/**
@@ -561,6 +597,7 @@ public class MainControllerEditMode implements Initializable{
 		setFitDimensions();
 		resetZooming();
 		setResizeTextFields();
+		setPadding();
 	}
 	
 	private void resetZooming() {
@@ -659,6 +696,7 @@ public class MainControllerEditMode implements Initializable{
 	private int zoomStage = 0;
 	
     private void setScrollingToRootPane(){
+    	
     	rootPane.setOnScroll(e -> {
     		int fitWidth    = (int) displayImageEditMode.getFitWidth();
     		int fitHeight   = (int) displayImageEditMode.getFitHeight();
@@ -698,6 +736,7 @@ public class MainControllerEditMode implements Initializable{
     				zoomSlider.setValue(zoomSliderValue - 5);
     			}
     		}
+    		setPadding();
     		zoomSliderValueLabel.setText(Integer.toString((int) zoomSlider.getValue()) + " %");
 		});
 	}
