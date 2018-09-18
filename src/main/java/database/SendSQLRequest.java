@@ -77,31 +77,20 @@ public class SendSQLRequest {
 	public static ResultSet sendSQL(String sqlRequest) throws SQLException {
 		Statement tmpStatement = getStatement();
 		if(testStatement(tmpStatement ,sqlRequest)== true) {
+			
+			closeDB_Connection();
+			return sendSQL_Query(sqlRequest);
+		}
+		else {
+			//sendSQL_Update(sqlRequest);
+			// Bessere L�sung suchen als null zur�ckgeben wenn keine ResultSet-Objekt
+			return null;
+		}
+	
+	}
+	
 
-			return sendSQL_Query(sqlRequest);
-		}
-		else {
-			//sendSQL_Update(sqlRequest);
-			// Bessere L�sung suchen als null zur�ckgeben wenn keine ResultSet-Objekt
-			return null;
-		}
 	
-	}
-	
-	public static ResultSet sendSQL(String sqlRequest, Initializable sender) throws SQLException, ParseException {
-		Statement tmpStatement = getStatement();
-		if(testStatement(tmpStatement ,sqlRequest)== true) {
-			MainControllerGalleryMode mainController = (MainControllerGalleryMode)sender;
-			mainController.getDatabase().reloadDatabaseContents();
-			return sendSQL_Query(sqlRequest);
-		}
-		else {
-			//sendSQL_Update(sqlRequest);
-			// Bessere L�sung suchen als null zur�ckgeben wenn keine ResultSet-Objekt
-			return null;
-		}
-	
-	}
 	
 //	private static void sendSQL_Update (String sqlRequest) {
 //	
