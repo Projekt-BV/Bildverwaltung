@@ -1,39 +1,25 @@
 package controller;
 
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
-import database.SendSQLRequest;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 
 import java.io.IOException;
 import java.awt.image.BufferedImage;
-import javafx.stage.Stage;
-import model.Album;
 import model.ImageContainer;
 import model.editing.ColorFilter;
 import model.editing.Cutter;
 import model.editing.GrayScaler;
 import model.editing.Resizer;
 import model.editing.Rotater;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -54,46 +40,27 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 	private int initFitWidth, initFitHeight;
 	private boolean cutMode = false;
-
-	@FXML
-	private AnchorPane rootPane;
+	private int currentImageFitWidth;
+	private int currentImageFitHeight;
+	private int zoomStage = 0;
 	
-	@FXML
-	private ScrollPane imageViewScrollPane;
 	
-	@FXML
-	private ImageView displayImageEditMode;
-		
-	@FXML
-	private Button applyFilterButton;
+	@FXML private ScrollPane imageViewScrollPane;	
+	@FXML private ImageView displayImageEditMode;		
+	@FXML private Button applyFilterButton;	
+	@FXML private Button cutModeButton;
+	@FXML private ChoiceBox<String> colorChoiceBox;
 	
-	@FXML
-	private Button cutModeButton;
-
-	@FXML
-	private ChoiceBox<String> colorChoiceBox;
 	ObservableList<String> colorChoiceList = FXCollections
 				.observableArrayList("Red", "Green", "Blue", 
 								     "Yellow", "Violet", "Aqua");
 	
-	@FXML
-	private TextField widthTextField, heightTextField;
-	
-	@FXML
-	private TextField titelTextField, locationTextField, 
-			          dateTextField , tagsTextField; 
-	
-	@FXML
-	private Label pathLabel;
-	
-	@FXML
-	private Slider zoomSlider;
-	
-	@FXML
-	private Label zoomSliderValueLabel;
-	
-	@FXML
-	private StackPane imageStackPane;
+	@FXML private TextField widthTextField, heightTextField;	
+	@FXML private TextField titelTextField, locationTextField, dateTextField , tagsTextField; 	
+	@FXML private Label pathLabel;	
+	@FXML private Slider zoomSlider;	
+	@FXML private Label zoomSliderValueLabel;	
+	@FXML private StackPane imageStackPane;
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -135,34 +102,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 		setResizeTextFields();
 	}
 	
-
-	@FXML
-	private void switchScene(Event event) throws IOException{
-			Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
-			Scene changePane = new Scene(pane);
-	
-			//Show stage information
-			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-			window.setScene(changePane);
-			window.show();
-	}
-			
-	@FXML
-	private void switchBack(Event event) throws IOException{
-			selectedAlbum = listView.getSelectionModel().getSelectedItem(); 
-			didSwitchBack = true;
-
-			Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_2.4.fxml"));
-			Scene changePane = new Scene(pane);
-			//Show stage information
-			
-			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-			window.setScene(changePane);
-			window.show();
-	}
-	
-	
-	
 		
 	//-----------------------------------------------------------------------------------------------------------//
 	/**
@@ -186,6 +125,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 		pathLabel.setText(text);
 	}
 	
+	
 	/**
 	 * Saves the metadata to the database
 	 * @author Julian Einspenner
@@ -194,6 +134,11 @@ public class MainControllerEditMode extends MainController implements Initializa
 	private void saveMetaDataButtonPressed() {
 		System.out.println("saveMetaData Button");
 	}
+	
+	@FXML
+	private void saveMetadata() {
+		System.out.println("I am the saveMetadata function");
+	}	
 	
 	/**
 	 * Images which are smaller as the imageView will be drawn in their original size
@@ -300,17 +245,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 		}
 	}
 	
-
-	@FXML
-	private void browseButtonPressed() {
-		System.out.println("I am the browseButtonPressed function");
-	}
-	
-	@FXML
-	private void fullScreenButtonPressed() {
-		System.out.println("I am the fullScreenButtonPressed function");
-	}
-	
 	
 	/**
 	 * Sets the ratio by the given width of the width textfield
@@ -340,37 +274,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 	
 	@FXML
-	private void newFolderButtonPressed() {
-		System.out.println("I am the newFolderButtonPressed function");
-	}
-
-	@FXML
-	private void filterButtonPressed() {
-		String color = (String)colorChoiceBox.getValue();
-		Image img = ColorFilter.filterCoulours(displayImageEditMode.getImage(), color);
-		displayImageEditMode.setImage(img);
-	}
-	
-	@FXML
-	private void renameAllButtonPressed() {
-		System.out.println("I am the renameAllButtonPressed function");
-	}
-	
-	@FXML
-	private void dropdownButtonChoiceSelected() {
-		System.out.println("I am the dropdownButtonChoiceSelected function");
-	}
-	
-
-// Menue-Bar----------------------------------------------------
-	
-	//File
-	@FXML
-	private void importImage() {
-		System.out.println("I am the importImage function");
-	}
-	
-	@FXML
 	private void cutModeButtonPressed() {
 		if(cutMode) {
 			cutModeButton.setStyle("-fx-background-color: #5a5a5a");
@@ -380,43 +283,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 		cutModeButton.setStyle("-fx-background-color: #005f00");  //saftiges wiesengruen
 		cutMode = true;
 	} 
-	
-	@FXML
-	private void copyImage() {
-		System.out.println("I am the copyImage function");
-	}
-	
-	@FXML
-	private void renameImage() {
-		System.out.println("I am the renameImage function");
-	}
-	
-	@FXML
-	private void deleteImage() {
-		System.out.println("I am the deleteImage function");
-	}
-	
-	@FXML
-	private void saveImage() {
-		System.out.println("I am the saveImage function");
-	}
-	
-	@FXML
-	private void saveImageAs() {
-		System.out.println("I am the saveImageAs function");
-	}
-	
-	@FXML
-	private void exit() {
-		System.out.println("I am the Exit function");
-	}
-	//-----------------------
-	
-	@FXML
-	private void cutImage() {
-		System.out.println("I am the cutImage function");
-	}	
-	
 	
 	
 	@FXML
@@ -440,63 +306,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 		resetZooming();
 	}
 	
-	
-	//---------------------------
-	
-	//Organize
 
-	@FXML
-	private void searchImage() {
-		System.out.println("I am the searchImage function");
-	}
-	
-	@FXML
-	private void filterImages() {
-		System.out.println("I am the filterImages function");
-	}	
-	
-	@FXML
-	private void sortImages() {
-		System.out.println("I am the sortImages function");
-	}	
-	
-	//---------------------------
-	
-	//View
-	
-	@FXML
-	private void showDetail() {
-		System.out.println("I am the showDetail function");
-	}	
-	
-//	@FXML
-//	private void showPreview() {
-//
-//	}	Fullscreen?
-	
-	@FXML
-	private void navigator() {
-		System.out.println("I am the navigator function");
-	}	
-	
-	@FXML
-	private void information() {
-		System.out.println("I am the information function");
-	}
-	
-	//----------------------------
-	
-	//Help
-	@FXML
-	private void showCommands() {
-		System.out.println("I am the showCommands function");
-	}	
-	
-	@FXML
-	private void changeLanguage() {
-		System.out.println("I am the changeLanguage function");
-	}	
-	
 	//--------------------------------------------------------
 	
 	//Edit Mode
@@ -567,6 +377,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 		zoomStage = 0;
 	}
 	
+		
 	/**
 	 * Current image will be appear in its plain state
 	 * @author Julian Einspenner
@@ -577,39 +388,18 @@ public class MainControllerEditMode extends MainController implements Initializa
 	}
 	
 	@FXML
-	private void saveMetadata() {
-		System.out.println("I am the saveMetadata function");
-	}	
-	
-	@FXML
-	private void filterColor() {
-		System.out.println("I am the filterColor function");
-	}	
-	
-	@FXML
-	private void addKeyword() {
-		System.out.println("I am the addKeyword function");
-	}
+	private void filterButtonPressed() {
+		String color = (String)colorChoiceBox.getValue();
+		Image img = ColorFilter.filterCoulours(displayImageEditMode.getImage(), color);
+		displayImageEditMode.setImage(img);
+		}
+
 	
 	@FXML
 	private void monochroneButtonPressed() {
 		displayImageEditMode.setImage(GrayScaler.grayScaleImage(displayImageEditMode.getImage()));
 	}
 	
-	@FXML
-	private void deleteAlbum() {
-		System.out.println("I am the deleteAlbum function");
-	}
-	
-
-// IMAGE TEST
-//-----------------------------------------------------------
-	@FXML
-	private void loadImage() throws IOException{
-		displayImageEditMode.setImage(null);
-		Image image = new Image("/design/dummyImages/2.jpeg");
-		displayImageEditMode.setImage(image);
-	}
 	
 	@FXML
 	private int setAndGetSliderLabel() {
@@ -625,8 +415,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 		return value;
 	}
 	
-	private int currentImageFitWidth;
-	private int currentImageFitHeight;
+	
 	@FXML
 	private void sliderMove() {
 		
@@ -654,7 +443,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 		displayImageEditMode.setFitHeight(fitHeight);
 	}
 
-	private int zoomStage = 0;
 	
     private void setScrollingToRootPane(){
     	

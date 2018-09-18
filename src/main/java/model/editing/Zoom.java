@@ -1,19 +1,12 @@
 package model.editing;
 
-import java.awt.Event;
-import java.awt.Graphics2D;
-import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
-import java.beans.EventHandler;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ScrollEvent;
 
 
 /**

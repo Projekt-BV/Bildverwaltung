@@ -1,13 +1,6 @@
 package model.editing;
 
-import java.awt.Event;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import controller.MainControllerEditMode;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
