@@ -16,12 +16,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Album;
 import model.Database;
+import model.editing.FileImport;
 
 public abstract class MainController {
 
-@FXML ListView<Album> listView;
-@FXML protected AnchorPane rootPane;
-	
+	@FXML ListView<Album> listView;
+	@FXML AnchorPane rootPane;	
 	
 	Database database = new Database();
 	ArrayList<Image> imagesInSelectedAlbum = new ArrayList<Image>();
@@ -75,7 +75,9 @@ public abstract class MainController {
 		//File
 		@FXML
 		private void importImage() {
-			System.out.println("I am the importImage function");
+			FileImport tmpImp = new FileImport();
+			Stage window = new Stage();
+			tmpImp.start(window);
 		}
 	
 		@FXML
