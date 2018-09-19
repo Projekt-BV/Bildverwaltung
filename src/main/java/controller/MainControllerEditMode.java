@@ -310,7 +310,13 @@ public class MainControllerEditMode extends MainController implements Initializa
 		displayImageEditMode.setFitWidth(initFitWidth);
 		displayImageEditMode.setFitHeight(initFitHeight);
 		
-		displayImageEditMode.setImage(Resizer.resizeImage(width, height, imagePlain));
+		displayImageEditMode.setImage(imagePlain);
+		
+		if(usedColorFilter) {
+			colorChoiceBoxUsed();
+		}
+		
+		displayImageEditMode.setImage(Resizer.resizeImage(width, height, displayImageEditMode.getImage()));
 		
 		setFitDimensionsIfSmallerThanImageViewsMaxSize(width, height);
 		setResizeTextFields();
@@ -371,9 +377,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 		
 		displayImageEditMode.setFitWidth(initFitWidth);
 		displayImageEditMode.setFitHeight(initFitHeight);
+		
+		usedColorFilter = false;
 	
 		resetGUI();
-		
 	}
 	
 	private void resetGUI() {
@@ -403,13 +410,22 @@ public class MainControllerEditMode extends MainController implements Initializa
 		System.out.println("filter-button");
 	}
 	
-	@FXML
+	
+	
+	boolean usedColorFilter = false;
+	/**
+	 * Filters the displayed image with a selected Color
+	 * @author Julian Einspenner
+	 */
 	private void colorChoiceBoxUsed() {
-		String color = (String)colorChoiceBox.getValue();
 		
-		if(color.equals("None:")) {
+		String color = colorChoiceBox.getValue();
+		
+		if(color.equals("None:") || color.equals("")) {
 			return;
 		}
+		
+		usedColorFilter = true;
 		
 		if(color.equals("Black And White")) {
 			displayImageEditMode.setImage(GrayScaler.grayScaleImage(displayImageEditMode.getImage()));
