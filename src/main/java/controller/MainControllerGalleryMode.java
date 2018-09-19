@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import java.io.IOException;
 import javafx.stage.Stage;
 import model.Album;
+import model.editing.FileImport;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -115,5 +116,12 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	@FXML
 	private void renameAllButtonPressed() {
 		System.out.println("I am the renameAllButtonPressed function");
+	}
+	
+	@FXML
+	private void addImageButtonPressed() {
+		FileImport tmpImp = new FileImport();
+		Stage window = new Stage();
+		tmpImp.start(window);
 	}
 }
