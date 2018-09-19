@@ -166,7 +166,12 @@ public class MainControllerEditMode extends MainController implements Initializa
 	}
 	
 	
-	//Fuer kleine Bilder gedacht
+	/**
+	 * This method is written for small images which would be overstreched after loading them to the imageView
+	 * @author Julian Einspenner
+	 * @param width
+	 * @param height
+	 */
 	private void setFitDimensionsIfSmallerThanImageViewsMaxSize(int width, int height) {
 		if(width < initFitWidth) {
 			displayImageEditMode.setFitWidth(width);
@@ -256,7 +261,8 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 	
 	/**
-	 * Sets the ratio by the given width of the width textfield
+	 * Sets the width-height ratio by the given width. The height textfield is going to be changed if the current width and height values 
+	 * from the textfields do not represent the images original ratio.
 	 * @author Julian Einspenner
 	 */
 	@FXML
@@ -281,7 +287,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 		}
 	}
 	
-	
+	/**
+	 * Activates or deactivates the cut mode
+	 * @author Julian Einspenner
+	 */
 	@FXML
 	private void cutModeButtonPressed() {
 		if(cutMode) {
@@ -293,7 +302,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 		cutMode = true;
 	} 
 	
-	
+	/**
+	 * Initializes the view to show the image with a new size. Calls the Resizer.java - Class to resize a new image
+	 * @author Julian Einspenner
+	 */
 	@FXML
 	private void resizeImage() {
 		int width, height;
@@ -324,7 +336,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	//--------------------------------------------------------
 	
-	//Edit Mode
+	/**
+	 * Calls the Rotater-class from Editing-Package to rotate the image clockwise
+	 * @author Julian Einspenner
+	 */
 	@FXML
 	private void rotateClockwise() {
 		Image image = displayImageEditMode.getImage();
@@ -339,6 +354,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 		swapFitDimensions();
 	}
 	
+	/**
+	 * Calls the Rotater-class from Editing-Package to rotate the image anticlockwise
+	 * @author Julian Einspenner
+	 */
 	@FXML
 	private void rotateCounterClockwise() {
 		Image image = displayImageEditMode.getImage();
@@ -354,6 +373,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 	/**
 	 * Swaps fit dimensions for rotated images
+	 * @author Julian Einspenner
 	 */
 	private void swapFitDimensions() {
 		if(displayImageEditMode.getImage().getWidth() < displayImageEditMode.getFitWidth() ||
@@ -381,12 +401,20 @@ public class MainControllerEditMode extends MainController implements Initializa
 		resetGUI();
 	}
 	
+	/**
+	 * Resetting of the GUI to make a suitable state for a new image
+	 * @author Julian Einspenner
+	 */
 	private void resetGUI() {
 		setFitDimensions();
 		resetZooming();
 		setResizeTextFields();
 	}
 	
+	/**
+	 * Resets zoomSlider, its text label and the zoomstage
+	 * @author Julian Einspenner
+	 */
 	private void resetZooming() {
 		zoomSlider.setValue(50);
 		zoomSliderValueLabel.setText("50 %");
@@ -424,7 +452,8 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 	boolean usedColorFilter = false;
 	/**
-	 * Filters the displayed image with a selected Color
+	 * Calls the ColorFilter-Class to set a colorfilter to the image. A color filtered state is going to be stored in this class for not loosing it
+	 * if the image will be resized
 	 * @author Julian Einspenner
 	 */
 	private void colorChoiceBoxUsed() {
@@ -446,6 +475,11 @@ public class MainControllerEditMode extends MainController implements Initializa
 		displayImageEditMode.setImage(img);
 	}
 		
+	/**
+	 * Sets the zoomSlider-label with the value of the slider. After, this value will be returned
+	 * @author Julian Einspenner
+	 * @return the new value of the zoomSlider
+	 */
 	@FXML
 	private int setAndGetSliderLabel() {
 		int value = (int)zoomSlider.getValue();
@@ -460,7 +494,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 		return value;
 	}
 	
-	
+	/**
+	 * If the slider is moved this function will calculate new fit dimensions for the imageView
+	 * @author Julian Einspenner
+	 */
 	@FXML
 	private void sliderMove() {
 		
@@ -489,6 +526,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 	}
 
 	
+	/**
+	 * Enhances the GUI with a scrolling event to zoom in and zoom out the displayed image
+	 * @author Julian Einspenner
+	 */
     private void setScrollingToRootPane(){
     	
     	rootPane.setOnScroll(e -> {
