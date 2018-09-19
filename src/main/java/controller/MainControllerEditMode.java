@@ -4,7 +4,10 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -397,6 +400,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 		displayImageEditMode.setFitHeight(initFitHeight);
 		
 		usedColorFilter = false;
+		colorChoiceBox.setValue("None");
 	
 		resetGUI();
 	}
@@ -431,9 +435,14 @@ public class MainControllerEditMode extends MainController implements Initializa
 		String title = titelTextField.getText();
 		String location = locationTextField.getText();
 		String date = dateTextField.getText();
-		String[] tags = tagsTextField.getText().split(",");
 		
-		System.out.println("title: " + title + "\nlocation: " + location + "\ndate: " + date + "\ntags: " + tags);
+		Pattern p = Pattern.compile("[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}");
+		Matcher m = p.matcher(date);
+		if(!m.matches()) {
+			date = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+		}
+		
+		String[] tags = tagsTextField.getText().split(",");
 		
 		EditMetaData.saveMetaData(title, location, date, tags, imageContainer.getId());
 	}
