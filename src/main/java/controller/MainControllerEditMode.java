@@ -52,7 +52,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	@FXML private ChoiceBox<String> colorChoiceBox;
 	
 	ObservableList<String> colorChoiceList = FXCollections
-				.observableArrayList("Red", "Green", "Blue", 
+				.observableArrayList("Black And White", "Red", "Green", "Blue", 
 								     "Yellow", "Violet", "Aqua");
 	
 	@FXML private TextField widthTextField, heightTextField;	
@@ -71,8 +71,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 		initFitWidth = (int)displayImageEditMode.getFitWidth();
 		initFitHeight = (int)displayImageEditMode.getFitHeight();
 		
-		colorChoiceBox.setItems(colorChoiceList);
-		colorChoiceBox.setValue(colorChoiceList.get(0));
+		initColorChoiceBox();
 		
 		//Beladen der ChoiceBox passiert erst nach Umstrukturierung der Controller.
 		//albumChoiceBox.getChildrenUnmodifiable().addAll(c);
@@ -123,6 +122,18 @@ public class MainControllerEditMode extends MainController implements Initializa
 	    	}
 	    }
 		pathLabel.setText(text);
+	}
+	
+	/**
+	 * Initializes the colorChoiceBox with values for filtering the color of the displayed image
+	 * @author Julian Einspenner
+	 */
+	private void initColorChoiceBox() {
+		colorChoiceBox.setItems(colorChoiceList);
+		colorChoiceBox.setValue(colorChoiceList.get(0));
+		colorChoiceBox.setOnAction(e -> {
+			colorChoiceBoxUsed();
+		});
 	}
 	
 	
@@ -389,18 +400,22 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 	@FXML
 	private void filterButtonPressed() {
-		String color = (String)colorChoiceBox.getValue();
-		Image img = ColorFilter.filterCoulours(displayImageEditMode.getImage(), color);
-		displayImageEditMode.setImage(img);
-		}
-
-	
-	@FXML
-	private void monochroneButtonPressed() {
-		displayImageEditMode.setImage(GrayScaler.grayScaleImage(displayImageEditMode.getImage()));
+		System.out.println("filter-button");
 	}
 	
-	
+	@FXML
+	private void colorChoiceBoxUsed() {
+		String color = (String)colorChoiceBox.getValue();
+		
+		if(color.equals("Black And White")) {
+			displayImageEditMode.setImage(GrayScaler.grayScaleImage(displayImageEditMode.getImage()));
+			return;
+		}
+		
+		Image img = ColorFilter.filterCoulours(displayImageEditMode.getImage(), color);
+		displayImageEditMode.setImage(img);
+	}
+		
 	@FXML
 	private int setAndGetSliderLabel() {
 		int value = (int)zoomSlider.getValue();
