@@ -6,6 +6,7 @@ public class UtilsForImageHandling {
 
 	/**
 	 * Generates a pixel array
+	 * @author Julian Einspenner
 	 * @param is your picture source
 	 * @return the array 
 	 */

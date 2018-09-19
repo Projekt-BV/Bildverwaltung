@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import java.awt.image.BufferedImage;
 import model.ImageContainer;
 import model.editing.ColorFilter;
 import model.editing.Cutter;
+import model.editing.EditMetaData;
 import model.editing.GrayScaler;
 import model.editing.Resizer;
 import model.editing.Rotater;
@@ -111,8 +113,17 @@ public class MainControllerEditMode extends MainController implements Initializa
 		titelTextField.setText(imageContainer.getName());
 		locationTextField.setText(imageContainer.getLocation());
 		dateTextField.setText(new SimpleDateFormat("dd.MM.yyyy").format(imageContainer.getDate()));
-		tagsTextField.setText("Datenbankaufruf folgt");
+		
+	    String tags = "";
+	    for(int i = 0; i < imageContainer.getTags().size(); i++) {
+	    	tags += imageContainer.getTags().get(i);
+	    	if(i < imageContainer.getTags().size() - 1) {
+	    		tags += ",";
+	    	}
+	    }
 	    
+	    tagsTextField.setText(tags);
+		
 	    String text = "Path:\n";
 	    StringBuilder sb = new StringBuilder(imageContainer.getPath());
 	    for(int i = 8; i < imageContainer.getPath().length(); i++) {
@@ -136,20 +147,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 		});
 	}
 	
-	
-	/**
-	 * Saves the metadata to the database
-	 * @author Julian Einspenner
-	 */
-	@FXML
-	private void saveMetaDataButtonPressed() {
-		System.out.println("saveMetaData Button");
-	}
-	
-	@FXML
-	private void saveMetadata() {
-		System.out.println("I am the saveMetadata function");
-	}	
+
 	
 	/**
 	 * Images which are smaller as the imageView will be drawn in their original size
@@ -397,12 +395,24 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 		
 	/**
-	 * Current image will be appear in its plain state
+	 * Saves metadata to database
 	 * @author Julian Einspenner
 	 */
 	@FXML
-	private void saveButtonPressed() {
-		System.out.println("Save Button");
+	private void saveMetaDataButtonPressed() {
+		String title = titelTextField.getText();
+		String location = locationTextField.getText();
+		String date = dateTextField.getText();
+		String[] tags = tagsTextField.getText().split(",");
+		
+		System.out.println("title: " + title + "\nlocation: " + location + "\ndate: " + date + "\ntags: " + tags);
+		
+		EditMetaData.saveMetaData(title, location, date, tags, imageContainer.getId());
+	}
+	
+	@FXML
+	private void saveImageButtonPressed() {
+		System.out.println("Save image button");
 	}
 	
 	@FXML
