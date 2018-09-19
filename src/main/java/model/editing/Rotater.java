@@ -12,6 +12,7 @@ public class Rotater {
 	
 	/**
 	 * Rotates the image clockwise with 45 degree
+	 * @author Julian Einspenner
 	 * @param img is the Image to rotate
 	 * @return the rotated Image
 	 */
@@ -35,6 +36,7 @@ public class Rotater {
 	
 	/**
 	 * Rotates the image anticlockwise with 45 degree
+	 * @author Julian Einspenner
 	 * @param img is the Image to rotate
 	 * @return the rotated Image
 	 */
@@ -61,16 +63,17 @@ public class Rotater {
 	
 	/**
 	 * Rotates a pixel array anticlockwise
+	 * @author Julian Einspenner
 	 * @param pixels is the pixel array
 	 * @param width the current width of the image
 	 * @param height the current height of the image
-	 * @return
+	 * @return the anticlockwise rotated pixel array
 	 */
-	private static int[] rotateArrayAntiClockwise(int[] pixels, int width, int height) {
+	public static int[] rotateArrayAntiClockwise(int[] pixels, int width, int height) {
 		int [] pixelRotatedAntiClockwise = new int[pixels.length];
 		
 		int z = 0;
-		for(int i = 1; i < width; i++) {
+		for(int i = 1; i <= width; i++) {
 			for(int j = 1; j <= height; j++) {
 				pixelRotatedAntiClockwise[z] = pixels[j*width - i];
 				z++;
@@ -81,12 +84,13 @@ public class Rotater {
 	
 	/**
 	 * Rotates a pixel array clockwise
+	 * @author Julian Einspenner
 	 * @param pixels is the pixel array
 	 * @param width the current width of the image
 	 * @param height the current height of the image
-	 * @return
+	 * @return the clockwise rotated pixel array
 	 */
-	private static int[] rotateArrayClockwise(int[] pixels, int width, int height) {
+	public static int[] rotateArrayClockwise(int[] pixels, int width, int height) {
 		int size = pixels.length;
 		int [] pixelRotatedClockwise = new int[pixels.length];
 		
