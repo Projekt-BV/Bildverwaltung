@@ -52,7 +52,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	@FXML private ChoiceBox<String> colorChoiceBox;
 	
 	ObservableList<String> colorChoiceList = FXCollections
-				.observableArrayList("Black And White", "Red", "Green", "Blue", 
+				.observableArrayList("None", "Black And White", "Red", "Green", "Blue", 
 								     "Yellow", "Violet", "Aqua");
 	
 	@FXML private TextField widthTextField, heightTextField;	
@@ -406,6 +406,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 	@FXML
 	private void colorChoiceBoxUsed() {
 		String color = (String)colorChoiceBox.getValue();
+		
+		if(color.equals("None:")) {
+			return;
+		}
 		
 		if(color.equals("Black And White")) {
 			displayImageEditMode.setImage(GrayScaler.grayScaleImage(displayImageEditMode.getImage()));
