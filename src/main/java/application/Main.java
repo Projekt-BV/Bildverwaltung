@@ -17,6 +17,8 @@ public class Main extends Application {
 		stage.setTitle("Bildverwaltung");
 		stage.setScene(scene);
 		stage.show();
+		
+		
 	}
 
 	public static void main(String[] args) {

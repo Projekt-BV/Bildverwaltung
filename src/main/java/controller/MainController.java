@@ -26,7 +26,7 @@ public abstract class MainController {
 	Database database = new Database();
 	ArrayList<Image> imagesInSelectedAlbum = new ArrayList<Image>();
 	static Album selectedAlbum;
-	static boolean didSwitchBack = false;
+	static boolean didSwitchBack = true;
 	
 	/** 
 	 * Method to initialize the listView containing the album names.

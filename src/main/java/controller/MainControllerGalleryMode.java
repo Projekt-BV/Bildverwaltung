@@ -31,6 +31,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		try {
+			didSwitchBack = true;
 			initializeListView();
 			initializeGridPane();
 		} catch (ParseException e) {
@@ -44,15 +45,17 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	 */	
 	@FXML void initializeGridPane() {			
 		
+		gridPane.getChildren().clear(); // clear gridPane
+
 		if (didSwitchBack && selectedAlbum != null){			
 			// if we come from Edit mode, leave selectedAlbum as it is and highlight it in listView
 			
-			Album referenceEqualSelectedAlbum = database.getAlbums().stream()
-					   												.filter(album -> album.getName().equals(selectedAlbum.getName()))
-					   												.findFirst()
-					   												.get();
+			selectedAlbum = database.getAlbums().stream()
+					   							.filter(album -> album.getName().equals(selectedAlbum.getName()))
+					   							.findFirst()
+					   							.get();
 			
-			listView.getSelectionModel().select(database.getAlbums().indexOf(referenceEqualSelectedAlbum));
+			listView.getSelectionModel().select(database.getAlbums().indexOf(selectedAlbum));
 		} else if (selectedAlbum == null) {
 			// else if no album has been clicked on, get album "All Images"
 			selectedAlbum = database.getAlbums().stream()
@@ -61,8 +64,12 @@ public class MainControllerGalleryMode extends MainController implements Initial
 												.get();
 		} else {
 			// else get album that has been clicked on
-			gridPane.getChildren().clear(); // clear gridPane
-			selectedAlbum = listView.getSelectionModel().getSelectedItem(); 
+			String selectedAlbumName = listView.getSelectionModel().getSelectedItem().getName(); 
+			selectedAlbum = database.getAlbums().stream()
+					.filter(album -> album.getName().equals(selectedAlbumName))
+					.findFirst()
+					.get();
+
 		}
 		
 		didSwitchBack = false;
