@@ -54,7 +54,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 					   												.get();
 			
 			listView.getSelectionModel().select(database.getAlbums().indexOf(referenceEqualSelectedAlbum));
-		} else if (gridPane.getChildren().isEmpty()) {
+		} else if (selectedAlbum == null) {
 			// else if no album has been clicked on, get album "All Images"
 			selectedAlbum = database.getAlbums().stream()
 												.filter(album -> album.getName().equals("All Images"))
