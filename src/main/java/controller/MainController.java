@@ -70,6 +70,22 @@ public abstract class MainController {
 			window.show();
 	}
 	
+	public static void reloadMainView() {
+		try {
+	        Parent pane;
+			pane = FXMLLoader.load(MainController.class.getResource("/design/Main_page_2.4.fxml"));
+			Scene changePane = new Scene(pane);	
+			
+			Stage stage = new Stage();
+			stage.setScene(changePane);
+			stage.show();
+			
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	// Menue-Bar----------------------------------------------------
 	
 		//File

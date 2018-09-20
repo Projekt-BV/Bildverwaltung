@@ -31,6 +31,7 @@ public class AlbumController implements Initializable{
 	    Stage stage = (Stage) exitId.getScene().getWindow();
 	    // do what you have to do
 	    stage.close();
+	    MainController.reloadMainView();
 	}
 	
 	@FXML
