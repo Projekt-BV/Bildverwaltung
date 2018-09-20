@@ -24,14 +24,9 @@ public class EditMetaData {
 		location = (location == null)  ?  ""   :  location;
 		date     = (date     == null)  ?  ""   :  date;
 		tags[0]  = (tags[0]  == null)  ?  ""   :  tags[0];
-	
-		String sqlStatementTitleLocationDate = "UPDATE prog3_db.fotos SET " +
-				 							   "Fotoname='" + title + 
-											   "', Datum='" + date + 
-											   "', Ort='" + location +
-											   "' WHERE ID=" + id;
 		
-		String sqlStatementDeleteTags = "DELETE FROM tags WHERE Foto_ID=" + id;
+		String sqlStatementTitleLocationDate = createStatementForTitleLocationDate(title, location, date, id);
+		String sqlStatementDeleteTags = createStatementToDeleteOldTags(id);
 		
 		try {
 			SendSQLRequest.sendSQL(sqlStatementTitleLocationDate);
@@ -46,6 +41,34 @@ public class EditMetaData {
 			e.printStackTrace();
 			System.err.println("Failed while savig metadata to database");
 		}
+	}
+	
+	
+	/**
+	 * Generates the SQL-Statement for setting title, date and location
+	 * @author Julian Einspenner
+	 * @param title name of the image
+	 * @param date time stamp of the image
+	 * @param location location of the image
+	 * @param id is the unique identifier of the image in database
+	 * @return is the SQL-statement
+	 */
+	public static String createStatementForTitleLocationDate(String title, String date, String location, int id) {
+		return "UPDATE prog3_db.fotos SET Fotoname='" + 
+				title + "', Datum='" + 
+				date + "', Ort='" + 
+				location + 
+				"' WHERE ID=" + id;
+	}
+	
+	/**
+	 * Generates the SQL-Statement for deleting an images tags
+	 * @author Julian Einspenner
+	 * @param id is the unique identifier of the image in database
+	 * @return is the SQL-Statement
+	 */
+	public static String createStatementToDeleteOldTags(int id) {
+		 return "DELETE FROM tags WHERE Foto_ID=" + id;
 	}
 	
 }
