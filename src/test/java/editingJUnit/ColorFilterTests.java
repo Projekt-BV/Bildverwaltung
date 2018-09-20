@@ -1,63 +1,111 @@
 package editingJUnit;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
-import java.awt.image.BufferedImage;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
 import model.editing.ColorFilter;
-import model.editing.UtilsForImageHandling;
 
 /**
  * JUnit tests for colorfiltering
  * @author Julian Einspenner
- *
  */
 public class ColorFilterTests {
 
-	static int[] colorFilterImage;
-	static int[] pixelArrayAqua;
+	static int[] colorArrayPlainInt;
+	static int[] colorArrayAquaInt;
+	static int[] colorArrayRedInt;
+	static int[] colorArrayBlueInt;
 	
-	static BufferedImage bimg;
+	static Color[] colorArrayPlain;
+	static Color[] colorArrayAqua;
+	static Color[] colorArrayRed;
+	static Color[] colorArrayBlue;
+	
+	static Color[] filteredColors; 
+	
+	/*
+	 * Used rgb-Values for Plain-Array:
+	 * 247 230 120, 2 1 43, 255 255 255, 0 0 0, 44 55 66
+	 * 13 0 0, 4 32 32, 55 128 128, 1 1 1, 120 120 120 
+	 */
+	
 	
 	@Before
 	public void setUpBefore() {
-		colorFilterImage = new int[] {16246392, 131371, 16777215, 0, 2897730, 851968, 270368, 3637376, 65793, 7895160};
-		pixelArrayAqua = new int[]{59110, 299, 65535, 0, 14146, 0, 8224, 32896, 257, 30840};
+		//Input
+		colorArrayPlainInt = new int[] {16246392, 131371, 16777215, 0, 2897730, 851968, 270368, 3637376, 65793, 7895160};
 		
-		Color[] colorArray = new Color[colorFilterImage.length];
+		//Expected output
+		colorArrayAquaInt  = new int[] {59000, 299, 65535, 0, 14146, 0, 8224, 32896, 257, 30840};
+		colorArrayRedInt   = new int[] {16187392, 131072, 16711680, 0, 2883584, 851968, 262144, 3604480, 65536, 7864320};
+		colorArrayBlueInt  = new int[] {120, 43, 255, 0, 66, 0, 32, 128, 1, 120};
 		
-		for(int i = 0; i < colorArray.length; i++) {
-			
+		colorArrayPlain = new Color[colorArrayPlainInt.length];
+		for(int i = 0; i < colorArrayPlain.length; i++) {
+			colorArrayPlain[i] = new Color(colorArrayPlainInt[i]);
 		}
 		
-		bimg = new BufferedImage(5, 2, BufferedImage.TYPE_INT_RGB);
-		bimg.setRGB(0, 0, 5, 2, colorFilterImage, 0, 5);
+		colorArrayAqua = new Color[colorArrayPlainInt.length];
+		for(int i = 0; i < colorArrayPlain.length; i++) {
+			colorArrayAqua[i] = new Color(colorArrayAquaInt[i]);
+		}
 		
-		int [] filteredPixelArray = UtilsForImageHandling.getPixelArray(bimg);
-		System.out.println("Dieses Array soll gefiltert werden");
-		Utils.printArray(filteredPixelArray, 5);
+		colorArrayRed = new Color[colorArrayPlainInt.length];
+		for(int i = 0; i < colorArrayPlain.length; i++) {
+			colorArrayRed[i] = new Color(colorArrayRedInt[i]);
+		}
+		
+		colorArrayBlue = new Color[colorArrayPlainInt.length];
+		for(int i = 0; i < colorArrayPlain.length; i++) {
+			colorArrayBlue[i] = new Color(colorArrayBlueInt[i]);
+		}
 	}
 	
 	@Test
 	public void aquaFilterTest() {
-		Image img = SwingFXUtils.toFXImage(bimg, null);
-		img = ColorFilter.filterCoulours(img, "aqua");
+		filteredColors = ColorFilter.makeItAqua(colorArrayPlain);
 		
-		bimg = SwingFXUtils.fromFXImage(img, null);
+		boolean b = true;
+		for(int i = 0; i < filteredColors.length; i++) {
+			if(!filteredColors[i].equals(colorArrayAqua[i])) {
+				b = false;
+				break;
+			}
+		}
 		
-		int [] filteredPixelArray = UtilsForImageHandling.getPixelArray(bimg);
-		filteredPixelArray = bimg.getRGB(0, 0, 5, 2, filteredPixelArray, 0, 5);
+		assertEquals(true, b);
+	}
+	
+	@Test
+	public void redFilterTest() {
+		filteredColors = ColorFilter.makeItRed(colorArrayPlain);
 		
-		Utils.printArray(colorFilterImage, 5);
-		Utils.printArray(filteredPixelArray, 5);
+		boolean b = true;
+		for(int i = 0; i < filteredColors.length; i++) {
+			if(!filteredColors[i].equals(colorArrayRed[i])) {
+				b = false;
+				break;
+			}
+		}
+		assertEquals(true, b);
+	}
+	
+	@Test
+	public void blueFilterTest() {
+		filteredColors = ColorFilter.makeItBlue(colorArrayPlain);
 		
-		assertArrayEquals(pixelArrayAqua, filteredPixelArray);
+		boolean b = true;
+		for(int i = 0; i < filteredColors.length; i++) {
+			if(!filteredColors[i].equals(colorArrayBlue[i])) {
+				b = false;
+				break;
+			}
+		}
+		assertEquals(true, b);
 	}
 	
 }

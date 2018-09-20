@@ -13,6 +13,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+/**
+ * JUnit tests for Rotater
+ * @author Julian Einspenner
+ */
 public class RotaterTests {
 	static BufferedImage image200x200;
 	static BufferedImage image200x200_clockwise;
@@ -63,11 +67,4 @@ public class RotaterTests {
 		pixelArrayPlain = Rotater.rotateArrayAntiClockwise(pixelArrayPlain, 5, 5);
 		assertArrayEquals(pixelArrayHeadstand, pixelArrayPlain);
 	}
-	
-//	@Test
-//	public void rotateClockwiseTest() throws InterruptedException {
-//		BufferedImage outputImage = model.editing.Rotater.rotateClockwise(image200x200);
-//		
-//		assertEquals(true, b);
-//	}
 }
