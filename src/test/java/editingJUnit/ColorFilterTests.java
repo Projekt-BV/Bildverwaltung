@@ -30,6 +30,12 @@ public class ColorFilterTests {
 		colorFilterImage = new int[] {16246392, 131371, 16777215, 0, 2897730, 851968, 270368, 3637376, 65793, 7895160};
 		pixelArrayAqua = new int[]{59110, 299, 65535, 0, 14146, 0, 8224, 32896, 257, 30840};
 		
+		Color[] colorArray = new Color[colorFilterImage.length];
+		
+		for(int i = 0; i < colorArray.length; i++) {
+			
+		}
+		
 		bimg = new BufferedImage(5, 2, BufferedImage.TYPE_INT_RGB);
 		bimg.setRGB(0, 0, 5, 2, colorFilterImage, 0, 5);
 		
