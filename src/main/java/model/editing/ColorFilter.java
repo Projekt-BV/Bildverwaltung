@@ -20,7 +20,6 @@ public class ColorFilter {
 	 */
 	public static Image filterCoulours(Image img, String colorSelection) {
 		BufferedImage bimg = SwingFXUtils.fromFXImage(img, null);
-		
 		int w = bimg.getWidth();
 		int h = bimg.getHeight();
 		
@@ -72,7 +71,7 @@ public class ColorFilter {
 	}
 		
 		
-	private static Color[] makeItRed(Color[] colors) {
+	public static Color[] makeItRed(Color[] colors) {
 		for(int i = 0; i < colors.length; i++) {
 			int red = colors[i].getRed();
 			colors[i] = new Color(red, 0, 0);
@@ -88,7 +87,7 @@ public class ColorFilter {
 		return colors;
 	}
 	
-	private static Color[] makeItBlue(Color[] colors) {
+	public static Color[] makeItBlue(Color[] colors) {
 		for(int i = 0; i < colors.length; i++) {
 			int blue = colors[i].getBlue();
 			colors[i] = new Color(0, 0, blue);
@@ -114,7 +113,7 @@ public class ColorFilter {
 		return colors;
 	}
 	
-	private static Color[] makeItAqua(Color[] colors) {
+	public static Color[] makeItAqua(Color[] colors) {
 		for(int i = 0; i < colors.length; i++) {
 			int green = colors[i].getGreen();
 			int blue = colors[i].getBlue();

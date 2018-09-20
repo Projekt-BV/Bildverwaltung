@@ -13,6 +13,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+/**
+ * JUnit tests for Rotater
+ * @author Julian Einspenner
+ */
 public class RotaterTests {
 	static BufferedImage image200x200;
 	static BufferedImage image200x200_clockwise;
@@ -62,26 +66,5 @@ public class RotaterTests {
 		pixelArrayPlain = Rotater.rotateArrayAntiClockwise(pixelArrayPlain, 5, 5);
 		pixelArrayPlain = Rotater.rotateArrayAntiClockwise(pixelArrayPlain, 5, 5);
 		assertArrayEquals(pixelArrayHeadstand, pixelArrayPlain);
-	}
-	
-//	@Test
-//	public void rotateClockwiseTest() throws InterruptedException {
-//		BufferedImage outputImage = model.editing.Rotater.rotateClockwise(image200x200);
-//		
-//		assertEquals(true, b);
-//	}
-	
-	
-	
-	
-	//Helps to print a pixel array for visual feedback
-	private void printArray(int[] array, int width) {
-		for(int i = 0; i < array.length; i++) {
-			if(i % width == 0) {
-				System.out.print("\n");
-			}
-			System.out.print(array[i] + " ");
-			
-		}
 	}
 }
