@@ -71,6 +71,11 @@
     -fx-background-color: rgb(75,75,75);
 }
 
+.root{
+	-fx-background-color: rgb(70, 70, 70);
+}
+
+
 .label{
     -fx-text-fill: rgb(220, 220, 220);
 }
