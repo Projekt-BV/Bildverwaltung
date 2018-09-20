@@ -15,7 +15,6 @@ import javafx.scene.layout.GridPane;
 import java.io.IOException;
 import javafx.stage.Stage;
 import model.Album;
-import model.editing.FileImport;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

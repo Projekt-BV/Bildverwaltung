@@ -4,11 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-
-import controller.MainController;
-import controller.MainControllerGalleryMode;
-import javafx.fxml.Initializable;
 
 import java.sql.ResultSet;
 
@@ -21,7 +16,6 @@ public class SendSQLRequest {
 	private static Statement stmt = null;
 	
 	private static Connection con;
-	private static MainController mainController;
 	
 		
 	/**
