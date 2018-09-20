@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="290.0" prefWidth="501.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AlbumController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="249.0" prefWidth="504.0" VBox.vgrow="ALWAYS">
+      <children>
+            <Button fx:id="exitId" layoutX="55.0" layoutY="178.0" mnemonicParsing="false" onAction="#exitButtonpressed" text="Exit" />
+            <Label layoutX="23.0" layoutY="90.0" prefHeight="25.0" prefWidth="98.0" text="Albumname" />
+            <ListView fx:id="listView" layoutX="304.0" layoutY="3.0" prefHeight="200.0" prefWidth="200.0" />
+            <TextField fx:id="albumName" layoutX="139.0" layoutY="90.0" />
+            <Button layoutX="212.0" layoutY="178.0" mnemonicParsing="false" onAction="#newAlbumpressed" text="Add Album" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

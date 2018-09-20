@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Album;
 import model.Database;
@@ -124,8 +125,15 @@ public abstract class MainController {
 		
 		// Buttons below listView
 		@FXML
-		private void addAlbumButtonPressed() {
-			System.out.println("I am the addAlbumButtonPressed function");
+		private void addAlbumButtonPressed() throws IOException {
+			Stage stage;
+			Parent root;
+			stage = new Stage();
+			root = FXMLLoader.load(getClass().getResource("/design/NewAlbum.fxml"));
+			stage.setScene(new Scene(root));
+			stage.setTitle("New Album");
+			stage.show();
+			
 		}
 		
 		@FXML
