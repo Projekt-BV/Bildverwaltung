@@ -22,7 +22,7 @@ import model.Database;
 public class AlbumController implements Initializable{
 
 	@FXML ListView<Album> listView;
-	@FXML TextField albumId;
+	@FXML TextField albumName;
 	@FXML Button exitId;
 	
 
@@ -40,11 +40,11 @@ public class AlbumController implements Initializable{
 	@FXML
 	private void newAlbumpressed() throws SQLException {
 		
-		String tmp = albumId.getText();
-		String query = "INSERT INTO ALBEN (Name) VALUES ('" + albumId.getText() + "');";
+		String tmp = albumName.getText();
+		String query = "INSERT INTO ALBEN (Name) VALUES ('" + albumName.getText() + "');";
 		SendSQLRequest.sendSQL(query);
 		System.out.println(tmp);
-		albumId.clear();
+		albumName.clear();
 		listView.getItems().clear();
 		try {
 			database.reloadDatabaseContents();
