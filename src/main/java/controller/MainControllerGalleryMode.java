@@ -117,11 +117,4 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	private void renameAllButtonPressed() {
 		System.out.println("I am the renameAllButtonPressed function");
 	}
-	
-	@FXML
-	private void addImageButtonPressed() {
-		FileImport tmpImp = new FileImport();
-		Stage window = new Stage();
-		tmpImp.start(window);
-	}
 }

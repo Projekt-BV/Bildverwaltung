@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 
+import controller.MainController;
 import controller.MainControllerGalleryMode;
 import javafx.fxml.Initializable;
 
@@ -20,6 +21,7 @@ public class SendSQLRequest {
 	private static Statement stmt = null;
 	
 	private static Connection con;
+	private static MainController mainController;
 	
 		
 	/**
@@ -135,16 +137,14 @@ public class SendSQLRequest {
 		}
 		finally {
 			
-		try {
-			closeDB_Connection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+			try {
+				closeDB_Connection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return rs;
 	}
-
 }
