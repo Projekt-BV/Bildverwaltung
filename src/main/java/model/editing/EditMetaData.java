@@ -53,7 +53,7 @@ public class EditMetaData {
 	 * @param id is the unique identifier of the image in database
 	 * @return is the SQL-statement
 	 */
-	public static String createStatementForTitleLocationDate(String title, String date, String location, int id) {
+	public static String createStatementForTitleLocationDate(String title, String location, String date, int id) {
 		return "UPDATE prog3_db.fotos SET Fotoname='" + 
 				title + "', Datum='" + 
 				date + "', Ort='" + 
