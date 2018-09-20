@@ -314,6 +314,14 @@ If you color the ChoiceBox further:
   -fx-background-color: rgb(80,80,80);
 }
 
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+   -fx-background-color: rgb(75, 75, 75);
+}
+
 .scroll-pane .corner{
     -fx-background-color: rgb(60, 60, 60);
 }

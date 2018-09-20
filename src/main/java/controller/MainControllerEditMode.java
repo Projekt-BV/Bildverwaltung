@@ -3,7 +3,11 @@ package controller;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +21,7 @@ import java.awt.image.BufferedImage;
 import model.ImageContainer;
 import model.editing.ColorFilter;
 import model.editing.Cutter;
+import model.editing.EditMetaData;
 import model.editing.GrayScaler;
 import model.editing.Resizer;
 import model.editing.Rotater;
@@ -52,7 +57,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	@FXML private ChoiceBox<String> colorChoiceBox;
 	
 	ObservableList<String> colorChoiceList = FXCollections
-				.observableArrayList("Red", "Green", "Blue", 
+				.observableArrayList("None", "Black And White", "Red", "Green", "Blue", 
 								     "Yellow", "Violet", "Aqua");
 	
 	@FXML private TextField widthTextField, heightTextField;	
@@ -71,8 +76,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 		initFitWidth = (int)displayImageEditMode.getFitWidth();
 		initFitHeight = (int)displayImageEditMode.getFitHeight();
 		
-		colorChoiceBox.setItems(colorChoiceList);
-		colorChoiceBox.setValue(colorChoiceList.get(0));
+		initColorChoiceBox();
 		
 		//Beladen der ChoiceBox passiert erst nach Umstrukturierung der Controller.
 		//albumChoiceBox.getChildrenUnmodifiable().addAll(c);
@@ -112,8 +116,17 @@ public class MainControllerEditMode extends MainController implements Initializa
 		titelTextField.setText(imageContainer.getName());
 		locationTextField.setText(imageContainer.getLocation());
 		dateTextField.setText(new SimpleDateFormat("dd.MM.yyyy").format(imageContainer.getDate()));
-		tagsTextField.setText("Datenbankaufruf folgt");
+		
+	    String tags = "";
+	    for(int i = 0; i < imageContainer.getTags().size(); i++) {
+	    	tags += imageContainer.getTags().get(i);
+	    	if(i < imageContainer.getTags().size() - 1) {
+	    		tags += ",";
+	    	}
+	    }
 	    
+	    tagsTextField.setText(tags);
+		
 	    String text = "Path:\n";
 	    StringBuilder sb = new StringBuilder(imageContainer.getPath());
 	    for(int i = 8; i < imageContainer.getPath().length(); i++) {
@@ -125,20 +138,19 @@ public class MainControllerEditMode extends MainController implements Initializa
 		pathLabel.setText(text);
 	}
 	
-	
 	/**
-	 * Saves the metadata to the database
+	 * Initializes the colorChoiceBox with values for filtering the color of the displayed image
 	 * @author Julian Einspenner
 	 */
-	@FXML
-	private void saveMetaDataButtonPressed() {
-		System.out.println("saveMetaData Button");
+	private void initColorChoiceBox() {
+		colorChoiceBox.setItems(colorChoiceList);
+		colorChoiceBox.setValue(colorChoiceList.get(0));
+		colorChoiceBox.setOnAction(e -> {
+			colorChoiceBoxUsed();
+		});
 	}
 	
-	@FXML
-	private void saveMetadata() {
-		System.out.println("I am the saveMetadata function");
-	}	
+
 	
 	/**
 	 * Images which are smaller as the imageView will be drawn in their original size
@@ -157,7 +169,12 @@ public class MainControllerEditMode extends MainController implements Initializa
 	}
 	
 	
-	//Fuer kleine Bilder gedacht
+	/**
+	 * This method is written for small images which would be overstreched after loading them to the imageView
+	 * @author Julian Einspenner
+	 * @param width
+	 * @param height
+	 */
 	private void setFitDimensionsIfSmallerThanImageViewsMaxSize(int width, int height) {
 		if(width < initFitWidth) {
 			displayImageEditMode.setFitWidth(width);
@@ -247,7 +264,8 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 	
 	/**
-	 * Sets the ratio by the given width of the width textfield
+	 * Sets the width-height ratio by the given width. The height textfield is going to be changed if the current width and height values 
+	 * from the textfields do not represent the images original ratio.
 	 * @author Julian Einspenner
 	 */
 	@FXML
@@ -272,7 +290,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 		}
 	}
 	
-	
+	/**
+	 * Activates or deactivates the cut mode
+	 * @author Julian Einspenner
+	 */
 	@FXML
 	private void cutModeButtonPressed() {
 		if(cutMode) {
@@ -284,7 +305,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 		cutMode = true;
 	} 
 	
-	
+	/**
+	 * Initializes the view to show the image with a new size. Calls the Resizer.java - Class to resize a new image
+	 * @author Julian Einspenner
+	 */
 	@FXML
 	private void resizeImage() {
 		int width, height;
@@ -299,7 +323,13 @@ public class MainControllerEditMode extends MainController implements Initializa
 		displayImageEditMode.setFitWidth(initFitWidth);
 		displayImageEditMode.setFitHeight(initFitHeight);
 		
-		displayImageEditMode.setImage(Resizer.resizeImage(width, height, imagePlain));
+		displayImageEditMode.setImage(imagePlain);
+		
+		if(usedColorFilter) {
+			colorChoiceBoxUsed();
+		}
+		
+		displayImageEditMode.setImage(Resizer.resizeImage(width, height, displayImageEditMode.getImage()));
 		
 		setFitDimensionsIfSmallerThanImageViewsMaxSize(width, height);
 		setResizeTextFields();
@@ -309,7 +339,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	//--------------------------------------------------------
 	
-	//Edit Mode
+	/**
+	 * Calls the Rotater-class from Editing-Package to rotate the image clockwise
+	 * @author Julian Einspenner
+	 */
 	@FXML
 	private void rotateClockwise() {
 		Image image = displayImageEditMode.getImage();
@@ -324,6 +357,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 		swapFitDimensions();
 	}
 	
+	/**
+	 * Calls the Rotater-class from Editing-Package to rotate the image anticlockwise
+	 * @author Julian Einspenner
+	 */
 	@FXML
 	private void rotateCounterClockwise() {
 		Image image = displayImageEditMode.getImage();
@@ -339,6 +376,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 	/**
 	 * Swaps fit dimensions for rotated images
+	 * @author Julian Einspenner
 	 */
 	private void swapFitDimensions() {
 		if(displayImageEditMode.getImage().getWidth() < displayImageEditMode.getFitWidth() ||
@@ -360,17 +398,27 @@ public class MainControllerEditMode extends MainController implements Initializa
 		
 		displayImageEditMode.setFitWidth(initFitWidth);
 		displayImageEditMode.setFitHeight(initFitHeight);
+		
+		usedColorFilter = false;
+		colorChoiceBox.setValue("None");
 	
 		resetGUI();
-		
 	}
 	
+	/**
+	 * Resetting of the GUI to make a suitable state for a new image
+	 * @author Julian Einspenner
+	 */
 	private void resetGUI() {
 		setFitDimensions();
 		resetZooming();
 		setResizeTextFields();
 	}
 	
+	/**
+	 * Resets zoomSlider, its text label and the zoomstage
+	 * @author Julian Einspenner
+	 */
 	private void resetZooming() {
 		zoomSlider.setValue(50);
 		zoomSliderValueLabel.setText("50 %");
@@ -379,28 +427,68 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 		
 	/**
-	 * Current image will be appear in its plain state
+	 * Saves metadata to database
 	 * @author Julian Einspenner
 	 */
 	@FXML
-	private void saveButtonPressed() {
-		System.out.println("Save Button");
+	private void saveMetaDataButtonPressed() {
+		String title = titelTextField.getText();
+		String location = locationTextField.getText();
+		String date = dateTextField.getText();
+		
+		Pattern p = Pattern.compile("[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}");
+		Matcher m = p.matcher(date);
+		if(!m.matches()) {
+			date = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+		}
+		
+		String[] tags = tagsTextField.getText().split(",");
+		
+		EditMetaData.saveMetaData(title, location, date, tags, imageContainer.getId());
+	}
+	
+	@FXML
+	private void saveImageButtonPressed() {
+		System.out.println("Save image button");
 	}
 	
 	@FXML
 	private void filterButtonPressed() {
-		String color = (String)colorChoiceBox.getValue();
-		Image img = ColorFilter.filterCoulours(displayImageEditMode.getImage(), color);
-		displayImageEditMode.setImage(img);
-		}
-
-	
-	@FXML
-	private void monochroneButtonPressed() {
-		displayImageEditMode.setImage(GrayScaler.grayScaleImage(displayImageEditMode.getImage()));
+		System.out.println("filter-button");
 	}
 	
 	
+	
+	boolean usedColorFilter = false;
+	/**
+	 * Calls the ColorFilter-Class to set a colorfilter to the image. A color filtered state is going to be stored in this class for not loosing it
+	 * if the image will be resized
+	 * @author Julian Einspenner
+	 */
+	private void colorChoiceBoxUsed() {
+		
+		String color = colorChoiceBox.getValue();
+		
+		if(color.equals("None:") || color.equals("")) {
+			return;
+		}
+		
+		usedColorFilter = true;
+		
+		if(color.equals("Black And White")) {
+			displayImageEditMode.setImage(GrayScaler.grayScaleImage(displayImageEditMode.getImage()));
+			return;
+		}
+		
+		Image img = ColorFilter.filterCoulours(displayImageEditMode.getImage(), color);
+		displayImageEditMode.setImage(img);
+	}
+		
+	/**
+	 * Sets the zoomSlider-label with the value of the slider. After, this value will be returned
+	 * @author Julian Einspenner
+	 * @return the new value of the zoomSlider
+	 */
 	@FXML
 	private int setAndGetSliderLabel() {
 		int value = (int)zoomSlider.getValue();
@@ -415,7 +503,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 		return value;
 	}
 	
-	
+	/**
+	 * If the slider is moved this function will calculate new fit dimensions for the imageView
+	 * @author Julian Einspenner
+	 */
 	@FXML
 	private void sliderMove() {
 		
@@ -444,6 +535,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 	}
 
 	
+	/**
+	 * Enhances the GUI with a scrolling event to zoom in and zoom out the displayed image
+	 * @author Julian Einspenner
+	 */
     private void setScrollingToRootPane(){
     	
     	rootPane.setOnScroll(e -> {
