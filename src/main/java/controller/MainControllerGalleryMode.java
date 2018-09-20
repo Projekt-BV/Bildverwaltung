@@ -14,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import java.io.IOException;
 import javafx.stage.Stage;
-import model.Album;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -116,6 +115,11 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		window.setScene(changePane);
 		window.show();	
 		
+	}
+	
+	public void reloadMainPage() throws ParseException {
+		initializeListView();
+		initializeGridPane();
 	}
 	
 	// Bar above gridPane

@@ -24,14 +24,16 @@ public class AlbumController implements Initializable{
 
 	
 	Database database = new Database();
+	private MainControllerGalleryMode mainController;
 	
 	@FXML
-	private void exitButtonpressed() {
+	private void exitButtonpressed() throws ParseException {
 		// get a handle to the stage
 	    Stage stage = (Stage) exitId.getScene().getWindow();
 	    // do what you have to do
 	    stage.close();
-	    MainController.reloadMainView();
+	    
+	    mainController.reloadMainPage();
 	}
 	
 	@FXML
@@ -69,5 +71,9 @@ public class AlbumController implements Initializable{
 		database.getAlbums().stream()
 							.forEach(album -> listView.getItems().add(album));
 		
+	}
+
+	public void injectMainController(MainControllerGalleryMode mainController) {
+		this.mainController = mainController;
 	}
 }

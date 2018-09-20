@@ -34,9 +34,19 @@ public abstract class MainController {
 	 */
 	public void initializeListView() throws ParseException {
 		
+		listView.getItems().clear();
 		database.reloadDatabaseContents();			
 		database.getAlbums().stream()
-							.forEach(album -> listView.getItems().add(album));		
+							.forEach(album -> listView.getItems().add(album));
+		
+		// highlight the selected album
+		if (selectedAlbum != null) {
+			Album referenceEqualAlbum = listView.getItems().stream()
+														   .filter(album -> album.getName().equals(selectedAlbum.getName()))
+														   .findFirst()
+														   .get();
+			listView.getSelectionModel().select(referenceEqualAlbum);
+		}
 	}
 	
 	public Database getDatabase() {
@@ -144,7 +154,12 @@ public abstract class MainController {
 			Stage stage;
 			Parent root;
 			stage = new Stage();
-			root = FXMLLoader.load(getClass().getResource("/design/NewAlbum.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/design/NewAlbum.fxml"));
+			root = loader.load();
+			
+			AlbumController albumController = loader.getController();
+			albumController.injectMainController((MainControllerGalleryMode)this);
+			
 			stage.setScene(new Scene(root));
 			stage.setTitle("New Album");
 			stage.show();
