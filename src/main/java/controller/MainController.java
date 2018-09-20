@@ -32,7 +32,7 @@ public abstract class MainController {
 	 * Method to initialize the listView containing the album names.
 	 * @throws ParseException 
 	 */
-	public void initializeListView() throws ParseException {
+	public void initializeListView() {
 		
 		listView.getItems().clear();
 		database.reloadDatabaseContents();			
@@ -94,7 +94,7 @@ public abstract class MainController {
 	
 		//File
 		@FXML
-		private void importImage() throws ParseException {
+		private void importImage()  {
 			FileImport tmpImp = new FileImport();
 			Stage window = new Stage();
 			tmpImp.injectMainController((MainControllerGalleryMode)this);

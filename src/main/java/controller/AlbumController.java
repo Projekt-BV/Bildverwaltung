@@ -45,16 +45,9 @@ public class AlbumController implements Initializable{
 		System.out.println(tmp);
 		albumName.clear();
 		listView.getItems().clear();
-		try {
-			database.reloadDatabaseContents();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}			
+		database.reloadDatabaseContents();
 		database.getAlbums().stream()
-							.forEach(album -> listView.getItems().add(album));
-		
-	
+							.forEach(album -> listView.getItems().add(album));	
 	}
 	
 	
@@ -62,12 +55,7 @@ public class AlbumController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		try {
-			database.reloadDatabaseContents();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}			
+		database.reloadDatabaseContents();
 		database.getAlbums().stream()
 							.forEach(album -> listView.getItems().add(album));
 		

@@ -19,7 +19,7 @@ public class Database {
 	private ArrayList<Album> albums;
 	
 
-	public void reloadDatabaseContents() throws ParseException {
+	public void reloadDatabaseContents() {
 		ResultSet albumsResultSet; 
 		albums = new ArrayList<Album>();
 		

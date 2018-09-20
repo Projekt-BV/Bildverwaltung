@@ -29,13 +29,9 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		try {
 			didSwitchBack = true;
 			initializeListView();
 			initializeGridPane();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	
@@ -117,7 +113,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		
 	}
 	
-	public void reloadMainPage() throws ParseException {
+	public void reloadMainPage() {
 		initializeListView();
 		initializeGridPane();
 	}

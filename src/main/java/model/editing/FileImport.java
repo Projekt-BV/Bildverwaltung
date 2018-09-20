@@ -24,7 +24,7 @@ public class FileImport extends Application {
     private MainControllerGalleryMode mainController;
 
 	@Override
-    public void start(final Stage stage) throws ParseException {
+    public void start(final Stage stage) {
         stage.setTitle("File import");
  
         final FileChooser fileChooser = new FileChooser();

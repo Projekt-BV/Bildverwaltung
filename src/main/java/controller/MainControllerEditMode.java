@@ -80,12 +80,9 @@ public class MainControllerEditMode extends MainController implements Initializa
 		//Beladen der ChoiceBox passiert erst nach Umstrukturierung der Controller.
 		//albumChoiceBox.getChildrenUnmodifiable().addAll(c);
 		
-		try {
-			initializeListView();
-		} catch (ParseException e) {
-			database.getAlbums().stream().forEach(a -> System.out.println(a.getName()));
-			e.printStackTrace();
-		}
+		initializeListView();
+		database.getAlbums().stream().forEach(a -> System.out.println(a.getName()));
+		
 		initializeMetaData();
 
 		imageViewScrollPane.setFitToWidth(true);

@@ -28,34 +28,35 @@ public class ImageContainer {
 	 * Constructor for ImageContainer objects
 	 * @throws ParseException 
 	 */
-	public ImageContainer(int id, String name, String path, String location, String date, ArrayList<String> tags) throws ParseException {
+	public ImageContainer(int id, String name, String path, String location, String date, ArrayList<String> tags)  {
 		this.id = id;
 		this.name = name;
 		this.path = path;
 		this.location = location;
-		this.date = new SimpleDateFormat("dd.MM.yyyy").parse(date);				
+		try {
+			this.date = new SimpleDateFormat("dd.MM.yyyy").parse(date);
+		} catch (ParseException e) {
+			this.date = null;
+			e.printStackTrace();
+		}				
 
 		this.tags = tags;
 	}
 	
-	public ImageContainer(int id, String name, String path, String location, String date) throws ParseException {
+	public ImageContainer(int id, String name, String path, String location, String date) {
 		this.id = id;
 		this.name = name;
 		this.path = path;
 		this.location = location;
-		this.date = new SimpleDateFormat("dd.MM.yyyy").parse(date);
+		try {
+			this.date = new SimpleDateFormat("dd.MM.yyyy").parse(date);
+		} catch (ParseException e) {
+			this.date = null;
+			e.printStackTrace();
+		}
 		this.tags = new ArrayList<String>();
 	}
 	
-	public ImageContainer(ResultSet imageResultSet) throws SQLException, ParseException {
-		this.id = imageResultSet.getInt("ID");
-		this.date = new SimpleDateFormat("dd.MM.yyyy").parse(imageResultSet.getString("Datum"));				
-		this.name = imageResultSet.getString("Fotoname");
-		this.path = imageResultSet.getString("Pfad");
-		this.location = imageResultSet.getString("Ort");
-		this.tags = null;
-	}
-
 	public Date getDate() {
 		return date;
 	}
@@ -64,8 +65,12 @@ public class ImageContainer {
 		this.date = date;
 	}
 	
-	public void setDate(String date) throws ParseException {
-		this.date = new SimpleDateFormat("dd.mm.yyyy").parse(date);
+	public void setDate(String date) {
+		try {
+			this.date = new SimpleDateFormat("dd.mm.yyyy").parse(date);
+		} catch (ParseException e) {			
+			e.printStackTrace();
+		}
 	}
 
 	public String getName() {
