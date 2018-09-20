@@ -70,18 +70,4 @@ public class RotaterTests {
 //		
 //		assertEquals(true, b);
 //	}
-	
-	
-	
-	
-	//Helps to print a pixel array for visual feedback
-	private void printArray(int[] array, int width) {
-		for(int i = 0; i < array.length; i++) {
-			if(i % width == 0) {
-				System.out.print("\n");
-			}
-			System.out.print(array[i] + " ");
-			
-		}
-	}
 }

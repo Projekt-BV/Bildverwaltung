@@ -72,7 +72,7 @@ public class ColorFilter {
 	}
 		
 		
-	private static Color[] makeItRed(Color[] colors) {
+	public static Color[] makeItRed(Color[] colors) {
 		for(int i = 0; i < colors.length; i++) {
 			int red = colors[i].getRed();
 			colors[i] = new Color(red, 0, 0);
@@ -114,7 +114,7 @@ public class ColorFilter {
 		return colors;
 	}
 	
-	private static Color[] makeItAqua(Color[] colors) {
+	public static Color[] makeItAqua(Color[] colors) {
 		for(int i = 0; i < colors.length; i++) {
 			int green = colors[i].getGreen();
 			int blue = colors[i].getBlue();
