@@ -32,7 +32,6 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#importImage" text="Import" />
                     <MenuItem mnemonicParsing="false" onAction="#copyImage" text="Copy" />
                     <MenuItem mnemonicParsing="false" onAction="#renameImage" text="Rename" />
                     <MenuItem mnemonicParsing="false" onAction="#deleteImage" text="Delete" />

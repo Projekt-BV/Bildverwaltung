@@ -39,14 +39,23 @@ public abstract class MainController {
 		database.getAlbums().stream()
 							.forEach(album -> listView.getItems().add(album));
 		
-		// highlight the selected album
+		// highlight the selected album		
+		Album referenceEqualAlbum;
 		if (selectedAlbum != null) {
-			Album referenceEqualAlbum = listView.getItems().stream()
-														   .filter(album -> album.getName().equals(selectedAlbum.getName()))
-														   .findFirst()
-														   .get();
-			listView.getSelectionModel().select(referenceEqualAlbum);
+			referenceEqualAlbum = listView.getItems().stream()
+											         .filter(album -> album.getName().equals(selectedAlbum.getName()))
+												     .findFirst()
+											         .get();
+		} else {
+			// if no album is selected, highlight "All Images"
+			referenceEqualAlbum = listView.getItems().stream()
+			         .filter(album -> album.getName().equals("All Images"))
+				     .findFirst()
+			         .get();
 		}
+		listView.getSelectionModel().select(referenceEqualAlbum);
+
+		
 	}
 	
 	public Database getDatabase() {
@@ -80,29 +89,15 @@ public abstract class MainController {
 			window.show();
 	}
 	
-	public static void reloadMainView() {
-		try {
-	        Parent pane;
-			pane = FXMLLoader.load(MainController.class.getResource("/design/Main_page_2.4.fxml"));
-			Scene changePane = new Scene(pane);	
-			
-			Stage stage = new Stage();
-			stage.setScene(changePane);
-			stage.show();
-			
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	// Menue-Bar----------------------------------------------------
 	
 		//File
 		@FXML
-		private void importImage() {
+		private void importImage() throws ParseException {
 			FileImport tmpImp = new FileImport();
 			Stage window = new Stage();
+			tmpImp.injectMainController((MainControllerGalleryMode)this);
 			tmpImp.start(window);
 		}
 	

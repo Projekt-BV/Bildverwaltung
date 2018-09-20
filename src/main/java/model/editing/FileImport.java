@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import controller.MainController;
+import controller.MainControllerGalleryMode;
 import database.SendSQLRequest;
 import javafx.application.Application;
 import javafx.stage.FileChooser;
@@ -19,8 +21,10 @@ import javafx.stage.Stage;
 
 public class FileImport extends Application {
 		 
-    @Override
-    public void start(final Stage stage) {
+    private MainControllerGalleryMode mainController;
+
+	@Override
+    public void start(final Stage stage) throws ParseException {
         stage.setTitle("File import");
  
         final FileChooser fileChooser = new FileChooser();
@@ -31,8 +35,7 @@ public class FileImport extends Application {
         		openFile(file);
             }
         }  
-        
-		MainController.reloadMainView();
+        mainController.reloadMainPage();
     }         
  
     private void openFile(File file) {
@@ -66,4 +69,8 @@ public class FileImport extends Application {
                 );
         }
     }
+
+	public void injectMainController(MainControllerGalleryMode mainControllerGalleryMode) {
+		this.mainController = mainControllerGalleryMode;		
+	}
 }
