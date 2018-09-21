@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -27,10 +28,13 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	@FXML
 	private GridPane gridPane;
 	@FXML
+	private ProgressIndicator progressIndicator;
+	@FXML
 	private ImageView displayImage;
 	private Image imageToDownScale;
 	private int col = 0;
 	private int line = 0;
+	private boolean refreshing = false;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -45,6 +49,11 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	@FXML
 	void initializeGridPane() {
 
+		if (refreshing == true) {
+			return;
+		}
+
+		refreshing = true;
 		gridPane.getChildren().clear(); // clear gridPane
 
 		if (didSwitchBack && selectedAlbum != null) {
@@ -73,9 +82,14 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		// Separate thread to keep UI responsive
 		col = 0;
 		line = 0;
-		for (ImageContainer ic : selectedAlbum.getImages()) {
 
-			Platform.runLater(() -> {
+		new Thread(() -> {
+
+			progressIndicator.toFront();
+			progressIndicator.setProgress(0.0);
+			progressIndicator.setVisible(true);
+
+			for (ImageContainer ic : selectedAlbum.getImages()) {
 
 				// Call to garbageCollector, because Image takes up a lot of memory
 				this.imageToDownScale = new Image(ic.getPath());
@@ -85,21 +99,27 @@ public class MainControllerGalleryMode extends MainController implements Initial
 				int newHeight = (int) ((newWidth / imageToDownScale.getWidth()) * imageToDownScale.getHeight());
 				imageToDownScale = Resizer.resizeImage(newWidth, newHeight, imageToDownScale);
 
-				ImageView imageView = new ImageView(imageToDownScale);
-				imageView.setFitHeight(130);
-				imageView.setFitWidth(135);
+				Platform.runLater(() -> {
+					ImageView imageView = new ImageView(imageToDownScale);
+					imageView.setFitHeight(130);
+					imageView.setFitWidth(135);
 
-				gridPane.getChildren().add(imageView);
+					gridPane.getChildren().add(imageView);
+					double currentProgress = progressIndicator.getProgress();
+					int numberOfImages = selectedAlbum.getImages().size();
+					progressIndicator.setProgress(currentProgress += (1.0 / numberOfImages));
 
-				GridPane.setConstraints(imageView, col, line, 1, 1);
+					GridPane.setConstraints(imageView, col, line, 1, 1);
+				});
 				if (col > 5) {
 					col = 0;
 					line++;
 				} else
 					col++;
-
-			});
-		}
+			}
+			progressIndicator.setVisible(false);
+			refreshing = false;
+		}).start();
 
 	}
 
