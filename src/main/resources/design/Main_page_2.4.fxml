@@ -95,6 +95,6 @@
             </AnchorPane>
          </left>
     </BorderPane>
-      <ProgressIndicator fx:id="progressIndicator" layoutX="696.0" layoutY="319.0" prefHeight="158.0" prefWidth="158.0" progress="0.0" stylesheets="@application.css" />
+      <ProgressIndicator fx:id="progressIndicator" layoutX="684.0" layoutY="292.0" prefHeight="158.0" prefWidth="158.0" progress="0.0" stylesheets="@application.css" />
   </children>
 </AnchorPane>

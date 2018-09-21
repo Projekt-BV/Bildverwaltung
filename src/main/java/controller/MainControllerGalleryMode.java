@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.CountDownLatch;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -88,8 +89,12 @@ public class MainControllerGalleryMode extends MainController implements Initial
 			progressIndicator.toFront();
 			progressIndicator.setProgress(0.0);
 			progressIndicator.setVisible(true);
+			gridPane.setOpacity(0.5);
 
 			for (ImageContainer ic : selectedAlbum.getImages()) {
+
+				// Semaphore, so that col and line are not incremented before UI is updated
+				final CountDownLatch latch = new CountDownLatch(1);
 
 				// Call to garbageCollector, because Image takes up a lot of memory
 				this.imageToDownScale = new Image(ic.getPath());
@@ -110,7 +115,13 @@ public class MainControllerGalleryMode extends MainController implements Initial
 					progressIndicator.setProgress(currentProgress += (1.0 / numberOfImages));
 
 					GridPane.setConstraints(imageView, col, line, 1, 1);
+					latch.countDown();
 				});
+				try {
+					latch.await();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				if (col > 5) {
 					col = 0;
 					line++;
@@ -118,6 +129,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 					col++;
 			}
 			progressIndicator.setVisible(false);
+			gridPane.setOpacity(1.0);
 			refreshing = false;
 		}).start();
 
