@@ -1,0 +1,55 @@
+MenuBar-File=File
+MenuBar-File-Import=Import
+MenuBar-File-Copy=Copy
+MenuBar-File-Rename=Rename
+MenuBar-File-Delete=Delete
+MenuBar-File-Save=Save
+MenuBar-File-SaveAs=Save as
+MenuBar-File-Exit=Exit
+MenuBar-Help=Help
+MenuBar-Help-About=About
+MenuBar-Language=Change Language
+MenuBar-Language-English=English
+MenuBar-Language-German=German
+Button-Search=Search
+Button-FScreen=Full screen
+Button-Filter=Filter
+TextField-Keyword=Keyword
+
+Button-AddAlbum=Add album
+Button-DeleteAlbum=Delete album
+
+Button-RenameAll=Rename all
+
+Tab-Editing=Editing
+Tab-Editing-Button-CClock=Counter-Clockwise
+Tab-Editing-Button-Clockwise=Clockwise
+Tab-Editing-Button-Resize=Resize
+Tab-Editing-Text-Width=Width
+Tab-Editing-Button-SetRatio=Set ratio
+Tab-Editing-Text-Height=Height
+Tab-Editing-Text-Rotate=Rotate
+Tab-Editing-Button-CutMode=Cut mode
+Tab-Editing-CutImage=Cut image
+Tab-Editing-ResizeImage=Resize image
+Tab-Editing-Button-Undo=Undo
+Tab-Editing-Save=Save
+Tab-Editing-ChoiceBox1=None
+Tab-Editing-ChoiceBox2=Black and White
+Tab-Editing-ChoiceBox3=Red
+Tab-Editing-ChoiceBox4=Green
+Tab-Editing-ChoiceBox5=Blue
+Tab-Editing-ChoiceBox6=Yellow
+Tab-Editing-ChoiceBox7=Violet
+Tab-Editing-ChoiceBox8=Aqua
+Tab-Metadata=Metadata
+Tab-Metadata-Button-Save=Save
+Tab-Metadata-Text-Title=Title
+Tab-Metadata-Text-Location=Location
+Tab-Metadata-Text-Tags=Tags
+Tab-Metadata-Text-Date=Date (dd.mm.yyyy)
+Tab-Metadata-Label-Path=Path:
+
+NewAlbum-Button-Exit=Exit
+NewAlbum-Label-Album=Albumname
+NewAlbum-Button-Add=Add album

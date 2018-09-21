@@ -15,6 +15,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
+
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import model.ImageContainer;
@@ -33,6 +34,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Button;
+
 
 
 public class MainControllerEditMode extends MainController implements Initializable{
@@ -578,7 +580,7 @@ public class MainControllerEditMode extends MainController implements Initializa
     		zoomSliderValueLabel.setText(Integer.toString((int) zoomSlider.getValue()) + " %");
 		});
 	}
-    
+ 
     
     // Getters and setters	
 

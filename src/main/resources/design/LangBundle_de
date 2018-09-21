@@ -1,0 +1,55 @@
+MenuBar-File=Datei
+MenuBar-File-Import=Importieren
+MenuBar-File-Copy=Kopieren
+MenuBar-File-Rename=Umbenennen
+MenuBar-File-Delete=Löschen
+MenuBar-File-Save=Speichern
+MenuBar-File-SaveAs=Speichern unter
+MenuBar-File-Exit=Beenden
+MenuBar-Help=Hilfe
+MenuBar-Help-About=Informationen
+MenuBar-Language=Sprache wechseln
+MenuBar-Language-English=Englisch
+MenuBar-Language-German=Deutsch
+Button-Search=Suche
+Button-FScreen=Vollbild
+Button-Filter=Filter
+TextField-Keyword=Schlüsselwort
+
+Button-AddAlbum=Album hinzufügen
+Button-DeleteAlbum=Album löschen
+
+Button-RenameAll=Alle umbenennen
+
+Tab-Editing=Editieren
+Tab-Editing-Button-CClock=Gegen Uhrzeigersinn
+Tab-Editing-Button-Clockwise=Im Uhrzeigersinn
+Tab-Editing-Button-Resize=Größe ändern
+Tab-Editing-Text-Width=Breite
+Tab-Editing-Button-SetRatio=Verhältniss einstellen
+Tab-Editing-Text-Height=Höhe
+Tab-Editing-Text-Rotate=Rotieren
+Tab-Editing-Button-CutMode=Schnittmodus
+Tab-Editing-CutImage=Zuschneiden
+Tab-Editing-ResizeImage=Bildgröße ändern
+Tab-Editing-Button-Undo=Zurück
+Tab-Editing-Save=Speichern
+Tab-Editing-ChoiceBox1=kein Filter
+Tab-Editing-ChoiceBox2=Schwarz-Weiß
+Tab-Editing-ChoiceBox3=Rot
+Tab-Editing-ChoiceBox4=Grün
+Tab-Editing-ChoiceBox5=Blau
+Tab-Editing-ChoiceBox6=Gelb
+Tab-Editing-ChoiceBox7=Violet
+Tab-Editing-ChoiceBox8=Aqua
+Tab-Metadata=Metadaten
+Tab-Metadata-Button-Save=Speichern
+Tab-Metadata-Text-Title=Titel
+Tab-Metadata-Text-Location=Speicherort
+Tab-Metadata-Text-Tags=Stichworte
+Tab-Metadata-Text-Date=Datum (dd.mm.yyyy)
+Tab-Metadata-Label-Path=Pfad:
+
+NewAlbum-Button-Exit=Beenden
+NewAlbum-Label-Album=Albumname
+NewAlbum-Button-Add=Album hinzufügen

@@ -1,7 +1,9 @@
 package controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Properties;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -16,6 +18,8 @@ import javafx.stage.Stage;
 import model.Album;
 import model.Database;
 import model.editing.FileImport;
+import java.io.FileInputStream;
+import java.util.Properties;
 
 public abstract class MainController {
 
@@ -130,11 +134,6 @@ public abstract class MainController {
 		System.out.println("I am the showCommands function");
 	}
 
-	@FXML
-	private void changeLanguage() {
-		System.out.println("I am the changeLanguage function");
-	}
-
 	// Buttons below listView
 	@FXML
 	private void addAlbumButtonPressed() throws IOException {
@@ -195,4 +194,24 @@ public abstract class MainController {
 		System.out.println("I am the dropdownButtonChoiceSelected function");
 	}
 
+	  /**
+		 * Allows to switch between languages
+		 * @author Tobias Reinert
+	     * @throws IOException 
+		 */
+		@FXML
+		public void changeLanguage() throws IOException {
+			Properties config;
+			config = new Properties();
+			FileInputStream fis=null;
+			
+			try {
+			fis = new FileInputStream("/design/LangBundle_de.properties");
+			config.load(fis);
+			
+			} catch (IOException io) {
+				io.printStackTrace();
+			}
+			System.out.println(config.getProperty("MenuBar-Language"));
+		}
 }

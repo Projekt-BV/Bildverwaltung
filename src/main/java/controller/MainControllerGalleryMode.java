@@ -153,7 +153,8 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		window.show();
 
 	}
-
+	
+	@FXML
 	public void reloadMainPage() {
 		initializeListView();
 		initializeGridPane();

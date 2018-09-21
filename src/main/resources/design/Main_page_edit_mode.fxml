@@ -104,13 +104,13 @@
                               <Button layoutX="18.0" layoutY="262.0" mnemonicParsing="false" onAction="#resizeImage" prefHeight="25.0" prefWidth="97.0" text="Resize" />
                               <Text layoutX="136.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Width" />
                               <TextField fx:id="widthTextField" layoutX="135.0" layoutY="262.0" prefHeight="25.0" prefWidth="100.0" />
-                              <Button layoutX="18.0" layoutY="329.0" mnemonicParsing="false" onAction="#setRatio" prefHeight="25.0" prefWidth="97.0" text="Set Ratio" />
+                              <Button layoutX="18.0" layoutY="329.0" mnemonicParsing="false" onAction="#setRatio" prefHeight="25.0" prefWidth="97.0" text="Set ratio" />
                               <Text layoutX="137.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Height" />
                               <TextField fx:id="heightTextField" layoutX="135.0" layoutY="329.0" prefHeight="25.0" prefWidth="100.0" />
                               <Text layoutX="17.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
-                              <Button fx:id="cutModeButton" layoutX="17.0" layoutY="435.0" mnemonicParsing="false" onAction="#cutModeButtonPressed" prefHeight="25.0" prefWidth="94.0" text="Cut Mode" />
+                              <Button fx:id="cutModeButton" layoutX="17.0" layoutY="435.0" mnemonicParsing="false" onAction="#cutModeButtonPressed" prefHeight="25.0" prefWidth="94.0" text="Cut mode" />
                               <Text layoutX="21.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cut image" wrappingWidth="86.13671875" />
-                              <Text layoutX="21.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Color Filter" />
+                              <Text layoutX="21.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Color filter" />
                               <Text layoutX="19.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Resize image" />
                               <Button layoutX="18.0" layoutY="564.0" mnemonicParsing="false" onAction="#undoButtonPressed" prefHeight="25.0" prefWidth="93.0" text="Undo" />
                               <Button layoutX="133.0" layoutY="564.0" mnemonicParsing="false" onAction="#saveImageButtonPressed" prefHeight="25.0" prefWidth="93.0" text="Save" />
