@@ -31,8 +31,7 @@ public class AlbumController implements Initializable{
 		// get a handle to the stage
 	    Stage stage = (Stage) exitId.getScene().getWindow();
 	    // do what you have to do
-	    stage.close();
-	    
+	    stage.close();	    
 	    mainController.reloadMainPage();
 	}
 	

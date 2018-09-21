@@ -36,7 +36,6 @@ import javafx.scene.control.Button;
 
 
 public class MainControllerEditMode extends MainController implements Initializable{
-	
 
 	public static Image image;	// Das Bild, das angezeigt wird
 	public static Image imagePlain;   //Das Bild ohne Editing wird hier festgehalten
@@ -50,7 +49,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 	
 	@FXML private ScrollPane imageViewScrollPane;	
-	@FXML private ImageView displayImageEditMode;		
+	@FXML private ImageView displayImageEditMode;
 	@FXML private Button applyFilterButton;	
 	@FXML private Button cutModeButton;
 	@FXML private ChoiceBox<String> colorChoiceBox;
@@ -579,4 +578,17 @@ public class MainControllerEditMode extends MainController implements Initializa
     		zoomSliderValueLabel.setText(Integer.toString((int) zoomSlider.getValue()) + " %");
 		});
 	}
+    
+    
+    // Getters and setters	
+
+	public static Image getImage() {
+		return image;
+	}
+
+	public static void setImage(Image image) {
+		MainControllerEditMode.image = image;
+	}
+
+
 }

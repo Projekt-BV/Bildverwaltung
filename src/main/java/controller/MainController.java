@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Album;
@@ -175,8 +176,27 @@ public abstract class MainController {
 		}
 		
 		@FXML
-		private void fullScreenButtonPressed() {
-			System.out.println("I am the fullScreenButtonPressed function");
+		private void fullScreenButtonPressed() throws IOException {
+			if (this instanceof MainControllerEditMode) {
+				Stage stage;
+				Parent root;
+				stage = new Stage();
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/design/FullScreen.fxml"));
+				root = loader.load();
+				
+				stage.setScene(new Scene(root));
+				stage.setFullScreen(true);
+				stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+				
+				FullScreenController fullScreenController = loader.getController();			
+				fullScreenController.injectMainController((MainControllerEditMode)this);
+				fullScreenController.setExitListener();
+				
+				stage.show();	
+			} else {
+				Stage stage = (Stage)rootPane.getScene().getWindow();
+				stage.setFullScreen(true);
+			}
 		}
 		
 		
