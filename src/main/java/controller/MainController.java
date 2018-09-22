@@ -293,19 +293,15 @@ public abstract class MainController {
 		Properties config;
 		config = new Properties();
 		FileInputStream fis;
-		//	FileInputStream fis2;
-		 //Needs to go into the brackets of the Method
 					
 		try {
-			fis = new FileInputStream("C:\\Users\\Tobi\\eclipse-workspace\\Bildverwaltung\\src\\main\\resources\\design\\LangBundle_"+currentLanguage+".properties");
-	//	fis2 = new FileInputStream(System.getProperty("user.dir")+
-    //		"\\eclipse-workspace\\Bildverwaltung\\src\\main\\resources\\design\\LangBundle_de.properties");
+			fis = new FileInputStream("src/main/java/LangBundle_"+currentLanguage+".properties");
 			config.load(fis);
 			
 		} catch (IOException io) {
 			io.printStackTrace();	
 		}
-			
+	
 		//ChangeGui
 		switch (controller) {
 		case("EditMode"):
@@ -358,7 +354,7 @@ public abstract class MainController {
 			AddAlbum.setText(config.getProperty("AddAlbum"));
 			DeleteAlbum.setText(config.getProperty("DeleteAlbum"));
 			
-			if(controller != "GalleryMode") {
+			if(controller == "GalleryMode") {
 			//BorderPane Center
 			ButtonRenameAll.setText(config.getProperty("Button-RenameAll"));
 			ButtonAddImage.setText(config.getProperty("Button-AddImage"));
