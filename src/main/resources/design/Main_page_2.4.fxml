@@ -26,37 +26,37 @@
           <children>
             <MenuBar layoutX="0.0" layoutY="2.0" prefHeight="25.0" prefWidth="254.0">
               <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu fx:id="MenuFile" mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#importImage" text="Import" />
-                    <MenuItem mnemonicParsing="false" onAction="#copyImage" text="Copy" />
-                    <MenuItem mnemonicParsing="false" onAction="#renameImage" text="Rename" />
-                    <MenuItem mnemonicParsing="false" onAction="#deleteImage" text="Delete" />
-                    <MenuItem mnemonicParsing="false" onAction="#saveImage" text="Save" />
-                              <MenuItem mnemonicParsing="false" onAction="#saveImageAs" text="Save as ..." />
-                              <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
+                    <MenuItem fx:id="MenuImport" mnemonicParsing="false" onAction="#importImage" text="Import" />
+                    <MenuItem fx:id="MenuCopy" mnemonicParsing="false" onAction="#copyImage" text="Copy" />
+                    <MenuItem fx:id="MenuRename" mnemonicParsing="false" onAction="#renameImage" text="Rename" />
+                    <MenuItem fx:id="MenuDelete" mnemonicParsing="false" onAction="#deleteImage" text="Delete" />
+                    <MenuItem fx:id="MenuSave" mnemonicParsing="false" onAction="#saveImage" text="Save" />
+                              <MenuItem fx:id="MenuSaveAs" mnemonicParsing="false" onAction="#saveImageAs" text="Save as ..." />
+                              <MenuItem fx:id="MenuExit" mnemonicParsing="false" onAction="#exit" text="Exit" />
                   </items>
                 </Menu>
-                        <Menu mnemonicParsing="false" text="Help">
+                        <Menu fx:id="MenuHelp" mnemonicParsing="false" text="Help">
                           <items>
-                            <MenuItem mnemonicParsing="false" onAction="#showCommands" text="About" />
-                              <Menu mnemonicParsing="false" text="Change Language">
+                            <MenuItem fx:id="MenuAbout" mnemonicParsing="false" onAction="#showCommands" text="About" />
+                              <Menu fx:id="MenuChangeLanguage" mnemonicParsing="false" text="Change Language">
                                 <items>
-                                  <MenuItem mnemonicParsing="false" text="English" />
-                                    <MenuItem mnemonicParsing="false" onAction="#changeLanguage" text="German" />
+                                  <MenuItem fx:id="MenuEnglish" mnemonicParsing="false" onAction="#changeToEnglish" text="English" />
+                                    <MenuItem fx:id="MenuGerman" mnemonicParsing="false" onAction="#changeToGerman" text="German" />
                                 </items>
                               </Menu>
                           </items>
                         </Menu>
               </menus>
             </MenuBar>
-                  <DatePicker layoutX="883.0" layoutY="30.0" prefHeight="27.0" prefWidth="161.0" promptText="to" />
+                  <DatePicker fx:id="DatePickerTo" layoutX="883.0" layoutY="30.0" prefHeight="27.0" prefWidth="161.0" promptText="to" />
           <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="190.0" />
-          <Button layoutX="196.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="59.0" text="Suche" />
-          <Button layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
-                  <Button layoutX="661.0" layoutY="30.0" mnemonicParsing="false" text="Filter" />
-                  <TextField layoutX="560.0" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" promptText="keyword" />
-                  <DatePicker layoutX="707.0" layoutY="30.0" prefHeight="27.0" prefWidth="175.0" promptText="from" />
+          <Button fx:id="ButtonSearch" layoutX="196.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="59.0" text="Search" />
+          <Button fx:id="ButtonFScreen" layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
+                  <Button fx:id="ButtonFilter" layoutX="661.0" layoutY="30.0" mnemonicParsing="false" text="Filter" />
+                  <TextField fx:id="TextFieldKeyword" layoutX="560.0" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" promptText="keyword" />
+                  <DatePicker fx:id="DatePickerFrom" layoutX="707.0" layoutY="30.0" prefHeight="27.0" prefWidth="175.0" promptText="from" />
           </children>
         </AnchorPane>
       </top>
@@ -65,10 +65,10 @@
               <items>
                 <AnchorPane maxHeight="31.0" styleClass="anchor-pane" stylesheets="@application.css">
                      <children>
-                        <Button layoutX="544.0" layoutY="2.0" mnemonicParsing="false" onAction="#renameAllButtonPressed" text="Rename All" />
+                        <Button fx:id="ButtonRenameAll" layoutX="544.0" layoutY="2.0" mnemonicParsing="false" onAction="#renameAllButtonPressed" text="Rename All" />
                         <TextField layoutX="623.0" layoutY="3.0" prefHeight="25.0" prefWidth="161.0" styleClass="text-field" stylesheets="@application.css" />
                         <ChoiceBox layoutY="2.0" onDragExited="#dropdownButtonChoiceSelected" prefWidth="150.0" />
-                        <Button layoutX="861.0" layoutY="2.0" mnemonicParsing="false" onAction="#importImage" prefHeight="27.0" prefWidth="98.0" text="Add Image" />
+                        <Button fx:id="ButtonAddImage" layoutX="861.0" layoutY="2.0" mnemonicParsing="false" onAction="#importImage" prefHeight="27.0" prefWidth="98.0" text="Add Image" />
                      </children></AnchorPane>
                   <ScrollPane pannable="true">
                      <content>
@@ -88,8 +88,8 @@
          <left>
             <AnchorPane prefHeight="713.0" prefWidth="255.0" styleClass="anchor-pane" stylesheets="@application.css" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutY="681.0" mnemonicParsing="false" onAction="#addAlbumButtonPressed" prefHeight="29.0" prefWidth="106.0" text="Add album" />
-                  <Button layoutX="135.0" layoutY="681.0" mnemonicParsing="false" onAction="#deleteAlbumButtonPressed" prefHeight="29.0" prefWidth="121.0" text="Delete Album" />
+                  <Button fx:id="AddAlbum" layoutY="681.0" mnemonicParsing="false" onAction="#addAlbumButtonPressed" prefHeight="29.0" prefWidth="106.0" text="Add album" />
+                  <Button fx:id="DeleteAlbum" layoutX="135.0" layoutY="681.0" mnemonicParsing="false" onAction="#deleteAlbumButtonPressed" prefHeight="29.0" prefWidth="121.0" text="Delete Album" />
                   <ListView fx:id="listView" onMouseClicked="#initializeGridPane" prefHeight="681.0" prefWidth="256.0" />
                </children>
             </AnchorPane>
