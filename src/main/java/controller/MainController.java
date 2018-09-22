@@ -20,6 +20,7 @@ import model.Database;
 import model.editing.FileImport;
 import java.io.FileInputStream;
 import java.util.Properties;
+import java.io.File;
 
 public abstract class MainController {
 
@@ -32,7 +33,9 @@ public abstract class MainController {
 
 	static Album selectedAlbum;
 	static boolean didSwitchBack = true;
-
+	String currentLanguage = "en";
+	
+	
 	/**
 	 * Method to initialize the listView containing the album names.
 	 * 
@@ -203,10 +206,19 @@ public abstract class MainController {
 		public void changeLanguage() throws IOException {
 			Properties config;
 			config = new Properties();
-			FileInputStream fis=null;
+			FileInputStream fis;
+		//	FileInputStream fis2;
 			
+			if (currentLanguage == "en") {
+				currentLanguage = "de";
+			} else {
+				currentLanguage = "en";
+			}
+				
 			try {
-			fis = new FileInputStream("/design/LangBundle_de.properties");
+			fis = new FileInputStream("C:\\Users\\Tobi\\eclipse-workspace\\Bildverwaltung\\src\\main\\resources\\design\\LangBundle_"+currentLanguage+".properties");
+		//	fis2 = new FileInputStream(System.getProperty("user.dir")+
+		//			"\\eclipse-workspace\\Bildverwaltung\\src\\main\\resources\\design\\LangBundle_de.properties");
 			config.load(fis);
 			
 			} catch (IOException io) {
