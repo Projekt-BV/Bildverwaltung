@@ -2,101 +2,157 @@ package controller;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Properties;
 
+import database.SendSQLRequest;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Album;
 import model.Database;
+import model.ImageContainer;
 import model.editing.FileImport;
-
-//GUI Elements
-import java.io.File;
-import javafx.scene.control.*;
-import javafx.scene.text.Text;
-import javafx.scene.control.Label;
-
 
 public abstract class MainController {
 
-	//GUI Elements, hierarchy like the hierarchy in Scenebuilder
-	//North
-	@FXML Menu MenuFile;
-	@FXML MenuItem MenuImport;
-	@FXML MenuItem MenuCopy;
-	@FXML MenuItem MenuRename;
-	@FXML MenuItem MenuDelete;
-	@FXML MenuItem MenuSave;
-	@FXML MenuItem MenuSaveAs;
-	@FXML MenuItem MenuExit;
-	@FXML Menu MenuHelp;
-	@FXML MenuItem MenuAbout;
-	@FXML Menu MenuChangeLanguage;
-	@FXML MenuItem MenuEnglish;
-	@FXML MenuItem MenuGerman;
-	@FXML Button ButtonSearch;
-	@FXML Button ButtonFScreen;
-	@FXML Button ButtonFilter;
-	@FXML TextField TextFieldKeyword;
-	@FXML DatePicker DatePickerFrom;
-	@FXML DatePicker DatePickerTo;
-	//West
-	@FXML Button AddAlbum;
-	@FXML Button DeleteAlbum;
-	//Center
-	@FXML Button ButtonRenameAll;
-	@FXML Button ButtonAddImage;
-	//EditMode
-	//North
-	@FXML Button ButtonAlbumView;
-	//Center
-	@FXML Button ButtonDeleteImage;
-	//East
-	@FXML Tab TabEditing;
-	@FXML Button TabEditButtonCClock;
-	@FXML Button TabEditButtonClock;
-	@FXML Button TabEditButtonResize;
-	@FXML Text TextWidth;
-	@FXML Button TabEditButtonSetRatio;
-	@FXML Text TextHeight;
-	@FXML Text TextRotate;
-	@FXML Button cutModeButton;
-	@FXML Text TextCutImage;
-	@FXML Text TextColorFilter;//
-	@FXML Text TextResizeImage;
-	@FXML Button TabEditButtonUndo;
-	@FXML Button TabEditButtonSave;
-	@FXML Tab TabMetadata;
-	@FXML Button TabMetaButtonSave;
-	@FXML Text TextTitle;
-	@FXML Text TextLocation;
-	@FXML Text TextTags;
-	@FXML Text TextDate;
-	@FXML Label pathLabel;
-	//NewAlbum GUI
-	@FXML Button exitId;
-	@FXML Label NewAlbumLabelAlbum;
-	@FXML Button NewAlbumButtonAdd;
-	
-	//Method to rewrite Choicebox
-//			Tab-Editing-ChoiceBox1=kein Filter
-//			Tab-Editing-ChoiceBox2=Schwarz-Weiß
-//			Tab-Editing-ChoiceBox3=Rot
-//			Tab-Editing-ChoiceBox4=Grün
-//			Tab-Editing-ChoiceBox5=Blau
-//			Tab-Editing-ChoiceBox6=Gelb
-//			Tab-Editing-ChoiceBox7=Violet
-//			Tab-Editing-ChoiceBox8=Aqua
-	
+	// GUI Elements, hierarchy like the hierarchy in Scenebuilder
+	// North
+	@FXML
+	Menu MenuFile;
+	@FXML
+	MenuItem MenuImport;
+	@FXML
+	MenuItem MenuCopy;
+	@FXML
+	MenuItem MenuRename;
+	@FXML
+	MenuItem MenuDelete;
+	@FXML
+	MenuItem MenuSave;
+	@FXML
+	MenuItem MenuSaveAs;
+	@FXML
+	MenuItem MenuExit;
+	@FXML
+	Menu MenuHelp;
+	@FXML
+	MenuItem MenuAbout;
+	@FXML
+	Menu MenuChangeLanguage;
+	@FXML
+	MenuItem MenuEnglish;
+	@FXML
+	MenuItem MenuGerman;
+	@FXML
+	Button ButtonSearch;
+	@FXML
+	Button ButtonFScreen;
+	@FXML
+	Button ButtonFilter;
+	@FXML
+	TextField TextFieldKeyword;
+	@FXML
+	DatePicker DatePickerFrom;
+	@FXML
+	DatePicker DatePickerTo;
+	// West
+	@FXML
+	Button AddAlbum;
+	@FXML
+	Button DeleteAlbum;
+	// Center
+	@FXML
+	Button ButtonRenameAll;
+	@FXML
+	Button ButtonAddImage;
+	// EditMode
+	// North
+	@FXML
+	Button ButtonAlbumView;
+	// Center
+	@FXML
+	Button ButtonDeleteImage;
+	// East
+	@FXML
+	Tab TabEditing;
+	@FXML
+	Button TabEditButtonCClock;
+	@FXML
+	Button TabEditButtonClock;
+	@FXML
+	Button TabEditButtonResize;
+	@FXML
+	Text TextWidth;
+	@FXML
+	Button TabEditButtonSetRatio;
+	@FXML
+	Text TextHeight;
+	@FXML
+	Text TextRotate;
+	@FXML
+	Button cutModeButton;
+	@FXML
+	Text TextCutImage;
+	@FXML
+	Text TextColorFilter;//
+	@FXML
+	Text TextResizeImage;
+	@FXML
+	Button TabEditButtonUndo;
+	@FXML
+	Button TabEditButtonSave;
+	@FXML
+	Tab TabMetadata;
+	@FXML
+	Button TabMetaButtonSave;
+	@FXML
+	Text TextTitle;
+	@FXML
+	Text TextLocation;
+	@FXML
+	Text TextTags;
+	@FXML
+	Text TextDate;
+	@FXML
+	Label pathLabel;
+	// NewAlbum GUI
+	@FXML
+	Button exitId;
+	@FXML
+	Label NewAlbumLabelAlbum;
+	@FXML
+	Button NewAlbumButtonAdd;
+
+	// Method to rewrite Choicebox
+	// Tab-Editing-ChoiceBox1=kein Filter
+	// Tab-Editing-ChoiceBox2=Schwarz-Weiß
+	// Tab-Editing-ChoiceBox3=Rot
+	// Tab-Editing-ChoiceBox4=Grün
+	// Tab-Editing-ChoiceBox5=Blau
+	// Tab-Editing-ChoiceBox6=Gelb
+	// Tab-Editing-ChoiceBox7=Violet
+	// Tab-Editing-ChoiceBox8=Aqua
+
 	@FXML
 	ListView<Album> listView;
 	@FXML
@@ -108,8 +164,7 @@ public abstract class MainController {
 	static boolean didSwitchBack = true;
 	String currentLanguage = "en";
 	String controller = "GalleryMode";
-	
-	
+
 	/**
 	 * Method to initialize the listView containing the album names.
 	 * 
@@ -119,6 +174,8 @@ public abstract class MainController {
 		listView.getItems().clear();
 		database.reloadDatabaseContents();
 		database.getAlbums().stream().forEach(album -> listView.getItems().add(album));
+
+		listView.setCellFactory(lv -> new AlbumListCell());
 
 		// highlight the selected album
 		Album referenceEqualAlbum;
@@ -264,13 +321,13 @@ public abstract class MainController {
 			stage.setFullScreen(true);
 		}
 	}
-	
+
 	// Bar above gridPane / ImageView
 	@FXML
 	private void dropdownButtonChoiceSelected() {
 		System.out.println("I am the dropdownButtonChoiceSelected function");
 	}
-	
+
 	@FXML
 	public void controllerCheck(String controller) {
 		this.controller = controller;
@@ -281,54 +338,55 @@ public abstract class MainController {
 		}
 		changeLanguage();
 	}
-	
+
 	@FXML
 	public void changeToGerman() {
-		
+
 		currentLanguage = "de";
 		changeLanguage();
-		
+
 		if (controller == "GalleryMode") {
 			ButtonAddImage.setPrefWidth(115);
 			ButtonRenameAll.setLayoutX(510);
 		}
 	}
-	
+
 	@FXML
 	public void changeToEnglish() {
 		currentLanguage = "en";
 		changeLanguage();
-		
+
 		if (controller == "GalleryMode") {
 			ButtonAddImage.setPrefWidth(98);
 			ButtonRenameAll.setLayoutX(545);
 		}
 	}
-	
-	  /**
-		 * Allows to switch between languages
-		 * @author Tobias Reinert
-	     * @throws IOException 
-		 */
+
+	/**
+	 * Allows to switch between languages
+	 * 
+	 * @author Tobias Reinert
+	 * @throws IOException
+	 */
 	@FXML
 	public void changeLanguage() {
 		System.out.println(controller);
 		Properties config;
 		config = new Properties();
 		FileInputStream fis;
-					
+
 		try {
-			fis = new FileInputStream("src/main/java/LangBundle_"+currentLanguage+".properties");
+			fis = new FileInputStream("src/main/java/LangBundle_" + currentLanguage + ".properties");
 			config.load(fis);
-			
+
 		} catch (IOException io) {
-			io.printStackTrace();	
+			io.printStackTrace();
 		}
-		
-		//ChangeGui
+
+		// ChangeGui
 		switch (controller) {
-		case("EditMode"):
-			//BorderPane East
+		case ("EditMode"):
+			// BorderPane East
 			TabEditing.setText(config.getProperty("Tab-Editing"));
 			TabEditButtonCClock.setText(config.getProperty("Tab-Editing-Button-CClock"));
 			TabEditButtonClock.setText(config.getProperty("Tab-Editing-Button-Clockwise"));
@@ -350,48 +408,95 @@ public abstract class MainController {
 			TextTags.setText(config.getProperty("Tab-Metadata-Text-Tags"));
 			TextDate.setText(config.getProperty("Tab-Metadata-Text-Date"));
 			pathLabel.setText(config.getProperty("Tab-Metadata-Label-Path"));
-			
+
 			ButtonAlbumView.setText(config.getProperty("EditMode-Button-AlbumView"));
 			ButtonDeleteImage.setText(config.getProperty("EditMode-Button-DeleteImage"));
 
-		case("GalleryMode"):
-			//BorderPane North
-			//MenuBar
-//			MenuFile.setText(config.getProperty("MenuBar-File"));
-//			MenuImport.setText(config.getProperty("MenuBar-File-Import"));
-//			MenuCopy.setText(config.getProperty("MenuBar-File-Copy"));
-//			MenuRename.setText(config.getProperty("MenuBar-File-Rename"));
-//			MenuDelete.setText(config.getProperty("MenuBar-File-Delete"));
-//			MenuSave.setText(config.getProperty("MenuBar-File-Save"));
-//			MenuSaveAs.setText(config.getProperty("MenuBar-File-SaveAs"));
-//			MenuExit.setText(config.getProperty("MenuBar-File-Exit"));
-//			MenuHelp.setText(config.getProperty("MenuBar-Help"));
-//			MenuAbout.setText(config.getProperty("MenuBar-Help-About"));
-//			MenuChangeLanguage.setText(config.getProperty("MenuBar-Help-Language"));
-//			MenuEnglish.setText(config.getProperty("MenuBar-Help-Language-English"));
-//			MenuGerman.setText(config.getProperty("MenuBar-Help-Language-German"));
-//			//North
-//			ButtonSearch.setText(config.getProperty("Button-Search"));
-//			ButtonFScreen.setText(config.getProperty("Button-FScreen"));
-//			ButtonFilter.setText(config.getProperty("Button-Filter"));
-//			TextFieldKeyword.setText(config.getProperty("TextField-Keyword"));
-//			DatePickerFrom.setAccessibleText(config.getProperty("DatePicker-From"));
-//			DatePickerTo.setAccessibleText(config.getProperty("DatePicker-To"));
-//			//BorderPane West
-//			AddAlbum.setText(config.getProperty("AddAlbum"));
-//			DeleteAlbum.setText(config.getProperty("DeleteAlbum"));
-//			
-			//BorderPane Center
-			if(controller == "GalleryMode") {
+		case ("GalleryMode"):
+			// BorderPane North
+			// MenuBar
+			// MenuFile.setText(config.getProperty("MenuBar-File"));
+			// MenuImport.setText(config.getProperty("MenuBar-File-Import"));
+			// MenuCopy.setText(config.getProperty("MenuBar-File-Copy"));
+			// MenuRename.setText(config.getProperty("MenuBar-File-Rename"));
+			// MenuDelete.setText(config.getProperty("MenuBar-File-Delete"));
+			// MenuSave.setText(config.getProperty("MenuBar-File-Save"));
+			// MenuSaveAs.setText(config.getProperty("MenuBar-File-SaveAs"));
+			// MenuExit.setText(config.getProperty("MenuBar-File-Exit"));
+			// MenuHelp.setText(config.getProperty("MenuBar-Help"));
+			// MenuAbout.setText(config.getProperty("MenuBar-Help-About"));
+			// MenuChangeLanguage.setText(config.getProperty("MenuBar-Help-Language"));
+			// MenuEnglish.setText(config.getProperty("MenuBar-Help-Language-English"));
+			// MenuGerman.setText(config.getProperty("MenuBar-Help-Language-German"));
+			// //North
+			// ButtonSearch.setText(config.getProperty("Button-Search"));
+			// ButtonFScreen.setText(config.getProperty("Button-FScreen"));
+			// ButtonFilter.setText(config.getProperty("Button-Filter"));
+			// TextFieldKeyword.setText(config.getProperty("TextField-Keyword"));
+			// DatePickerFrom.setAccessibleText(config.getProperty("DatePicker-From"));
+			// DatePickerTo.setAccessibleText(config.getProperty("DatePicker-To"));
+			// //BorderPane West
+			// AddAlbum.setText(config.getProperty("AddAlbum"));
+			// DeleteAlbum.setText(config.getProperty("DeleteAlbum"));
+			//
+			// BorderPane Center
+			if (controller == "GalleryMode") {
 				ButtonRenameAll.setText(config.getProperty("Button-RenameAll"));
 				ButtonAddImage.setText(config.getProperty("Button-AddImage"));
 			}
-		break;
-			
-		case("AddAlbum"):		
+			break;
+
+		case ("AddAlbum"):
 			exitId.setText(config.getProperty("NewAlbum-Button-Exit"));
 			NewAlbumLabelAlbum.setText(config.getProperty("NewAlbum-Label-Album"));
 			NewAlbumButtonAdd.setText(config.getProperty("NewAlbum-Button-Add"));
 		}
+	}
+
+	class AlbumListCell extends ListCell<Album> {
+
+		private final ContextMenu contextMenu;
+
+		public AlbumListCell() {
+			contextMenu = new ContextMenu();
+			MenuItem delete = new MenuItem("Delete");
+			contextMenu.getItems().addAll(delete);
+
+			// delete.setOnAction(e -> //TODO);
+
+			this.setOnDragDropped(e -> {
+				ImageContainer image = (ImageContainer) e.getDragboard()
+						.getContent(MainControllerGalleryMode.imageContainerFormat);
+
+				String sqlRequest = "INSERT INTO albumfoto (AlbumID, FotoID) VALUES" + "(" + this.getItem().getId()
+						+ ", '" + image.getId() + "');";
+				try {
+					ResultSet tmpRs = SendSQLRequest.sendSQL(sqlRequest);
+				} catch (SQLException ex) {
+					System.out.println("Bild schon in Album.");
+					return;
+				}
+				e.setDropCompleted(true);
+
+				Album referenceEqualAlbum = listView.getItems().stream().filter(a -> a.getId() == getItem().getId())
+						.findAny().get();
+
+				selectedAlbum = referenceEqualAlbum;
+				initializeListView();
+				if (MainController.this instanceof MainControllerGalleryMode) {
+					((MainControllerGalleryMode) MainController.this).initializeGridPane();
+				}
+			});
+		}
+
+		@Override
+		protected void updateItem(Album item, boolean empty) {
+			super.updateItem(item, empty);
+			if (!empty) {
+				this.textProperty().bind(this.itemProperty().get().nameProperty());
+				setContextMenu(contextMenu);
+			}
+		}
+
 	}
 }

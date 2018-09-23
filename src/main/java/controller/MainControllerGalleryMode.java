@@ -15,7 +15,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -24,6 +29,7 @@ import model.editing.Resizer;
 
 public class MainControllerGalleryMode extends MainController implements Initializable {
 
+	public static DataFormat imageContainerFormat = new DataFormat("model.ImageContainer");;
 	@FXML
 	private AnchorPane rootPane;
 	@FXML
@@ -154,11 +160,37 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		window.show();
 
 	}
-	
+
 	@FXML
 	public void reloadMainPage() {
 		initializeListView();
 		initializeGridPane();
+	}
+
+	// Drag and drop
+
+	@FXML
+	private void imageDragStarted(MouseEvent e) {
+		Dragboard dragBoard = gridPane.startDragAndDrop(TransferMode.ANY);
+		ClipboardContent clipBoard = new ClipboardContent();
+
+		ImageView imageView = (ImageView) e.getPickResult().getIntersectedNode();
+		int indexOfSelectedImage = gridPane.getChildren().indexOf(imageView);
+		System.out.println(indexOfSelectedImage);
+		ImageContainer image = selectedAlbum.getImages().get(indexOfSelectedImage);
+
+		clipBoard.put(imageContainerFormat, image);
+		dragBoard.setContent(clipBoard);
+		e.consume();
+	}
+
+	@FXML
+	private void imageDragOver(DragEvent e) {
+		System.out.println("dragover");
+		if (e.getDragboard().hasContent(imageContainerFormat)) {
+			e.acceptTransferModes(TransferMode.ANY);
+		}
+		e.consume();
 	}
 
 	// Bar above gridPane

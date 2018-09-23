@@ -3,44 +3,44 @@
  */
 package model;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
- * @author philpsc 
+ * @author philpsc
  */
 public class Album {
 
-	private String name;
+	private StringProperty name = new SimpleStringProperty();
 	private int id;
 	private ArrayList<ImageContainer> images;
-	
+
 	public Album(String name, int id, ArrayList<ImageContainer> images) {
-		this.name = name;
+		this.name = new SimpleStringProperty(name);
+		;
 		this.id = id;
 		this.images = images;
 	}
-	
+
 	public Album(String name, int id) {
-		this.name = name;
+		this.name = new SimpleStringProperty(name);
+		;
 		this.id = id;
 		this.images = new ArrayList<ImageContainer>();
 	}
-	
-	public Album(ResultSet album) throws SQLException {
-		this.name = album.getString("Name");
-		this.id = album.getInt("ID");
-		this.images = null; //TODO: Vervollständigen
-	}
-	
+
 	public String getName() {
-		return name;
+		return this.name.get();
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name.set(name);
+	}
+
+	public final StringProperty nameProperty() {
+		return this.name;
 	}
 
 	public int getId() {
@@ -58,11 +58,9 @@ public class Album {
 	public void setImages(ArrayList<ImageContainer> images) {
 		this.images = images;
 	}
-	
-	 
+
 	public String toString() {
 		return this.getName();
 	}
-	
-	
+
 }
