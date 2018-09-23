@@ -77,9 +77,9 @@ public abstract class MainController {
 	DatePicker DatePickerTo;
 	// West
 	@FXML
-	Button AddAlbum;
+	Button ButtonAddAlbum;
 	@FXML
-	Button DeleteAlbum;
+	Button ButtonDeleteAlbum;
 	// Center
 	@FXML
 	Button ButtonRenameAll;
@@ -162,8 +162,8 @@ public abstract class MainController {
 
 	static Album selectedAlbum;
 	static boolean didSwitchBack = true;
-	String currentLanguage = "en";
-	String controller = "GalleryMode";
+	private static String currentLanguage = "en";
+	private String controller = "GalleryMode";
 
 	/**
 	 * Method to initialize the listView containing the album names.
@@ -331,6 +331,7 @@ public abstract class MainController {
 	@FXML
 	public void controllerCheck(String controller) {
 		this.controller = controller;
+		
 		if (currentLanguage == "de") {
 			changeToGerman();
 		} else {
@@ -341,13 +342,18 @@ public abstract class MainController {
 
 	@FXML
 	public void changeToGerman() {
-
 		currentLanguage = "de";
 		changeLanguage();
-
-		if (controller == "GalleryMode") {
+		
+		switch (controller) {
+		case("GalleryMode"):
 			ButtonAddImage.setPrefWidth(115);
 			ButtonRenameAll.setLayoutX(510);
+		break;
+		
+		case("EditMode"):
+			ButtonDeleteImage.setLayoutX(701);
+		break;
 		}
 	}
 
@@ -355,10 +361,16 @@ public abstract class MainController {
 	public void changeToEnglish() {
 		currentLanguage = "en";
 		changeLanguage();
-
-		if (controller == "GalleryMode") {
+		
+		switch (controller) {
+		case("GalleryMode"):
 			ButtonAddImage.setPrefWidth(98);
 			ButtonRenameAll.setLayoutX(545);
+		break;
+		
+		case("EditMode"):
+			ButtonDeleteImage.setLayoutX(694);
+		break;
 		}
 	}
 
@@ -370,7 +382,6 @@ public abstract class MainController {
 	 */
 	@FXML
 	public void changeLanguage() {
-		System.out.println(controller);
 		Properties config;
 		config = new Properties();
 		FileInputStream fis;
@@ -386,7 +397,7 @@ public abstract class MainController {
 		// ChangeGui
 		switch (controller) {
 		case ("EditMode"):
-			// BorderPane East
+		  //BorderPane East
 			TabEditing.setText(config.getProperty("Tab-Editing"));
 			TabEditButtonCClock.setText(config.getProperty("Tab-Editing-Button-CClock"));
 			TabEditButtonClock.setText(config.getProperty("Tab-Editing-Button-Clockwise"));
@@ -413,36 +424,38 @@ public abstract class MainController {
 			ButtonDeleteImage.setText(config.getProperty("EditMode-Button-DeleteImage"));
 
 		case ("GalleryMode"):
-			// BorderPane North
-			// MenuBar
-			// MenuFile.setText(config.getProperty("MenuBar-File"));
-			// MenuImport.setText(config.getProperty("MenuBar-File-Import"));
-			// MenuCopy.setText(config.getProperty("MenuBar-File-Copy"));
-			// MenuRename.setText(config.getProperty("MenuBar-File-Rename"));
-			// MenuDelete.setText(config.getProperty("MenuBar-File-Delete"));
-			// MenuSave.setText(config.getProperty("MenuBar-File-Save"));
-			// MenuSaveAs.setText(config.getProperty("MenuBar-File-SaveAs"));
-			// MenuExit.setText(config.getProperty("MenuBar-File-Exit"));
-			// MenuHelp.setText(config.getProperty("MenuBar-Help"));
-			// MenuAbout.setText(config.getProperty("MenuBar-Help-About"));
-			// MenuChangeLanguage.setText(config.getProperty("MenuBar-Help-Language"));
-			// MenuEnglish.setText(config.getProperty("MenuBar-Help-Language-English"));
-			// MenuGerman.setText(config.getProperty("MenuBar-Help-Language-German"));
-			// //North
-			// ButtonSearch.setText(config.getProperty("Button-Search"));
-			// ButtonFScreen.setText(config.getProperty("Button-FScreen"));
-			// ButtonFilter.setText(config.getProperty("Button-Filter"));
-			// TextFieldKeyword.setText(config.getProperty("TextField-Keyword"));
-			// DatePickerFrom.setAccessibleText(config.getProperty("DatePicker-From"));
-			// DatePickerTo.setAccessibleText(config.getProperty("DatePicker-To"));
-			// //BorderPane West
-			// AddAlbum.setText(config.getProperty("AddAlbum"));
-			// DeleteAlbum.setText(config.getProperty("DeleteAlbum"));
-			//
-			// BorderPane Center
+		   //BorderPane North
+		   //MenuBar
+			 MenuFile.setText(config.getProperty("MenuBar-File"));
+			 //MenuImport Move to if cause below;
+			 MenuCopy.setText(config.getProperty("MenuBar-File-Copy"));
+			 MenuRename.setText(config.getProperty("MenuBar-File-Rename"));
+			 MenuDelete.setText(config.getProperty("MenuBar-File-Delete"));
+			 MenuSave.setText(config.getProperty("MenuBar-File-Save"));
+			 MenuSaveAs.setText(config.getProperty("MenuBar-File-SaveAs"));
+			 MenuExit.setText(config.getProperty("MenuBar-File-Exit"));
+			 MenuHelp.setText(config.getProperty("MenuBar-Help"));
+			 MenuAbout.setText(config.getProperty("MenuBar-Help-About"));
+			 MenuChangeLanguage.setText(config.getProperty("MenuBar-Help-Language"));
+			 MenuEnglish.setText(config.getProperty("MenuBar-Help-Language-English"));
+			 MenuGerman.setText(config.getProperty("MenuBar-Help-Language-German"));
+		   //North
+			 ButtonSearch.setText(config.getProperty("Button-Search"));
+			 ButtonFScreen.setText(config.getProperty("Button-FScreen"));
+			 ButtonFilter.setText(config.getProperty("Button-Filter"));
+			 TextFieldKeyword.setText(config.getProperty("TextField-Keyword"));
+			 DatePickerFrom.setAccessibleText(config.getProperty("DatePicker-From"));
+			 DatePickerTo.setAccessibleText(config.getProperty("DatePicker-To"));
+		   //BorderPane West
+			// ButtonAddAlbum.setText(config.getProperty("AddAlbum"));
+			// ButtonDeleteAlbum.setText(config.getProperty("DeleteAlbum"));
+			
+		   //BorderPane Center
 			if (controller == "GalleryMode") {
 				ButtonRenameAll.setText(config.getProperty("Button-RenameAll"));
 				ButtonAddImage.setText(config.getProperty("Button-AddImage"));
+		   //North
+				MenuImport.setText(config.getProperty("MenuBar-File-Import"));
 			}
 			break;
 
@@ -450,6 +463,8 @@ public abstract class MainController {
 			exitId.setText(config.getProperty("NewAlbum-Button-Exit"));
 			NewAlbumLabelAlbum.setText(config.getProperty("NewAlbum-Label-Album"));
 			NewAlbumButtonAdd.setText(config.getProperty("NewAlbum-Button-Add"));
+			if (currentLanguage == "de") {NewAlbumButtonAdd.setLayoutX(172);}
+			else {NewAlbumButtonAdd.setLayoutX(211);}
 		}
 	}
 
