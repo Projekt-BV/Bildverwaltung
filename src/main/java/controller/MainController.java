@@ -447,8 +447,10 @@ public abstract class MainController {
 			 DatePickerFrom.setAccessibleText(config.getProperty("DatePicker-From"));
 			 DatePickerTo.setAccessibleText(config.getProperty("DatePicker-To"));
 		   //BorderPane West
-			// ButtonAddAlbum.setText(config.getProperty("AddAlbum"));
-			// ButtonDeleteAlbum.setText(config.getProperty("DeleteAlbum"));
+			 ButtonAddAlbum.setText(config.getProperty("Button-AddAlbum"));
+			 if (currentLanguage == "en") {ButtonAddAlbum.setPrefWidth(106);}
+			 else {ButtonAddAlbum.setPrefWidth(120);}
+			 ButtonDeleteAlbum.setText(config.getProperty("Button-DeleteAlbum"));
 			
 		   //BorderPane Center
 			if (controller == "GalleryMode") {
