@@ -15,29 +15,34 @@ import javafx.stage.Stage;
 import model.Album;
 import model.Database;
 
-public class AlbumController extends MainController implements Initializable{
+public class AlbumController extends MainController implements Initializable {
 
-	@FXML ListView<Album> listView;
-	@FXML TextField albumName;
-	@FXML Button exitId;
-	
+	@FXML
+	ListView<Album> listView;
+	@FXML
+	TextField albumName;
+	@FXML
+	Button exitId;
 
-	
 	Database database = new Database();
-	private MainControllerGalleryMode mainController;
-	
+	private MainController mainController;
+
 	@FXML
 	private void exitButtonpressed() throws ParseException {
 		// get a handle to the stage
-	    Stage stage = (Stage) exitId.getScene().getWindow();
-	    // do what you have to do
-	    stage.close();	    
-	    mainController.reloadMainPage();
+		Stage stage = (Stage) exitId.getScene().getWindow();
+		// do what you have to do
+		stage.close();
+		mainController.initializeListView();
+		if (mainController instanceof MainControllerGalleryMode) {
+			MainControllerGalleryMode mc = (MainControllerGalleryMode) mainController;
+			mc.initializeGridPane();
+		}
 	}
-	
+
 	@FXML
 	private void newAlbumpressed() throws SQLException {
-		
+
 		String tmp = albumName.getText();
 		String query = "INSERT INTO ALBEN (Name) VALUES ('" + albumName.getText() + "');";
 		SendSQLRequest.sendSQL(query);
@@ -45,22 +50,17 @@ public class AlbumController extends MainController implements Initializable{
 		albumName.clear();
 		listView.getItems().clear();
 		database.reloadDatabaseContents();
-		database.getAlbums().stream()
-							.forEach(album -> listView.getItems().add(album));	
+		database.getAlbums().stream().forEach(album -> listView.getItems().add(album));
 	}
-	
-	
-	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		database.reloadDatabaseContents();
-		database.getAlbums().stream()
-							.forEach(album -> listView.getItems().add(album));
+		database.getAlbums().stream().forEach(album -> listView.getItems().add(album));
 		controllerCheck("AddAlbum");
 	}
 
-	public void injectMainController(MainControllerGalleryMode mainController) {
+	public void injectMainController(MainController mainController) {
 		this.mainController = mainController;
 	}
 }
