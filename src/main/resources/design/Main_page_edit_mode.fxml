@@ -30,37 +30,37 @@
           <children>
             <MenuBar layoutX="0.0" layoutY="2.0" prefHeight="25.0" prefWidth="254.0">
               <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu fx:id="MenuFile" mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#copyImage" text="Copy" />
-                    <MenuItem mnemonicParsing="false" onAction="#renameImage" text="Rename" />
-                    <MenuItem mnemonicParsing="false" onAction="#deleteImage" text="Delete" />
-                    <MenuItem mnemonicParsing="false" onAction="#saveImage" text="Save" />
-                              <MenuItem mnemonicParsing="false" onAction="#saveImageAs" text="Save as ..." />
-                              <MenuItem mnemonicParsing="false" text="Exit" />
+                    <MenuItem fx:id="MenuCopy" mnemonicParsing="false" onAction="#copyImage" text="Copy" />
+                    <MenuItem fx:id="MenuRename" mnemonicParsing="false" onAction="#renameImage" text="Rename" />
+                    <MenuItem fx:id="MenuDelete" mnemonicParsing="false" onAction="#deleteImage" text="Delete" />
+                    <MenuItem fx:id="MenuSave" mnemonicParsing="false" onAction="#saveImage" text="Save" />
+                              <MenuItem fx:id="MenuSaveAs" mnemonicParsing="false" onAction="#saveImageAs" text="Save as ..." />
+                              <MenuItem fx:id="MenuExit" mnemonicParsing="false" text="Exit" />
                   </items>
                 </Menu>
-                        <Menu mnemonicParsing="false" text="Help">
+                        <Menu fx:id="MenuHelp" mnemonicParsing="false" text="Help">
                           <items>
-                            <MenuItem mnemonicParsing="false" onAction="#showCommands" text="About" />
-                              <Menu mnemonicParsing="false" text="Language">
+                            <MenuItem fx:id="MenuAbout" mnemonicParsing="false" onAction="#showCommands" text="About" />
+                              <Menu fx:id="MenuChangeLanguage" mnemonicParsing="false" text="Language">
                                 <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#changeLanguage" text="English" />
-                                  <MenuItem mnemonicParsing="false" onAction="#changeLanguage" text="German" />
+                                    <MenuItem fx:id="MenuEnglish" mnemonicParsing="false" onAction="#changeToEnglish" text="English" />
+                                  <MenuItem fx:id="MenuGerman" mnemonicParsing="false" onAction="#changeToGerman" text="German" />
                                 </items>
                               </Menu>
                           </items>
                         </Menu>
               </menus>
             </MenuBar>
-                  <DatePicker layoutX="878.0" layoutY="30.0" prefHeight="27.0" prefWidth="166.0" promptText="to" />
+                  <DatePicker fx:id="DatePickerTo" layoutX="878.0" layoutY="30.0" prefHeight="27.0" prefWidth="166.0" promptText="to" />
           <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="190.0" />
-          <Button layoutX="196.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="59.0" text="Suche" />
-          <Button layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
-                  <Button layoutX="660.0" layoutY="30.0" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
-                  <TextField layoutX="560.0" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" promptText="keyword" />
-                  <DatePicker layoutX="704.0" layoutY="30.0" promptText="from" />
-                  <Button layoutX="1181.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchBack" prefHeight="27.0" prefWidth="99.0" text="Album view" />
+          <Button fx:id="ButtonSearch" layoutX="196.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="59.0" text="Suche" />
+          <Button fx:id="ButtonFScreen" layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
+                  <Button fx:id="ButtonFilter" layoutX="660.0" layoutY="30.0" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
+                  <TextField fx:id="TextFieldKeyword" layoutX="560.0" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" promptText="keyword" />
+                  <DatePicker fx:id="DatePickerFrom" layoutX="704.0" layoutY="30.0" promptText="from" />
+                  <Button fx:id="ButtonAlbumView" layoutX="1181.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchBack" prefHeight="27.0" prefWidth="99.0" text="Album view" />
           </children>
         </AnchorPane>
       </top>
@@ -72,7 +72,7 @@
                 <Slider fx:id="zoomSlider" layoutX="268.0" layoutY="6.0" onMouseDragged="#setAndGetSliderLabel" onMouseReleased="#sliderMove" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
                 <Label fx:id="zoomSliderValueLabel" layoutX="489.0" layoutY="6.0" prefWidth="51.0" text="0%" />
                         <ChoiceBox fx:id="chooseAlbumChoiceBox" onDragExited="#dropdownButtonChoiceSelected" prefWidth="150.0" />
-                        <Button layoutX="694.0" mnemonicParsing="false" onAction="#deleteImage" text="Delete Image" />
+                        <Button fx:id="ButtonDeleteImage" layoutX="694.0" mnemonicParsing="false" onAction="#deleteImage" text="Delete Image" />
                      </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="750.0">
                      <children>
@@ -95,39 +95,39 @@
          <right>
             <TabPane prefHeight="713.0" prefWidth="247.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab text="Editing">
+                <Tab fx:id="TabEditing" text="Editing">
                   <content>
                     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="239.0">
                            <children>
-                              <Button layoutX="133.0" layoutY="57.0" mnemonicParsing="false" onAction="#rotateCounterClockwise" prefHeight="25.0" prefWidth="100.0" text="Counter-Clockwise" />
-                              <Button layoutX="16.0" layoutY="57.0" mnemonicParsing="false" onAction="#rotateClockwise" prefHeight="25.0" prefWidth="100.0" text="Clockwise" />
-                              <Button layoutX="18.0" layoutY="262.0" mnemonicParsing="false" onAction="#resizeImage" prefHeight="25.0" prefWidth="97.0" text="Resize" />
-                              <Text layoutX="136.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Width" />
+                              <Button fx:id="TabEditButtonCClock" layoutX="133.0" layoutY="57.0" mnemonicParsing="false" onAction="#rotateCounterClockwise" prefHeight="25.0" prefWidth="100.0" text="Counter-Clockwise" />
+                              <Button fx:id="TabEditButtonClock" layoutX="16.0" layoutY="57.0" mnemonicParsing="false" onAction="#rotateClockwise" prefHeight="25.0" prefWidth="100.0" text="Clockwise" />
+                              <Button fx:id="TabEditButtonResize" layoutX="18.0" layoutY="262.0" mnemonicParsing="false" onAction="#resizeImage" prefHeight="25.0" prefWidth="97.0" text="Resize" />
+                              <Text fx:id="TextWidth" layoutX="136.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Width" />
                               <TextField fx:id="widthTextField" layoutX="135.0" layoutY="262.0" prefHeight="25.0" prefWidth="100.0" />
-                              <Button layoutX="18.0" layoutY="329.0" mnemonicParsing="false" onAction="#setRatio" prefHeight="25.0" prefWidth="97.0" text="Set ratio" />
-                              <Text layoutX="137.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Height" />
+                              <Button fx:id="TabEditButtonSetRatio" layoutX="18.0" layoutY="329.0" mnemonicParsing="false" onAction="#setRatio" prefHeight="25.0" prefWidth="97.0" text="Set ratio" />
+                              <Text fx:id="TextHeight" layoutX="137.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Height" />
                               <TextField fx:id="heightTextField" layoutX="135.0" layoutY="329.0" prefHeight="25.0" prefWidth="100.0" />
-                              <Text layoutX="17.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
+                              <Text fx:id="TextRotate" layoutX="17.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
                               <Button fx:id="cutModeButton" layoutX="17.0" layoutY="435.0" mnemonicParsing="false" onAction="#cutModeButtonPressed" prefHeight="25.0" prefWidth="94.0" text="Cut mode" />
-                              <Text layoutX="21.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cut image" wrappingWidth="86.13671875" />
-                              <Text layoutX="21.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Color filter" />
-                              <Text layoutX="19.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Resize image" />
-                              <Button layoutX="18.0" layoutY="564.0" mnemonicParsing="false" onAction="#undoButtonPressed" prefHeight="25.0" prefWidth="93.0" text="Undo" />
-                              <Button layoutX="133.0" layoutY="564.0" mnemonicParsing="false" onAction="#saveImageButtonPressed" prefHeight="25.0" prefWidth="93.0" text="Save" />
+                              <Text fx:id="TextCutImage" layoutX="21.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cut image" wrappingWidth="86.13671875" />
+                              <Text fx:id="TextColorFilter" layoutX="21.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Color filter" />
+                              <Text fx:id="TextResizeImage" layoutX="19.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Resize image" />
+                              <Button fx:id="TabEditButtonUndo" layoutX="18.0" layoutY="564.0" mnemonicParsing="false" onAction="#undoButtonPressed" prefHeight="25.0" prefWidth="93.0" text="Undo" />
+                              <Button fx:id="TabEditButtonSave" layoutX="133.0" layoutY="564.0" mnemonicParsing="false" onAction="#saveImageButtonPressed" prefHeight="25.0" prefWidth="93.0" text="Save" />
                               <ChoiceBox fx:id="colorChoiceBox" layoutX="18.0" layoutY="147.0" prefHeight="27.0" prefWidth="99.0" />
                            </children>
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Metadata">
+                <Tab fx:id="TabMetadata" text="Metadata">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                        <children>
-                          <Button layoutX="94.0" layoutY="14.0" mnemonicParsing="false" onAction="#saveMetaDataButtonPressed" prefHeight="25.0" prefWidth="69.0" text="Save" />
-                          <Text layoutX="13.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Title" />
-                          <Text layoutX="15.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Location" />
-                          <Text layoutX="15.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Tags" />
-                          <Text layoutX="15.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Date (dd.mm.yyyy)" />
+                          <Button fx:id="TabMetaButtonSave" layoutX="94.0" layoutY="14.0" mnemonicParsing="false" onAction="#saveMetaDataButtonPressed" prefHeight="25.0" prefWidth="69.0" text="Save" />
+                          <Text fx:id="TextTitle" layoutX="13.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Title" />
+                          <Text fx:id="TextLocation" layoutX="15.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Location" />
+                          <Text fx:id="TextTags" layoutX="15.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Tags" />
+                          <Text fx:id="TextDate" layoutX="15.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Date (dd.mm.yyyy)" />
                           <Label fx:id="pathLabel" layoutX="15.0" layoutY="440.0" text="Path:" />
                           <TextField fx:id="titelTextField" layoutX="12.0" layoutY="79.0" />
                           <TextField fx:id="locationTextField" layoutX="14.0" layoutY="144.0" />
@@ -143,8 +143,8 @@
          <left>
             <AnchorPane prefHeight="713.0" prefWidth="255.0" styleClass="anchor-pane" stylesheets="@application.css" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="44.0" layoutY="682.0" mnemonicParsing="false" onAction="#addAlbumButtonPressed" text="Add album" />
-                  <Button layoutX="165.0" layoutY="682.0" mnemonicParsing="false" onAction="#deleteAlbumButtonPressed" text="Delete Album" />
+                  <Button fx:id="AddAlbum" layoutX="44.0" layoutY="682.0" mnemonicParsing="false" onAction="#addAlbumButtonPressed" text="Add album" />
+                  <Button fx:id="DeleteAlbum" layoutX="165.0" layoutY="682.0" mnemonicParsing="false" onAction="#deleteAlbumButtonPressed" text="Delete Album" />
                   <ListView fx:id="listView" onMouseClicked="#switchBack" prefHeight="681.0" prefWidth="256.0" />
                </children>
             </AnchorPane>

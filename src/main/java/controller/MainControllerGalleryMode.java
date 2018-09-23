@@ -42,6 +42,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		didSwitchBack = true;
 		initializeListView();
 		initializeGridPane();
+		controllerCheck("GalleryMode");
 	}
 
 	/**

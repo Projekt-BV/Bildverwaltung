@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import model.Album;
 import model.Database;
 
-public class AlbumController implements Initializable{
+public class AlbumController extends MainController implements Initializable{
 
 	@FXML ListView<Album> listView;
 	@FXML TextField albumName;
@@ -57,7 +57,7 @@ public class AlbumController implements Initializable{
 		database.reloadDatabaseContents();
 		database.getAlbums().stream()
 							.forEach(album -> listView.getItems().add(album));
-		
+		controllerCheck("AddAlbum");
 	}
 
 	public void injectMainController(MainControllerGalleryMode mainController) {

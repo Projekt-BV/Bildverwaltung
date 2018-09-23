@@ -101,6 +101,8 @@ public class MainControllerEditMode extends MainController implements Initializa
 		
 		resetZooming();
 		setResizeTextFields();
+		
+		controllerCheck("EditMode");
 	}
 	
 		

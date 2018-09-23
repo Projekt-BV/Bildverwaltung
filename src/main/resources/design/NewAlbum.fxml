@@ -12,10 +12,10 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="249.0" prefWidth="504.0" VBox.vgrow="ALWAYS">
       <children>
             <Button fx:id="exitId" layoutX="55.0" layoutY="178.0" mnemonicParsing="false" onAction="#exitButtonpressed" text="Exit" />
-            <Label layoutX="23.0" layoutY="90.0" prefHeight="25.0" prefWidth="98.0" text="Albumname" />
+            <Label fx:id="NewAlbumLabelAlbum" layoutX="23.0" layoutY="90.0" prefHeight="25.0" prefWidth="98.0" text="Albumname" />
             <ListView fx:id="listView" layoutX="304.0" layoutY="3.0" prefHeight="200.0" prefWidth="200.0" />
             <TextField fx:id="albumName" layoutX="139.0" layoutY="90.0" />
-            <Button layoutX="212.0" layoutY="178.0" mnemonicParsing="false" onAction="#newAlbumpressed" text="Add album" />
+            <Button fx:id="NewAlbumButtonAdd" layoutX="212.0" layoutY="178.0" mnemonicParsing="false" onAction="#newAlbumpressed" text="Add album" />
       </children>
     </AnchorPane>
   </children>
