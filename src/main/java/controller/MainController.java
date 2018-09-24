@@ -478,14 +478,11 @@ public abstract class MainController {
 
 	class AlbumListCell extends ListCell<Album> {
 
-		private final ContextMenu contextMenu;
+		private ContextMenu contextMenu;
 
 		public AlbumListCell() {
-			contextMenu = new ContextMenu();
-			MenuItem delete = new MenuItem("Delete");
-			MenuItem rename = new MenuItem("Rename");
-			contextMenu.getItems().addAll(delete, rename);
 
+			contextMenu = new ContextMenu();
 			// delete.setOnAction(e -> //TODO);
 
 			this.setOnDragDropped(e -> {
@@ -517,6 +514,14 @@ public abstract class MainController {
 		protected void updateItem(Album item, boolean empty) {
 			super.updateItem(item, empty);
 			if (!empty) {
+				contextMenu = new ContextMenu();
+
+				// don't allow user to rename or delete album "All Images"
+				if (!getItem().getName().equals("All Images")) {
+					MenuItem delete = new MenuItem("Delete");
+					MenuItem rename = new MenuItem("Rename");
+					contextMenu.getItems().addAll(rename, delete);
+				}
 				this.textProperty().bind(this.itemProperty().get().nameProperty());
 				setContextMenu(contextMenu);
 			}
