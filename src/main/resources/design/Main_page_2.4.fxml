@@ -68,7 +68,7 @@
                         <TextField layoutX="623.0" layoutY="3.0" prefHeight="25.0" prefWidth="161.0" styleClass="text-field" stylesheets="@application.css" />
                         <Button fx:id="ButtonAddImage" layoutX="861.0" layoutY="2.0" mnemonicParsing="false" onAction="#importImage" prefHeight="27.0" prefWidth="98.0" text="Add Image" />
                      </children></AnchorPane>
-                  <ScrollPane pannable="true">
+                  <ScrollPane onDragDetected="#selectionDragStarted" pannable="true">
                      <content>
                         <GridPane fx:id="gridPane" hgap="10.0" minHeight="135.0" minWidth="135.0" onContextMenuRequested="#contextMenuRequested" onDragDetected="#imageDragStarted" onMouseClicked="#gridPaneImagePressed" styleClass="grid-pane" stylesheets="@application.css" vgap="8.0">
                            <columnConstraints>

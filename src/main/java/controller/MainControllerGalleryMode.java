@@ -47,6 +47,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	private int col = 0;
 	private int line = 0;
 	private boolean refreshing = false;
+	boolean actionWasDragAndNoClick = false;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -151,6 +152,14 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	@FXML
 	private void gridPaneImagePressed(MouseEvent e) throws IOException {
 
+		// this check is to make sure, that the scene is not switched after a drag and
+		// drop ends on an image. Boolean actionWasDragAndNoClick is set to true when
+		// drag is detected
+		if (actionWasDragAndNoClick) {
+			actionWasDragAndNoClick = false;
+			return;
+		}
+
 		// if right mouse button was clicked, don't open detail view, but show context
 		// menu
 		if (e.getButton() == MouseButton.SECONDARY) {
@@ -184,17 +193,29 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 	@FXML
 	private void imageDragStarted(MouseEvent e) {
+		actionWasDragAndNoClick = true;
 		Dragboard dragBoard = gridPane.startDragAndDrop(TransferMode.ANY);
 		ClipboardContent clipBoard = new ClipboardContent();
 
-		ImageView imageView = (ImageView) e.getPickResult().getIntersectedNode();
-		int indexOfSelectedImage = gridPane.getChildren().indexOf(imageView);
-		System.out.println(indexOfSelectedImage);
-		ImageContainer image = selectedAlbum.getImages().get(indexOfSelectedImage);
+		// if drag started on grid, but not an image, drag a box to select images
+		if (!(e.getPickResult().getIntersectedNode() instanceof ImageView)) {
+			selectionDragStarted(e);
+		} else {
+			ImageView imageView = (ImageView) e.getPickResult().getIntersectedNode();
+			int indexOfSelectedImage = gridPane.getChildren().indexOf(imageView);
+			System.out.println(indexOfSelectedImage);
+			ImageContainer image = selectedAlbum.getImages().get(indexOfSelectedImage);
 
-		clipBoard.put(imageContainerFormat, image);
+			clipBoard.put(imageContainerFormat, image);
+		}
+
 		dragBoard.setContent(clipBoard);
 		e.consume();
+	}
+
+	@FXML
+	private void selectionDragStarted(MouseEvent e) {
+		System.out.println("selectiondrag started");
 	}
 
 	@FXML
