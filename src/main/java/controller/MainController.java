@@ -483,7 +483,8 @@ public abstract class MainController {
 		public AlbumListCell() {
 			contextMenu = new ContextMenu();
 			MenuItem delete = new MenuItem("Delete");
-			contextMenu.getItems().addAll(delete);
+			MenuItem rename = new MenuItem("Rename");
+			contextMenu.getItems().addAll(delete, rename);
 
 			// delete.setOnAction(e -> //TODO);
 

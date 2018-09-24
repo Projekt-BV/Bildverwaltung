@@ -12,13 +12,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
@@ -39,6 +43,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	@FXML
 	private ImageView displayImage;
 	private Image imageToDownScale;
+	private ContextMenu contextMenu;
 	private int col = 0;
 	private int line = 0;
 	private boolean refreshing = false;
@@ -48,6 +53,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		didSwitchBack = true;
 		initializeListView();
 		initializeGridPane();
+		initializeContextMenu();
 		controllerCheck("GalleryMode");
 	}
 
@@ -144,6 +150,13 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 	@FXML
 	private void gridPaneImagePressed(MouseEvent e) throws IOException {
+
+		// if right mouse button was clicked, don't open detail view, but show context
+		// menu
+		if (e.getButton() == MouseButton.SECONDARY) {
+			return;
+		}
+
 		ImageView imageView = (ImageView) e.getPickResult().getIntersectedNode();
 
 		int indexOfImageView = gridPane.getChildren().indexOf(imageView);
@@ -198,4 +211,20 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	private void renameAllButtonPressed() {
 		System.out.println("I am the renameAllButtonPressed function");
 	}
+
+	// ContextMenu
+
+	private void initializeContextMenu() {
+		contextMenu = new ContextMenu();
+		MenuItem delete = new MenuItem("delete");
+		MenuItem rename = new MenuItem("rename");
+		contextMenu.getItems().addAll(delete, rename);
+		contextMenu.setOpacity(1);
+	}
+
+	@FXML
+	private void contextMenuRequested(ContextMenuEvent e) {
+		contextMenu.show(gridPane, e.getScreenX(), e.getScreenY());
+	}
+
 }
