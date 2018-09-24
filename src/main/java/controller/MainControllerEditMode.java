@@ -49,6 +49,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	private ScrollPane imageViewScrollPane;
 	@FXML
 	private ImageView displayImageEditMode;
+
 	@FXML
 	private Button applyFilterButton;
 	@FXML
@@ -652,6 +653,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	public static Image getImage() {
 		return image;
+	}
+
+	public ImageView getDisplayImageEditMode() {
+		return displayImageEditMode;
 	}
 
 	public static void setImage(Image image) {

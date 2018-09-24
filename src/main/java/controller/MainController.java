@@ -313,7 +313,7 @@ public abstract class MainController {
 
 			FullScreenController fullScreenController = loader.getController();
 			fullScreenController.injectMainController((MainControllerEditMode) this);
-			fullScreenController.setExitListener();
+			fullScreenController.setKeyListener();
 
 			stage.show();
 		} else {

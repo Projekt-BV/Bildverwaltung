@@ -34,9 +34,11 @@ public class FullScreenController implements Initializable {
 
 	public void injectMainController(MainControllerEditMode mainControllerEditMode) {
 		this.mainController = mainControllerEditMode;
+
 	}
 
-	public void setExitListener() {
+	public void setKeyListener() {
+		imageView.imageProperty().bind(mainController.getDisplayImageEditMode().imageProperty());
 		Stage stage = (Stage) imageView.getScene().getWindow();
 		stage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
 			if (event.getCode() == KeyCode.ESCAPE) {
@@ -47,8 +49,6 @@ public class FullScreenController implements Initializable {
 			} else if (event.getCode() == KeyCode.RIGHT) {
 				mainController.swipeForwards();
 			}
-			this.image = MainControllerEditMode.getImage();
-			this.imageView.setImage(image);
 		});
 	}
 
