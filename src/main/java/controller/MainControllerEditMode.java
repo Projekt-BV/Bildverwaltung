@@ -71,6 +71,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 	private Label zoomSliderValueLabel;
 	@FXML
 	private StackPane imageStackPane;
+	@FXML
+	private Button forwardButton;
+	@FXML
+	private Button backwardButton;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -630,6 +634,18 @@ public class MainControllerEditMode extends MainController implements Initializa
 		image = new Image(imageContainer.getPath());
 		imagePlain = new Image(imageContainer.getPath());
 		displayImageEditMode.setImage(image);
+	}
+
+	@FXML
+	private void showSwipeButtons() {
+		forwardButton.setVisible(true);
+		backwardButton.setVisible(true);
+	}
+
+	@FXML
+	private void hideSwipeButtons() {
+		forwardButton.setVisible(false);
+		backwardButton.setVisible(false);
 	}
 
 	// Getters and setters
