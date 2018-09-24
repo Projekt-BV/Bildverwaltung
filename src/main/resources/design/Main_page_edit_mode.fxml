@@ -14,6 +14,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -78,13 +79,34 @@
                      <children>
                         <ScrollPane fx:id="imageViewScrollPane" layoutX="-2.0" layoutY="-1.0" prefHeight="682.0" prefWidth="789.0">
                            <content>
-                              <StackPane fx:id="imageStackPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: 80,80,80;">
+                              <StackPane fx:id="imageStackPane" blendMode="LIGHTEN" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: 80,80,80;">
                                  <children>
                                     <ImageView fx:id="displayImageEditMode" fitHeight="678.0" fitWidth="785.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                                        <image>
                                           <Image url="@RGB-Background.png" />
                                        </image>
                                     </ImageView>
+                                    <Button fx:id="forwardButton" mnemonicParsing="false" onAction="#swipeForwards" style="-fx-background-color: transparent; -fx-border-width: 0;" translateX="340.0">
+                                       <graphic>
+                                          <ImageView fitHeight="70.0" fitWidth="70.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@backwardsButton.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="backwardButton" alignment="CENTER" mnemonicParsing="false" onAction="#swipeBackwards" style="-fx-background-color: transparent; -fx-border-width: 0;" translateX="-340.0">
+                                       <graphic>
+                                          <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@backwardsButton.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <effect>
+                                          <Blend />
+                                       </effect>
+                                    </Button>
                                  </children>
                               </StackPane>
                            </content></ScrollPane>
