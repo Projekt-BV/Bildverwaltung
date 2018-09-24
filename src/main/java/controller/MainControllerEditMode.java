@@ -613,7 +613,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	// Swipe through images
 
 	@FXML
-	private void swipeForwards() {
+	void swipeForwards() {
 		int newIndex = selectedAlbum.getImages().indexOf(imageContainer) + 1;
 		if (newIndex > selectedAlbum.getImages().size() - 1) {
 			return;
@@ -625,7 +625,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	}
 
 	@FXML
-	private void swipeBackwards() {
+	void swipeBackwards() {
 		int newIndex = selectedAlbum.getImages().indexOf(imageContainer) - 1;
 		if (newIndex < 0) {
 			return;
