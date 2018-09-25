@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerEditMode">
+<AnchorPane fx:id="rootPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerEditMode">
   <!-- TODO Add Nodes -->
   <children>
     <BorderPane layoutX="0.0" layoutY="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -74,9 +74,9 @@
                         <ChoiceBox fx:id="chooseAlbumChoiceBox" onDragExited="#dropdownButtonChoiceSelected" prefWidth="150.0" />
                         <Button fx:id="ButtonDeleteImage" layoutX="694.0" mnemonicParsing="false" onAction="#deleteImage" text="Delete Image" />
                      </children></AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" onMouseEntered="#showSwipeButtons" onMouseExited="#hideSwipeButtons">
                      <children>
-                        <ScrollPane fx:id="imageViewScrollPane" fitToHeight="true" fitToWidth="true" layoutX="-2.0" layoutY="-1.0" onMouseEntered="#showSwipeButtons" onMouseExited="#hideSwipeButtons" prefHeight="678.0" prefWidth="785.0">
+                        <ScrollPane fx:id="imageViewScrollPane" fitToHeight="true" fitToWidth="true" layoutX="-2.0" layoutY="-1.0" prefHeight="678.0" prefWidth="785.0">
                            <content>
                               <StackPane fx:id="imageStackPane" blendMode="LIGHTEN" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: 80,80,80;">
                                  <children>
@@ -85,30 +85,30 @@
                                           <Image url="@RGB-Background.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="forwardButton" mnemonicParsing="false" onAction="#swipeForwards" style="-fx-background-color: transparent; -fx-border-width: 0;" translateX="340.0" visible="false">
-                                       <graphic>
-                                          <ImageView fitHeight="70.0" fitWidth="70.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@backwardsButton.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="backwardButton" alignment="CENTER" mnemonicParsing="false" onAction="#swipeBackwards" style="-fx-background-color: transparent; -fx-border-width: 0;" translateX="-340.0" visible="false">
-                                       <graphic>
-                                          <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@backwardsButton.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <effect>
-                                          <Blend />
-                                       </effect>
-                                    </Button>
                                  </children>
                               </StackPane>
                            </content></ScrollPane>
+                        <Button fx:id="forwardButton" mnemonicParsing="false" onAction="#swipeForwards" style="-fx-background-color: transparent; -fx-border-width: 0;" visible="false" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="280.0">
+                           <graphic>
+                              <ImageView fitHeight="70.0" fitWidth="70.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@backwardsButton.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="backwardButton" alignment="CENTER" mnemonicParsing="false" onAction="#swipeBackwards" style="-fx-background-color: transparent; -fx-border-width: 0;" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="280.0">
+                           <graphic>
+                              <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@backwardsButton.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </Button>
                      </children></AnchorPane>
               </items>
             </SplitPane>
