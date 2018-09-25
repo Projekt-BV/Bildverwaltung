@@ -237,6 +237,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 			return;
 		}
 		selectedAlbum.getImages().stream().forEach(i -> renameImage(i, renameAllTextField.getText()));
+		reloadMainPage();
 	}
 
 	// ContextMenu
