@@ -236,7 +236,9 @@ public abstract class MainController {
 
 	@FXML
 	private void saveImage() {
-		System.out.println("I am the saveImage function");
+		String path = MainControllerEditMode.getImagePath();
+		
+		
 	}
 
 	@FXML

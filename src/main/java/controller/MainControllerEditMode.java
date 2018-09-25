@@ -697,5 +697,9 @@ public class MainControllerEditMode extends MainController implements Initializa
 	public static void setImage(Image image) {
 		MainControllerEditMode.image = image;
 	}
+	
+	public static String getImagePath() {
+		return imageContainer.getPath();
+	}
 
 }
