@@ -48,7 +48,7 @@
           <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="190.0" />
           <Button fx:id="ButtonSearch" layoutX="196.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="59.0" text="Search" />
           <Button fx:id="ButtonFScreen" layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
-                  <Button fx:id="ButtonFilter" layoutX="999.0" layoutY="27.0" mnemonicParsing="false" text="Filter" />
+                  <Button fx:id="ButtonFilter" onAction="#filterButtonPressed"  layoutX="999.0" layoutY="27.0" mnemonicParsing="false" text="Filter" />
                   <TextField fx:id="TextFieldKeyword" layoutX="550.0" layoutY="27.0" prefHeight="28.0" prefWidth="122.0" promptText="keyword" />
                   <DatePicker fx:id="DatePickerFrom" layoutX="674.0" layoutY="27.0" prefHeight="27.0" prefWidth="161.0" promptText="from" />
           </children>

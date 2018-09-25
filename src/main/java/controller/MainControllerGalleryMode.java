@@ -3,7 +3,11 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.concurrent.CountDownLatch;
 
 import database.SendSQLRequest;
@@ -283,6 +287,46 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		clickedOnImage = selectedAlbum.getImages().get(indexOfImageView);
 
 		contextMenu.show(gridPane, e.getScreenX(), e.getScreenY());
+	}
+	
+	/**
+	 * Filters the displayed image in gallery. Checks if the tags contain the keyword or the date is between
+	 * two other dates
+	 * @author Julian Einspenner
+	 */
+	@FXML
+	private void filterButtonPressed() {
+		String keyword = TextFieldKeyword.getText();
+		TreeSet<Integer> idSet = new TreeSet<Integer>();
+		
+		if(selectedAlbum != null || !keyword.equals("") ){
+			for(ImageContainer ic : selectedAlbum.getImages()) {
+				for(String tag : ic.getTags()) {
+					if(tag.contains(keyword)) {
+						idSet.add(ic.getId());
+						break;
+					}
+				}
+			}
+		}
+		
+		if(DatePickerFrom.getValue() != null && DatePickerTo.getValue() != null) {
+			Date min = convertToDateViaSqlDate(DatePickerFrom.getValue());
+			Date max = convertToDateViaSqlDate(DatePickerTo.getValue());
+			
+			for(ImageContainer ic : selectedAlbum.getImages()) {
+				Date date = ic.getDate();
+				if(date.before(max) && date.after(min) || date.equals(max) || date.equals(min)) {
+					idSet.add(ic.getId());
+				}
+			}
+		}
+		
+		//  --> pibbosMegaFunction(idSet);
+	}
+	
+	private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
+	    return java.sql.Date.valueOf(dateToConvert);
 	}
 
 }
