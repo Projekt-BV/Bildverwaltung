@@ -30,10 +30,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 import model.ImageContainer;
 import model.editing.ColorFilter;
 import model.editing.Cutter;
 import model.editing.EditMetaData;
+import model.editing.FileImport;
 import model.editing.GrayScaler;
 import model.editing.Resizer;
 import model.editing.Rotater;
@@ -545,7 +548,22 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	@FXML
 	private void saveImageAs() {
-		System.out.println("I am the saveImageAs function");
+		DirectoryChooser directoryChooser = new DirectoryChooser();
+		File selectedDirectory = directoryChooser.showDialog(new Stage());
+
+		if(selectedDirectory == null){
+		     return;
+		}
+		
+		String path = selectedDirectory.getAbsolutePath();
+		BufferedImage img = SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null);
+		File outFile = new File(path + "/" + imageContainer.getName());
+		try {
+		      ImageIO.write(img, "png", outFile);
+		} catch (IOException e) {
+		      System.err.println("Failed while saving the image");
+		}
+		
 	}
 
 	@FXML
