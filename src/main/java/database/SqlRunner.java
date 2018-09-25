@@ -20,7 +20,7 @@ public class SqlRunner {
 	   }
 	 
 	   static void executeScriptUsingStatement() throws IOException, SQLException {
-		String scriptFilePath = "../Bildverwaltung/pro3Sql.sql";
+		String scriptFilePath = "src/main/resources/pro3Sql.sql";
 		BufferedReader reader = null;
 		Connection con = null;
 		Statement statement = null;
