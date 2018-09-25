@@ -234,17 +234,6 @@ public abstract class MainController {
 		System.out.println("I am the deleteImage function");
 	}
 
-	@FXML
-	private void saveImage() {
-		String path = MainControllerEditMode.getImagePath();
-		
-		
-	}
-
-	@FXML
-	private void saveImageAs() {
-		System.out.println("I am the saveImageAs function");
-	}
 
 	@FXML
 	private void exit() {

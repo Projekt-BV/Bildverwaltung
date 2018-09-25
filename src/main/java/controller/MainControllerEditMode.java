@@ -327,7 +327,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	/**
 	 * Activates or deactivates the cut mode
-	 * 
 	 * @author Julian Einspenner
 	 */
 	@FXML
@@ -448,7 +447,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	/**
 	 * Resetting of the GUI to make a suitable state for a new image
-	 * 
 	 * @author Julian Einspenner
 	 */
 	private void resetGUI() {
@@ -494,6 +492,19 @@ public class MainControllerEditMode extends MainController implements Initializa
 		String[] tags = tagsTextField.getText().split(",");
 
 		EditMetaData.saveMetaData(title, location, date, tags, imageContainer.getId());
+	}
+	
+	
+	@FXML
+	private void saveImage() {
+		String path = imageContainer.getPath();
+		Image img = displayImageEditMode.getImage();
+		System.out.println("bin da");
+	}
+
+	@FXML
+	private void saveImageAs() {
+		System.out.println("I am the saveImageAs function");
 	}
 
 	@FXML
@@ -689,17 +700,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 	public static Image getImage() {
 		return image;
 	}
+	
 
 	public ImageView getDisplayImageEditMode() {
 		return displayImageEditMode;
-	}
-
-	public static void setImage(Image image) {
-		MainControllerEditMode.image = image;
-	}
-	
-	public static String getImagePath() {
-		return imageContainer.getPath();
 	}
 
 }
