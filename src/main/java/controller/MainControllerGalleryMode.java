@@ -160,18 +160,17 @@ public class MainControllerGalleryMode extends MainController implements Initial
 			return;
 		}
 
+		ImageView imageView = (ImageView) e.getPickResult().getIntersectedNode();
+		int indexOfImageView = gridPane.getChildren().indexOf(imageView);
+		clickedOnImage = selectedAlbum.getImages().get(indexOfImageView);
+
 		// if right mouse button was clicked, don't open detail view, but show context
 		// menu
 		if (e.getButton() == MouseButton.SECONDARY) {
 			return;
 		}
 
-		ImageView imageView = (ImageView) e.getPickResult().getIntersectedNode();
-
-		int indexOfImageView = gridPane.getChildren().indexOf(imageView);
-		ImageContainer completeImage = selectedAlbum.getImages().get(indexOfImageView);
-
-		MainControllerEditMode.imageContainer = completeImage;
+		MainControllerEditMode.imageContainer = clickedOnImage;
 
 		Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
 		Scene changePane = new Scene(pane);
@@ -234,11 +233,11 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	}
 
 	// ContextMenu
-
 	private void initializeContextMenu() {
 		contextMenu = new ContextMenu();
 		MenuItem delete = new MenuItem("delete");
 		MenuItem rename = new MenuItem("rename");
+		rename.setOnAction(e -> initializeRenameDialog());
 		contextMenu.getItems().addAll(delete, rename);
 		contextMenu.setOpacity(1);
 	}
