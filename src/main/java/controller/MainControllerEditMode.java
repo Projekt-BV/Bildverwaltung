@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.imageio.ImageIO;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -32,6 +34,7 @@ import model.editing.GrayScaler;
 import model.editing.Resizer;
 import model.editing.Rotater;
 import java.util.Properties;
+import java.io.File;
 import java.io.FileInputStream;
 
 public class MainControllerEditMode extends MainController implements Initializable {
@@ -327,7 +330,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	/**
 	 * Activates or deactivates the cut mode
-	 * 
 	 * @author Julian Einspenner
 	 */
 	@FXML
@@ -448,7 +450,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	/**
 	 * Resetting of the GUI to make a suitable state for a new image
-	 * 
 	 * @author Julian Einspenner
 	 */
 	private void resetGUI() {
@@ -495,6 +496,24 @@ public class MainControllerEditMode extends MainController implements Initializa
 		String[] tags = tagsTextField.getText().split(",");
 
 		EditMetaData.saveMetaData(title, location, date, tags, imageContainer.getId());
+	}
+	
+	
+	@FXML
+	private void saveImage() {
+		String path = imageContainer.getPath().substring(8, imageContainer.getPath().length());
+		BufferedImage img = SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null);
+		File outFile = new File(path);
+		try {
+		      ImageIO.write(img, "png", outFile);
+		} catch (IOException e) {
+		      System.err.println("Failed while saving the image");
+		}
+	}
+
+	@FXML
+	private void saveImageAs() {
+		System.out.println("I am the saveImageAs function");
 	}
 
 	@FXML
@@ -690,13 +709,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 	public static Image getImage() {
 		return image;
 	}
+	
 
 	public ImageView getDisplayImageEditMode() {
 		return displayImageEditMode;
-	}
-
-	public static void setImage(Image image) {
-		MainControllerEditMode.image = image;
 	}
 
 }
