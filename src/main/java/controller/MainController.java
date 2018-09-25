@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -33,6 +34,7 @@ import model.Album;
 import model.Database;
 import model.ImageContainer;
 import model.editing.FileImport;
+import model.editing.RenameImage;
 
 //GOD Class
 public abstract class MainController {
@@ -154,6 +156,8 @@ public abstract class MainController {
 
 	static Album selectedAlbum;
 	static boolean didSwitchBack = true;
+	protected ImageContainer clickedOnImage;
+
 	protected static String currentLanguage = "en";
 	private String controller = "GalleryMode";
 
@@ -234,15 +238,6 @@ public abstract class MainController {
 		System.out.println("I am the deleteImage function");
 	}
 
-	@FXML
-	private void saveImage() {
-		System.out.println("I am the saveImage function");
-	}
-
-	@FXML
-	private void saveImageAs() {
-		System.out.println("I am the saveImageAs function");
-	}
 
 	@FXML
 	private void exit() {
@@ -276,8 +271,11 @@ public abstract class MainController {
 		albumController.injectMainController(this);
 
 		stage.setScene(new Scene(root));
-		if(currentLanguage == "en") {stage.setTitle("New Album");
-		} else {stage.setTitle("Neues Album");}
+		if (currentLanguage == "en") {
+			stage.setTitle("New Album");
+		} else {
+			stage.setTitle("Neues Album");
+		}
 		stage.getIcons().add(new Image("/design/Nerd_Icon.jpg"));
 		stage.show();
 
@@ -317,6 +315,66 @@ public abstract class MainController {
 			Stage stage = (Stage) rootPane.getScene().getWindow();
 			stage.setFullScreen(true);
 		}
+	}
+
+	// Rename
+
+	protected void initializeRenameDialog() {
+		RenameImage ri = new RenameImage();
+		ri.start(new Stage());
+
+		if (ri.getResult() != null) {
+			renameImage(clickedOnImage, ri.getResult().get());
+			initializeListView();
+			if (MainController.this instanceof MainControllerGalleryMode) {
+				((MainControllerGalleryMode) MainController.this).initializeGridPane();
+			}
+		}
+	}
+
+	public boolean renameImage(ImageContainer imageContainer, String newName) {
+
+		String oldPath = imageContainer.getPath().substring(8);
+		File file = new File(oldPath);
+		int lastSlash = oldPath.lastIndexOf("/");
+		int dot = oldPath.lastIndexOf(".");
+		String fileType = oldPath.substring(dot, oldPath.length());
+
+		String newPath = oldPath.substring(0, lastSlash + 1);
+		System.out.println(newPath);
+		File newFile = new File(newPath + newName + fileType);
+
+		int i = 1;
+		String originalNewName = newName;
+		while (newFile.exists()) {
+			newName = originalNewName + i++;
+			newFile = new File(newPath + newName + fileType);
+		}
+
+		if (file.renameTo(newFile)) {
+			String updatePathRequest = "UPDATE fotos SET Pfad='file:///" + newPath + newName + fileType + "' WHERE ID="
+					+ imageContainer.getId() + ";";
+			String updateNameRequest = "UPDATE fotos SET Fotoname='" + newName + fileType + "' WHERE ID="
+					+ imageContainer.getId() + ";";
+			System.out.println(updateNameRequest);
+			try {
+				SendSQLRequest.sendSQL(updatePathRequest);
+				SendSQLRequest.sendSQL(updateNameRequest);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+
+		} else {
+			System.out.println("File rename failed");
+			System.out.println("oldPath: " + imageContainer.getPath());
+			System.out.println("lastSlash: " + lastSlash);
+			System.out.println("newPath: " + newPath);
+			System.out.println("FileType: " + fileType);
+			System.out.println(file.getAbsolutePath());
+			System.out.println(newFile.getAbsolutePath());
+		}
+		return true;
 	}
 
 	// Bar above gridPane / ImageView
