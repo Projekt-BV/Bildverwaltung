@@ -1,12 +1,15 @@
 package model.editing;
 
+import java.io.File;
 import java.sql.SQLException;
 
+import controller.MainControllerEditMode;
 import database.SendSQLRequest;
+import model.ImageContainer;
 
 /**
  * Class to edit metadata of displayed images
- * @author Julian Einspenner
+ * @author Julian Einspenner, Phillip Persch
  */
 public class EditMetaData {
 	
@@ -19,13 +22,13 @@ public class EditMetaData {
 	 * @param tags are additional information, e.g. "vacation16"
 	 * @param id is the unique identifier of the image
 	 */
-	public static void saveMetaData(String title, String location, String date, String[] tags, int id) {
-		title    = (title    == null)  ?  ""   :  title;
+	public static boolean saveMetaData(String title, String location, String date, String[] tags, int id) {
+		renameImage(MainControllerEditMode.imageContainer, title);
 		location = (location == null)  ?  ""   :  location;
 		date     = (date     == null)  ?  ""   :  date;
 		tags[0]  = (tags[0]  == null)  ?  ""   :  tags[0];
 		
-		String sqlStatementTitleLocationDate = createStatementForTitleLocationDate(title, location, date, id);
+		String sqlStatementTitleLocationDate = createStatementForTitleLocationDate(location, date, id);
 		String sqlStatementDeleteTags = createStatementToDeleteOldTags(id);
 		
 		try {
@@ -40,7 +43,9 @@ public class EditMetaData {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.err.println("Failed while savig metadata to database");
+			return false;
 		}
+		return true;
 	}
 	
 	
@@ -53,12 +58,9 @@ public class EditMetaData {
 	 * @param id is the unique identifier of the image in database
 	 * @return is the SQL-statement
 	 */
-	public static String createStatementForTitleLocationDate(String title, String location, String date, int id) {
-		return "UPDATE prog3_db.fotos SET Fotoname='" + 
-				title + "', Datum='" + 
-				date + "', Ort='" + 
-				location + 
-				"' WHERE ID=" + id;
+	public static String createStatementForTitleLocationDate(String location, String date, int id) {
+		return "UPDATE prog3_db.fotos SET " + 
+				"Datum='" + date + "', Ort='" + location + "' WHERE ID=" + id;
 	}
 	
 	/**
@@ -69,6 +71,45 @@ public class EditMetaData {
 	 */
 	public static String createStatementToDeleteOldTags(int id) {
 		 return "DELETE FROM tags WHERE Foto_ID=" + id;
+	}
+	
+	
+	public static boolean renameImage(ImageContainer imageContainer, String newName) {
+
+		String oldPath = imageContainer.getPath().substring(8);
+		File file = new File(oldPath);
+		int lastSlash = oldPath.lastIndexOf("/");
+		int dot = oldPath.lastIndexOf(".");
+		String fileType = oldPath.substring(dot, oldPath.length());
+
+		String newPath = oldPath.substring(0, lastSlash + 1);
+		File newFile = new File(newPath + newName + fileType);
+
+		int i = 1;
+		String originalNewName = newName;
+		while (newFile.exists()) {
+			newName = originalNewName + i++;
+			newFile = new File(newPath + newName + fileType);
+		}
+
+		if (file.renameTo(newFile)) {
+			String updatePathRequest = "UPDATE fotos SET Pfad='file:///" + newPath + newName + fileType + "' WHERE ID="
+					+ imageContainer.getId() + ";";
+			String updateNameRequest = "UPDATE fotos SET Fotoname='" + newName + fileType + "' WHERE ID="
+					+ imageContainer.getId() + ";";
+			try {
+				SendSQLRequest.sendSQL(updatePathRequest);
+				SendSQLRequest.sendSQL(updateNameRequest);
+				imageContainer.setPath("file:///" + newPath + newName + fileType);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+
+		} else {
+			
+		}
+		return true;
 	}
 	
 }
