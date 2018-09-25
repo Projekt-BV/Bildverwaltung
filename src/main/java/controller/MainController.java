@@ -225,11 +225,6 @@ public abstract class MainController {
 	}
 
 	@FXML
-	private void copyImage() {
-		System.out.println("I am the copyImage function");
-	}
-
-	@FXML
 	private void renameImage() {
 		System.out.println("I am the renameImage function");
 	}
@@ -392,7 +387,6 @@ public abstract class MainController {
 		switch (controller) {
 		case ("EditMode"):
 			// BorderPane East
-			MenuCopy.setText(config.getProperty("MenuBar-File-Copy"));
 			MenuRename.setText(config.getProperty("MenuBar-File-Rename"));
 			MenuDelete.setText(config.getProperty("MenuBar-File-Delete"));
 			MenuSave.setText(config.getProperty("MenuBar-File-Save"));

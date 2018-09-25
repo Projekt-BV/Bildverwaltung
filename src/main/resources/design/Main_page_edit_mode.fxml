@@ -33,7 +33,6 @@
               <menus>
                 <Menu fx:id="MenuFile" mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem fx:id="MenuCopy" mnemonicParsing="false" onAction="#copyImage" text="Copy" />
                     <MenuItem fx:id="MenuRename" mnemonicParsing="false" onAction="#renameImage" text="Rename" />
                     <MenuItem fx:id="MenuDelete" mnemonicParsing="false" onAction="#deleteImage" text="Delete" />
                     <MenuItem fx:id="MenuSave" mnemonicParsing="false" onAction="#saveImage" text="Save" />
