@@ -95,8 +95,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 		initializeListView();
 		database.getAlbums().stream().forEach(a -> System.out.println(a.getName()));
 
-		initializeMetaData();
-
 		imageViewScrollPane.setFitToWidth(true);
 		imageViewScrollPane.setFitToHeight(true);
 		imageStackPane.setStyle("-fx-background-color: rgb(80,80,80)");
@@ -114,6 +112,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 		controllerCheck("EditMode");
 		initColorChoiceBox();
+		initializeMetaData();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------//
@@ -462,6 +461,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 		setFitDimensions();
 		resetZooming();
 		setResizeTextFields();
+		initializeMetaData();
 	}
 
 	/**
