@@ -489,6 +489,8 @@ public class MainControllerEditMode extends MainController implements Initializa
 		Matcher m = p.matcher(date);
 		if (!m.matches()) {
 			date = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+		}else {
+			date = new SimpleDateFormat("dd.MM.yyyy").format(imageContainer.getDate());
 		}
 
 		String[] tags = tagsTextField.getText().split(",");
