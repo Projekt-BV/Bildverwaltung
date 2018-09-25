@@ -15,8 +15,8 @@ public class ConnectTest {
 			Album tmpAlbum = new Album("TestAlbum", 2);
 			
 			
-//			SendSQLRequest.deleteAlbum(tmpAlbum);
-			SendSQLRequest.checkTabelles();
+			SendSQLRequest.deleteAlbum(tmpAlbum);
+			//SendSQLRequest.checkTabelles();
 		
 	}
 }

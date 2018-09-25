@@ -192,7 +192,11 @@ public class SendSQLRequest {
 		
 		sendSQL (deleteFromAlbumfoto);
 	}
-	
+	/**
+	 * Löscht ein Bild aus der Datenbank
+	 * @param ic
+	 * @throws SQLException
+	 */
 	public static void deleteImageFromDB (ImageContainer ic) throws SQLException {
 		int id = ic.getId();
 		

@@ -251,8 +251,16 @@ public abstract class MainController {
 
 	// Help
 	@FXML
-	private void showCommands() {
-		System.out.println("I am the showCommands function");
+	private void showCommands() throws IOException {
+		Stage stage;
+		Parent root;
+		stage = new Stage();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/design/About.fxml"));
+		root = loader.load();
+		stage.setScene(new Scene(root));
+		if(currentLanguage == "en") {stage.setTitle("Help");
+		} else {stage.setTitle("Hilfe");}
+		stage.show();
 	}
 
 	// Buttons below listView
