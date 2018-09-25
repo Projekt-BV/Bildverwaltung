@@ -345,8 +345,10 @@ public abstract class MainController {
 		System.out.println(newPath);
 		File newFile = new File(newPath + newName + fileType);
 
+		int i = 1;
+		String originalNewName = newName;
 		while (newFile.exists()) {
-			newName = newName + "1";
+			newName = originalNewName + i++;
 			newFile = new File(newPath + newName + fileType);
 		}
 
