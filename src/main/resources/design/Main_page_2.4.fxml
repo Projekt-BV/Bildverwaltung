@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="rootPane" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerGalleryMode">
+<AnchorPane fx:id="rootPane" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerGalleryMode">
   <!-- TODO Add Nodes -->
   <children>
     <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css">
@@ -28,11 +28,6 @@
                 <Menu fx:id="MenuFile" mnemonicParsing="false" text="File">
                   <items>
                     <MenuItem fx:id="MenuImport" mnemonicParsing="false" onAction="#importImage" text="Import" />
-                    <MenuItem fx:id="MenuCopy" mnemonicParsing="false" onAction="#copyImage" text="Copy" />
-                    <MenuItem fx:id="MenuRename" mnemonicParsing="false" onAction="#renameImage" text="Rename" />
-                    <MenuItem fx:id="MenuDelete" mnemonicParsing="false" onAction="#deleteImage" text="Delete" />
-                    <MenuItem fx:id="MenuSave" mnemonicParsing="false" onAction="#saveImage" text="Save" />
-                              <MenuItem fx:id="MenuSaveAs" mnemonicParsing="false" onAction="#saveImageAs" text="Save as ..." />
                               <MenuItem fx:id="MenuExit" mnemonicParsing="false" onAction="#exit" text="Exit" />
                   </items>
                 </Menu>
@@ -49,13 +44,13 @@
                         </Menu>
               </menus>
             </MenuBar>
-                  <DatePicker fx:id="DatePickerTo" layoutX="883.0" layoutY="30.0" prefHeight="27.0" prefWidth="161.0" promptText="to" />
+                  <DatePicker fx:id="DatePickerTo" layoutX="837.0" layoutY="30.0" prefHeight="27.0" prefWidth="161.0" promptText="to" />
           <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="190.0" />
           <Button fx:id="ButtonSearch" layoutX="196.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="59.0" text="Search" />
           <Button fx:id="ButtonFScreen" layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
-                  <Button fx:id="ButtonFilter" layoutX="661.0" layoutY="30.0" mnemonicParsing="false" text="Filter" />
-                  <TextField fx:id="TextFieldKeyword" layoutX="560.0" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" promptText="keyword" />
-                  <DatePicker fx:id="DatePickerFrom" layoutX="707.0" layoutY="30.0" prefHeight="27.0" prefWidth="175.0" promptText="from" />
+                  <Button fx:id="ButtonFilter" layoutX="999.0" layoutY="30.0" mnemonicParsing="false" text="Filter" />
+                  <TextField fx:id="TextFieldKeyword" layoutX="550.0" layoutY="30.0" prefHeight="28.0" prefWidth="122.0" promptText="keyword" />
+                  <DatePicker fx:id="DatePickerFrom" layoutX="674.0" layoutY="30.0" prefHeight="27.0" prefWidth="161.0" promptText="from" />
           </children>
         </AnchorPane>
       </top>
