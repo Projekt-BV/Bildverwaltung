@@ -120,20 +120,21 @@ public class SendSQLRequest {
 		File tmpFile;
 		
 		String query = "SELECT * from fotos;";
-		String delete1 = "DELETE FROM albumfoto WHERE FotoID=?";
-		String delete2 = "DELETE FROM fotos WHERE ID=?";
+		String deleteFromAlbumfoto = "DELETE FROM albumfoto WHERE FotoID=?";
+		String deleteFromFoto = "DELETE FROM fotos WHERE ID=?";
+		String deleteFromTags = "DELETE FROM tags WHERE Foto_ID=?";
 		
 		getDB_Connection();
 		stmt = con.createStatement();
 
 		
         tmpRs = stmt.executeQuery(query);
+        
         ResultSetMetaData rsmd = tmpRs.getMetaData();
-	    int cols = rsmd.getColumnCount();
-
-	    
-	    PreparedStatement preStatement = con.prepareStatement(delete1);
-	    PreparedStatement preStatementDel2 = con.prepareStatement(delete2);
+	 
+	    PreparedStatement preAlbumFoto = con.prepareStatement(deleteFromAlbumfoto);
+	    PreparedStatement preFoto = con.prepareStatement(deleteFromFoto);
+	    PreparedStatement preTag = con.prepareStatement(deleteFromTags);
 	    String tmpString ="";
 	
 	    while(tmpRs.next())
@@ -150,10 +151,13 @@ public class SendSQLRequest {
 	     
 	        		int tmpId = tmpRs.getInt(1);
 	      
-	        		preStatement.setInt(1, tmpId);
-	        		preStatementDel2.setInt(1, tmpId);
-	    	        preStatement.executeUpdate();
-	    	        preStatementDel2.executeUpdate();
+	        		preAlbumFoto.setInt(1, tmpId);
+	        		preFoto.setInt(1, tmpId);
+	        		preTag.setInt(1, tmpId);
+	        		
+	        		preAlbumFoto.executeUpdate();
+	        		preTag.executeUpdate();
+	        		preFoto.executeUpdate();
 	        	}
 	
 	  
@@ -162,14 +166,26 @@ public class SendSQLRequest {
 	    closeDB_Connection();
 	}
 	
+	/**Entfernt uebergebens Album aus der DB
+	 * 
+	 * @param album Zulöschendes Album
+	 * @throws SQLException
+	 */
 	public static void deleteAlbum (Album album) throws SQLException {
-		String deleteFromAlbum = "DELETE FROM alben WHERE ID = "+ album.getId() + "; " ;
-		String deleteFromAlbumfoto ="DELETE FROM albumfoto WHERE AlbumID =" +album.getId()+ ";";
-		String sendSql= deleteFromAlbumfoto + deleteFromAlbum;
+		String deleteFromAlbum = "DELETE FROM alben WHERE ID = "+ album.getId();
+		String deleteFromAlbumfoto ="DELETE FROM albumfoto WHERE AlbumID =" +album.getId()+ "; \n";
+	
 		
-		sendSQL(sendSql);
+		sendSQL(deleteFromAlbumfoto);
+		sendSQL(deleteFromAlbum);
 	}
 	
+	/**
+	 * 
+	 * @param album 
+	 * @param ic
+	 * @throws SQLException
+	 */
 	public static void deleteImageFromAlbum (Album album, ImageContainer ic) throws SQLException {
 		
 		String deleteFromAlbumfoto ="DELETE FROM albumfoto WHERE AlbumID = " +album.getId()+ " AND FotoID = " + ic.getId();
@@ -181,10 +197,13 @@ public class SendSQLRequest {
 		int id = ic.getId();
 		
 		String deleteFotoFormFotos = "DELETE FROM fotos WHERE ID = " + id + ";";
-		String deleteFromAlbumFoto = "DELETE FROM albumdoto WHERE FotoID = "+ id + ";";
-		String sendSql = deleteFromAlbumFoto + deleteFotoFormFotos;
+		String deleteFromAlbumFoto = "DELETE FROM albumdoto WHERE FotoID = "+ id + ";\n";
+		String deleteFromTags = "DELETE FROM tags WHERE Foto_ID = "+ id + ";" ;
+	
 		
-		sendSQL (sendSql);
+		sendSQL (deleteFromAlbumFoto);
+		sendSQL (deleteFromTags);
+		sendSQL (deleteFotoFormFotos);
 	}
 }
 
