@@ -251,7 +251,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		MenuItem deleteFromAll = new MenuItem("delete from all albums");
 		MenuItem rename = new MenuItem("rename");
 
-		rename.setVisible(true);
 		rename.setOnAction(e -> initializeRenameDialog());
 
 		delete.setOnAction(e -> {
