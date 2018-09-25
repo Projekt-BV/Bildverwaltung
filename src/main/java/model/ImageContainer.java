@@ -89,6 +89,10 @@ public class ImageContainer implements Serializable {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	
+	public void setPath(String path) {
+		this.path = path;
+	}
 
 	public ArrayList<String> getTags() {
 		return tags;

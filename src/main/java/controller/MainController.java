@@ -33,6 +33,7 @@ import javafx.stage.Stage;
 import model.Album;
 import model.Database;
 import model.ImageContainer;
+import model.editing.EditMetaData;
 import model.editing.FileImport;
 import model.editing.RenameImage;
 
@@ -324,7 +325,7 @@ public abstract class MainController {
 		ri.start(new Stage());
 
 		if (ri.getResult() != null) {
-			renameImage(clickedOnImage, ri.getResult().get());
+			EditMetaData.renameImage(clickedOnImage, ri.getResult().get());
 			initializeListView();
 			if (MainController.this instanceof MainControllerGalleryMode) {
 				((MainControllerGalleryMode) MainController.this).initializeGridPane();
@@ -332,50 +333,7 @@ public abstract class MainController {
 		}
 	}
 
-	public boolean renameImage(ImageContainer imageContainer, String newName) {
-
-		String oldPath = imageContainer.getPath().substring(8);
-		File file = new File(oldPath);
-		int lastSlash = oldPath.lastIndexOf("/");
-		int dot = oldPath.lastIndexOf(".");
-		String fileType = oldPath.substring(dot, oldPath.length());
-
-		String newPath = oldPath.substring(0, lastSlash + 1);
-		System.out.println(newPath);
-		File newFile = new File(newPath + newName + fileType);
-
-		int i = 1;
-		String originalNewName = newName;
-		while (newFile.exists()) {
-			newName = originalNewName + i++;
-			newFile = new File(newPath + newName + fileType);
-		}
-
-		if (file.renameTo(newFile)) {
-			String updatePathRequest = "UPDATE fotos SET Pfad='file:///" + newPath + newName + fileType + "' WHERE ID="
-					+ imageContainer.getId() + ";";
-			String updateNameRequest = "UPDATE fotos SET Fotoname='" + newName + fileType + "' WHERE ID="
-					+ imageContainer.getId() + ";";
-			System.out.println(updateNameRequest);
-			try {
-				SendSQLRequest.sendSQL(updatePathRequest);
-				SendSQLRequest.sendSQL(updateNameRequest);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return false;
-			}
-
-		} else {
-			System.out.println("File rename failed");
-			System.out.println("oldPath: " + imageContainer.getPath());
-			System.out.println("lastSlash: " + lastSlash);
-			System.out.println("newPath: " + newPath);
-			System.out.println("FileType: " + fileType);
-			System.out.println(file.getAbsolutePath());
-			System.out.println(newFile.getAbsolutePath());
-		}
-		return true;
-	}
+	
 
 	// Bar above gridPane / ImageView
 	@FXML

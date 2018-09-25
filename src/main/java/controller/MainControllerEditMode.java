@@ -4,12 +4,16 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
+
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -123,7 +127,16 @@ public class MainControllerEditMode extends MainController implements Initializa
 	 * @author Julian Einspenner
 	 */
 	private void initializeMetaData() {
-		titelTextField.setText(imageContainer.getName());
+		
+		String titleSplitted[] = imageContainer.getName().split("\\.");
+		String title = "";
+		if(titleSplitted[0] == null) {
+			title = imageContainer.getName();
+		}else {
+			title = titleSplitted[0];
+		}
+		
+		titelTextField.setText(title);
 		locationTextField.setText(imageContainer.getLocation());
 		dateTextField.setText(new SimpleDateFormat("dd.MM.yyyy").format(imageContainer.getDate()));
 
@@ -137,6 +150,16 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 		tagsTextField.setText(tags);
 
+		
+		setPath();
+	}
+	
+	
+	/**
+	 * @author Julian Einspenner
+	 * Sets the path label to current path of imageContainer
+	 */
+	private void setPath() {
 		String text = "Path:\n";
 		StringBuilder sb = new StringBuilder(imageContainer.getPath());
 		for (int i = 8; i < imageContainer.getPath().length(); i++) {
@@ -495,7 +518,16 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 		String[] tags = tagsTextField.getText().split(",");
 
-		EditMetaData.saveMetaData(title, location, date, tags, imageContainer.getId());
+		if(EditMetaData.saveMetaData(title, location, date, tags, imageContainer.getId())) {
+			imageContainer.setDate(date);
+			imageContainer.setLocation(location);
+			imageContainer.setName(title);
+			
+			ArrayList<String> tagList = new ArrayList<String>(Arrays.asList(tags));
+			imageContainer.setTags(tagList);
+			setPath();
+		}
+		saveImage();
 	}
 	
 	

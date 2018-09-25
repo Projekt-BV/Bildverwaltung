@@ -30,6 +30,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.ImageContainer;
+import model.editing.EditMetaData;
 import model.editing.Resizer;
 
 public class MainControllerGalleryMode extends MainController implements Initializable {
@@ -236,7 +237,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		if (renameAllTextField.getText().isEmpty()) {
 			return;
 		}
-		selectedAlbum.getImages().stream().forEach(i -> renameImage(i, renameAllTextField.getText()));
+		selectedAlbum.getImages().stream().forEach(i -> EditMetaData.renameImage(i, renameAllTextField.getText()));
 		reloadMainPage();
 	}
 
