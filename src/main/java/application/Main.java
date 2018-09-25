@@ -21,7 +21,7 @@ public class Main extends Application {
 		scene.getStylesheets().add(css);
 		stage.getIcons().add(new Image("/design/Nerd_Icon.jpg"));
 		stage.setTitle("Bildverwaltung");
-		stage.minHeightProperty().bind(stage.widthProperty().multiply(0.63));
+		stage.minHeightProperty().bind(stage.widthProperty().multiply(0.625));
 		stage.maxHeightProperty().bind(stage.widthProperty().multiply(0.5));
 		stage.setScene(scene);
 		stage.show();
