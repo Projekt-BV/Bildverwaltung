@@ -34,7 +34,7 @@ import model.Album;
 import model.Database;
 import model.ImageContainer;
 import model.editing.FileImport;
-import model.editing.RenameAlbum;
+import model.editing.RenameImage;
 
 //GOD Class
 public abstract class MainController {
@@ -321,11 +321,11 @@ public abstract class MainController {
 	// Rename
 
 	protected void initializeRenameDialog() {
-		RenameAlbum ra = new RenameAlbum();
-		ra.start(new Stage());
+		RenameImage ri = new RenameImage();
+		ri.start(new Stage());
 
-		if (ra.getResult() != null) {
-			renameImage(clickedOnImage, ra.getResult().get());
+		if (ri.getResult() != null) {
+			renameImage(clickedOnImage, ri.getResult().get());
 			initializeListView();
 			if (MainController.this instanceof MainControllerGalleryMode) {
 				((MainControllerGalleryMode) MainController.this).initializeGridPane();
@@ -333,7 +333,7 @@ public abstract class MainController {
 		}
 	}
 
-	public void renameImage(ImageContainer imageContainer, String newName) {
+	public boolean renameImage(ImageContainer imageContainer, String newName) {
 
 		String oldPath = imageContainer.getPath().substring(8);
 		File file = new File(oldPath);
@@ -345,8 +345,10 @@ public abstract class MainController {
 		System.out.println(newPath);
 		File newFile = new File(newPath + newName + fileType);
 
-		if (newFile.exists())
-			System.out.println("Gibt es schon"); // TODO: Alert!
+		while (newFile.exists()) {
+			newName = newName + "1";
+			newFile = new File(newPath + newName + fileType);
+		}
 
 		if (file.renameTo(newFile)) {
 			String updatePathRequest = "UPDATE fotos SET Pfad='file:///" + newPath + newName + fileType + "' WHERE ID="
@@ -359,6 +361,7 @@ public abstract class MainController {
 				SendSQLRequest.sendSQL(updateNameRequest);
 			} catch (SQLException e) {
 				e.printStackTrace();
+				return false;
 			}
 
 		} else {
@@ -370,7 +373,7 @@ public abstract class MainController {
 			System.out.println(file.getAbsolutePath());
 			System.out.println(newFile.getAbsolutePath());
 		}
-
+		return true;
 	}
 
 	// Bar above gridPane / ImageView

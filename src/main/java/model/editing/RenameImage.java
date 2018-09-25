@@ -8,7 +8,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class RenameAlbum extends Application {
+public class RenameImage extends Application {
 
 	private Optional<String> result;
 
