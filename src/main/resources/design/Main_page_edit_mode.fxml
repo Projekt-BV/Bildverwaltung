@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerEditMode">
+<AnchorPane fx:id="rootPane" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerEditMode">
   <!-- TODO Add Nodes -->
   <children>
     <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css">
@@ -54,13 +54,13 @@
                         </Menu>
               </menus>
             </MenuBar>
-                  <DatePicker fx:id="DatePickerTo" layoutX="878.0" layoutY="30.0" prefHeight="27.0" prefWidth="166.0" promptText="to" />
+                  <DatePicker fx:id="DatePickerTo" layoutX="832.0" layoutY="28.0" prefHeight="27.0" prefWidth="166.0" promptText="to" />
           <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="190.0" />
           <Button fx:id="ButtonSearch" layoutX="196.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="59.0" text="Suche" />
           <Button fx:id="ButtonFScreen" layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
-                  <Button fx:id="ButtonFilter" layoutX="660.0" layoutY="30.0" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
-                  <TextField fx:id="TextFieldKeyword" layoutX="560.0" layoutY="31.0" prefHeight="25.0" prefWidth="100.0" promptText="keyword" />
-                  <DatePicker fx:id="DatePickerFrom" layoutX="704.0" layoutY="30.0" promptText="from" />
+                  <Button fx:id="ButtonFilter" layoutX="999.0" layoutY="28.0" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
+                  <TextField fx:id="TextFieldKeyword" layoutX="540.0" layoutY="28.0" prefHeight="28.0" prefWidth="122.0" promptText="keyword" />
+                  <DatePicker fx:id="DatePickerFrom" layoutX="664.0" layoutY="28.0" prefHeight="27.0" prefWidth="166.0" promptText="from" />
                   <Button fx:id="ButtonAlbumView" layoutX="1181.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchBack" prefHeight="27.0" prefWidth="99.0" text="Album view" />
           </children>
         </AnchorPane>

@@ -24,6 +24,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -281,7 +282,9 @@ public abstract class MainController {
 		albumController.injectMainController(this);
 
 		stage.setScene(new Scene(root));
-		stage.setTitle("New Album");
+		if(currentLanguage == "en") {stage.setTitle("New Album");
+		} else {stage.setTitle("Neues Album");}
+		stage.getIcons().add(new Image("/design/Nerd_Icon.jpg"));
 		stage.show();
 
 	}
@@ -398,6 +401,12 @@ public abstract class MainController {
 		switch (controller) {
 		case ("EditMode"):
 			// BorderPane East
+			MenuCopy.setText(config.getProperty("MenuBar-File-Copy"));
+			MenuRename.setText(config.getProperty("MenuBar-File-Rename"));
+			MenuDelete.setText(config.getProperty("MenuBar-File-Delete"));
+			MenuSave.setText(config.getProperty("MenuBar-File-Save"));
+			MenuSaveAs.setText(config.getProperty("MenuBar-File-SaveAs"));
+			MenuExit.setText(config.getProperty("MenuBar-File-Exit"));
 			TabEditing.setText(config.getProperty("Tab-Editing"));
 			TabEditButtonCClock.setText(config.getProperty("Tab-Editing-Button-CClock"));
 			TabEditButtonClock.setText(config.getProperty("Tab-Editing-Button-Clockwise"));
@@ -428,12 +437,6 @@ public abstract class MainController {
 			// MenuBar
 			MenuFile.setText(config.getProperty("MenuBar-File"));
 			// MenuImport Move to if cause below;
-			MenuCopy.setText(config.getProperty("MenuBar-File-Copy"));
-			MenuRename.setText(config.getProperty("MenuBar-File-Rename"));
-			MenuDelete.setText(config.getProperty("MenuBar-File-Delete"));
-			MenuSave.setText(config.getProperty("MenuBar-File-Save"));
-			MenuSaveAs.setText(config.getProperty("MenuBar-File-SaveAs"));
-			MenuExit.setText(config.getProperty("MenuBar-File-Exit"));
 			MenuHelp.setText(config.getProperty("MenuBar-Help"));
 			MenuAbout.setText(config.getProperty("MenuBar-Help-About"));
 			MenuChangeLanguage.setText(config.getProperty("MenuBar-Help-Language"));
