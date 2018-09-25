@@ -512,7 +512,6 @@ public abstract class MainController {
 		public AlbumListCell() {
 
 			contextMenu = new ContextMenu();
-			// delete.setOnAction(e -> //TODO);
 
 			this.setOnDragDropped(e -> {
 				ImageContainer image = (ImageContainer) e.getDragboard()
@@ -520,6 +519,12 @@ public abstract class MainController {
 
 				String sqlRequest = "INSERT INTO albumfoto (AlbumID, FotoID) VALUES" + "(" + this.getItem().getId()
 						+ ", '" + image.getId() + "');";
+
+				Album referenceEqualAlbum = database.getAlbums().stream().filter(a -> a.getId() == getItem().getId())
+						.findAny().get();
+
+				selectedAlbum = referenceEqualAlbum;
+
 				try {
 					ResultSet tmpRs = SendSQLRequest.sendSQL(sqlRequest);
 				} catch (SQLException ex) {
@@ -528,10 +533,6 @@ public abstract class MainController {
 				}
 				e.setDropCompleted(true);
 
-				Album referenceEqualAlbum = listView.getItems().stream().filter(a -> a.getId() == getItem().getId())
-						.findAny().get();
-
-				selectedAlbum = referenceEqualAlbum;
 				initializeListView();
 				if (MainController.this instanceof MainControllerGalleryMode) {
 					((MainControllerGalleryMode) MainController.this).initializeGridPane();
@@ -548,6 +549,7 @@ public abstract class MainController {
 				// don't allow user to rename or delete album "All Images"
 				if (!getItem().getName().equals("All Images")) {
 					MenuItem delete = new MenuItem("Delete");
+
 					delete.setOnAction(event -> {
 						try {
 							SendSQLRequest.deleteAlbum(this.getItem());
@@ -561,6 +563,7 @@ public abstract class MainController {
 							e.printStackTrace();
 						}
 					});
+
 					MenuItem rename = new MenuItem("Rename");
 					contextMenu.getItems().addAll(rename, delete);
 				}

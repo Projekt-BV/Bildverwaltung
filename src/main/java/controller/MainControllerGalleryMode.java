@@ -2,9 +2,11 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
 
+import database.SendSQLRequest;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -157,6 +159,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	@FXML
 	private void gridPaneImagePressed(MouseEvent e) throws IOException {
 
+		System.out.println("I was called");
 		// this check is to make sure, that the scene is not switched after a drag and
 		// drop ends on an image. Boolean actionWasDragAndNoClick is set to true when
 		// drag is detected
@@ -244,15 +247,32 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	// ContextMenu
 	private void initializeContextMenu() {
 		contextMenu = new ContextMenu();
-		MenuItem delete = new MenuItem("delete");
+		MenuItem delete = new MenuItem("delete from album");
+		MenuItem deleteFromAll = new MenuItem("delete from all albums");
 		MenuItem rename = new MenuItem("rename");
+
+		rename.setVisible(true);
 		rename.setOnAction(e -> initializeRenameDialog());
-		contextMenu.getItems().addAll(delete, rename);
+
+		delete.setOnAction(e -> {
+			try {
+				SendSQLRequest.deleteImageFromAlbum(selectedAlbum, clickedOnImage);
+				reloadMainPage();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+
+		});
+		contextMenu.getItems().addAll(rename, delete, deleteFromAll);
 		contextMenu.setOpacity(1);
 	}
 
 	@FXML
 	private void contextMenuRequested(ContextMenuEvent e) {
+		ImageView imageView = (ImageView) e.getPickResult().getIntersectedNode();
+		int indexOfImageView = gridPane.getChildren().indexOf(imageView);
+		clickedOnImage = selectedAlbum.getImages().get(indexOfImageView);
+
 		contextMenu.show(gridPane, e.getScreenX(), e.getScreenY());
 	}
 
