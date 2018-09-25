@@ -1,11 +1,14 @@
 package database;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 
 
 public class SendSQLRequest {
@@ -74,7 +77,7 @@ public class SendSQLRequest {
 		Statement tmpStatement = getStatement();
 		if(testStatement(tmpStatement ,sqlRequest)== true) {
 			
-			closeDB_Connection();
+			//closeDB_Connection();
 			return sendSQL_Query(sqlRequest);
 		}
 		else {
@@ -85,45 +88,13 @@ public class SendSQLRequest {
 	
 	}
 	
-
-	
-	
-//	private static void sendSQL_Update (String sqlRequest) {
-//	
-//		try {
-//			getDB_Connection();
-//			stmt = con.createStatement();
-//			stmt.executeUpdate(sqlRequest);
-//			stmt.close();
-//		    con.commit();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		finally {
-//			
-//		try {
-//			closeDB_Connection();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		}
-//       
-//	}
 	public static ResultSet sendSQL_Query (String sqlRequest) {
 		ResultSet rs;
 		rs = null;
 		try {
-		
-            // Query ausf�hren - einf�gen
-            
             rs = getStatement().executeQuery(sqlRequest);
-
             stmt.close();
-            con.commit();
-      
+            con.commit();     
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -141,4 +112,69 @@ public class SendSQLRequest {
 		
 		return rs;
 	}
+
+
+	public static void checkTabelles() throws SQLException {
+		ResultSet tmpRs;
+		File tmpFile;
+		
+		String query = "SELECT * from fotos;";
+		String delete1 = "DELETE FROM albumfoto WHERE FotoID=?";
+		String delete2 = "DELETE FROM fotos WHERE ID=?";
+
+
+		
+        tmpRs = getStatement().executeQuery(query);
+        ResultSetMetaData rsmd = tmpRs.getMetaData();
+	    int cols = rsmd.getColumnCount();
+		
+	    // Statement vorbereiten
+	    getDB_Connection();
+	    //con.setAutoCommit(false);
+	    
+	    PreparedStatement preStatement = con.prepareStatement(delete1);
+	    PreparedStatement preStatementDel2 = con.prepareStatement(delete2);
+	    String tmpString ="";
+	    boolean statementBool = false;
+	    while(tmpRs.next())
+	    {
+	      
+	        	
+	        	
+	        	tmpString = tmpRs.getString(4);
+	        	System.out.println(tmpString);
+	        	tmpString = tmpString.substring(8, tmpString.length());
+	        	System.out.println(tmpString);
+	        	tmpFile = new File (tmpString);
+	        	boolean tmpbool = tmpFile.exists();
+	        	if(tmpbool) {
+	        		
+	        	}else
+	        	{
+	        		statementBool = true;
+	        		int tmpId = tmpRs.getInt(1);
+	      
+	        		preStatement.setInt(1, tmpId);
+	        		preStatementDel2.setInt(1, tmpId);
+	        	}
+	
+	  
+	    }
+	    
+	    if(statementBool == true) {
+	    	
+		    System.out.println(preStatement.toString());
+		    System.out.println(preStatementDel2.toString());
+	        preStatement.executeUpdate();
+	        preStatementDel2.executeUpdate();
+	        con.commit();
+	        
+	    }
+        
+		
+	    closeDB_Connection();
+		 
+		
+	}
 }
+

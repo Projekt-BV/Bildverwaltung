@@ -15,7 +15,7 @@ public class ConnectTest {
 		
 		try (Connection con = DriverManager.getConnection(url, user, password)) {
 			System.out.println("Verbindung zu " + url + " wurde hergestellt.");
-						
+			SendSQLRequest.checkTabelles();
 			con.close();
 		} catch (SQLException e) {
 			System.err.println("Verbindung konnte nicht hergestellt werden.");
