@@ -34,6 +34,7 @@ import model.Database;
 import model.ImageContainer;
 import model.editing.FileImport;
 
+//GOD Class
 public abstract class MainController {
 
 	// GUI Elements, hierarchy like the hierarchy in Scenebuilder
@@ -144,16 +145,6 @@ public abstract class MainController {
 	@FXML
 	Button NewAlbumButtonAdd;
 
-	// Method to rewrite Choicebox
-	// Tab-Editing-ChoiceBox1=kein Filter
-	// Tab-Editing-ChoiceBox2=Schwarz-Weiß
-	// Tab-Editing-ChoiceBox3=Rot
-	// Tab-Editing-ChoiceBox4=Grün
-	// Tab-Editing-ChoiceBox5=Blau
-	// Tab-Editing-ChoiceBox6=Gelb
-	// Tab-Editing-ChoiceBox7=Violet
-	// Tab-Editing-ChoiceBox8=Aqua
-
 	@FXML
 	ListView<Album> listView;
 	@FXML
@@ -163,7 +154,7 @@ public abstract class MainController {
 
 	static Album selectedAlbum;
 	static boolean didSwitchBack = true;
-	private static String currentLanguage = "en";
+	protected static String currentLanguage = "en";
 	private String controller = "GalleryMode";
 
 	/**
@@ -231,11 +222,6 @@ public abstract class MainController {
 		Stage window = new Stage();
 		tmpImp.injectMainController((MainControllerGalleryMode) this);
 		tmpImp.start(window);
-	}
-
-	@FXML
-	private void copyImage() {
-		System.out.println("I am the copyImage function");
 	}
 
 	@FXML
@@ -401,7 +387,6 @@ public abstract class MainController {
 		switch (controller) {
 		case ("EditMode"):
 			// BorderPane East
-			MenuCopy.setText(config.getProperty("MenuBar-File-Copy"));
 			MenuRename.setText(config.getProperty("MenuBar-File-Rename"));
 			MenuDelete.setText(config.getProperty("MenuBar-File-Delete"));
 			MenuSave.setText(config.getProperty("MenuBar-File-Save"));

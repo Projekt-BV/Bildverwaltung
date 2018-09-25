@@ -31,6 +31,8 @@ import model.editing.EditMetaData;
 import model.editing.GrayScaler;
 import model.editing.Resizer;
 import model.editing.Rotater;
+import java.util.Properties;
+import java.io.FileInputStream;
 
 public class MainControllerEditMode extends MainController implements Initializable {
 
@@ -55,10 +57,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	@FXML
 	private Button cutModeButton;
 	@FXML
-	private ChoiceBox<String> colorChoiceBox;
-
-	ObservableList<String> colorChoiceList = FXCollections.observableArrayList("None", "Black And White", "Red",
-			"Green", "Blue", "Yellow", "Violet", "Aqua");
+	private ChoiceBox <String> colorChoiceBox;
 
 	@FXML
 	private TextField widthTextField, heightTextField;
@@ -85,8 +84,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 		initFitWidth = (int) displayImageEditMode.getFitWidth();
 		initFitHeight = (int) displayImageEditMode.getFitHeight();
-
-		initColorChoiceBox();
+		
 
 		// Beladen der ChoiceBox passiert erst nach Umstrukturierung der Controller.
 		// albumChoiceBox.getChildrenUnmodifiable().addAll(c);
@@ -112,9 +110,11 @@ public class MainControllerEditMode extends MainController implements Initializa
 		setResizeTextFields();
 
 		controllerCheck("EditMode");
+		initColorChoiceBox();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------//
+	
 	/**
 	 * Initializes the metadata and the path of an image in editing mode
 	 * 
@@ -153,6 +153,28 @@ public class MainControllerEditMode extends MainController implements Initializa
 	 * @author Julian Einspenner
 	 */
 	private void initColorChoiceBox() {
+		Properties config;
+		config = new Properties();
+		FileInputStream fis;
+	
+		try {
+		fis = new FileInputStream("src/main/java/LangBundle_" + currentLanguage + ".properties");
+		config.load(fis);
+
+		} catch (IOException io) {
+		io.printStackTrace();
+		}
+		
+		ObservableList<String> colorChoiceList = FXCollections.observableArrayList
+				(config.getProperty("ChoiceBox-None"), 
+				 config.getProperty("ChoiceBox-Black-White"), 
+				 config.getProperty("ChoiceBox-Red"),
+				 config.getProperty("ChoiceBox-Green"), 
+				 config.getProperty("ChoiceBox-Blue"), 
+				 config.getProperty("ChoiceBox-Yellow"), 
+				 config.getProperty("ChoiceBox-Violet"), 
+				 config.getProperty("ChoiceBox-Aqua"));
+		
 		colorChoiceBox.setItems(colorChoiceList);
 		colorChoiceBox.setValue(colorChoiceList.get(0));
 		colorChoiceBox.setOnAction(e -> {
