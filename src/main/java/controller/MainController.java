@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -239,7 +238,6 @@ public abstract class MainController {
 		System.out.println("I am the deleteImage function");
 	}
 
-
 	@FXML
 	private void exit() {
 		System.out.println("I am the Exit function");
@@ -254,8 +252,11 @@ public abstract class MainController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/design/About.fxml"));
 		root = loader.load();
 		stage.setScene(new Scene(root));
-		if(currentLanguage == "en") {stage.setTitle("Help");
-		} else {stage.setTitle("Hilfe");}
+		if (currentLanguage == "en") {
+			stage.setTitle("Help");
+		} else {
+			stage.setTitle("Hilfe");
+		}
 		stage.show();
 	}
 
@@ -283,8 +284,13 @@ public abstract class MainController {
 	}
 
 	@FXML
-	private void deleteAlbumButtonPressed() {
-		System.out.println("I am the deleteAlbumButtonPressed function");
+	private void deleteAlbumButtonPressed() throws SQLException {
+		if (selectedAlbum.getName().equals("All Images")) {
+			return;
+		}
+		SendSQLRequest.deleteAlbum(selectedAlbum);
+		selectedAlbum = null;
+		initializeListView();
 	}
 
 	// Bar below Menubar
@@ -332,8 +338,6 @@ public abstract class MainController {
 			}
 		}
 	}
-
-	
 
 	// Bar above gridPane / ImageView
 	@FXML
@@ -531,6 +535,17 @@ public abstract class MainController {
 				// don't allow user to rename or delete album "All Images"
 				if (!getItem().getName().equals("All Images")) {
 					MenuItem delete = new MenuItem("Delete");
+					delete.setOnAction(event -> {
+						try {
+							SendSQLRequest.deleteAlbum(this.getItem());
+							selectedAlbum = null;
+							initializeListView();
+						} catch (SQLException e) {
+							System.out.println("catch");
+
+							e.printStackTrace();
+						}
+					});
 					MenuItem rename = new MenuItem("Rename");
 					contextMenu.getItems().addAll(rename, delete);
 				}
