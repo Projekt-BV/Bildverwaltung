@@ -16,12 +16,12 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="rootPane" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerGalleryMode">
+<AnchorPane fx:id="rootPane" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerGalleryMode">
   <!-- TODO Add Nodes -->
   <children>
-    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css">
+    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <top>
-        <AnchorPane prefHeight="52.0" prefWidth="471.0" styleClass="anchor-pane" stylesheets="@application.css">
+        <AnchorPane maxHeight="62.0" minHeight="52.0" prefHeight="52.0" prefWidth="1280.0" styleClass="anchor-pane" stylesheets="@application.css">
           <children>
             <MenuBar layoutX="0.0" layoutY="2.0" prefHeight="25.0" prefWidth="254.0">
               <menus>
@@ -55,17 +55,17 @@
         </AnchorPane>
       </top>
          <center>
-            <SplitPane dividerPositions="0.5" maxWidth="1025.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="713.0" prefWidth="1025.0" BorderPane.alignment="CENTER">
+            <SplitPane dividerPositions="0.5" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" BorderPane.alignment="CENTER">
               <items>
-                <AnchorPane maxHeight="31.0" styleClass="anchor-pane" stylesheets="@application.css">
+                <AnchorPane maxHeight="31.0" minHeight="30.0" prefHeight="30.0" styleClass="anchor-pane" stylesheets="@application.css">
                      <children>
                         <Button fx:id="ButtonRenameAll" layoutX="544.0" layoutY="2.0" mnemonicParsing="false" onAction="#renameAllButtonPressed" text="Rename All" />
                         <TextField fx:id="renameAllTextField" layoutX="623.0" layoutY="3.0" prefHeight="25.0" prefWidth="161.0" styleClass="text-field" stylesheets="@application.css" />
                         <Button fx:id="ButtonAddImage" layoutX="861.0" layoutY="2.0" mnemonicParsing="false" onAction="#importImage" prefHeight="27.0" prefWidth="98.0" text="Add Image" />
                      </children></AnchorPane>
-                  <ScrollPane onDragDetected="#selectionDragStarted" pannable="true">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" onDragDetected="#selectionDragStarted" pannable="true">
                      <content>
-                        <GridPane fx:id="gridPane" hgap="10.0" minHeight="135.0" minWidth="135.0" onContextMenuRequested="#contextMenuRequested" onDragDetected="#imageDragStarted" onMouseClicked="#gridPaneImagePressed" styleClass="grid-pane" stylesheets="@application.css" vgap="8.0">
+                        <GridPane fx:id="gridPane" hgap="10.0" onContextMenuRequested="#contextMenuRequested" onDragDetected="#imageDragStarted" onMouseClicked="#gridPaneImagePressed" styleClass="grid-pane" stylesheets="@application.css" vgap="8.0">
                            <columnConstraints>
                               <ColumnConstraints fillWidth="false" hgrow="ALWAYS" />
                            </columnConstraints>
@@ -79,11 +79,11 @@
             </SplitPane>
          </center>
          <left>
-            <AnchorPane prefHeight="713.0" prefWidth="255.0" styleClass="anchor-pane" stylesheets="@application.css" BorderPane.alignment="CENTER">
+            <AnchorPane styleClass="anchor-pane" stylesheets="@application.css" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="ButtonAddAlbum" layoutY="681.0" mnemonicParsing="false" onAction="#addAlbumButtonPressed" prefHeight="29.0" prefWidth="106.0" text="Add album" />
                   <Button fx:id="ButtonDeleteAlbum" layoutX="135.0" layoutY="681.0" mnemonicParsing="false" onAction="#deleteAlbumButtonPressed" prefHeight="29.0" prefWidth="121.0" text="Delete Album" />
-                  <ListView fx:id="listView" onDragOver="#imageDragOver" onMouseClicked="#initializeGridPane" prefHeight="681.0" prefWidth="256.0" />
+                  <ListView fx:id="listView" maxWidth="254.0" onDragOver="#imageDragOver" onMouseClicked="#initializeGridPane" prefHeight="681.0" prefWidth="256.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </left>
