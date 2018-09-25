@@ -430,6 +430,12 @@ public class MainControllerEditMode extends MainController implements Initializa
 	 * @author Julian Einspenner
 	 */
 	private void resetGUI() {
+		displayImageEditMode.setFitWidth(initFitWidth);
+		displayImageEditMode.setFitHeight(initFitHeight);
+
+		usedColorFilter = false;
+		colorChoiceBox.setValue("None");
+		
 		setFitDimensions();
 		resetZooming();
 		setResizeTextFields();
@@ -622,7 +628,12 @@ public class MainControllerEditMode extends MainController implements Initializa
 		imageContainer = selectedAlbum.getImages().get(newIndex);
 		image = new Image(imageContainer.getPath());
 		imagePlain = new Image(imageContainer.getPath());
+		
 		displayImageEditMode.setImage(image);
+		
+		
+
+		resetGUI();
 	}
 
 	@FXML
@@ -635,6 +646,8 @@ public class MainControllerEditMode extends MainController implements Initializa
 		image = new Image(imageContainer.getPath());
 		imagePlain = new Image(imageContainer.getPath());
 		displayImageEditMode.setImage(image);
+		
+		resetGUI();
 	}
 
 	@FXML

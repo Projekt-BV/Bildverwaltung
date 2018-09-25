@@ -55,7 +55,6 @@ public class ColorFilter {
 				colors = makeItAqua(colors);
 				break;
 			default:
-				System.err.println("Bad colour selection");
 				return img;
 		}
 		
