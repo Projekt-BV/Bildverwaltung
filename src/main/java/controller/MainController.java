@@ -273,6 +273,14 @@ public abstract class MainController {
 		albumController.injectMainController(this);
 
 		stage.setScene(new Scene(root));
+		stage.setAlwaysOnTop(true);
+		stage.setOnCloseRequest(e -> {
+			initializeListView();
+			if (this instanceof MainControllerGalleryMode) {
+				MainControllerGalleryMode mc = (MainControllerGalleryMode) this;
+				mc.initializeGridPane();
+			}
+		});
 		if (currentLanguage == "en") {
 			stage.setTitle("New Album");
 		} else {
@@ -538,11 +546,13 @@ public abstract class MainController {
 					delete.setOnAction(event -> {
 						try {
 							SendSQLRequest.deleteAlbum(this.getItem());
-							selectedAlbum = null;
+							selectedAlbum = database.getAlbums().get(0);
 							initializeListView();
+							if (MainController.this instanceof MainControllerGalleryMode) {
+								MainControllerGalleryMode mc = (MainControllerGalleryMode) MainController.this;
+								mc.initializeGridPane();
+							}
 						} catch (SQLException e) {
-							System.out.println("catch");
-
 							e.printStackTrace();
 						}
 					});

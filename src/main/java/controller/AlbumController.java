@@ -15,7 +15,8 @@ import javafx.stage.Stage;
 import model.Album;
 import model.Database;
 
-/**Controllerklasse zum erzeugen von neuen Alben
+/**
+ * Controllerklasse zum erzeugen von neuen Alben
  * 
  * @author Mario Anklam
  *
