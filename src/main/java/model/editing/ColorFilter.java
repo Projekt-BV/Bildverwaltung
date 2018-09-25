@@ -8,17 +8,25 @@ import java.awt.Color;
 
 /**
  * This class enables to filter colors of an image
+ * Color values:
+ * 2 -> Red
+ * 3 -> Green
+ * 4 -> Blue
+ * 5 -> Yellow
+ * 6 -> Violet
+ * 7 -> Aqua
  * @author Julian Einspenner
  */
 public class ColorFilter {
 	
 	/**
+	 * Colorfilters an image. See class documentation for the number and its referenced color
 	 * @author Julian Einspenner
 	 * @param img is the image which is going to be colorfiltered
-	 * @param colorSelection is the color the image should have after filtering (possible strings: red, green, blue, yellow, violet, aqua)
+	 * @param color is the color the image should have after filtering (possible strings: red, green, blue, yellow, violet, aqua)
 	 * @return
 	 */
-	public static Image filterCoulours(Image img, String colorSelection) {
+	public static Image filterCoulours(Image img, int color) {
 		BufferedImage bimg = SwingFXUtils.fromFXImage(img, null);
 		int w = bimg.getWidth();
 		int h = bimg.getHeight();
@@ -32,26 +40,24 @@ public class ColorFilter {
 			}
 		}
 		
-		colorSelection = colorSelection.toLowerCase();
+		switch(color) {
 		
-		switch(colorSelection) {
-		
-			case("red"): 
+			case(2): 
 				colors = makeItRed(colors);
 				break;
-			case("blue"): 
-				colors = makeItBlue(colors);
-				break;
-			case("green"): 
+			case(3): 
 				colors = makeItGreen(colors);
 				break;
-			case("yellow"): 
+			case(4): 
+				colors = makeItBlue(colors);
+				break;
+			case(5): 
 				colors = makeItYellow(colors);
 				break;
-			case("violet"): 
+			case(6): 
 				colors = makeItViolet(colors);
 				break;
-			case("aqua"): 
+			case(7): 
 				colors = makeItAqua(colors);
 				break;
 			default:
