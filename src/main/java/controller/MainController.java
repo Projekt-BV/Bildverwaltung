@@ -163,7 +163,7 @@ public abstract class MainController {
 
 	static Album selectedAlbum;
 	static boolean didSwitchBack = true;
-	private static String currentLanguage = "en";
+	protected static String currentLanguage = "en";
 	private String controller = "GalleryMode";
 
 	/**
