@@ -1,5 +1,8 @@
 package application;
 
+import java.sql.SQLException;
+
+import database.SendSQLRequest;
 import database.SqlRunner;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +25,9 @@ public class Main extends Application {
 		
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		SqlRunner.main(null);
+		SendSQLRequest.checkTabelles();
 		launch(args);
 	}
 }

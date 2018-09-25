@@ -36,27 +36,6 @@ public class SendSQLRequest {
 		
 		return stmt.execute(sqlRequest);
 	}
-
-//	/**
-//	 * Erzeugt ein Statement
-//	 * @return
-//	 * @throws SQLException
-//	 */
-//	private static Statement getStatement() throws SQLException {
-//		try {
-//			getDB_Connection();
-//			stmt = con.createStatement();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			stmt.close();
-//			closeDB_Connection();
-//		} finally {
-//
-//		}
-//		return stmt;
-//	}
-	
 	
 	/**
 	 * Erzeugt eine Verbindung zur Datenbank
