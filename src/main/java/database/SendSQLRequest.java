@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import model.Album;
+import model.ImageContainer;
+
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 
@@ -30,28 +33,29 @@ public class SendSQLRequest {
 	 * @throws SQLException
 	 */
 	private static boolean testStatement(Statement stmt, String sqlRequest) throws SQLException {
+		
 		return stmt.execute(sqlRequest);
 	}
 
-	/**
-	 * Erzeugt ein Statement
-	 * @return
-	 * @throws SQLException
-	 */
-	private static Statement getStatement() throws SQLException {
-		try {
-			getDB_Connection();
-			stmt = con.createStatement();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			stmt.close();
-			closeDB_Connection();
-		} finally {
-
-		}
-		return stmt;
-	}
+//	/**
+//	 * Erzeugt ein Statement
+//	 * @return
+//	 * @throws SQLException
+//	 */
+//	private static Statement getStatement() throws SQLException {
+//		try {
+//			getDB_Connection();
+//			stmt = con.createStatement();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			stmt.close();
+//			closeDB_Connection();
+//		} finally {
+//
+//		}
+//		return stmt;
+//	}
 	
 	
 	/**
@@ -74,25 +78,39 @@ public class SendSQLRequest {
 	}
 	
 	public static ResultSet sendSQL(String sqlRequest) throws SQLException {
-		Statement tmpStatement = getStatement();
-		if(testStatement(tmpStatement ,sqlRequest)== true) {
+		
+		try {
+			getDB_Connection();
+			stmt = con.createStatement();
 			
-			//closeDB_Connection();
-			return sendSQL_Query(sqlRequest);
+			if(testStatement(stmt ,sqlRequest)== true) {
+				
+				//closeDB_Connection();
+				return sendSQL_Query(sqlRequest);
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			stmt.close();
+			closeDB_Connection();			
 		}
-		else {
-			//sendSQL_Update(sqlRequest);
-			// Bessere L�sung suchen als null zur�ckgeben wenn keine ResultSet-Objekt
-			return null;
-		}
-	
+		
+		return null;
 	}
 	
+	/**
+	 * Fuehrt eine SELECT Sql-Anweissung durch
+	 * @param sqlRequest SQL-Anweissung
+	 * @return ResultSet
+	 * 
+	 */
 	public static ResultSet sendSQL_Query (String sqlRequest) {
 		ResultSet rs;
 		rs = null;
 		try {
-            rs = getStatement().executeQuery(sqlRequest);
+            rs = stmt.executeQuery(sqlRequest);
+			//rs = getStatement().executeQuery(sqlRequest);
             stmt.close();
             con.commit();     
 			
@@ -113,7 +131,11 @@ public class SendSQLRequest {
 		return rs;
 	}
 
-
+	/**
+	 * Ueberprueft Datenbank ob Pfade noch gueltig sind -> löscht fehlerhafte Einträge
+	 * 	
+	 * @throws SQLException
+	 */
 	public static void checkTabelles() throws SQLException {
 		ResultSet tmpRs;
 		File tmpFile;
@@ -121,28 +143,23 @@ public class SendSQLRequest {
 		String query = "SELECT * from fotos;";
 		String delete1 = "DELETE FROM albumfoto WHERE FotoID=?";
 		String delete2 = "DELETE FROM fotos WHERE ID=?";
-
+		
+		getDB_Connection();
+		stmt = con.createStatement();
 
 		
-        tmpRs = getStatement().executeQuery(query);
+        tmpRs = stmt.executeQuery(query);
         ResultSetMetaData rsmd = tmpRs.getMetaData();
 	    int cols = rsmd.getColumnCount();
-		
-	    // Statement vorbereiten
-	    getDB_Connection();
-	    //con.setAutoCommit(false);
+
 	    
 	    PreparedStatement preStatement = con.prepareStatement(delete1);
 	    PreparedStatement preStatementDel2 = con.prepareStatement(delete2);
 	    String tmpString ="";
-	    boolean statementBool = false;
+	
 	    while(tmpRs.next())
 	    {
-	      
-	        	
-	        	
 	        	tmpString = tmpRs.getString(4);
-	        	System.out.println(tmpString);
 	        	tmpString = tmpString.substring(8, tmpString.length());
 	        	System.out.println(tmpString);
 	        	tmpFile = new File (tmpString);
@@ -151,30 +168,44 @@ public class SendSQLRequest {
 	        		
 	        	}else
 	        	{
-	        		statementBool = true;
+	     
 	        		int tmpId = tmpRs.getInt(1);
 	      
 	        		preStatement.setInt(1, tmpId);
 	        		preStatementDel2.setInt(1, tmpId);
+	    	        preStatement.executeUpdate();
+	    	        preStatementDel2.executeUpdate();
 	        	}
 	
 	  
 	    }
-	    
-	    if(statementBool == true) {
-	    	
-		    System.out.println(preStatement.toString());
-		    System.out.println(preStatementDel2.toString());
-	        preStatement.executeUpdate();
-	        preStatementDel2.executeUpdate();
-	        con.commit();
-	        
-	    }
-        
-		
+	    con.commit();
 	    closeDB_Connection();
-		 
+	}
+	
+	public static void deleteAlbum (Album album) throws SQLException {
+		String deleteFromAlbum = "DELETE FROM alben WHERE ID = "+ album.getId() + "; " ;
+		String deleteFromAlbumfoto ="DELETE FROM albumfoto WHERE AlbumID =" +album.getId()+ ";";
+		String sendSql= deleteFromAlbumfoto + deleteFromAlbum;
 		
+		sendSQL(sendSql);
+	}
+	
+	public static void deleteImageFromAlbum (Album album, ImageContainer ic) throws SQLException {
+		
+		String deleteFromAlbumfoto ="DELETE FROM albumfoto WHERE AlbumID = " +album.getId()+ " AND FotoID = " + ic.getId();
+		
+		sendSQL (deleteFromAlbumfoto);
+	}
+	
+	public static void deleteImageFromDB (ImageContainer ic) throws SQLException {
+		int id = ic.getId();
+		
+		String deleteFotoFormFotos = "DELETE FROM fotos WHERE ID = " + id + ";";
+		String deleteFromAlbumFoto = "DELETE FROM albumdoto WHERE FotoID = "+ id + ";";
+		String sendSql = deleteFromAlbumFoto + deleteFotoFormFotos;
+		
+		sendSQL (sendSql);
 	}
 }
 
