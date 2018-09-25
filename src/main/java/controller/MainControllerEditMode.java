@@ -443,7 +443,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 		displayImageEditMode.setFitHeight(initFitHeight);
 
 		usedColorFilter = false;
-		colorChoiceBox.setValue("None");
+		colorChoiceBox.getSelectionModel().selectFirst();
 
 		resetGUI();
 	}
@@ -457,7 +457,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 		displayImageEditMode.setFitHeight(initFitHeight);
 
 		usedColorFilter = false;
-		colorChoiceBox.setValue("None");
+		colorChoiceBox.getSelectionModel().selectFirst();
 		
 		setFitDimensions();
 		resetZooming();
@@ -537,15 +537,15 @@ public class MainControllerEditMode extends MainController implements Initializa
 	 */
 	private void colorChoiceBoxUsed() {
 
-		String color = colorChoiceBox.getValue();
+		int color = getSelectedChoiceBoxIndex();
 
-		if (color.equals("None:") || color.equals("")) {
+		if (color == 0 ) {
 			return;
 		}
 
 		usedColorFilter = true;
 
-		if (color.equals("Black And White")) {
+		if (color == 1) {
 			displayImageEditMode.setImage(GrayScaler.grayScaleImage(displayImageEditMode.getImage()));
 			return;
 		}
@@ -713,6 +713,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	public ImageView getDisplayImageEditMode() {
 		return displayImageEditMode;
+	}
+	
+	private int getSelectedChoiceBoxIndex() {
+		return colorChoiceBox.getSelectionModel().getSelectedIndex();
 	}
 
 }
