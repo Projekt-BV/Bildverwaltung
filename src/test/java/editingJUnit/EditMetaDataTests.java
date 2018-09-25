@@ -8,9 +8,7 @@ import model.editing.EditMetaData;
 
 public class EditMetaDataTests {
 	
-	static String titleDateLocationStatement = "UPDATE prog3_db.fotos SET Fotoname='" + 
-											   "universe.jpg" + 
-											   "', Datum='" + "22.11.2010" + 
+	static String titleDateLocationStatement = "UPDATE prog3_db.fotos SET Datum='" + "22.11.2010" + 
 											   "', Ort='" + "pluto" + 
 											   "' WHERE ID=" + 42;
 	
@@ -18,7 +16,7 @@ public class EditMetaDataTests {
 
 	@Test
 	public void createSQLForTitleDateLocationTest() {
-		String statement = EditMetaData.createStatementForTitleLocationDate("universe.jpg", "22.11.2010", "pluto", 42);
+		String statement = EditMetaData.createStatementForTitleLocationDate("pluto", "22.11.2010", 42);
 		assertEquals(titleDateLocationStatement, statement);
 	}
 
