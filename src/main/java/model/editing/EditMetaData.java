@@ -9,37 +9,46 @@ import model.ImageContainer;
 
 /**
  * Class to edit metadata of displayed images
+ * 
  * @author Julian Einspenner, Phillip Persch
  */
 public class EditMetaData {
-	
+
 	/**
-	 * This function generates the SQL-Statements to save an images metadata to the database
+	 * This function generates the SQL-Statements to save an images metadata to the
+	 * database
+	 * 
 	 * @author Julian Einspenner
-	 * @param title is the name of the image
-	 * @param location is the location where this photo was shot
-	 * @param date is a time stamp of the image
-	 * @param tags are additional information, e.g. "vacation16"
-	 * @param id is the unique identifier of the image
+	 * @param title
+	 *            is the name of the image
+	 * @param location
+	 *            is the location where this photo was shot
+	 * @param date
+	 *            is a time stamp of the image
+	 * @param tags
+	 *            are additional information, e.g. "vacation16"
+	 * @param id
+	 *            is the unique identifier of the image
 	 */
 	public static boolean saveMetaData(String title, String location, String date, String[] tags, int id) {
 		renameImage(MainControllerEditMode.imageContainer, title);
-		location = (location == null)  ?  ""   :  location;
-		date     = (date     == null)  ?  ""   :  date;
-		tags[0]  = (tags[0]  == null)  ?  ""   :  tags[0];
-		
+		location = (location == null) ? "" : location;
+		date = (date == null) ? "" : date;
+		tags[0] = (tags[0] == null) ? "" : tags[0];
+
 		String sqlStatementTitleLocationDate = createStatementForTitleLocationDate(location, date, id);
 		String sqlStatementDeleteTags = createStatementToDeleteOldTags(id);
-		
+
 		try {
 			SendSQLRequest.sendSQL(sqlStatementTitleLocationDate);
 			SendSQLRequest.sendSQL(sqlStatementDeleteTags);
-			
-			for(int i = 0; i < tags.length; i++) {
-				String sqlStatementTags = "INSERT INTO prog3_db.tags (Schluesselwort, Foto_ID) VALUES ('" + tags[i] + "', " + id + ")";
+
+			for (int i = 0; i < tags.length; i++) {
+				String sqlStatementTags = "INSERT INTO prog3_db.tags (Schluesselwort, Foto_ID) VALUES ('" + tags[i]
+						+ "', " + id + ")";
 				SendSQLRequest.sendSQL(sqlStatementTags);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.err.println("Failed while savig metadata to database");
@@ -47,33 +56,37 @@ public class EditMetaData {
 		}
 		return true;
 	}
-	
-	
+
 	/**
 	 * Generates the SQL-Statement for setting title, date and location
+	 * 
 	 * @author Julian Einspenner
-	 * @param title name of the image
-	 * @param date time stamp of the image
-	 * @param location location of the image
-	 * @param id is the unique identifier of the image in database
+	 * @param title
+	 *            name of the image
+	 * @param date
+	 *            time stamp of the image
+	 * @param location
+	 *            location of the image
+	 * @param id
+	 *            is the unique identifier of the image in database
 	 * @return is the SQL-statement
 	 */
 	public static String createStatementForTitleLocationDate(String location, String date, int id) {
-		return "UPDATE prog3_db.fotos SET " + 
-				"Datum='" + date + "', Ort='" + location + "' WHERE ID=" + id;
+		return "UPDATE prog3_db.fotos SET " + "Datum='" + date + "', Ort='" + location + "' WHERE ID=" + id;
 	}
-	
+
 	/**
 	 * Generates the SQL-Statement for deleting an images tags
+	 * 
 	 * @author Julian Einspenner
-	 * @param id is the unique identifier of the image in database
+	 * @param id
+	 *            is the unique identifier of the image in database
 	 * @return is the SQL-Statement
 	 */
 	public static String createStatementToDeleteOldTags(int id) {
-		 return "DELETE FROM tags WHERE Foto_ID=" + id;
+		return "DELETE FROM tags WHERE Foto_ID=" + id;
 	}
-	
-	
+
 	public static boolean renameImage(ImageContainer imageContainer, String newName) {
 
 		String oldPath = imageContainer.getPath().substring(8);
@@ -87,7 +100,7 @@ public class EditMetaData {
 
 		int i = 1;
 		String originalNewName = newName;
-		while (newFile.exists()) {
+		while (newFile.exists() && !newFile.equals(file)) {
 			newName = originalNewName + i++;
 			newFile = new File(newPath + newName + fileType);
 		}
@@ -107,9 +120,9 @@ public class EditMetaData {
 			}
 
 		} else {
-			
+
 		}
 		return true;
 	}
-	
+
 }
