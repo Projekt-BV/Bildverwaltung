@@ -25,9 +25,9 @@
 <AnchorPane fx:id="rootPane" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerEditMode">
   <!-- TODO Add Nodes -->
   <children>
-    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css">
+    <BorderPane layoutX="0.0" layoutY="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <top>
-        <AnchorPane prefHeight="52.0" prefWidth="471.0" styleClass="anchor-pane" stylesheets="@application.css">
+        <AnchorPane maxHeight="58.0" minHeight="58.0" prefHeight="58.0" prefWidth="1280.0" styleClass="anchor-pane" stylesheets="@application.css">
           <children>
             <MenuBar layoutX="0.0" layoutY="2.0" prefHeight="25.0" prefWidth="254.0">
               <menus>
@@ -65,18 +65,18 @@
         </AnchorPane>
       </top>
          <center>
-            <SplitPane dividerPositions="0.0392156862745098" maxWidth="788.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="713.0" prefWidth="788.0" BorderPane.alignment="CENTER">
+            <SplitPane dividerPositions="0.0392156862745098" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" BorderPane.alignment="CENTER">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="25.0" prefWidth="609.0" styleClass="anchor-pane" stylesheets="@application.css">
+                <AnchorPane maxHeight="30.0" minHeight="30.0" minWidth="0.0" prefHeight="30.0" styleClass="anchor-pane" stylesheets="@application.css">
                      <children>
                 <Slider fx:id="zoomSlider" layoutX="268.0" layoutY="6.0" onMouseDragged="#setAndGetSliderLabel" onMouseReleased="#sliderMove" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
                 <Label fx:id="zoomSliderValueLabel" layoutX="489.0" layoutY="6.0" prefWidth="51.0" text="0%" />
                         <ChoiceBox fx:id="chooseAlbumChoiceBox" onDragExited="#dropdownButtonChoiceSelected" prefWidth="150.0" />
                         <Button fx:id="ButtonDeleteImage" layoutX="694.0" mnemonicParsing="false" onAction="#deleteImage" text="Delete Image" />
                      </children></AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="750.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
-                        <ScrollPane fx:id="imageViewScrollPane" layoutX="-2.0" layoutY="-1.0" onMouseEntered="#showSwipeButtons" onMouseExited="#hideSwipeButtons" prefHeight="682.0" prefWidth="789.0">
+                        <ScrollPane fx:id="imageViewScrollPane" fitToHeight="true" fitToWidth="true" layoutX="-2.0" layoutY="-1.0" onMouseEntered="#showSwipeButtons" onMouseExited="#hideSwipeButtons">
                            <content>
                               <StackPane fx:id="imageStackPane" blendMode="LIGHTEN" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: 80,80,80;">
                                  <children>
@@ -114,7 +114,7 @@
             </SplitPane>
          </center>
          <right>
-            <TabPane prefHeight="713.0" prefWidth="247.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
                 <Tab fx:id="TabEditing" text="Editing">
                   <content>
@@ -162,12 +162,12 @@
             </TabPane>
          </right>
          <left>
-            <AnchorPane prefHeight="713.0" prefWidth="255.0" styleClass="anchor-pane" stylesheets="@application.css" BorderPane.alignment="CENTER">
+            <AnchorPane styleClass="anchor-pane" stylesheets="@application.css" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="ButtonAddAlbum" layoutY="681.0" mnemonicParsing="false" onAction="#addAlbumButtonPressed" prefHeight="29.0" prefWidth="106.0" text="Add album" />
                   <Button fx:id="ButtonDeleteAlbum" layoutX="135.0" layoutY="681.0" mnemonicParsing="false" onAction="#deleteAlbumButtonPressed" prefHeight="29.0" prefWidth="121.0" text="Delete Album" />               
 
-                  <ListView fx:id="listView" onMouseClicked="#switchBack" prefHeight="681.0" prefWidth="256.0" />
+                  <ListView fx:id="listView" onMouseClicked="#switchBack" prefHeight="681.0" prefWidth="256.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </left>

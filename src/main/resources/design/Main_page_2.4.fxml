@@ -19,9 +19,9 @@
 <AnchorPane fx:id="rootPane" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerGalleryMode">
   <!-- TODO Add Nodes -->
   <children>
-    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <BorderPane layoutX="0.0" layoutY="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <top>
-        <AnchorPane maxHeight="62.0" minHeight="52.0" prefHeight="58.0" prefWidth="1280.0" styleClass="anchor-pane" stylesheets="@application.css">
+        <AnchorPane maxHeight="58.0" minHeight="58.0" prefHeight="58.0" prefWidth="1280.0" styleClass="anchor-pane" stylesheets="@application.css">
           <children>
             <MenuBar layoutX="0.0" layoutY="2.0" prefHeight="25.0" prefWidth="254.0">
               <menus>
@@ -57,7 +57,7 @@
          <center>
             <SplitPane dividerPositions="0.5" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" BorderPane.alignment="CENTER">
               <items>
-                <AnchorPane maxHeight="31.0" minHeight="30.0" prefHeight="30.0" styleClass="anchor-pane" stylesheets="@application.css">
+                <AnchorPane maxHeight="30.0" minHeight="30.0" prefHeight="30.0" styleClass="anchor-pane" stylesheets="@application.css">
                      <children>
                         <Button fx:id="ButtonRenameAll" layoutX="544.0" layoutY="2.0" mnemonicParsing="false" onAction="#renameAllButtonPressed" text="Rename All" />
                         <TextField fx:id="renameAllTextField" layoutX="623.0" layoutY="3.0" prefHeight="25.0" prefWidth="161.0" styleClass="text-field" stylesheets="@application.css" />
@@ -83,7 +83,7 @@
                <children>
                   <Button fx:id="ButtonAddAlbum" layoutY="681.0" mnemonicParsing="false" onAction="#addAlbumButtonPressed" prefHeight="29.0" prefWidth="106.0" text="Add album" />
                   <Button fx:id="ButtonDeleteAlbum" layoutX="135.0" layoutY="681.0" mnemonicParsing="false" onAction="#deleteAlbumButtonPressed" prefHeight="29.0" prefWidth="121.0" text="Delete Album" />
-                  <ListView fx:id="listView" maxWidth="254.0" onDragOver="#imageDragOver" onMouseClicked="#initializeGridPane" prefHeight="681.0" prefWidth="256.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0" />
+                  <ListView fx:id="listView" maxHeight="-Infinity" maxWidth="254.0" onDragOver="#imageDragOver" onMouseClicked="#initializeGridPane" prefHeight="681.0" prefWidth="256.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </left>
