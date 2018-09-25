@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -42,6 +43,9 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	private ProgressIndicator progressIndicator;
 	@FXML
 	private ImageView displayImage;
+	@FXML
+	TextField renameAllTextField;
+
 	private Image imageToDownScale;
 	private ContextMenu contextMenu;
 	private int col = 0;
@@ -229,7 +233,10 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	// Bar above gridPane
 	@FXML
 	private void renameAllButtonPressed() {
-		System.out.println("I am the renameAllButtonPressed function");
+		if (renameAllTextField.getText().isEmpty()) {
+			return;
+		}
+		selectedAlbum.getImages().stream().forEach(i -> renameImage(i, renameAllTextField.getText()));
 	}
 
 	// ContextMenu
