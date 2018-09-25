@@ -485,11 +485,10 @@ public class MainControllerEditMode extends MainController implements Initializa
 		String location = locationTextField.getText();
 		String date = dateTextField.getText();
 
-		Pattern p = Pattern.compile("[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}");
+		Pattern p = Pattern.compile("[0-9]{1,2}\\.[0-9]{1,2}\\.[0-9]{4}");
 		Matcher m = p.matcher(date);
+		
 		if (!m.matches()) {
-			date = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
-		}else {
 			date = new SimpleDateFormat("dd.MM.yyyy").format(imageContainer.getDate());
 		}
 
