@@ -292,13 +292,18 @@ public abstract class MainController {
 	}
 
 	@FXML
-	private void deleteAlbumButtonPressed() throws SQLException {
+	private void deleteAlbumButtonPressed(Event e) throws SQLException, IOException {
 		if (selectedAlbum.getName().equals("All Images")) {
 			return;
 		}
 		SendSQLRequest.deleteAlbum(selectedAlbum);
 		selectedAlbum = null;
 		initializeListView();
+		if (this instanceof MainControllerGalleryMode) {
+			((MainControllerGalleryMode) this).initializeGridPane();
+		} else {
+			switchBack(e);
+		}
 	}
 
 	// Bar below Menubar
