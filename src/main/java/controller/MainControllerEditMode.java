@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.imageio.ImageIO;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -32,6 +34,7 @@ import model.editing.GrayScaler;
 import model.editing.Resizer;
 import model.editing.Rotater;
 import java.util.Properties;
+import java.io.File;
 import java.io.FileInputStream;
 
 public class MainControllerEditMode extends MainController implements Initializable {
@@ -497,9 +500,14 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 	@FXML
 	private void saveImage() {
-		String path = imageContainer.getPath();
-		Image img = displayImageEditMode.getImage();
-		System.out.println("bin da");
+		String path = imageContainer.getPath().substring(8, imageContainer.getPath().length());
+		BufferedImage img = SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null);
+		File outFile = new File(path);
+		try {
+		      ImageIO.write(img, "png", outFile);
+		} catch (IOException e) {
+		      System.err.println("Failed while saving the image");
+		}
 	}
 
 	@FXML
