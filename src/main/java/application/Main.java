@@ -13,14 +13,15 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	@Override
-	public void start(Stage stage) throws Exception{
+	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("/design/Main_page_2.4.fxml"));
 		Scene scene = new Scene(root);
-		
+
 		String css = Main.class.getResource("/design/application.css").toExternalForm();
 		scene.getStylesheets().add(css);
 		stage.getIcons().add(new Image("/design/Nerd_Icon.jpg"));
 		stage.setTitle("Bildverwaltung");
+		stage.setMinWidth(1295);
 		stage.minHeightProperty().bind(stage.widthProperty().multiply(0.625));
 		stage.maxHeightProperty().bind(stage.widthProperty().multiply(0.5));
 		stage.setScene(scene);
