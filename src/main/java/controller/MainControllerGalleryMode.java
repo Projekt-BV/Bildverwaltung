@@ -247,22 +247,32 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	// ContextMenu
 	private void initializeContextMenu() {
 		contextMenu = new ContextMenu();
-		MenuItem delete = new MenuItem("delete from album");
-		MenuItem deleteFromAll = new MenuItem("delete from all albums");
-		MenuItem rename = new MenuItem("rename");
 
+		MenuItem rename = new MenuItem("Rename");
 		rename.setOnAction(e -> initializeRenameDialog());
 
-		delete.setOnAction(e -> {
+		MenuItem deleteImageFromAlbum = new MenuItem("Delete From Album");
+		deleteImageFromAlbum.setOnAction(event -> {
 			try {
 				SendSQLRequest.deleteImageFromAlbum(selectedAlbum, clickedOnImage);
 				reloadMainPage();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 
 		});
-		contextMenu.getItems().addAll(rename, delete, deleteFromAll);
+
+		MenuItem deleteImageFromAllAlbums = new MenuItem("Delete From All Albums");
+		deleteImageFromAllAlbums.setOnAction(event -> {
+			try {
+				SendSQLRequest.deleteImageFromDB(clickedOnImage);
+				reloadMainPage();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		});
+
+		contextMenu.getItems().addAll(rename, deleteImageFromAlbum, deleteImageFromAllAlbums);
 		contextMenu.setOpacity(1);
 	}
 
