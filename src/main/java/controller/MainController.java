@@ -34,6 +34,7 @@ import model.Database;
 import model.ImageContainer;
 import model.editing.FileImport;
 
+//GOD Class
 public abstract class MainController {
 
 	// GUI Elements, hierarchy like the hierarchy in Scenebuilder
@@ -143,16 +144,6 @@ public abstract class MainController {
 	Label NewAlbumLabelAlbum;
 	@FXML
 	Button NewAlbumButtonAdd;
-
-	// Method to rewrite Choicebox
-	// Tab-Editing-ChoiceBox1=kein Filter
-	// Tab-Editing-ChoiceBox2=Schwarz-Weiß
-	// Tab-Editing-ChoiceBox3=Rot
-	// Tab-Editing-ChoiceBox4=Grün
-	// Tab-Editing-ChoiceBox5=Blau
-	// Tab-Editing-ChoiceBox6=Gelb
-	// Tab-Editing-ChoiceBox7=Violet
-	// Tab-Editing-ChoiceBox8=Aqua
 
 	@FXML
 	ListView<Album> listView;
