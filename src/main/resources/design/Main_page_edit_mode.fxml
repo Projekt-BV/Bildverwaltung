@@ -57,7 +57,7 @@
                   <HBox fx:id="sliderBox" layoutX="543.0" layoutY="36.0" prefHeight="24.0" prefWidth="265.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.topAnchor="35.0">
                      <children>
                 <Slider fx:id="zoomSlider" onMouseDragged="#setAndGetSliderLabel" onMouseReleased="#sliderMove" prefHeight="14.0" prefWidth="212.0" styleClass="sliders" />
-                <Label fx:id="zoomSliderValueLabel" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="33.0" text="0%" />
+			    <Label fx:id="zoomSliderValueLabel" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="50.0" />
                      </children>
                   </HBox>
           </children>
