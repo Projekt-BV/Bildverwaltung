@@ -165,9 +165,17 @@ public class MainControllerGalleryMode extends MainController implements Initial
 			return;
 		}
 
+		try {
+			
 		ImageView imageView = (ImageView) e.getPickResult().getIntersectedNode();
 		int indexOfImageView = tilePane.getChildren().indexOf(imageView);
 		clickedOnImage = selectedAlbum.getImages().get(indexOfImageView);
+		
+		} catch (ClassCastException e1) {
+			// Click was on background of tilePane. Doing nothing is fine.
+			return;
+		}
+		
 
 		// if right mouse button was clicked, don't open detail view, but show context
 		// menu
