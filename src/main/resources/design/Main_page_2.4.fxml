@@ -57,7 +57,6 @@
                         <Button fx:id="ButtonFilter" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
                      </children>
                   </HBox>
-                  
           <Button fx:id="ButtonFScreen" layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="256.0" />
           </children>
         </AnchorPane>
