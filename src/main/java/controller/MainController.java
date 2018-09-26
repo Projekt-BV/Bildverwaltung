@@ -239,8 +239,18 @@ public abstract class MainController {
 	}
 
 	@FXML
-	private void deleteImage() {
-		System.out.println("I am the deleteImage function");
+	private void deleteImage(Event e) throws SQLException, IOException {
+		if (selectedAlbum.getName().equals("All Images")) {
+			SendSQLRequest.deleteImageFromDB(MainControllerEditMode.imageContainer);
+			
+		}
+		else 
+		{
+			SendSQLRequest.deleteImageFromAlbum(selectedAlbum, MainControllerEditMode.imageContainer);
+			
+		}
+		
+		
 	}
 
 	@FXML
