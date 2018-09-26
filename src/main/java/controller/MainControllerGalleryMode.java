@@ -18,10 +18,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
@@ -38,7 +36,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import model.ImageContainer;
 import model.editing.EditMetaData;
@@ -191,18 +188,9 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	
 	private void switchScene(MouseEvent e) throws IOException {
 		Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
-		Scene changePane;
 		// Show stage information
 		Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
-		
-		if(window.isMaximized()) {
-			Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-			changePane = new Scene(pane, screenSize.getWidth(), screenSize.getHeight());
-		} else {
-			changePane = new Scene(pane);
-		}
-		
-		window.setScene(changePane);
+		window.getScene().setRoot(pane);		
 		window.show();
 	}
 
