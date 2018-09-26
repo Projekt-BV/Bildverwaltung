@@ -477,10 +477,6 @@ public abstract class MainController {
 			MenuGerman.setText(config.getProperty("MenuBar-Help-Language-German"));
 			// North
 			ButtonFScreen.setText(config.getProperty("Button-FScreen"));
-			ButtonFilter.setText(config.getProperty("Button-Filter"));
-			TextFieldKeyword.setText(config.getProperty("TextField-Keyword"));
-			DatePickerFrom.setAccessibleText(config.getProperty("DatePicker-From"));
-			DatePickerTo.setAccessibleText(config.getProperty("DatePicker-To"));
 			// BorderPane West
 			ButtonAddAlbum.setText(config.getProperty("Button-AddAlbum"));
 			if (currentLanguage == "en") {

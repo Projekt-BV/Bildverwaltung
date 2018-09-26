@@ -55,18 +55,6 @@
                         </Menu>
               </menus>
             </MenuBar>
-                  <HBox layoutX="540.0" layoutY="28.0" AnchorPane.rightAnchor="241.0">
-                     <children>
-                        <TextField fx:id="TextFieldKeyword" prefHeight="26.0" prefWidth="122.0" promptText="keyword">
-                           <HBox.margin>
-                              <Insets top="1.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <DatePicker fx:id="DatePickerFrom" prefHeight="27.0" prefWidth="166.0" promptText="from" />
-                        <DatePicker fx:id="DatePickerTo" prefHeight="27.0" prefWidth="166.0" promptText="to" />
-                        <Button fx:id="ButtonFilter" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
-                     </children>
-                  </HBox>
                   <Button fx:id="ButtonFScreen" layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
                   <Button fx:id="ButtonAlbumView" layoutX="1181.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchBack" prefHeight="27.0" prefWidth="99.0" text="Album view" AnchorPane.rightAnchor="2.0" />
           </children>
