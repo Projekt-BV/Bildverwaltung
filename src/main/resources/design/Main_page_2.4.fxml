@@ -47,7 +47,7 @@
             </MenuBar>
                   <HBox layoutX="550.0" layoutY="27.0" AnchorPane.rightAnchor="234.0">
                      <children>
-                        <TextField fx:id="TextFieldKeyword" prefHeight="9.0" prefWidth="122.0" promptText="keyword">
+                        <TextField fx:id="TextFieldKeyword" prefHeight="9.0" prefWidth="122.0" promptText="Keyword">
                            <HBox.margin>
                               <Insets top="1.0" />
                            </HBox.margin>

@@ -282,44 +282,117 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	}
 
 	/**
-	 * Filters the displayed image in gallery. Checks if the tags contain the
+	 * Filters the displayed images in gallery. Checks if the tags contain the
 	 * keyword or the date is between two other dates
-	 * 
 	 * @author Julian Einspenner
 	 */
 	@FXML
 	private void filterButtonPressed() {
 		String keyword = TextFieldKeyword.getText();
+		
+		Date min = convertToDateViaSqlDate(DatePickerFrom.getValue());
+		Date max = convertToDateViaSqlDate(DatePickerTo.getValue());
+		
+		boolean keywordOnly = keyword != null && !keyword.equals("") &&
+							  (!keyword.equals("Keyword") && !keyword.equals("Schlüsselwort")) && 
+							  (min == null || max == null);
+		
+		boolean dateOnly    = (keyword.equals("Keyword") || keyword.equals("Schlüsselwort") || keyword.equals("")) &&
+							  (min != null && max != null);
+		
+		boolean booth       = keyword != null && !keyword.equals("") &&
+							  (!keyword.equals("Keyword") && !keyword.equals("Schlüsselwort")) &&
+							  (min != null && max != null);
+							
 		TreeSet<Integer> idSet = new TreeSet<Integer>();
-
-		if (selectedAlbum != null || !keyword.equals("")) {
-			for (ImageContainer ic : selectedAlbum.getImages()) {
-				for (String tag : ic.getTags()) {
-					if (tag.contains(keyword)) {
-						idSet.add(ic.getId());
-						break;
-					}
-				}
-			}
+		
+		if(keywordOnly) {
+			filterGalleryImages(filterByKeyword(keyword, idSet));
+			return;
+		}else if(dateOnly) {
+			filterGalleryImages(filterByDate(min, max, idSet));
+			return;
+		}else if(booth){
+			filterGalleryImages(filterByKeywordAndDate(keyword, min, max, idSet));
 		}
-
-		if (DatePickerFrom.getValue() != null && DatePickerTo.getValue() != null) {
-			Date min = convertToDateViaSqlDate(DatePickerFrom.getValue());
-			Date max = convertToDateViaSqlDate(DatePickerTo.getValue());
-
-			for (ImageContainer ic : selectedAlbum.getImages()) {
-				Date date = ic.getDate();
-				if (date.before(max) && date.after(min) || date.equals(max) || date.equals(min)) {
-					idSet.add(ic.getId());
-				}
-			}
-		}
-
-		// --> pibbosMegaFunction(idSet);
 	}
 
+	/**
+	 * Converts from LocalDate() to Date()
+	 * @param dateToConvert is the LocalDate object to convert
+	 * @return is the new Date
+	 * @author Julian Einspenner
+	 */
 	private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
+		if(dateToConvert == null ) {
+			return null;
+		}
 		return java.sql.Date.valueOf(dateToConvert);
+	}
+	
+	/**
+	 * Filters images by keyword
+	 * @param keyword is the keyword to filter
+	 * @param idSet is a Set of image ID's. Will be stocked up, if filter matches
+	 * @return the idSet
+	 * @author Julian Einspenner
+	 */
+	private TreeSet filterByKeyword(String keyword, TreeSet<Integer> idSet){
+		for (ImageContainer ic : selectedAlbum.getImages()) {
+			for (String tag : ic.getTags()) {
+				if (tag.contains(keyword)) {
+					idSet.add(ic.getId());
+					break;
+				}
+			}
+		}
+		return idSet;
+	}
+	
+	/**
+	 * Filters images by date
+	 * @param min the "from"-Date
+	 * @param max the "to"-Date
+	 * @param idSet is a Set of image ID's. Will be stocked up, if filter matches
+	 * @return the idSet
+	 * @author Julian Einspenner
+	 */
+	private TreeSet filterByDate(Date min, Date max, TreeSet<Integer> idSet) {
+		for (ImageContainer ic : selectedAlbum.getImages()) {
+			Date date = ic.getDate();
+			if (date.before(max) && date.after(min) || date.equals(max) || date.equals(min)) {
+				idSet.add(ic.getId());
+			}
+		}
+		return idSet;
+	}
+	
+	/**
+	 * Filters images by keyword AND date
+	 * @param keyword is the keyword to filter
+	 * @param min the "from"-Date
+	 * @param max the "to"-Date
+	 * @param idSet is a Set of image ID's. Will be stocked up, if filter matches
+	 * @return the idSet
+	 * @author Julian Einspenner
+	 */
+	private TreeSet filterByKeywordAndDate(String keyword, Date min, Date max, TreeSet<Integer> idSet) {
+		for (ImageContainer ic : selectedAlbum.getImages()) {
+			Date date = ic.getDate();
+			for (String tag : ic.getTags()) {
+				if (tag.contains(keyword) && 
+					(date.before(max) && date.after(min) || date.equals(max) || date.equals(min))) {
+					idSet.add(ic.getId());
+					break;
+				}
+			}
+		}
+		return idSet;
+	}
+	
+	//Pibbo here
+	private void filterGalleryImages(TreeSet<Integer> idSet) {
+		System.out.println(idSet.toString());
 	}
 
 }
