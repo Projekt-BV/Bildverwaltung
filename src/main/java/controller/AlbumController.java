@@ -50,7 +50,7 @@ public class AlbumController extends MainController implements Initializable {
 	@FXML
 	private void newAlbumpressed() throws SQLException {
 
-		if (albumName.getText().equals("")) {
+		if (albumName.getText().equals("") || albumName.getText().equals("All Images")) {
 			return;
 		}
 		
