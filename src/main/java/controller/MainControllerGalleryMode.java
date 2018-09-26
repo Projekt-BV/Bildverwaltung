@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 import java.util.concurrent.CountDownLatch;
+import java.util.stream.Collectors;
 
 import database.SendSQLRequest;
 import javafx.application.Platform;
@@ -392,7 +394,14 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	
 	//Pibbo here
 	private void filterGalleryImages(TreeSet<Integer> idSet) {
-		System.out.println(idSet.toString());
+		ArrayList<ImageContainer> filteredImages = selectedAlbum.getImages()
+																.stream()
+																.filter(i -> idSet.contains(i.getId()))
+																.collect(Collectors.toCollection(ArrayList::new));
+		
+		filteredImages.stream().forEach(i -> System.out.println(i));
+		selectedAlbum.setImages(filteredImages);
+		initializeTilePane();
 	}
 
 }
