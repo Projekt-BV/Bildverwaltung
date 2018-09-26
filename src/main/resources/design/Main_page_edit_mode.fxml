@@ -107,7 +107,7 @@
                                  </children>
                               </StackPane>
                            </content></ScrollPane>
-                        <Button fx:id="forwardButton" mnemonicParsing="false" onAction="#swipeForwards" style="-fx-background-color: transparent; -fx-border-width: 0;" visible="false" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="280.0">
+                        <Button fx:id="forwardButton" mnemonicParsing="false" onAction="#swipeForwards" style="-fx-border-width: 0; -fx-opacity: 0.5; -fx-background-color: transparent;" visible="false" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="280.0">
                            <graphic>
                               <ImageView fitHeight="70.0" fitWidth="70.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -116,7 +116,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="backwardButton" alignment="CENTER" mnemonicParsing="false" onAction="#swipeBackwards" style="-fx-background-color: transparent; -fx-border-width: 0;" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="280.0">
+                        <Button fx:id="backwardButton" alignment="CENTER" mnemonicParsing="false" onAction="#swipeBackwards" style="-fx-opacity: 0.5; -fx-background-color: transparent; -fx-border-width: 0;" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="280.0">
                            <graphic>
                               <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
