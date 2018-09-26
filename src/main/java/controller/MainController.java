@@ -455,7 +455,7 @@ public abstract class MainController {
 			TabEditButtonResize.setText(config.getProperty("Tab-Editing-Button-Resize"));
 			TextWidth.setText(config.getProperty("Tab-Editing-Text-Width"));
 			TabEditButtonSetRatio.setText(config.getProperty("Tab-Editing-Button-SetRatio"));
-			TextHeight.setText(config.getProperty("Tab-Editing-TextHeight"));
+			TextHeight.setText(config.getProperty("Tab-Editing-Text-Height"));
 			TextRotate.setText(config.getProperty("Tab-Editing-Text-Rotate"));
 			cutModeButton.setText(config.getProperty("Tab-Editing-Button-CutMode"));
 			TextCutImage.setText(config.getProperty("Tab-Editing-Text-CutImage"));

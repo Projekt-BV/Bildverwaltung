@@ -76,7 +76,7 @@
                               <Text fx:id="TextWidth" layoutX="136.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Width" />
                               <TextField fx:id="widthTextField" layoutX="135.0" layoutY="262.0" prefHeight="25.0" prefWidth="100.0" />
                               <Button fx:id="TabEditButtonSetRatio" layoutX="18.0" layoutY="329.0" mnemonicParsing="false" onAction="#setRatio" prefHeight="25.0" prefWidth="97.0" text="Set ratio" />
-                              <Text fx:id="TextHeight" layoutX="137.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Height" />
+                              <Text fx:id="TextHeight" layoutX="136.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Height" />
                               <TextField fx:id="heightTextField" layoutX="135.0" layoutY="329.0" prefHeight="25.0" prefWidth="100.0" />
                               <Text fx:id="TextRotate" layoutX="17.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
                               <Button fx:id="cutModeButton" layoutX="17.0" layoutY="435.0" mnemonicParsing="false" onAction="#cutModeButtonPressed" prefHeight="25.0" prefWidth="94.0" text="Cut mode" />
