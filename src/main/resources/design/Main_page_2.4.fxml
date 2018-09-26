@@ -57,20 +57,7 @@
                         <Button fx:id="ButtonFilter" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
                      </children>
                   </HBox>
-                  <HBox layoutX="4.0" layoutY="28.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
-                     <children>
-                <TextField prefHeight="20.0" prefWidth="190.0">
-                           <HBox.margin>
-                              <Insets top="1.0" />
-                           </HBox.margin>
-                        </TextField>
-                <Button fx:id="ButtonSearch" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="66.0" text="Search">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
+                  
           <Button fx:id="ButtonFScreen" layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="256.0" />
           </children>
         </AnchorPane>

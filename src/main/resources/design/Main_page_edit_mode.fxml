@@ -69,8 +69,6 @@
                   </HBox>
                   <HBox layoutX="4.0" layoutY="28.0" prefHeight="25.0" prefWidth="352.0" AnchorPane.leftAnchor="3.0">
                      <children>
-                <TextField prefHeight="30.0" prefWidth="193.0" />
-                <Button fx:id="ButtonSearch" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="60.0" text="Suche" />
                 <Button fx:id="ButtonFScreen" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
                      </children>
                   </HBox>

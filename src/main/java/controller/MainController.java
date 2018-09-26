@@ -476,7 +476,6 @@ public abstract class MainController {
 			MenuEnglish.setText(config.getProperty("MenuBar-Help-Language-English"));
 			MenuGerman.setText(config.getProperty("MenuBar-Help-Language-German"));
 			// North
-			ButtonSearch.setText(config.getProperty("Button-Search"));
 			ButtonFScreen.setText(config.getProperty("Button-FScreen"));
 			ButtonFilter.setText(config.getProperty("Button-Filter"));
 			TextFieldKeyword.setText(config.getProperty("TextField-Keyword"));
