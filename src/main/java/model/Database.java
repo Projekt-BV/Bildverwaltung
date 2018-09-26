@@ -61,6 +61,7 @@ public class Database {
 						album.getImages().add(image);
 					}					
 				}
+				album.sortByDate();
 			}
 			sortByName();
 			
@@ -69,7 +70,7 @@ public class Database {
 		}
 	}
 	
-	public void sortByName() {
+	private void sortByName() {
 		albums = albums.stream()
 				       .sorted((i1, i2) -> i1.getName().compareTo(i2.getName()))
 				       .collect(Collectors.toCollection(ArrayList::new));

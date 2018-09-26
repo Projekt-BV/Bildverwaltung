@@ -4,6 +4,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -29,6 +30,12 @@ public class Album {
 		;
 		this.id = id;
 		this.images = new ArrayList<ImageContainer>();
+	}
+	
+	void sortByDate() {
+		images = images.stream()
+				       .sorted((i1, i2) -> i2.getDate().compareTo(i1.getDate()))
+				       .collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	public String getName() {
