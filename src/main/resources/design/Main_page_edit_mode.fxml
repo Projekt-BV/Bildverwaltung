@@ -24,7 +24,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerEditMode">
+<AnchorPane fx:id="rootPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerEditMode">
   <!-- TODO Add Nodes -->
   <children>
     <BorderPane layoutX="0.0" layoutY="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -57,7 +57,7 @@
             </MenuBar>
                   <HBox layoutX="540.0" layoutY="28.0" AnchorPane.rightAnchor="241.0">
                      <children>
-                        <TextField fx:id="TextFieldKeyword" prefHeight="25.0" prefWidth="122.0" promptText="keyword">
+                        <TextField fx:id="TextFieldKeyword" prefHeight="26.0" prefWidth="122.0" promptText="keyword">
                            <HBox.margin>
                               <Insets top="1.0" />
                            </HBox.margin>
@@ -67,10 +67,10 @@
                         <Button fx:id="ButtonFilter" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
                      </children>
                   </HBox>
-                  <HBox layoutX="4.0" layoutY="28.0" AnchorPane.leftAnchor="2.0">
+                  <HBox layoutX="4.0" layoutY="28.0" prefHeight="25.0" prefWidth="352.0" AnchorPane.leftAnchor="3.0">
                      <children>
-                <TextField prefHeight="25.0" prefWidth="190.0" />
-                <Button fx:id="ButtonSearch" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="59.0" text="Suche" />
+                <TextField prefHeight="30.0" prefWidth="193.0" />
+                <Button fx:id="ButtonSearch" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="60.0" text="Suche" />
                 <Button fx:id="ButtonFScreen" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
                      </children>
                   </HBox>
@@ -79,7 +79,7 @@
         </AnchorPane>
       </top>
          <center>
-            <SplitPane dividerPositions="0.5" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" BorderPane.alignment="CENTER">
+            <SplitPane dividerPositions="0.5" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="715.0" prefWidth="762.0" BorderPane.alignment="CENTER">
               <items>
                 <AnchorPane maxHeight="27.0" minHeight="27.0" minWidth="0.0" prefHeight="27.0" prefWidth="785.0" styleClass="anchor-pane" stylesheets="@application.css">
                      <children>
@@ -90,7 +90,7 @@
                            </children>
                         </HBox>
                         <ChoiceBox fx:id="chooseAlbumChoiceBox" onDragExited="#dropdownButtonChoiceSelected" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
-                        <Button fx:id="ButtonDeleteImage" layoutX="694.0" mnemonicParsing="false" onAction="#deleteImage" text="Delete Image" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="ButtonDeleteImage" layoutX="684.0" layoutY="-1.0" mnemonicParsing="false" onAction="#deleteImage" text="Delete Image" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" onMouseEntered="#showSwipeButtons" onMouseExited="#hideSwipeButtons">
