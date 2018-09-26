@@ -33,9 +33,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Album;
 import model.Database;
+import model.FileImport;
 import model.ImageContainer;
 import model.editing.EditMetaData;
-import model.editing.FileImport;
 import model.editing.RenameImage;
 
 //GOD Class
