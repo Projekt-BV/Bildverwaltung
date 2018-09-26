@@ -11,8 +11,6 @@ import database.SendSQLRequest;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -31,7 +29,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import model.Album;
 import model.Database;
@@ -198,29 +195,6 @@ public abstract class MainController {
 		return this.database;
 	}
 
-	// Navigation between the main controllers
-
-
-	@FXML
-	private void switchBack(Event event) throws IOException {
-		selectedAlbum = listView.getSelectionModel().getSelectedItem();
-		didSwitchBack = true;
-
-		Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_2.4.fxml"));
-		Scene changePane;
-		// Show stage information
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		
-		if(window.isMaximized()) {
-			Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-			changePane = new Scene(pane, screenSize.getWidth(), screenSize.getHeight());
-		} else {
-			changePane = new Scene(pane);
-		}
-		window.setScene(changePane);
-		window.show();
-	}
-
 	// Menue-Bar----------------------------------------------------
 
 	// File
@@ -315,9 +289,7 @@ public abstract class MainController {
 		initializeListView();
 		if (this instanceof MainControllerGalleryMode) {
 			((MainControllerGalleryMode) this).initializeTilePane();
-		} else {
-			switchBack(e);
-		}
+		} 
 	}
 
 	// Bar below Menubar
