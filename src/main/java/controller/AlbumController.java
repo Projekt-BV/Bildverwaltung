@@ -50,6 +50,10 @@ public class AlbumController extends MainController implements Initializable {
 	@FXML
 	private void newAlbumpressed() throws SQLException {
 
+		if (albumName.getText().equals("")) {
+			return;
+		}
+		
 		String tmp = albumName.getText();
 		String query = "INSERT INTO ALBEN (Name) VALUES ('" + albumName.getText() + "');";
 		SendSQLRequest.sendSQL(query);
