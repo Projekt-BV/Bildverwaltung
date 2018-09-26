@@ -1,10 +1,12 @@
 package controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 import java.util.concurrent.CountDownLatch;
@@ -229,11 +231,23 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 	// ContextMenu
 	private void initializeContextMenu() {
-		contextMenu = new ContextMenu();
+		Properties config;
+		config = new Properties();
+		FileInputStream fis;
 
-		MenuItem rename = new MenuItem("Rename");
+		try {
+			fis = new FileInputStream("src/main/java/LangBundle_" + currentLanguage + ".properties");
+			config.load(fis);
+
+		} catch (IOException io) {
+			io.printStackTrace();
+		}
+		
+		contextMenu = new ContextMenu();
+	
+		MenuItem rename = new MenuItem(config.getProperty("ContextRename"));
 		rename.setOnAction(e -> initializeRenameDialog());
-		MenuItem deleteImageFromAlbum = new MenuItem("Delete From Album");
+		MenuItem deleteImageFromAlbum = new MenuItem(config.getProperty("Context-Delete-From-Album"));
 		deleteImageFromAlbum.setOnAction(event -> {
 			try {
 				SendSQLRequest.deleteImageFromAlbum(selectedAlbum, clickedOnImage);
@@ -244,7 +258,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 		});
 
-		MenuItem deleteImageFromAllAlbums = new MenuItem("Delete From All Albums");
+		MenuItem deleteImageFromAllAlbums = new MenuItem(config.getProperty("Context-Delete-From-All-Albums"));
 		deleteImageFromAllAlbums.setOnAction(event -> {
 			try {
 				SendSQLRequest.deleteImageFromDB(clickedOnImage);

@@ -36,6 +36,7 @@ import model.ImageContainer;
 import model.editing.EditMetaData;
 import model.editing.FileImport;
 import model.editing.RenameImage;
+import javafx.scene.control.ChoiceBox;
 
 //GOD Class
 public abstract class MainController {
@@ -149,6 +150,7 @@ public abstract class MainController {
 	Button NewAlbumButtonAdd;
 	@FXML
 	HBox sliderBox;
+	@FXML ChoiceBox colorChoiceBox;
 
 	@FXML
 	ListView<Album> listView;
@@ -386,6 +388,7 @@ public abstract class MainController {
 
 		case ("EditMode"):
 			ButtonDeleteImage.setLayoutX(701);
+			colorChoiceBox.setPrefWidth(105);
 			break;
 		}
 	}
@@ -403,6 +406,7 @@ public abstract class MainController {
 
 		case ("EditMode"):
 			ButtonDeleteImage.setLayoutX(694);
+		    colorChoiceBox.setPrefWidth(99);
 			break;
 		}
 	}
