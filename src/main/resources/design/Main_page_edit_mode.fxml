@@ -140,7 +140,7 @@
                               </StackPane>
                            </content>
                         </ScrollPane>
-                        <Button fx:id="backwardButton" alignment="CENTER" mnemonicParsing="false" onAction="#swipeBackwards" style="-fx-opacity: 0.5; -fx-background-color: transparent; -fx-border-width: 0;" visible="false" StackPane.alignment="CENTER_RIGHT">
+                        <Button fx:id="backwardButton" alignment="CENTER" mnemonicParsing="false" onAction="#swipeForwards" style="-fx-opacity: 0.5; -fx-background-color: transparent; -fx-border-width: 0;" visible="false" StackPane.alignment="CENTER_RIGHT">
                            <graphic>
                               <ImageView fitHeight="70.0" fitWidth="70.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -155,7 +155,7 @@
                               <Insets right="10.0" />
                            </StackPane.margin>
                         </Button>
-                        <Button fx:id="forwardButton" mnemonicParsing="false" onAction="#swipeForwards" style="-fx-border-width: 0; -fx-opacity: 0.5; -fx-background-color: transparent;" visible="false" StackPane.alignment="CENTER_LEFT">
+                        <Button fx:id="forwardButton" mnemonicParsing="false" onAction="#swipeBackwards" style="-fx-border-width: 0; -fx-opacity: 0.5; -fx-background-color: transparent;" visible="false" StackPane.alignment="CENTER_LEFT">
                            <graphic>
                               <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
