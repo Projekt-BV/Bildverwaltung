@@ -95,7 +95,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 		// albumChoiceBox.getChildrenUnmodifiable().addAll(c);
 
 		initializeListView();
-		database.getAlbums().stream().forEach(a -> System.out.println(a.getName()));
 
 		imageViewScrollPane.setFitToWidth(true);
 		imageViewScrollPane.setFitToHeight(true);

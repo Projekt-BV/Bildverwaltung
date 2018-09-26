@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -36,7 +37,6 @@ import model.ImageContainer;
 import model.editing.EditMetaData;
 import model.editing.FileImport;
 import model.editing.RenameImage;
-import javafx.scene.control.ChoiceBox;
 
 //GOD Class
 public abstract class MainController {
@@ -415,7 +415,6 @@ public abstract class MainController {
 			break;
 
 		case ("EditMode"):
-			ButtonDeleteImage.setLayoutX(694);
 		    colorChoiceBox.setPrefWidth(99);
 			break;
 		}
@@ -473,7 +472,6 @@ public abstract class MainController {
 			pathLabel.setText(config.getProperty("Tab-Metadata-Label-Path"));
 
 			ButtonAlbumView.setText(config.getProperty("EditMode-Button-AlbumView"));
-			ButtonDeleteImage.setText(config.getProperty("EditMode-Button-DeleteImage"));
 
 		case ("GalleryMode"):
 			// BorderPane North
