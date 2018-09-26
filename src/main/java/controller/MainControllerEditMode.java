@@ -18,8 +18,14 @@ import javax.imageio.ImageIO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -31,6 +37,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import model.ImageContainer;
 import model.editing.ColorFilter;
@@ -196,6 +203,26 @@ public class MainControllerEditMode extends MainController implements Initializa
 		colorChoiceBox.setOnAction(e -> {
 			colorChoiceBoxUsed();
 		});
+	}
+	
+	@FXML
+	private void switchBack(Event event) throws IOException {
+		selectedAlbum = listView.getSelectionModel().getSelectedItem();
+		didSwitchBack = true;
+
+		Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_2.4.fxml"));
+		Scene changePane;
+		// Show stage information
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		
+		if(window.isMaximized()) {
+			Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+			changePane = new Scene(pane, screenSize.getWidth(), screenSize.getHeight());
+		} else {
+			changePane = new Scene(pane);
+		}
+		window.setScene(changePane);
+		window.show();
 	}
 
 	/**
