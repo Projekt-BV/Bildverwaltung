@@ -1,19 +1,19 @@
 package controller;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,13 +36,9 @@ import model.ImageContainer;
 import model.editing.ColorFilter;
 import model.editing.Cutter;
 import model.editing.EditMetaData;
-import model.editing.FileImport;
 import model.editing.GrayScaler;
 import model.editing.Resizer;
 import model.editing.Rotater;
-import java.util.Properties;
-import java.io.File;
-import java.io.FileInputStream;
 
 public class MainControllerEditMode extends MainController implements Initializable {
 
@@ -67,7 +63,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	@FXML
 	private Button cutModeButton;
 	@FXML
-	private ChoiceBox <String> colorChoiceBox;
+	private ChoiceBox<String> colorChoiceBox;
 
 	@FXML
 	private TextField widthTextField, heightTextField;
@@ -94,7 +90,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 		initFitWidth = (int) displayImageEditMode.getFitWidth();
 		initFitHeight = (int) displayImageEditMode.getFitHeight();
-		
 
 		// Beladen der ChoiceBox passiert erst nach Umstrukturierung der Controller.
 		// albumChoiceBox.getChildrenUnmodifiable().addAll(c);
@@ -123,22 +118,22 @@ public class MainControllerEditMode extends MainController implements Initializa
 	}
 
 	// -----------------------------------------------------------------------------------------------------------//
-	
+
 	/**
 	 * Initializes the metadata and the path of an image in editing mode
 	 * 
 	 * @author Julian Einspenner
 	 */
 	private void initializeMetaData() {
-		
+
 		String titleSplitted[] = imageContainer.getName().split("\\.");
 		String title = "";
-		if(titleSplitted[0] == null) {
+		if (titleSplitted[0] == null) {
 			title = imageContainer.getName();
-		}else {
+		} else {
 			title = titleSplitted[0];
 		}
-		
+
 		titelTextField.setText(title);
 		locationTextField.setText(imageContainer.getLocation());
 		dateTextField.setText(new SimpleDateFormat("dd.MM.yyyy").format(imageContainer.getDate()));
@@ -153,14 +148,12 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 		tagsTextField.setText(tags);
 
-		
 		setPath();
 	}
-	
-	
+
 	/**
-	 * @author Julian Einspenner
-	 * Sets the path label to current path of imageContainer
+	 * @author Julian Einspenner Sets the path label to current path of
+	 *         imageContainer
 	 */
 	private void setPath() {
 		String text = "Path:\n";
@@ -184,25 +177,21 @@ public class MainControllerEditMode extends MainController implements Initializa
 		Properties config;
 		config = new Properties();
 		FileInputStream fis;
-	
+
 		try {
-		fis = new FileInputStream("src/main/java/LangBundle_" + currentLanguage + ".properties");
-		config.load(fis);
+			fis = new FileInputStream("src/main/java/LangBundle_" + currentLanguage + ".properties");
+			config.load(fis);
 
 		} catch (IOException io) {
-		io.printStackTrace();
+			io.printStackTrace();
 		}
-		
-		ObservableList<String> colorChoiceList = FXCollections.observableArrayList
-				(config.getProperty("ChoiceBox-None"), 
-				 config.getProperty("ChoiceBox-Black-White"), 
-				 config.getProperty("ChoiceBox-Red"),
-				 config.getProperty("ChoiceBox-Green"), 
-				 config.getProperty("ChoiceBox-Blue"), 
-				 config.getProperty("ChoiceBox-Yellow"), 
-				 config.getProperty("ChoiceBox-Violet"), 
-				 config.getProperty("ChoiceBox-Aqua"));
-		
+
+		ObservableList<String> colorChoiceList = FXCollections.observableArrayList(config.getProperty("ChoiceBox-None"),
+				config.getProperty("ChoiceBox-Black-White"), config.getProperty("ChoiceBox-Red"),
+				config.getProperty("ChoiceBox-Green"), config.getProperty("ChoiceBox-Blue"),
+				config.getProperty("ChoiceBox-Yellow"), config.getProperty("ChoiceBox-Violet"),
+				config.getProperty("ChoiceBox-Aqua"));
+
 		colorChoiceBox.setItems(colorChoiceList);
 		colorChoiceBox.setValue(colorChoiceList.get(0));
 		colorChoiceBox.setOnAction(e -> {
@@ -355,6 +344,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	/**
 	 * Activates or deactivates the cut mode
+	 * 
 	 * @author Julian Einspenner
 	 */
 	@FXML
@@ -475,6 +465,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	/**
 	 * Resetting of the GUI to make a suitable state for a new image
+	 * 
 	 * @author Julian Einspenner
 	 */
 	private void resetGUI() {
@@ -483,7 +474,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 		usedColorFilter = false;
 		colorChoiceBox.getSelectionModel().selectFirst();
-		
+
 		setFitDimensions();
 		resetZooming();
 		setResizeTextFields();
@@ -514,35 +505,34 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 		Pattern p = Pattern.compile("[0-9]{1,2}\\.[0-9]{1,2}\\.[0-9]{4}");
 		Matcher m = p.matcher(date);
-		
+
 		if (!m.matches()) {
 			date = new SimpleDateFormat("dd.MM.yyyy").format(imageContainer.getDate());
 		}
 
 		String[] tags = tagsTextField.getText().split(",");
 
-		if(EditMetaData.saveMetaData(title, location, date, tags, imageContainer.getId())) {
+		if (EditMetaData.saveMetaData(title, location, date, tags, imageContainer.getId())) {
 			imageContainer.setDate(date);
 			imageContainer.setLocation(location);
 			imageContainer.setName(title);
-			
+
 			ArrayList<String> tagList = new ArrayList<String>(Arrays.asList(tags));
 			imageContainer.setTags(tagList);
 			setPath();
 		}
 		saveImage();
 	}
-	
-	
+
 	@FXML
 	private void saveImage() {
 		String path = imageContainer.getPath().substring(8, imageContainer.getPath().length());
 		BufferedImage img = SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null);
 		File outFile = new File(path);
 		try {
-		      ImageIO.write(img, "png", outFile);
+			ImageIO.write(img, "png", outFile);
 		} catch (IOException e) {
-		      System.err.println("Failed while saving the image");
+			System.err.println("Failed while saving the image");
 		}
 	}
 
@@ -551,19 +541,19 @@ public class MainControllerEditMode extends MainController implements Initializa
 		DirectoryChooser directoryChooser = new DirectoryChooser();
 		File selectedDirectory = directoryChooser.showDialog(new Stage());
 
-		if(selectedDirectory == null){
-		     return;
+		if (selectedDirectory == null) {
+			return;
 		}
-		
+
 		String path = selectedDirectory.getAbsolutePath();
 		BufferedImage img = SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null);
 		File outFile = new File(path + "/" + imageContainer.getName());
 		try {
-		      ImageIO.write(img, "png", outFile);
+			ImageIO.write(img, "png", outFile);
 		} catch (IOException e) {
-		      System.err.println("Failed while saving the image");
+			System.err.println("Failed while saving the image");
 		}
-		
+
 	}
 
 	@FXML
@@ -589,7 +579,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 		int color = getSelectedChoiceBoxIndex();
 
-		if (color == 0 ) {
+		if (color == 0) {
 			return;
 		}
 
@@ -720,10 +710,8 @@ public class MainControllerEditMode extends MainController implements Initializa
 		imageContainer = selectedAlbum.getImages().get(newIndex);
 		image = new Image(imageContainer.getPath());
 		imagePlain = new Image(imageContainer.getPath());
-		
+
 		displayImageEditMode.setImage(image);
-		
-		
 
 		resetGUI();
 	}
@@ -738,7 +726,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 		image = new Image(imageContainer.getPath());
 		imagePlain = new Image(imageContainer.getPath());
 		displayImageEditMode.setImage(image);
-		
+
 		resetGUI();
 	}
 
@@ -759,12 +747,11 @@ public class MainControllerEditMode extends MainController implements Initializa
 	public static Image getImage() {
 		return image;
 	}
-	
 
 	public ImageView getDisplayImageEditMode() {
 		return displayImageEditMode;
 	}
-	
+
 	private int getSelectedChoiceBoxIndex() {
 		return colorChoiceBox.getSelectionModel().getSelectedIndex();
 	}

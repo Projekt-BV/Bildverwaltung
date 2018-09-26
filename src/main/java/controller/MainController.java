@@ -27,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Album;
@@ -146,6 +147,8 @@ public abstract class MainController {
 	Label NewAlbumLabelAlbum;
 	@FXML
 	Button NewAlbumButtonAdd;
+	@FXML
+	HBox sliderBox;
 
 	@FXML
 	ListView<Album> listView;
@@ -278,7 +281,7 @@ public abstract class MainController {
 			initializeListView();
 			if (this instanceof MainControllerGalleryMode) {
 				MainControllerGalleryMode mc = (MainControllerGalleryMode) this;
-				mc.initializeGridPane();
+				mc.initializeTilePane();
 			}
 		});
 		if (currentLanguage == "en") {
@@ -300,7 +303,7 @@ public abstract class MainController {
 		selectedAlbum = null;
 		initializeListView();
 		if (this instanceof MainControllerGalleryMode) {
-			((MainControllerGalleryMode) this).initializeGridPane();
+			((MainControllerGalleryMode) this).initializeTilePane();
 		} else {
 			switchBack(e);
 		}
@@ -347,12 +350,12 @@ public abstract class MainController {
 			EditMetaData.renameImage(clickedOnImage, ri.getResult().get());
 			initializeListView();
 			if (MainController.this instanceof MainControllerGalleryMode) {
-				((MainControllerGalleryMode) MainController.this).initializeGridPane();
+				((MainControllerGalleryMode) MainController.this).initializeTilePane();
 			}
 		}
 	}
 
-	// Bar above gridPane / ImageView
+	// Bar above tilePane / ImageView
 	@FXML
 	private void dropdownButtonChoiceSelected() {
 		System.out.println("I am the dropdownButtonChoiceSelected function");
@@ -535,7 +538,7 @@ public abstract class MainController {
 
 				initializeListView();
 				if (MainController.this instanceof MainControllerGalleryMode) {
-					((MainControllerGalleryMode) MainController.this).initializeGridPane();
+					((MainControllerGalleryMode) MainController.this).initializeTilePane();
 				}
 			});
 		}
@@ -557,7 +560,7 @@ public abstract class MainController {
 							initializeListView();
 							if (MainController.this instanceof MainControllerGalleryMode) {
 								MainControllerGalleryMode mc = (MainControllerGalleryMode) MainController.this;
-								mc.initializeGridPane();
+								mc.initializeTilePane();
 							}
 						} catch (SQLException e) {
 							e.printStackTrace();

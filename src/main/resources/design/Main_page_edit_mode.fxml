@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -19,6 +20,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 
@@ -27,9 +29,9 @@
   <children>
     <BorderPane layoutX="0.0" layoutY="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" stylesheets="@application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <top>
-        <AnchorPane maxHeight="58.0" minHeight="58.0" prefHeight="58.0" prefWidth="1280.0" styleClass="anchor-pane" stylesheets="@application.css">
+        <AnchorPane maxHeight="58.0" minHeight="58.0" prefHeight="58.0" prefWidth="1280.0" styleClass="anchor-pane" stylesheets="@application.css" BorderPane.alignment="TOP_LEFT">
           <children>
-            <MenuBar layoutX="0.0" layoutY="2.0" prefHeight="25.0" prefWidth="254.0">
+            <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="254.0">
               <menus>
                 <Menu fx:id="MenuFile" mnemonicParsing="false" text="File">
                   <items>
@@ -53,30 +55,47 @@
                         </Menu>
               </menus>
             </MenuBar>
-                  <DatePicker fx:id="DatePickerTo" layoutX="832.0" layoutY="28.0" prefHeight="27.0" prefWidth="166.0" promptText="to" />
-          <TextField layoutX="4.0" layoutY="30.0" prefHeight="25.0" prefWidth="190.0" />
-          <Button fx:id="ButtonSearch" layoutX="196.0" layoutY="28.0" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="59.0" text="Suche" />
-          <Button fx:id="ButtonFScreen" layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
-                  <Button fx:id="ButtonFilter" layoutX="999.0" layoutY="28.0" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
-                  <TextField fx:id="TextFieldKeyword" layoutX="540.0" layoutY="28.0" prefHeight="28.0" prefWidth="122.0" promptText="keyword" />
-                  <DatePicker fx:id="DatePickerFrom" layoutX="664.0" layoutY="28.0" prefHeight="27.0" prefWidth="166.0" promptText="from" />
-                  <Button fx:id="ButtonAlbumView" layoutX="1181.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchBack" prefHeight="27.0" prefWidth="99.0" text="Album view" />
+                  <HBox layoutX="540.0" layoutY="28.0" AnchorPane.rightAnchor="241.0">
+                     <children>
+                        <TextField fx:id="TextFieldKeyword" prefHeight="25.0" prefWidth="122.0" promptText="keyword">
+                           <HBox.margin>
+                              <Insets top="1.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <DatePicker fx:id="DatePickerFrom" prefHeight="27.0" prefWidth="166.0" promptText="from" />
+                        <DatePicker fx:id="DatePickerTo" prefHeight="27.0" prefWidth="166.0" promptText="to" />
+                        <Button fx:id="ButtonFilter" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="4.0" layoutY="28.0" AnchorPane.leftAnchor="2.0">
+                     <children>
+                <TextField prefHeight="25.0" prefWidth="190.0" />
+                <Button fx:id="ButtonSearch" mnemonicParsing="false" onAction="#browseButtonPressed" prefHeight="27.0" prefWidth="59.0" text="Suche" />
+                <Button fx:id="ButtonFScreen" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="ButtonAlbumView" layoutX="1181.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchBack" prefHeight="27.0" prefWidth="99.0" text="Album view" AnchorPane.rightAnchor="2.0" />
           </children>
         </AnchorPane>
       </top>
          <center>
-            <SplitPane dividerPositions="0.0392156862745098" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" BorderPane.alignment="CENTER">
+            <SplitPane dividerPositions="0.5" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" BorderPane.alignment="CENTER">
               <items>
-                <AnchorPane maxHeight="30.0" minHeight="30.0" minWidth="0.0" prefHeight="30.0" styleClass="anchor-pane" stylesheets="@application.css">
+                <AnchorPane maxHeight="27.0" minHeight="27.0" minWidth="0.0" prefHeight="27.0" prefWidth="785.0" styleClass="anchor-pane" stylesheets="@application.css">
                      <children>
-                <Slider fx:id="zoomSlider" layoutX="268.0" layoutY="6.0" onMouseDragged="#setAndGetSliderLabel" onMouseReleased="#sliderMove" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
-                <Label fx:id="zoomSliderValueLabel" layoutX="489.0" layoutY="6.0" prefWidth="51.0" text="0%" />
-                        <ChoiceBox fx:id="chooseAlbumChoiceBox" onDragExited="#dropdownButtonChoiceSelected" prefWidth="150.0" />
-                        <Button fx:id="ButtonDeleteImage" layoutX="694.0" mnemonicParsing="false" onAction="#deleteImage" text="Delete Image" />
-                     </children></AnchorPane>
+                        <HBox fx:id="sliderBox" layoutX="266.0" layoutY="6.0" AnchorPane.bottomAnchor="4.0" AnchorPane.topAnchor="5.0">
+                           <children>
+                      <Slider fx:id="zoomSlider" onMouseDragged="#setAndGetSliderLabel" onMouseReleased="#sliderMove" prefHeight="14.0" prefWidth="214.0" styleClass="sliders" />
+                      <Label fx:id="zoomSliderValueLabel" prefWidth="51.0" text="0%" />
+                           </children>
+                        </HBox>
+                        <ChoiceBox fx:id="chooseAlbumChoiceBox" onDragExited="#dropdownButtonChoiceSelected" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+                        <Button fx:id="ButtonDeleteImage" layoutX="694.0" mnemonicParsing="false" onAction="#deleteImage" text="Delete Image" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" onMouseEntered="#showSwipeButtons" onMouseExited="#hideSwipeButtons">
                      <children>
-                        <ScrollPane fx:id="imageViewScrollPane" fitToHeight="true" fitToWidth="true" layoutX="-2.0" layoutY="-1.0" prefHeight="678.0" prefWidth="785.0">
+                        <ScrollPane fx:id="imageViewScrollPane" fitToHeight="true" fitToWidth="true" layoutX="-2.0" layoutY="-1.0" prefHeight="678.0" prefWidth="785.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
                               <StackPane fx:id="imageStackPane" blendMode="LIGHTEN" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: 80,80,80;">
                                  <children>

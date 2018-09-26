@@ -43,7 +43,7 @@ public class AlbumController extends MainController implements Initializable {
 		mainController.initializeListView();
 		if (mainController instanceof MainControllerGalleryMode) {
 			MainControllerGalleryMode mc = (MainControllerGalleryMode) mainController;
-			mc.initializeGridPane();
+			mc.initializeTilePane();
 		}
 	}
 

@@ -80,8 +80,8 @@
 
 
 /*@Author: Tobias Reinert 
- * This will color the background of any 'Grid pane' used*/
-.grid-pane{
+ * This will color the background of any 'Tile pane' used*/
+.tile-pane{
     -fx-background-color: rgb(75,75,75);
 }
 

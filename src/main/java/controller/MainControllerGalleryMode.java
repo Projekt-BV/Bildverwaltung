@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.CountDownLatch;
 
@@ -33,7 +32,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import model.ImageContainer;
 import model.editing.EditMetaData;
@@ -45,7 +44,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	@FXML
 	private AnchorPane rootPane;
 	@FXML
-	private GridPane gridPane;
+	private TilePane tilePane;
 	@FXML
 	private ProgressIndicator progressIndicator;
 	@FXML
@@ -55,8 +54,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 	private Image imageToDownScale;
 	private ContextMenu contextMenu;
-	private int col = 0;
-	private int line = 0;
 	private boolean refreshing = false;
 	boolean actionWasDragAndNoClick = false;
 
@@ -64,23 +61,24 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	public void initialize(URL url, ResourceBundle rb) {
 		didSwitchBack = true;
 		initializeListView();
-		initializeGridPane();
+		initializeTilePane();
 		initializeContextMenu();
 		controllerCheck("GalleryMode");
 	}
 
 	/**
-	 * Method to initialize the gridPane containing each album's images.
+	 * Method to initialize the tilePane containing each album's images.
 	 */
 	@FXML
-	void initializeGridPane() {
+	void initializeTilePane() {
 
 		if (refreshing == true) {
 			return;
 		}
 
 		refreshing = true;
-		gridPane.getChildren().clear(); // clear gridPane
+		if (!tilePane.getChildren().isEmpty())
+			tilePane.getChildren().clear();
 
 		if (didSwitchBack && selectedAlbum != null) {
 			// if we come from Edit mode, leave selectedAlbum as it is and highlight it in
@@ -106,15 +104,13 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 		// downscale all images for performance, load images into grid
 		// Separate thread to keep UI responsive
-		col = 0;
-		line = 0;
 
 		new Thread(() -> {
 
 			progressIndicator.toFront();
 			progressIndicator.setProgress(0.0);
 			progressIndicator.setVisible(true);
-			gridPane.setOpacity(0.5);
+			tilePane.setOpacity(0.5);
 
 			for (ImageContainer ic : selectedAlbum.getImages()) {
 
@@ -134,12 +130,11 @@ public class MainControllerGalleryMode extends MainController implements Initial
 					imageView.setFitHeight(130);
 					imageView.setFitWidth(135);
 
-					gridPane.getChildren().add(imageView);
+					tilePane.getChildren().add(imageView);
 					double currentProgress = progressIndicator.getProgress();
 					int numberOfImages = selectedAlbum.getImages().size();
 					progressIndicator.setProgress(currentProgress += (1.0 / numberOfImages));
 
-					GridPane.setConstraints(imageView, col, line, 1, 1);
 					latch.countDown();
 				});
 				try {
@@ -147,23 +142,17 @@ public class MainControllerGalleryMode extends MainController implements Initial
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if (col > 5) {
-					col = 0;
-					line++;
-				} else
-					col++;
 			}
 			progressIndicator.setVisible(false);
-			gridPane.setOpacity(1.0);
+			tilePane.setOpacity(1.0);
 			refreshing = false;
 		}).start();
 
 	}
 
 	@FXML
-	private void gridPaneImagePressed(MouseEvent e) throws IOException {
+	private void tilePaneImagePressed(MouseEvent e) throws IOException {
 
-		System.out.println("I was called");
 		// this check is to make sure, that the scene is not switched after a drag and
 		// drop ends on an image. Boolean actionWasDragAndNoClick is set to true when
 		// drag is detected
@@ -173,7 +162,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		}
 
 		ImageView imageView = (ImageView) e.getPickResult().getIntersectedNode();
-		int indexOfImageView = gridPane.getChildren().indexOf(imageView);
+		int indexOfImageView = tilePane.getChildren().indexOf(imageView);
 		clickedOnImage = selectedAlbum.getImages().get(indexOfImageView);
 
 		// if right mouse button was clicked, don't open detail view, but show context
@@ -197,7 +186,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	@FXML
 	public void reloadMainPage() {
 		initializeListView();
-		initializeGridPane();
+		initializeTilePane();
 	}
 
 	// Drag and drop
@@ -205,28 +194,18 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	@FXML
 	private void imageDragStarted(MouseEvent e) {
 		actionWasDragAndNoClick = true;
-		Dragboard dragBoard = gridPane.startDragAndDrop(TransferMode.ANY);
+		Dragboard dragBoard = tilePane.startDragAndDrop(TransferMode.ANY);
 		ClipboardContent clipBoard = new ClipboardContent();
 
-		// if drag started on grid, but not an image, drag a box to select images
-		if (!(e.getPickResult().getIntersectedNode() instanceof ImageView)) {
-			selectionDragStarted(e);
-		} else {
-			ImageView imageView = (ImageView) e.getPickResult().getIntersectedNode();
-			int indexOfSelectedImage = gridPane.getChildren().indexOf(imageView);
-			System.out.println(indexOfSelectedImage);
-			ImageContainer image = selectedAlbum.getImages().get(indexOfSelectedImage);
+		ImageView imageView = (ImageView) e.getPickResult().getIntersectedNode();
+		int indexOfSelectedImage = tilePane.getChildren().indexOf(imageView);
+		System.out.println(indexOfSelectedImage);
+		ImageContainer image = selectedAlbum.getImages().get(indexOfSelectedImage);
 
-			clipBoard.put(imageContainerFormat, image);
-		}
+		clipBoard.put(imageContainerFormat, image);
 
 		dragBoard.setContent(clipBoard);
 		e.consume();
-	}
-
-	@FXML
-	private void selectionDragStarted(MouseEvent e) {
-		System.out.println("selectiondrag started");
 	}
 
 	@FXML
@@ -238,7 +217,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		e.consume();
 	}
 
-	// Bar above gridPane
+	// Bar above tilePane
 	@FXML
 	private void renameAllButtonPressed() {
 		if (renameAllTextField.getText().isEmpty()) {
@@ -254,7 +233,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 		MenuItem rename = new MenuItem("Rename");
 		rename.setOnAction(e -> initializeRenameDialog());
-
 		MenuItem deleteImageFromAlbum = new MenuItem("Delete From Album");
 		deleteImageFromAlbum.setOnAction(event -> {
 			try {
@@ -283,50 +261,51 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	@FXML
 	private void contextMenuRequested(ContextMenuEvent e) {
 		ImageView imageView = (ImageView) e.getPickResult().getIntersectedNode();
-		int indexOfImageView = gridPane.getChildren().indexOf(imageView);
+		int indexOfImageView = tilePane.getChildren().indexOf(imageView);
 		clickedOnImage = selectedAlbum.getImages().get(indexOfImageView);
 
-		contextMenu.show(gridPane, e.getScreenX(), e.getScreenY());
+		contextMenu.show(tilePane, e.getScreenX(), e.getScreenY());
 	}
-	
+
 	/**
-	 * Filters the displayed image in gallery. Checks if the tags contain the keyword or the date is between
-	 * two other dates
+	 * Filters the displayed image in gallery. Checks if the tags contain the
+	 * keyword or the date is between two other dates
+	 * 
 	 * @author Julian Einspenner
 	 */
 	@FXML
 	private void filterButtonPressed() {
 		String keyword = TextFieldKeyword.getText();
 		TreeSet<Integer> idSet = new TreeSet<Integer>();
-		
-		if(selectedAlbum != null || !keyword.equals("") ){
-			for(ImageContainer ic : selectedAlbum.getImages()) {
-				for(String tag : ic.getTags()) {
-					if(tag.contains(keyword)) {
+
+		if (selectedAlbum != null || !keyword.equals("")) {
+			for (ImageContainer ic : selectedAlbum.getImages()) {
+				for (String tag : ic.getTags()) {
+					if (tag.contains(keyword)) {
 						idSet.add(ic.getId());
 						break;
 					}
 				}
 			}
 		}
-		
-		if(DatePickerFrom.getValue() != null && DatePickerTo.getValue() != null) {
+
+		if (DatePickerFrom.getValue() != null && DatePickerTo.getValue() != null) {
 			Date min = convertToDateViaSqlDate(DatePickerFrom.getValue());
 			Date max = convertToDateViaSqlDate(DatePickerTo.getValue());
-			
-			for(ImageContainer ic : selectedAlbum.getImages()) {
+
+			for (ImageContainer ic : selectedAlbum.getImages()) {
 				Date date = ic.getDate();
-				if(date.before(max) && date.after(min) || date.equals(max) || date.equals(min)) {
+				if (date.before(max) && date.after(min) || date.equals(max) || date.equals(min)) {
 					idSet.add(ic.getId());
 				}
 			}
 		}
-		
-		//  --> pibbosMegaFunction(idSet);
+
+		// --> pibbosMegaFunction(idSet);
 	}
-	
+
 	private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
-	    return java.sql.Date.valueOf(dateToConvert);
+		return java.sql.Date.valueOf(dateToConvert);
 	}
 
 }
