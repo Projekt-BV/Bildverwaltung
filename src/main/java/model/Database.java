@@ -5,8 +5,8 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import database.SendSQLRequest;
 
@@ -62,12 +62,18 @@ public class Database {
 					}					
 				}
 			}
+			sortByName();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	public void sortByName() {
+		albums = albums.stream()
+				       .sorted((i1, i2) -> i1.getName().compareTo(i2.getName()))
+				       .collect(Collectors.toCollection(ArrayList::new));
+	}
 	
 	public ArrayList<Album> getAlbums() {
 		return albums;
