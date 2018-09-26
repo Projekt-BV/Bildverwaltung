@@ -405,7 +405,6 @@ public abstract class MainController {
 			break;
 
 		case ("EditMode"):
-			ButtonDeleteImage.setLayoutX(694);
 		    colorChoiceBox.setPrefWidth(99);
 			break;
 		}
@@ -463,7 +462,6 @@ public abstract class MainController {
 			pathLabel.setText(config.getProperty("Tab-Metadata-Label-Path"));
 
 			ButtonAlbumView.setText(config.getProperty("EditMode-Button-AlbumView"));
-			ButtonDeleteImage.setText(config.getProperty("EditMode-Button-DeleteImage"));
 
 		case ("GalleryMode"):
 			// BorderPane North
