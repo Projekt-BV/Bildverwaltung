@@ -6,6 +6,8 @@ package model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 import database.SendSQLRequest;
@@ -74,6 +76,17 @@ public class Database {
 		albums = albums.stream()
 				       .sorted((i1, i2) -> i1.getName().compareTo(i2.getName()))
 				       .collect(Collectors.toCollection(ArrayList::new));
+		Deque<Album> albumQueue = new LinkedList<Album>(albums);
+		
+		Album allImages = albumQueue.stream()
+									.filter(album -> album.getName()	
+									.equals("All Images"))
+									.findFirst()
+									.get();
+		
+		albumQueue.remove(allImages);
+		albumQueue.addFirst(allImages);
+		albums = new ArrayList<Album>(albumQueue);
 	}
 	
 	public ArrayList<Album> getAlbums() {
