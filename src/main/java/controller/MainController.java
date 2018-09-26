@@ -255,7 +255,7 @@ public abstract class MainController {
 
 	@FXML
 	private void exit() {
-		System.out.println("I am the Exit function");
+		System.exit(0);
 	}
 
 	// Help
