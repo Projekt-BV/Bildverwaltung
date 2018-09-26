@@ -57,7 +57,7 @@
                         <Button fx:id="ButtonFilter" mnemonicParsing="false" onAction="#filterButtonPressed" text="Filter" />
                      </children>
                   </HBox>
-          <Button fx:id="ButtonFScreen" layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="256.0" />
+          <Button fx:id="ButtonFScreen" layoutX="256.0" layoutY="28.0" mnemonicParsing="false" onAction="#fullScreenButtonPressed" prefHeight="25.0" prefWidth="78.0" text="Full Screen" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="256.0" />
           </children>
         </AnchorPane>
       </top>
@@ -90,8 +90,8 @@
          <left>
             <AnchorPane styleClass="anchor-pane" stylesheets="@application.css" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="ButtonAddAlbum" layoutY="681.0" mnemonicParsing="false" onAction="#addAlbumButtonPressed" prefHeight="29.0" prefWidth="106.0" text="Add album" AnchorPane.bottomAnchor="2.0" />
-                  <Button fx:id="ButtonDeleteAlbum" layoutX="135.0" layoutY="681.0" mnemonicParsing="false" onAction="#deleteAlbumButtonPressed" prefHeight="29.0" prefWidth="121.0" text="Delete Album" AnchorPane.bottomAnchor="2.0" />
+                  <Button fx:id="ButtonAddAlbum" layoutY="681.0" mnemonicParsing="false" onAction="#addAlbumButtonPressed" prefHeight="29.0" prefWidth="106.0" text="Add album" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="1.0" />
+                  <Button fx:id="ButtonDeleteAlbum" layoutX="135.0" layoutY="681.0" mnemonicParsing="false" onAction="#deleteAlbumButtonPressed" prefHeight="29.0" prefWidth="121.0" text="Delete Album" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="135.0" />
                   <ListView fx:id="listView" maxHeight="-Infinity" maxWidth="254.0" onDragOver="#imageDragOver" onMouseClicked="#initializeTilePane" prefHeight="681.0" prefWidth="256.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
