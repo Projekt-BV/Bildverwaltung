@@ -118,7 +118,15 @@ public class MainControllerEditMode extends MainController implements Initializa
 		controllerCheck("EditMode");
 		initColorChoiceBox();
 		initializeMetaData();
+		//stageSizeListener();
 	}
+	
+//	private void stageSizeListener() {
+//		Stage stage = (Stage)rootPane.getScene().getWindow();
+//		stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+//		     sliderBox.layoutXProperty().bind(newVal.multiply(0.5));
+//		});
+//	}
 
 	// -----------------------------------------------------------------------------------------------------------//
 
