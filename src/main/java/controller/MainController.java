@@ -358,7 +358,7 @@ public abstract class MainController {
 		RenameImage ri = new RenameImage();
 		ri.start(new Stage());
 
-		if (ri.getResult().isPresent() && ri.getResult() != null && !ri.getResult().get().equals("")) {
+		if (ri.getResult().isPresent() && ri.getResult() != null && !ri.getResult().get().trim().equals("")) {
 			EditMetaData.renameImage(clickedOnImage, ri.getResult().get());
 			initializeListView();
 			if (MainController.this instanceof MainControllerGalleryMode) {
