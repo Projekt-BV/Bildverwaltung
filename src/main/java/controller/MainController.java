@@ -317,6 +317,7 @@ public abstract class MainController {
 		RenameImage ri = new RenameImage();
 		ri.start(new Stage());
 
+
 		// check if user has put in text before confirming. Empty file paths are not fun
 		if (ri.getResult().isPresent() && ri.getResult() != null && !ri.getResult().get().trim().equals("")) {
 			EditMetaData.renameImage(clickedOnImage, ri.getResult().get());
@@ -398,7 +399,6 @@ public abstract class MainController {
 		switch (controller) {
 		case ("EditMode"):
 			// BorderPane East
-			MenuRename.setText(config.getProperty("MenuBar-File-Rename"));
 			MenuDelete.setText(config.getProperty("MenuBar-File-Delete"));
 			MenuSave.setText(config.getProperty("MenuBar-File-Save"));
 			MenuSaveAs.setText(config.getProperty("MenuBar-File-SaveAs"));

@@ -86,9 +86,24 @@ public class EditMetaData {
 	public static String createStatementToDeleteOldTags(int id) {
 		return "DELETE FROM tags WHERE Foto_ID=" + id;
 	}
-
+	
+	
+	/**
+	 * This method renames all images in .
+	 * If the corresponding text field is not empty, all images are renamed to:
+	 * the textfield's text + an incrementing integer.
+	 * 
+	 * For example:
+	 * text field's text: "Xmas"
+	 * new image names: "Xmas", "Xmas1", "Xmas2"...
+	 * 
+	 * @author Phillip Persch
+	 * @param imageContainer the image to be renamed
+	 * @param newName the new name
+	 */
 	public static boolean renameImage(ImageContainer imageContainer, String newName) {
 
+		// String manipulation necessary to have correct paths
 		String oldPath = imageContainer.getPath().substring(8);
 		File file = new File(oldPath);
 		int lastSlash = oldPath.lastIndexOf("/");
@@ -105,6 +120,7 @@ public class EditMetaData {
 			newFile = new File(newPath + newName + fileType);
 		}
 
+		// database calls
 		if (file.renameTo(newFile)) {
 			String updatePathRequest = "UPDATE fotos SET Pfad='file:///" + newPath + newName + fileType + "' WHERE ID="
 					+ imageContainer.getId() + ";";

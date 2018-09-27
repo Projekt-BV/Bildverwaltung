@@ -46,18 +46,18 @@ import model.editing.Resizer;
  * 
  * @author Phillip Persch, Julian Einspenner, Mario Anklam, Tobias Reinert
  */
-public class MainControllerGalleryMode extends MainController implements Initializable {
-
-	/**
-	 * Drag and drop of objects of custom classes requires a custom DataFormat.	
-	 */
-	public static DataFormat imageContainerFormat = new DataFormat("model.ImageContainer");
+public class MainControllerGalleryMode extends MainController implements Initializable {	
+	
+	// FXML Fields
 	@FXML private AnchorPane rootPane;
 	@FXML private TilePane tilePane;
 	@FXML private ProgressIndicator progressIndicator;
 	@FXML private ImageView displayImage;
 	@FXML TextField renameAllTextField;
-
+	
+	
+	// Fields
+	public static DataFormat imageContainerFormat = new DataFormat("model.ImageContainer");
 	private Image imageToDownScale;
 	private ContextMenu contextMenu;
 	private boolean refreshing = false;
@@ -80,6 +80,9 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 	/**
 	 * Method to initialize the tilePane containing each album's images.
+	 * This method does way too much.
+	 * 
+	 * @author: Phillip Persch
 	 */
 	@FXML
 	void initializeTilePane() {
@@ -88,13 +91,18 @@ public class MainControllerGalleryMode extends MainController implements Initial
 			return;
 		}
 
+		// 1. Clear current tile pane
+		
 		refreshing = true;
 		if (!tilePane.getChildren().isEmpty())
 			tilePane.getChildren().clear();
 
+		
+		
+		// 2. Check where this was called from and assign field selectedAlbum accordingly		
+		
 		if (didSwitchBack && selectedAlbum != null) {
-			// if we come from Edit mode, leave selectedAlbum as it is and highlight it in
-			// listView
+			// if we come from Edit mode, leave selectedAlbum as it is and highlight it in listView
 
 			selectedAlbum = database.getAlbums().stream()
 					.filter(album -> album.getName().equals(selectedAlbum.getName())).findFirst().get();
@@ -114,11 +122,11 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 		didSwitchBack = false;
 
-		// downscale all images for performance, load images into grid
-		// Separate thread to keep UI responsive
-
+		
+		// separate thread to keep UI responsive
 		new Thread(() -> {
 
+			// 3. setup progress indicator
 			progressIndicator.toFront();
 			progressIndicator.setProgress(0.0);
 			progressIndicator.setVisible(true);
@@ -126,16 +134,19 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 			for (ImageContainer ic : selectedAlbum.getImages()) {
 
-				// Semaphore, so that col and line are not incremented before UI is updated
-				final CountDownLatch latch = new CountDownLatch(1);
 
-				// Call to garbageCollector, because Image takes up a lot of memory
+				// call to garbageCollector, because javafx.scene.Image objects take up a lot of memory
 				this.imageToDownScale = new Image(ic.getPath());
 				System.gc();
 
+				// 4. images are scaled down for better performance
 				int newWidth = 300;
 				int newHeight = (int) ((newWidth / imageToDownScale.getWidth()) * imageToDownScale.getHeight());
 				imageToDownScale = Resizer.resizeImage(newWidth, newHeight, imageToDownScale);
+
+				// 5. switch back to javafx thread to change UI
+				// semaphore to make this thread wait for UI to finish
+				final CountDownLatch latch = new CountDownLatch(1);
 
 				Platform.runLater(() -> {
 					ImageView imageView = new ImageView(imageToDownScale);
@@ -149,6 +160,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 					latch.countDown();
 				});
+				
 				try {
 					latch.await();
 				} catch (InterruptedException e) {
@@ -162,12 +174,22 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 	}
 
+	/**
+	 * This method handles the click on an image in the tile pane.
+	 * The result is the transition to the edit scene.
+	 * 
+	 * @author Phillip Persch
+	 * @param e the mouse click on an image that triggered this method call
+	 * @throws IOException
+	 */
 	@FXML
 	private void tilePaneImagePressed(MouseEvent e) throws IOException {
 
-		// this check is to make sure, that the scene is not switched after a drag and
-		// drop ends on an image. Boolean actionWasDragAndNoClick is set to true when
-		// drag is detected
+		/*
+		 * this check is to make sure that the scene is not switched after a drag and
+		 * drop ends on an image. Boolean actionWasDragAndNoClick is set to true when
+		 * drag is detected
+		 */		
 		if (actionWasDragAndNoClick) {
 			actionWasDragAndNoClick = false;
 			return;
@@ -192,9 +214,17 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		}
 
 		MainControllerEditMode.imageContainer = clickedOnImage;
+		// switch the scene to edit mode
 		switchScene(e);
 	}
 	
+	/**
+	 * This method causes the scene to switch to the edit scene.
+	 * 
+	 * @author Phillip Persch
+	 * @param e the mouse event that triggered the scene switch
+	 * @throws IOException
+	 */
 	private void switchScene(MouseEvent e) throws IOException {
 		Parent pane = FXMLLoader.load(getClass().getResource("/design/Main_page_edit_mode.fxml"));
 		// Show stage information
@@ -203,7 +233,9 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		window.show();
 	}
 
-	@FXML
+	/**
+	 * 
+	 */	
 	public void reloadMainPage() {
 		initializeListView();
 		initializeTilePane();

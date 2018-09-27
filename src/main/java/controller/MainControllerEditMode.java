@@ -573,18 +573,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	}
 
-	@FXML private void renameImage() {}
-
-	@FXML
-	private void saveImageButtonPressed() {
-		System.out.println("Save image button");
-	}
-
-	@FXML
-	private void filterButtonPressed() {
-		System.out.println("filter-button");
-	}
-
+	
 	boolean usedColorFilter = false;
 
 	/**
@@ -718,8 +707,15 @@ public class MainControllerEditMode extends MainController implements Initializa
 		});
 	}
 
+	
+	
 	// Swipe through images
 
+	/**
+	 * This method selects the next ImageContainer in the selected album to be displayed.
+	 * 
+	 * @author: Phillip Persch
+	 */
 	@FXML
 	void swipeForwards() {
 		int newIndex = selectedAlbum.getImages().indexOf(imageContainer) + 1;
@@ -735,6 +731,11 @@ public class MainControllerEditMode extends MainController implements Initializa
 		resetGUI();
 	}
 
+	/**
+	 * This method selects the previous ImageContainer in the selected album to be displayed.
+	 * 
+	 * @author: Phillip Persch
+	 */
 	@FXML
 	void swipeBackwards() {
 		int newIndex = selectedAlbum.getImages().indexOf(imageContainer) - 1;
@@ -749,12 +750,24 @@ public class MainControllerEditMode extends MainController implements Initializa
 		resetGUI();
 	}
 
+	/**
+	 * This method shows left and right arrow buttons to swipe through images.
+	 * It is called when the mouse hovers over the stackPane that contains the imageView.
+	 * 
+	 * @author: Phillip Persch
+	 */	
 	@FXML
 	private void showSwipeButtons() {
 		forwardButton.setVisible(true);
 		backwardButton.setVisible(true);
 	}
 
+	/**
+	 * This method hides left and right arrow buttons to swipe through images.
+	 * It is called when the mouse hovers over the stackPane that contains the imageView.
+	 * 
+	 * @author: Phillip Persch
+	 */	
 	@FXML
 	private void hideSwipeButtons() {
 		forwardButton.setVisible(false);
@@ -763,14 +776,27 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	// Getters and setters
 
+	/**
+	 * Getter for static member image.
+	 * 
+	 * @author Phillip Persch
+	 * @return the image being displayed. 
+	 */
 	public static Image getImage() {
 		return image;
 	}
 
+	/**
+	 * Getter for member imageView
+	 * 
+	 * @author: Phillip Persch
+	 * @return the imageView holding the current image
+	 */
 	public ImageView getDisplayImageEditMode() {
 		return displayImageEditMode;
 	}
 
+	
 	private int getSelectedChoiceBoxIndex() {
 		return colorChoiceBox.getSelectionModel().getSelectedIndex();
 	}
