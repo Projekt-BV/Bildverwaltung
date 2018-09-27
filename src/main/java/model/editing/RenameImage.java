@@ -8,10 +8,22 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
+/**
+ * This class implements a dialog to choose a new image name.
+ * 
+ * @author Phillip Persch
+ */
 public class RenameImage extends Application {
 
 	private Optional<String> result;
 
+	/**
+	 * This method sets up the instructions the user is given.
+	 * It then waits for the user's inputs.
+	 * 
+	 * @author Phillip Persch
+	 */
 	private void showInputTextDialog() {
 
 		TextInputDialog dialog = new TextInputDialog();
@@ -23,6 +35,11 @@ public class RenameImage extends Application {
 		result = dialog.showAndWait();
 	}
 
+	/**
+	 * This method initializes the view.
+	 * 
+	 * @author Phillip Persch
+	 */
 	@Override
 	public void start(Stage stage) {
 
@@ -33,6 +50,11 @@ public class RenameImage extends Application {
 
 	}
 
+	/**
+	 * Getter for field result
+	 * 
+	 * @return the result if there is one or null if there is none
+	 */
 	public Optional<String> getResult() {
 		return this.result;
 	}

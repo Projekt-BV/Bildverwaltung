@@ -1,6 +1,3 @@
-/**
- * 
- */
 package model;
 
 import java.sql.ResultSet;
@@ -13,7 +10,8 @@ import java.util.stream.Collectors;
 import database.SendSQLRequest;
 
 /**
- * Database class 
+ * This class defines a database which has a collection of albums
+ *  
  * @author philpsc 
  */
 public class Database {
@@ -21,6 +19,12 @@ public class Database {
 	private ArrayList<Album> albums;
 	
 
+	/**
+	 * This method reloads the entire list of albums from the database.
+	 * It is called too often in this project. ;)
+	 * 
+	 * @author Phillip Persch
+	 */
 	public void reloadDatabaseContents() {
 		ResultSet albumsResultSet; 
 		albums = new ArrayList<Album>();
@@ -72,6 +76,11 @@ public class Database {
 		}
 	}
 	
+	/**
+	 * This method sorts the database's albums alphabetically
+	 * 
+	 * @author Phillip Persch
+	 */
 	private void sortByName() {
 		albums = albums.stream()
 				       .sorted((i1, i2) -> i1.getName().compareTo(i2.getName()))
@@ -89,10 +98,22 @@ public class Database {
 		albums = new ArrayList<Album>(albumQueue);
 	}
 	
+	/**
+	 * Getter for field albums.
+	 * 
+	 * @author Phillip Persch
+	 * @return this database's albums
+	 */
 	public ArrayList<Album> getAlbums() {
 		return albums;
 	}
 
+	/**
+	 * Setter for field albums.
+	 * 
+	 * @author Phillip Persch
+	 * @param albums the new albums
+	 */
 	public void setAlbums(ArrayList<Album> albums) {
 		this.albums = albums;
 	}

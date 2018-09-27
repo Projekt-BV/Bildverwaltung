@@ -21,6 +21,12 @@ public class FileImport extends Application {
 		 
     private MainControllerGalleryMode mainController;
 
+    /**
+     * This method opens a file chooser and processes its results.
+     * It makes a number of checks for database data integrity.
+     * 
+     * @author Mario Anklam, Phillip Persch
+     */
 	@Override
     public void start(final Stage stage) {
         stage.setTitle("File import");
@@ -85,6 +91,12 @@ public class FileImport extends Application {
         }
     }
 
+    /**
+     * Passes the FileImport object an instance of the MainControllerGalleryMode that called it.
+     * 
+     * @author Phillip Persch
+     * @param mainControllerGalleryMode the instance of MainControllerGalleryMode that requested a file import
+     */
 	public void injectMainController(MainControllerGalleryMode mainControllerGalleryMode) {
 		this.mainController = mainControllerGalleryMode;		
 	}
