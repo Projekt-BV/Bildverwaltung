@@ -42,7 +42,6 @@ public class SqlRunner {
 			// read script line by line
 			while ((line = reader.readLine()) != null) {
 				// execute query
-				System.out.println(line);
 				statement.execute(line);
 			}
 

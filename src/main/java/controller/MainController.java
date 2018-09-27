@@ -180,7 +180,7 @@ public abstract class MainController {
 			SendSQLRequest.deleteImageFromAlbum(selectedAlbum, MainControllerEditMode.imageContainer);
 		}	
 	}
-
+	
 	/**
 	 * This method exits the program.
 	 * @author Phillip Persch
@@ -399,7 +399,6 @@ public abstract class MainController {
 		switch (controller) {
 		case ("EditMode"):
 			// BorderPane East
-			MenuDelete.setText(config.getProperty("MenuBar-File-Delete"));
 			MenuSave.setText(config.getProperty("MenuBar-File-Save"));
 			MenuSaveAs.setText(config.getProperty("MenuBar-File-SaveAs"));
 			MenuExit.setText(config.getProperty("MenuBar-File-Exit"));

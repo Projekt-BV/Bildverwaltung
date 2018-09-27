@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
+import database.SendSQLRequest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -35,6 +37,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.ImageContainer;
 import model.editing.ColorFilter;
@@ -555,22 +558,36 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	@FXML
 	private void saveImageAs() {
-		DirectoryChooser directoryChooser = new DirectoryChooser();
-		File selectedDirectory = directoryChooser.showDialog(new Stage());
-
-		if (selectedDirectory == null) {
-			return;
-		}
-
-		String path = selectedDirectory.getAbsolutePath();
-		BufferedImage img = SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null);
-		File outFile = new File(path + "/" + imageContainer.getName());
-		try {
-			ImageIO.write(img, "png", outFile);
-		} catch (IOException e) {
-			System.err.println("Failed while saving the image");
-		}
-
+//		FileChooser fc = new FileChooser();
+//		File selectedDirectory = fc.showSaveDialog(new Stage());
+//
+//		System.out.println(selectedDirectory);
+//		
+//		if (selectedDirectory == null) {
+//			return;
+//		}
+//
+//		String path = selectedDirectory.getAbsolutePath();
+//		String filename = selectedDirectory.getName();
+//		System.out.println(filename);
+//		BufferedImage img = SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null);
+//		File outFile = new File(path);
+//		
+//		System.out.println(outFile);
+//		try {
+//			ImageIO.write(img, "png", outFile);
+//		} catch (IOException e) {
+//			System.err.println("Failed while saving the image");
+//		}
+//		
+//		try {
+//			//String saveAsRequest = "prog3_db.fotos Set Fotoname = "
+//			
+//			SendSQLRequest.sendSQL("");
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}
+//
 	}
 
 	
@@ -772,6 +789,16 @@ public class MainControllerEditMode extends MainController implements Initializa
 	private void hideSwipeButtons() {
 		forwardButton.setVisible(false);
 		backwardButton.setVisible(false);
+	}
+	
+	@FXML
+	private void deleteImage(Event e) throws SQLException, IOException {
+		if (selectedAlbum.getName().equals("All Images")) {
+			SendSQLRequest.deleteImageFromDB(MainControllerEditMode.imageContainer);			
+		} else {
+			SendSQLRequest.deleteImageFromAlbum(selectedAlbum, MainControllerEditMode.imageContainer);
+		}	
+		switchBack(e);
 	}
 
 	// Getters and setters

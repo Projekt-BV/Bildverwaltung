@@ -138,8 +138,7 @@ public class SendSQLRequest {
 
 		while (tmpRs.next()) {
 			tmpString = tmpRs.getString(4);
-			tmpString = tmpString.substring(8, tmpString.length());
-			System.out.println(tmpString);
+			tmpString = tmpString.substring(7, tmpString.length());
 			tmpFile = new File(tmpString);
 			boolean tmpbool = tmpFile.exists();
 			if (tmpbool) {
