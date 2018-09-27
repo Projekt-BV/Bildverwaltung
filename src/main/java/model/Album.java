@@ -10,6 +10,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
+ * This class defines albums which have a name, an ID and a collection of images.
+ * 
  * @author philpsc
  */
 public class Album {

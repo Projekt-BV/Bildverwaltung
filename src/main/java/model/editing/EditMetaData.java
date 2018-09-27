@@ -89,13 +89,10 @@ public class EditMetaData {
 	
 	
 	/**
-	 * This method renames all images in .
-	 * If the corresponding text field is not empty, all images are renamed to:
+	 * This method renames an image.
+	 * If the corresponding text field is not empty, it are renamed to:
 	 * the textfield's text + an incrementing integer.
 	 * 
-	 * For example:
-	 * text field's text: "Xmas"
-	 * new image names: "Xmas", "Xmas1", "Xmas2"...
 	 * 
 	 * @author Phillip Persch
 	 * @param imageContainer the image to be renamed
@@ -134,9 +131,6 @@ public class EditMetaData {
 				e.printStackTrace();
 				return false;
 			}
-
-		} else {
-
 		}
 		return true;
 	}

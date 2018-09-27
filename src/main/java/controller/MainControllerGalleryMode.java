@@ -218,6 +218,9 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		switchScene(e);
 	}
 	
+	
+	// navigation
+	
 	/**
 	 * This method causes the scene to switch to the edit scene.
 	 * 
@@ -234,15 +237,25 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	}
 
 	/**
+	 * This method should get called whenever the gallery scene needs to be reloaded.
 	 * 
+	 * @author Phillip Persch
 	 */	
 	public void reloadMainPage() {
 		initializeListView();
 		initializeTilePane();
 	}
 
+	
 	// Drag and drop
 
+	/**
+	 * This method handles the start of the drag and drop event.
+	 * It determines which image has been selected an initiates the procedure.
+	 * 
+	 * @author Phillip Persch
+	 * @param e the start of the drag and drop event
+	 */
 	@FXML
 	private void imageDragStarted(MouseEvent e) {
 		actionWasDragAndNoClick = true;
@@ -260,6 +273,12 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		e.consume();
 	}
 
+	/**
+	 * This method gets called when something is dragged over the tile pane, but not yet dropped.
+	 * 
+	 * @author Phillip Persch
+	 * @param e the event of the mouse being dragged over the tile pane
+	 */
 	@FXML
 	private void imageDragOver(DragEvent e) {
 		System.out.println("dragover");
@@ -270,6 +289,18 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	}
 
 	// Bar above tilePane
+	
+	/**
+	 * This method renames all images in the selected album.
+	 * If the corresponding text field is not empty, all images are renamed to:
+	 * the textfield's text + an incrementing integer.
+	 * 
+	 * For example:
+	 * text field's text: "Xmas"
+	 * new image names: "Xmas", "Xmas1", "Xmas2"...
+	 * 
+	 * @author Phillip Persch
+	 */
 	@FXML
 	private void renameAllButtonPressed() {
 		if (renameAllTextField.getText().isEmpty()) {
@@ -280,6 +311,16 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	}
 
 	// ContextMenu
+	/**
+	 * This method initializes the context menu on the tile pane, including all menu items and action listeners.
+	 * There are two delete operations:
+	 * 1) delete from album: deletes the image only from the currently selected album
+	 * 2) delete from all albums: deletes the image from the entire database
+	 * 
+	 * There is no operation to delete images from the file system.
+	 * 
+	 * @author Phillip Persch, Tobias Reinert
+	 */
 	private void initializeContextMenu() {
 		Properties config;
 		config = new Properties();
@@ -295,8 +336,12 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		
 		contextMenu = new ContextMenu();
 	
+		// Menu item rename + action listener
 		MenuItem rename = new MenuItem(config.getProperty("ContextRename"));
 		rename.setOnAction(e -> initializeRenameDialog());
+		
+		
+		// Menu item delete from album + action listener
 		MenuItem deleteImageFromAlbum = new MenuItem(config.getProperty("Context-Delete-From-Album"));
 		deleteImageFromAlbum.setOnAction(event -> {
 			try {
@@ -308,6 +353,8 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 		});
 
+		
+		// Menu item delete from all albums + action listener
 		MenuItem deleteImageFromAllAlbums = new MenuItem(config.getProperty("Context-Delete-From-All-Albums"));
 		deleteImageFromAllAlbums.setOnAction(event -> {
 			try {
@@ -322,6 +369,12 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		contextMenu.setOpacity(1);
 	}
 
+	/**
+	 * This method shows the context menu over the selected image when right clicked.
+	 * 
+	 * @author Phillip Persch
+	 * @param e right mouse click 
+	 */
 	@FXML
 	private void contextMenuRequested(ContextMenuEvent e) {
 		ImageView imageView = (ImageView) e.getPickResult().getIntersectedNode();
@@ -440,7 +493,13 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		return idSet;
 	}
 	
-	//Pibbo here
+	
+	/**
+	 * This method puts the images that match the filter criteria into the tile pane.
+	 * 
+	 * @author Phillip Persch
+	 * @param idSet a set of image IDs, representing imageContainers who meet the filter criteria
+	 */
 	private void filterGalleryImages(TreeSet<Integer> idSet) {
 		ArrayList<ImageContainer> filteredImages = selectedAlbum.getImages()
 																.stream()
