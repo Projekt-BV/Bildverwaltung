@@ -5,10 +5,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -558,36 +561,61 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 	@FXML
 	private void saveImageAs() {
-//		FileChooser fc = new FileChooser();
-//		File selectedDirectory = fc.showSaveDialog(new Stage());
-//
-//		System.out.println(selectedDirectory);
-//		
-//		if (selectedDirectory == null) {
-//			return;
-//		}
-//
-//		String path = selectedDirectory.getAbsolutePath();
-//		String filename = selectedDirectory.getName();
-//		System.out.println(filename);
-//		BufferedImage img = SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null);
-//		File outFile = new File(path);
-//		
-//		System.out.println(outFile);
-//		try {
-//			ImageIO.write(img, "png", outFile);
-//		} catch (IOException e) {
-//			System.err.println("Failed while saving the image");
-//		}
-//		
-//		try {
-//			//String saveAsRequest = "prog3_db.fotos Set Fotoname = "
-//			
-//			SendSQLRequest.sendSQL("");
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}
-//
+		FileChooser fc = new FileChooser();
+		fc.setInitialFileName("Photo.jpg");
+		fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image (*.jpg)", "*.jpg"));
+		File selectedDirectory = fc.showSaveDialog(new Stage());
+
+		if (selectedDirectory == null) {
+			return;
+		}
+
+		String path = selectedDirectory.getAbsolutePath().replace("\\", "/");
+		String filename = selectedDirectory.getName();
+		
+		File outFile = new File(path);
+		
+		Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");            
+        String formattedDate = df.format(date);
+		
+		try {
+			BufferedImage img = SwingFXUtils.fromFXImage(displayImageEditMode.getImage(), null);
+			ImageIO.write(img, "png", outFile);
+		} catch (IOException e) {
+			System.err.println("Failed while saving the image");
+		}
+		
+		System.out.println(path);
+		String selectIdRequest = "SELECT ID FROM fotos WHERE Pfad=" + "'file:///" + path + "'";
+		
+		ResultSetMetaData meta;
+		try {
+			meta = SendSQLRequest.sendSQL(selectIdRequest).getMetaData();
+			if(meta.getColumnCount() >= 1) {
+				//Bild wurde ueberschrieben, der Pfad existiert schon in der DB
+				return;
+			}
+			
+			//Speichere nach Tabelle fotos
+			String saveAsRequestFotos = "INSERT INTO fotos (Datum, Fotoname, Pfad) VALUES ('" + formattedDate + "', '" + filename + "', 'file:///" + path + "')";
+			SendSQLRequest.sendSQL(saveAsRequestFotos);
+			
+			//Welche ID hat das neue Bild?
+			ResultSet set = SendSQLRequest.sendSQL(selectIdRequest);
+			
+			int id = -1; 
+			while(set.next()) {
+				id = set.getInt(1);
+			}
+			
+		    //Speichere nach Tabelle albumfoto
+			String saveAsRequestAlben = "INSERT INTO albumfoto (AlbumID, FotoID) VALUES ('1', '" + id + "')";
+			SendSQLRequest.sendSQL(saveAsRequestAlben);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	
