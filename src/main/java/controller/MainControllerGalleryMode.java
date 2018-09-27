@@ -1,65 +1,55 @@
 package controller;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.io.*;
+import java.net.*;
+import java.sql.*;
+import java.time.*;
+import java.util.*;
 import java.util.Date;
-import java.util.Properties;
-import java.util.ResourceBundle;
-import java.util.TreeSet;
-import java.util.concurrent.CountDownLatch;
-import java.util.stream.Collectors;
+import java.util.concurrent.*;
+import java.util.stream.*;
 
-import database.SendSQLRequest;
-import javafx.application.Platform;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import database.*;
+import javafx.application.*;
+import javafx.fxml.*;
+import javafx.scene.*;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.input.DataFormat;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.TilePane;
-import javafx.stage.Stage;
-import model.ImageContainer;
-import model.editing.EditMetaData;
-import model.editing.Resizer;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
+import model.*;
+import model.editing.*;
 
+/**
+ * This class manages the gallery scene. (first main scene)
+ * 
+ * @author Phillip Persch, Julian Einspenner, Mario Anklam, Tobias Reinert
+ */
 public class MainControllerGalleryMode extends MainController implements Initializable {
 
-	public static DataFormat imageContainerFormat = new DataFormat("model.ImageContainer");;
-	@FXML
-	private AnchorPane rootPane;
-	@FXML
-	private TilePane tilePane;
-	@FXML
-	private ProgressIndicator progressIndicator;
-	@FXML
-	private ImageView displayImage;
-	@FXML
-	TextField renameAllTextField;
+	/**
+	 * Drag and drop of objects of custom classes requires a custom DataFormat.	
+	 */
+	public static DataFormat imageContainerFormat = new DataFormat("model.ImageContainer");
+	@FXML private AnchorPane rootPane;
+	@FXML private TilePane tilePane;
+	@FXML private ProgressIndicator progressIndicator;
+	@FXML private ImageView displayImage;
+	@FXML TextField renameAllTextField;
 
 	private Image imageToDownScale;
 	private ContextMenu contextMenu;
 	private boolean refreshing = false;
 	boolean actionWasDragAndNoClick = false;
 
+	/**
+	 * This method initializes the controller.
+	 * @author Phillip Persch
+	 * @param arg0 inhereted from superclass
+	 * @param arg1 inhereted from superclass
+	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		didSwitchBack = true;

@@ -1,49 +1,32 @@
 package controller;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Properties;
-import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.awt.image.*;
+import java.io.*;
+import java.net.*;
+import java.text.*;
+import java.util.*;
+import java.util.regex.*;
 
-import javax.imageio.ImageIO;
+import javax.imageio.*;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.event.Event;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
-import model.ImageContainer;
-import model.editing.ColorFilter;
-import model.editing.Cutter;
-import model.editing.EditMetaData;
-import model.editing.GrayScaler;
-import model.editing.Resizer;
-import model.editing.Rotater;
+import javafx.collections.*;
+import javafx.embed.swing.*;
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
+import model.*;
+import model.editing.*;
 
+/**
+ * This class manages the edit image scene. (second main scene)
+ * 
+ * @author Julian Einspenner, Phillip Persch, Mario Anklam, Tobias Reinert *
+ */
 public class MainControllerEditMode extends MainController implements Initializable {
 
 	public static Image image; // The image being displayed
@@ -58,6 +41,8 @@ public class MainControllerEditMode extends MainController implements Initializa
 	private int currentImageFitHeight;
 	private int zoomStage = 0;
 
+	@FXML private void renameImage() {}
+	// FXML fields
 	@FXML private ScrollPane imageViewScrollPane;
 	@FXML private ImageView displayImageEditMode;
 	@FXML private Button applyFilterButton;
@@ -87,7 +72,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 		initFitWidth = (int) displayImageEditMode.getFitWidth();
 		initFitHeight = (int) displayImageEditMode.getFitHeight();
-
+		
 		initializeListView();
 
 		imageViewScrollPane.setFitToWidth(true);
@@ -147,8 +132,9 @@ public class MainControllerEditMode extends MainController implements Initializa
 	}
 
 	/**
-	 * @author Julian Einspenner Sets the path label to current path of
-	 *         imageContainer
+	 * Sets the path label to current path of imageContainer
+	 * 
+	 * @author Julian Einspenner 
 	 */
 	private void setPath() {
 		String text = "Path:\n";
@@ -163,8 +149,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	}
 
 	/**
-	 * Initializes the colorChoiceBox with values for filtering the color of the
-	 * displayed image
+	 * Initializes the colorChoiceBox with values for filtering the color of the displayed image
 	 * 
 	 * @author Julian Einspenner
 	 */
@@ -196,8 +181,9 @@ public class MainControllerEditMode extends MainController implements Initializa
 	
 	/**
 	 * This method switches back from this scene to the gallery scene.
+	 * 
 	 * @author Tobias Reinert, Phillip Persch
-	 * @param event
+	 * @param event the event that caused the scene to switch
 	 * @throws IOException
 	 */
 	@FXML
@@ -212,9 +198,7 @@ public class MainControllerEditMode extends MainController implements Initializa
 	}
 
 	/**
-	 * Images which are smaller as the imageView will be drawn in their original
-	 * size
-	 * 
+	 * Images which are smaller as the imageView will be drawn in their original size 
 	 * @author Julian Einspenner
 	 */
 	private void setFitDimensions() {

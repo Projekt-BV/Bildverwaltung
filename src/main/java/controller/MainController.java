@@ -1,167 +1,101 @@
 package controller;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.Properties;
+import java.io.*;
+import java.sql.*;
+import java.text.*;
+import java.util.*;
 
-import database.SendSQLRequest;
-import javafx.event.Event;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import model.Album;
-import model.Database;
-import model.FileImport;
-import model.ImageContainer;
-import model.editing.EditMetaData;
-import model.editing.RenameImage;
+import database.*;
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
+import javafx.scene.text.*;
+import javafx.stage.*;
+import model.*;
+import model.editing.*;
 
-//GOD Class
+/**
+ * This abstract class gives the basis for both main scenes of the app (gallery scene and edit scene).
+ * It offers all the functionalities, that both controllers have in common, to reduce redundant code.
+ * 
+ * @author Phillip Persch, Tobias Reinert, Mario Anklam, Julian Einspenner
+ */
 public abstract class MainController {
 
 	// GUI Elements, hierarchy like the hierarchy in Scenebuilder
 	// North
-	@FXML
-	Menu MenuFile;
-	@FXML
-	MenuItem MenuImport;
-	@FXML
-	MenuItem MenuCopy;
-	@FXML
-	MenuItem MenuRename;
-	@FXML
-	MenuItem MenuDelete;
-	@FXML
-	MenuItem MenuSave;
-	@FXML
-	MenuItem MenuSaveAs;
-	@FXML
-	MenuItem MenuExit;
-	@FXML
-	Menu MenuHelp;
-	@FXML
-	MenuItem MenuAbout;
-	@FXML
-	Menu MenuChangeLanguage;
-	@FXML
-	MenuItem MenuEnglish;
-	@FXML
-	MenuItem MenuGerman;
-	@FXML
-	Button ButtonSearch;
-	@FXML
-	Button ButtonFScreen;
-	@FXML
-	Button ButtonFilter;
-	@FXML
-	TextField TextFieldKeyword;
-	@FXML
-	DatePicker DatePickerFrom;
-	@FXML
-	DatePicker DatePickerTo;
+	@FXML Menu MenuFile;
+	@FXML MenuItem MenuImport;
+	@FXML MenuItem MenuCopy;
+	@FXML MenuItem MenuRename;
+	@FXML MenuItem MenuDelete;
+	@FXML MenuItem MenuSave;
+	@FXML MenuItem MenuSaveAs;
+	@FXML MenuItem MenuExit;
+	@FXML Menu MenuHelp;
+	@FXML MenuItem MenuAbout;
+	@FXML Menu MenuChangeLanguage;
+	@FXML MenuItem MenuEnglish;
+	@FXML MenuItem MenuGerman;
+	@FXML Button ButtonSearch;
+	@FXML Button ButtonFScreen;
+	@FXML Button ButtonFilter;
+	@FXML TextField TextFieldKeyword;
+	@FXML DatePicker DatePickerFrom;
+	@FXML DatePicker DatePickerTo;
 	// West
-	@FXML
-	Button ButtonAddAlbum;
-	@FXML
-	Button ButtonDeleteAlbum;
+	@FXML Button ButtonAddAlbum;
+	@FXML Button ButtonDeleteAlbum;
 	// Center
-	@FXML
-	Button ButtonRenameAll;
-	@FXML
-	Button ButtonAddImage;
+	@FXML Button ButtonRenameAll;
+	@FXML Button ButtonAddImage;
+	
 	// EditMode
 	// North
-	@FXML
-	Button ButtonAlbumView;
+	@FXML Button ButtonAlbumView;	
 	// Center
-	@FXML
-	Button ButtonDeleteImage;
+	@FXML Button ButtonDeleteImage;	
 	// East
-	@FXML
-	Tab TabEditing;
-	@FXML
-	Button TabEditButtonCClock;
-	@FXML
-	Button TabEditButtonClock;
-	@FXML
-	Button TabEditButtonResize;
-	@FXML
-	Text TextWidth;
-	@FXML
-	Button TabEditButtonSetRatio;
-	@FXML
-	Text TextHeight;
-	@FXML
-	Text TextRotate;
-	@FXML
-	Button cutModeButton;
-	@FXML
-	Text TextCutImage;
-	@FXML
-	Text TextColorFilter;//
-	@FXML
-	Text TextResizeImage;
-	@FXML
-	Button TabEditButtonUndo;
-	@FXML
-	Button TabEditButtonSave;
-	@FXML
-	Tab TabMetadata;
-	@FXML
-	Button TabMetaButtonSave;
-	@FXML
-	Text TextTitle;
-	@FXML
-	Text TextLocation;
-	@FXML
-	Text TextTags;
-	@FXML
-	Text TextDate;
-	@FXML
-	Label pathLabel;
-	// NewAlbum GUI
-	@FXML
-	Button exitId;
-	@FXML
-	Label NewAlbumLabelAlbum;
-	@FXML
-	Button NewAlbumButtonAdd;
-	@FXML
-	HBox sliderBox;
-	@FXML ChoiceBox colorChoiceBox;
+	@FXML Tab TabEditing;
+	@FXML Button TabEditButtonCClock;
+	@FXML Button TabEditButtonClock;
+	@FXML Button TabEditButtonResize;
+	@FXML Text TextWidth;
+	@FXML Button TabEditButtonSetRatio;
+	@FXML Text TextHeight;
+	@FXML Text TextRotate;
+	@FXML Button cutModeButton;
+	@FXML Text TextCutImage;
+	@FXML Text TextColorFilter;
+	@FXML Text TextResizeImage;
+	@FXML Button TabEditButtonUndo;
+	@FXML Button TabEditButtonSave;
+	@FXML Tab TabMetadata;
+	@FXML Button TabMetaButtonSave;
+	@FXML Text TextTitle;
+	@FXML Text TextLocation;
+	@FXML Text TextTags;
+	@FXML Text TextDate;
+	@FXML Label pathLabel;	
+	// AlbumController GUI
+	@FXML Button exitId;
+	@FXML Label NewAlbumLabelAlbum;
+	@FXML Button NewAlbumButtonAdd;
+	@FXML HBox sliderBox;
+	@FXML ChoiceBox<String> colorChoiceBox;
+	@FXML ListView<Album> listView;
+	@FXML AnchorPane rootPane;
 
-	@FXML
-	ListView<Album> listView;
-	@FXML
-	AnchorPane rootPane;
-
+	
+	// Fields
 	Database database = new Database();
-
 	static Album selectedAlbum;
 	static boolean didSwitchBack = true;
 	protected ImageContainer clickedOnImage;
-
 	protected static String currentLanguage = "en";
 	private String controller = "GalleryMode";
 
@@ -171,10 +105,13 @@ public abstract class MainController {
 	 * @throws ParseException
 	 */
 	public void initializeListView() {
+		
+		// clear current list and reload albums from database
 		listView.getItems().clear();
 		database.reloadDatabaseContents();
 		database.getAlbums().stream().forEach(album -> listView.getItems().add(album));
 
+		// custom listView cells are required to handle drag and drop + context menu
 		listView.setCellFactory(lv -> new AlbumListCell());
 
 		// highlight the selected album
@@ -187,15 +124,24 @@ public abstract class MainController {
 			referenceEqualAlbum = listView.getItems().stream().filter(album -> album.getName().equals("All Images"))
 					.findFirst().get();
 		}
+		
 		listView.getSelectionModel().select(referenceEqualAlbum);
 
 	}
-
+	
+	/**
+	 * Getter for field database.
+	 * 
+	 * @author Phillip Persch
+	 * @return the database this controller works with
+	 */
 	public Database getDatabase() {
 		return this.database;
 	}
 
-	// Menue-Bar----------------------------------------------------
+	
+	
+	// MenuBar
 
 	// File
 	@FXML
@@ -206,26 +152,20 @@ public abstract class MainController {
 		tmpImp.start(window);
 	}
 
-	@FXML
-	private void renameImage() {
-		System.out.println("I am the renameImage function");
-	}
-
+	
 	@FXML
 	private void deleteImage(Event e) throws SQLException, IOException {
 		if (selectedAlbum.getName().equals("All Images")) {
-			SendSQLRequest.deleteImageFromDB(MainControllerEditMode.imageContainer);
-			
-		}
-		else 
-		{
+			SendSQLRequest.deleteImageFromDB(MainControllerEditMode.imageContainer);			
+		} else {
 			SendSQLRequest.deleteImageFromAlbum(selectedAlbum, MainControllerEditMode.imageContainer);
-			
-		}
-		
-		
+		}	
 	}
 
+	/**
+	 * This method exits the program.
+	 * @author Phillip Persch
+	 */
 	@FXML
 	private void exit() {
 		System.exit(0);
@@ -248,7 +188,13 @@ public abstract class MainController {
 		stage.show();
 	}
 
-	// Buttons below listView
+	/**
+	 * This method opens a new stage for adding albums to the database.
+	 * The new stage is managed by an instance of AlbumController.
+	 * 
+	 * @author Mario Anklam, Phillip Persch, Tobias Reinert
+	 * @throws IOException
+	 */
 	@FXML
 	private void addAlbumButtonPressed() throws IOException {
 		Stage stage;
@@ -279,25 +225,34 @@ public abstract class MainController {
 
 	}
 
+	/**
+	 * This method deletes the selected album from the database.
+	 * 
+	 * @param e the event that triggers the deletion of an album
+	 * @throws SQLException
+	 * @throws IOException
+	 */
 	@FXML
 	private void deleteAlbumButtonPressed(Event e) throws SQLException, IOException {
+		
+		// never allow the user to delete album "All Images"		
 		if (selectedAlbum.getName().equals("All Images")) {
+			//TODO: tell the user that he is not allowed.
 			return;
 		}
+		
 		SendSQLRequest.deleteAlbum(selectedAlbum);
 		selectedAlbum = null;
+		
+		// depending on the scene, do a different initialization
 		initializeListView();
 		if (this instanceof MainControllerGalleryMode) {
 			((MainControllerGalleryMode) this).initializeTilePane();
 		} 
 	}
 
+	
 	// Bar below Menubar
-
-	@FXML
-	private void browseButtonPressed() {
-		System.out.println("I am the browseButtonPressed function");
-	}
 
 	@FXML
 	private void fullScreenButtonPressed() throws IOException {
