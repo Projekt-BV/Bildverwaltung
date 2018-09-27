@@ -352,7 +352,7 @@ public abstract class MainController {
 			break;
 
 		case ("EditMode"):
-			ButtonDeleteImage.setLayoutX(701);
+			//ButtonDeleteImage.setLayoutX(701);
 			colorChoiceBox.setPrefWidth(105);
 			break;
 		}
@@ -453,6 +453,9 @@ public abstract class MainController {
 				ButtonAddImage.setText(config.getProperty("Button-AddImage"));
 				// North
 				MenuImport.setText(config.getProperty("MenuBar-File-Import"));
+				DatePickerFrom.setPromptText(config.getProperty("DatePicker-From"));
+				DatePickerTo.setPromptText(config.getProperty("DatePicker-To"));
+				TextFieldKeyword.setText(config.getProperty("TextField-Keyword"));
 			}
 			break;
 

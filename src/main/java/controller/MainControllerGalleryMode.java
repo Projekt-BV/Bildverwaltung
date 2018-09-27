@@ -233,6 +233,8 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		// Show stage information
 		Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		window.getScene().setRoot(pane);		
+		window.setMinWidth(1280);
+		window.setMinHeight(767);
 		window.show();
 	}
 

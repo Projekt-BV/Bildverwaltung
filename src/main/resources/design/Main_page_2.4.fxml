@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 
-<AnchorPane fx:id="rootPane" minHeight="500.0" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerGalleryMode">
+<AnchorPane fx:id="rootPane" minHeight="500.0" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerGalleryMode">
   <!-- TODO Add Nodes -->
   <children>
     <BorderPane layoutX="0.0" layoutY="0.0" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -47,7 +47,7 @@
             </MenuBar>
                   <HBox layoutX="550.0" layoutY="27.0" AnchorPane.rightAnchor="234.0">
                      <children>
-                        <TextField fx:id="TextFieldKeyword" prefHeight="9.0" prefWidth="122.0" promptText="Keyword">
+                        <TextField fx:id="TextFieldKeyword" prefHeight="9.0" prefWidth="122.0" promptText="TextFieldKeyword">
                            <HBox.margin>
                               <Insets top="1.0" />
                            </HBox.margin>

@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerEditMode">
+<AnchorPane fx:id="rootPane" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainControllerEditMode">
   <!-- TODO Add Nodes -->
   <children>
     <BorderPane layoutX="0.0" layoutY="0.0" stylesheets="@application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -69,22 +69,22 @@
                   <content>
                     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="239.0">
                            <children>
-                              <Button fx:id="TabEditButtonCClock" layoutX="133.0" layoutY="57.0" mnemonicParsing="false" onAction="#rotateCounterClockwise" prefHeight="25.0" prefWidth="100.0" text="Counter-Clockwise" />
-                              <Button fx:id="TabEditButtonClock" layoutX="16.0" layoutY="57.0" mnemonicParsing="false" onAction="#rotateClockwise" prefHeight="25.0" prefWidth="100.0" text="Clockwise" />
+                              <Button fx:id="TabEditButtonCClock" layoutX="16.0" layoutY="65.0" mnemonicParsing="false" onAction="#rotateCounterClockwise" prefHeight="25.0" prefWidth="207.0" text="Counter-Clockwise" />
+                              <Button fx:id="TabEditButtonClock" layoutX="16.0" layoutY="32.0" mnemonicParsing="false" onAction="#rotateClockwise" prefHeight="25.0" prefWidth="207.0" text="Clockwise" />
                               <Button fx:id="TabEditButtonResize" layoutX="18.0" layoutY="262.0" mnemonicParsing="false" onAction="#resizeImage" prefHeight="25.0" prefWidth="97.0" text="Resize" />
                               <Text fx:id="TextWidth" layoutX="136.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Width" />
                               <TextField fx:id="widthTextField" layoutX="135.0" layoutY="262.0" prefHeight="25.0" prefWidth="100.0" />
                               <Button fx:id="TabEditButtonSetRatio" layoutX="18.0" layoutY="329.0" mnemonicParsing="false" onAction="#setRatio" prefHeight="25.0" prefWidth="97.0" text="Set ratio" />
                               <Text fx:id="TextHeight" layoutX="136.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Height" />
                               <TextField fx:id="heightTextField" layoutX="135.0" layoutY="329.0" prefHeight="25.0" prefWidth="100.0" />
-                              <Text fx:id="TextRotate" layoutX="17.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
+                              <Text fx:id="TextRotate" layoutX="17.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Rotate" />
                               <Button fx:id="cutModeButton" layoutX="17.0" layoutY="435.0" mnemonicParsing="false" onAction="#cutModeButtonPressed" prefHeight="25.0" prefWidth="94.0" text="Cut mode" />
                               <Text fx:id="TextCutImage" layoutX="21.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Cut image" wrappingWidth="86.13671875" />
                               <Text fx:id="TextColorFilter" layoutX="21.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Color filter" />
                               <Text fx:id="TextResizeImage" layoutX="19.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Resize image" />
-                              <Button fx:id="TabEditButtonUndo" layoutX="18.0" layoutY="504.0" mnemonicParsing="false" onAction="#undoButtonPressed" prefHeight="25.0" prefWidth="93.0" text="Undo"  />
-                              <Button fx:id="TabEditButtonSave" layoutX="133.0" layoutY="564.0" mnemonicParsing="false" onAction="#saveImage" prefHeight="25.0" prefWidth="93.0" text="Save"  />
-                              <Button fx:id="DeleteButton" layoutX="18.0" onAction="#deleteImage" layoutY="564.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Delete" />
+                              <Button fx:id="TabEditButtonUndo" layoutX="18.0" layoutY="504.0" mnemonicParsing="false" onAction="#undoButtonPressed" prefHeight="25.0" prefWidth="93.0" text="Undo" />
+                              <Button fx:id="TabEditButtonSave" layoutX="133.0" layoutY="564.0" mnemonicParsing="false" onAction="#saveImage" prefHeight="25.0" prefWidth="93.0" text="Save" />
+                              <Button fx:id="DeleteButton" layoutX="18.0" layoutY="564.0" mnemonicParsing="false" onAction="#deleteImage" prefHeight="25.0" prefWidth="93.0" text="Delete" />
                               <ChoiceBox fx:id="colorChoiceBox" layoutX="18.0" layoutY="147.0" prefHeight="27.0" prefWidth="99.0" />
                            </children>
                         </AnchorPane>
@@ -126,7 +126,7 @@
                <children>
                   <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <ScrollPane fx:id="imageViewScrollPane" fitToHeight="true" fitToWidth="true">
+                        <ScrollPane fx:id="imageViewScrollPane" fitToHeight="true" fitToWidth="true" stylesheets="@application.css">
                            <content>
                               <StackPane fx:id="imageStackPane" blendMode="LIGHTEN" style="-fx-background-color: 80,80,80;">
                                  <children>

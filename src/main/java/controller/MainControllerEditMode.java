@@ -219,6 +219,8 @@ public class MainControllerEditMode extends MainController implements Initializa
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		
 		window.getScene().setRoot(pane);
+		window.setMinWidth(1280);
+		window.setMinHeight(767);
 	}
 
 	/**
