@@ -442,7 +442,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	 * @return the idSet
 	 * @author Julian Einspenner
 	 */
-	private TreeSet filterByKeyword(String keyword, TreeSet<Integer> idSet){
+	private TreeSet<Integer> filterByKeyword(String keyword, TreeSet<Integer> idSet){
 		for (ImageContainer ic : selectedAlbum.getImages()) {
 			for (String tag : ic.getTags()) {
 				if (tag.contains(keyword)) {
@@ -462,7 +462,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	 * @return the idSet
 	 * @author Julian Einspenner
 	 */
-	private TreeSet filterByDate(Date min, Date max, TreeSet<Integer> idSet) {
+	private TreeSet<Integer> filterByDate(Date min, Date max, TreeSet<Integer> idSet) {
 		for (ImageContainer ic : selectedAlbum.getImages()) {
 			Date date = ic.getDate();
 			if (date.before(max) && date.after(min) || date.equals(max) || date.equals(min)) {
@@ -481,7 +481,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	 * @return the idSet
 	 * @author Julian Einspenner
 	 */
-	private TreeSet filterByKeywordAndDate(String keyword, Date min, Date max, TreeSet<Integer> idSet) {
+	private TreeSet<Integer> filterByKeywordAndDate(String keyword, Date min, Date max, TreeSet<Integer> idSet) {
 		for (ImageContainer ic : selectedAlbum.getImages()) {
 			Date date = ic.getDate();
 			for (String tag : ic.getTags()) {
