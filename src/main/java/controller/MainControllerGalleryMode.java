@@ -62,6 +62,8 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	private ContextMenu contextMenu;
 	private boolean refreshing = false;
 	boolean actionWasDragAndNoClick = false;
+	
+	private ArrayList<ImageContainer> imagesBeforeFiltering;
 
 	/**
 	 * This method initializes the controller.
@@ -75,7 +77,8 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		initializeListView();
 		initializeTilePane();
 		initializeContextMenu();
-		controllerCheck("GalleryMode");		
+		controllerCheck("GalleryMode");	
+		imagesBeforeFiltering = selectedAlbum.getImages();
 	}
 
 	/**
@@ -171,7 +174,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 			tilePane.setOpacity(1.0);
 			refreshing = false;
 		}).start();
-
 	}
 
 	/**
@@ -419,6 +421,9 @@ public class MainControllerGalleryMode extends MainController implements Initial
 			return;
 		}else if(booth){
 			filterGalleryImages(filterByKeywordAndDate(keyword, min, max, idSet));
+		}else {
+			selectedAlbum.setImages(imagesBeforeFiltering);
+			initializeTilePane();
 		}
 	}
 
