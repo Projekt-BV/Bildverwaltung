@@ -46,10 +46,11 @@ import model.editing.Rotater;
 
 public class MainControllerEditMode extends MainController implements Initializable {
 
-	public static Image image; // Das Bild, das angezeigt wird
-	public static Image imagePlain; // Das Bild ohne Editing wird hier festgehalten
-	public static ImageContainer imageContainer; // Wrapper für das Bild mit allen Informationen (wird veraendert nach
-													// dem Editieren!)
+	public static Image image; // The image being displayed
+	public static Image imagePlain; // The image before being edited
+	public static ImageContainer imageContainer; // Wrapper for image and metadata
+	
+	// don't confuse Image, ImageView, ImageContainer!!!
 
 	private int initFitWidth, initFitHeight;
 	private boolean cutMode = false;
@@ -57,35 +58,27 @@ public class MainControllerEditMode extends MainController implements Initializa
 	private int currentImageFitHeight;
 	private int zoomStage = 0;
 
-	@FXML
-	private ScrollPane imageViewScrollPane;
-	@FXML
-	private ImageView displayImageEditMode;
+	@FXML private ScrollPane imageViewScrollPane;
+	@FXML private ImageView displayImageEditMode;
+	@FXML private Button applyFilterButton;
+	@FXML private Button cutModeButton;
+	@FXML private ChoiceBox<String> colorChoiceBox;
+	@FXML private TextField widthTextField, heightTextField;
+	@FXML private TextField titelTextField, locationTextField, dateTextField, tagsTextField;
+	@FXML private Label pathLabel;
+	@FXML private Slider zoomSlider;
+	@FXML private Label zoomSliderValueLabel;
+	@FXML private StackPane imageStackPane;
+	@FXML private Button forwardButton;
+	@FXML private Button backwardButton;
 
-	@FXML
-	private Button applyFilterButton;
-	@FXML
-	private Button cutModeButton;
-	@FXML
-	private ChoiceBox<String> colorChoiceBox;
-
-	@FXML
-	private TextField widthTextField, heightTextField;
-	@FXML
-	private TextField titelTextField, locationTextField, dateTextField, tagsTextField;
-	@FXML
-	private Label pathLabel;
-	@FXML
-	private Slider zoomSlider;
-	@FXML
-	private Label zoomSliderValueLabel;
-	@FXML
-	private StackPane imageStackPane;
-	@FXML
-	private Button forwardButton;
-	@FXML
-	private Button backwardButton;
-
+	/**
+	 * This method initializes the controller and all of its components.
+	 * 
+	 * @author Julian Einspenner, Phillip Persch
+	 * @param arg0 inhereted from superclass
+	 * @param arg1 inhereted from superclass
+	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		image = new Image(imageContainer.getPath());
@@ -94,9 +87,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 
 		initFitWidth = (int) displayImageEditMode.getFitWidth();
 		initFitHeight = (int) displayImageEditMode.getFitHeight();
-
-		// Beladen der ChoiceBox passiert erst nach Umstrukturierung der Controller.
-		// albumChoiceBox.getChildrenUnmodifiable().addAll(c);
 
 		initializeListView();
 
@@ -118,18 +108,12 @@ public class MainControllerEditMode extends MainController implements Initializa
 		controllerCheck("EditMode");
 		initColorChoiceBox();
 		initializeMetaData();
-		//stageSizeListener();
 	}
 	
-//	private void stageSizeListener() {
-//		Stage stage = (Stage)rootPane.getScene().getWindow();
-//		stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-//		     sliderBox.layoutXProperty().bind(newVal.multiply(0.5));
-//		});
-//	}
 
 	// -----------------------------------------------------------------------------------------------------------//
-
+	// Initialization
+	
 	/**
 	 * Initializes the metadata and the path of an image in editing mode
 	 * 
@@ -210,6 +194,12 @@ public class MainControllerEditMode extends MainController implements Initializa
 		});
 	}
 	
+	/**
+	 * This method switches back from this scene to the gallery scene.
+	 * @author Tobias Reinert, Phillip Persch
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	private void switchBack(Event event) throws IOException {
 		selectedAlbum = listView.getSelectionModel().getSelectedItem();

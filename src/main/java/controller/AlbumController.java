@@ -16,40 +16,45 @@ import model.Album;
 import model.Database;
 
 /**
- * Controllerklasse zum erzeugen von neuen Alben
- * 
+ * Class to add albums to the database.
  * @author Mario Anklam
- *
  */
-
 public class AlbumController extends MainController implements Initializable {
 
-	@FXML
-	ListView<Album> listView;
-	@FXML
-	TextField albumName;
-	@FXML
-	Button exitId;
+	@FXML ListView<Album> listView;
+	@FXML TextField albumName;
+	@FXML Button exitId;
 
 	Database database = new Database();
 	private MainController mainController;
-
+	
+	/**
+	 * This method closes the window and lets the user return to the main screen.
+	 * @author Mario Anklam, Phillip Persch
+	 * @throws ParseException
+	 */
 	@FXML
 	private void exitButtonpressed() throws ParseException {
-		// get a handle to the stage
 		Stage stage = (Stage) exitId.getScene().getWindow();
-		// do what you have to do
 		stage.close();
+		
+		// depending on the type of mainController, different initializations have to be made
 		mainController.initializeListView();
 		if (mainController instanceof MainControllerGalleryMode) {
 			MainControllerGalleryMode mc = (MainControllerGalleryMode) mainController;
 			mc.initializeTilePane();
 		}
 	}
-
+	
+	/**
+	 * This method adds an album to the database.
+	 * @author Mario Anklam, Phillip Persch
+	 * @throws SQLException
+	 */
 	@FXML
 	private void newAlbumpressed() throws SQLException {
 
+		// don't allow empty inputs or the reserved album name "All Images"
 		if (albumName.getText().equals("") || albumName.getText().equals("All Images")) {
 			return;
 		}
@@ -64,6 +69,12 @@ public class AlbumController extends MainController implements Initializable {
 		database.getAlbums().stream().forEach(album -> listView.getItems().add(album));
 	}
 
+	/**
+	 * This method initializes the controller.
+	 * @author Phillip Persch
+	 * @param arg0 inhereted from superclass
+	 * @param arg1 inhereted from superclass
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		database.reloadDatabaseContents();
@@ -71,6 +82,11 @@ public class AlbumController extends MainController implements Initializable {
 		controllerCheck("AddAlbum");
 	}
 
+	/**
+	 * This method gives the albumcontroller an instance of MainController.
+	 * @author Phillip Persch     *
+	 * @param mainController the instance of MainController that wants to add albums
+	 */
 	public void injectMainController(MainController mainController) {
 		this.mainController = mainController;
 	}
