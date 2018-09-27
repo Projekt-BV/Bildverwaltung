@@ -1,26 +1,48 @@
 package controller;
 
-import java.awt.image.*;
-import java.io.*;
-import java.net.*;
-import java.text.*;
-import java.util.*;
-import java.util.regex.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Properties;
+import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import javax.imageio.*;
+import javax.imageio.ImageIO;
 
-import javafx.collections.*;
-import javafx.embed.swing.*;
-import javafx.event.*;
-import javafx.fxml.*;
-import javafx.scene.*;
-import javafx.scene.control.*;
-import javafx.scene.image.*;
-import javafx.scene.input.*;
-import javafx.scene.layout.*;
-import javafx.stage.*;
-import model.*;
-import model.editing.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
+import model.ImageContainer;
+import model.editing.ColorFilter;
+import model.editing.Cutter;
+import model.editing.EditMetaData;
+import model.editing.GrayScaler;
+import model.editing.Resizer;
+import model.editing.Rotater;
 
 /**
  * This class manages the edit image scene. (second main scene)
@@ -41,7 +63,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 	private int currentImageFitHeight;
 	private int zoomStage = 0;
 
-	@FXML private void renameImage() {}
 	// FXML fields
 	@FXML private ScrollPane imageViewScrollPane;
 	@FXML private ImageView displayImageEditMode;
@@ -551,6 +572,8 @@ public class MainControllerEditMode extends MainController implements Initializa
 		}
 
 	}
+
+	@FXML private void renameImage() {}
 
 	@FXML
 	private void saveImageButtonPressed() {

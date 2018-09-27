@@ -1,13 +1,16 @@
 package controller;
 
-import java.net.*;
-import java.util.*;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-import javafx.fxml.*;
-import javafx.scene.image.*;
-import javafx.scene.input.*;
-import javafx.scene.layout.*;
-import javafx.stage.*;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 /**
  * This class manages the fullscreen scene while displaying one large image.
@@ -15,10 +18,8 @@ import javafx.stage.*;
  */
 public class FullScreenController implements Initializable {
 
-	@FXML
-	ImageView imageView;
-	@FXML
-	StackPane stackPane;
+	@FXML ImageView imageView;
+	@FXML StackPane stackPane;
 
 	private Image image;
 	private MainControllerEditMode mainController;
@@ -39,11 +40,22 @@ public class FullScreenController implements Initializable {
 
 	}
 
+	/**
+	 * This method injects the instance of the MainControllerEditMode that requested fullscreen
+	 * 
+	 * @author Phillip Persch
+	 * @param mainControllerEditMode the instance of the MainControllerEditMode that requested fullscreen
+	 */
 	public void injectMainController(MainControllerEditMode mainControllerEditMode) {
 		this.mainController = mainControllerEditMode;
 
 	}
 
+	/**
+	 * This method sets all key listeners required for navigation (left arrow, right arrow, escape)
+	 * 
+	 * @author Phillip Persch
+	 */
 	public void setKeyListener() {
 		imageView.imageProperty().bind(mainController.getDisplayImageEditMode().imageProperty());
 		Stage stage = (Stage) imageView.getScene().getWindow();
@@ -58,5 +70,4 @@ public class FullScreenController implements Initializable {
 			}
 		});
 	}
-
 }

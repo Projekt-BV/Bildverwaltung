@@ -1,26 +1,45 @@
 package controller;
 
-import java.io.*;
-import java.net.*;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.*;
-import java.util.stream.*;
+import java.util.Properties;
+import java.util.ResourceBundle;
+import java.util.TreeSet;
+import java.util.concurrent.CountDownLatch;
+import java.util.stream.Collectors;
 
-import database.*;
-import javafx.application.*;
-import javafx.fxml.*;
-import javafx.scene.*;
+import database.SendSQLRequest;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.image.*;
-import javafx.scene.input.*;
-import javafx.scene.layout.*;
-import javafx.stage.*;
-import model.*;
-import model.editing.*;
+import javafx.scene.Parent;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
+import model.ImageContainer;
+import model.editing.EditMetaData;
+import model.editing.Resizer;
 
 /**
  * This class manages the gallery scene. (first main scene)
@@ -56,7 +75,7 @@ public class MainControllerGalleryMode extends MainController implements Initial
 		initializeListView();
 		initializeTilePane();
 		initializeContextMenu();
-		controllerCheck("GalleryMode");
+		controllerCheck("GalleryMode");		
 	}
 
 	/**

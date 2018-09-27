@@ -65,7 +65,7 @@ public class Album {
 	public void setImages(ArrayList<ImageContainer> images) {
 		this.images = images;
 	}
-
+	
 	public String toString() {
 		return this.getName();
 	}

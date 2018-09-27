@@ -1,22 +1,41 @@
 package controller;
 
-import java.io.*;
-import java.sql.*;
-import java.text.*;
-import java.util.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.Properties;
 
-import database.*;
-import javafx.event.*;
-import javafx.fxml.*;
-import javafx.scene.*;
-import javafx.scene.control.*;
-import javafx.scene.image.*;
-import javafx.scene.input.*;
-import javafx.scene.layout.*;
-import javafx.scene.text.*;
-import javafx.stage.*;
-import model.*;
-import model.editing.*;
+import database.SendSQLRequest;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import model.Album;
+import model.Database;
+import model.FileImport;
+import model.ImageContainer;
+import model.editing.EditMetaData;
+import model.editing.RenameImage;
 
 /**
  * This abstract class gives the basis for both main scenes of the app (gallery scene and edit scene).
@@ -254,8 +273,15 @@ public abstract class MainController {
 	
 	// Bar below Menubar
 
+	/**
+	 * This method puts the window to fullscreen or maximized, depending on the class of the caller
+	 * 
+	 * @author Phillip Persch
+	 * @throws IOException
+	 */
 	@FXML
 	private void fullScreenButtonPressed() throws IOException {
+		// if edit mode, call FullScreenController
 		if (this instanceof MainControllerEditMode) {
 			Stage stage;
 			Parent root;
@@ -272,7 +298,9 @@ public abstract class MainController {
 			fullScreenController.setKeyListener();
 
 			stage.show();
+		//if gallery mode, just maximize
 		} else {
+			
 			Stage stage = (Stage) rootPane.getScene().getWindow();
 			stage.setMaximized(true);
 		}
@@ -280,10 +308,16 @@ public abstract class MainController {
 
 	// Rename
 
+	/**
+	 * This method asks for the new name, calls the renameImage function in EditMetaData and refreshes the model from the database
+	 * 
+	 * @author Phillip Persch
+	 */
 	protected void initializeRenameDialog() {
 		RenameImage ri = new RenameImage();
 		ri.start(new Stage());
 
+		// check if user has put in text before confirming. Empty file paths are not fun
 		if (ri.getResult().isPresent() && ri.getResult() != null && !ri.getResult().get().trim().equals("")) {
 			EditMetaData.renameImage(clickedOnImage, ri.getResult().get());
 			initializeListView();
@@ -291,12 +325,6 @@ public abstract class MainController {
 				((MainControllerGalleryMode) MainController.this).initializeTilePane();
 			}
 		}
-	}
-
-	// Bar above tilePane / ImageView
-	@FXML
-	private void dropdownButtonChoiceSelected() {
-		System.out.println("I am the dropdownButtonChoiceSelected function");
 	}
 
 	@FXML
@@ -441,14 +469,27 @@ public abstract class MainController {
 		}
 	}
 
+	/**
+	 * This class defines custom cells for the listView.
+	 *  
+	 * @author Phillip Persch
+	 */
 	class AlbumListCell extends ListCell<Album> {
 
 		private ContextMenu contextMenu;
 
+		/**
+		 * Constructor for AlbumListCell objects.
+		 * 
+		 * @author Phillip Persch
+		 */
 		public AlbumListCell() {
 
 			contextMenu = new ContextMenu();
 
+			
+			// this gets called when an ImageContainer is dropped on the cell.
+			// It is added to the album.
 			this.setOnDragDropped(e -> {
 				ImageContainer image = (ImageContainer) e.getDragboard()
 						.getContent(MainControllerGalleryMode.imageContainerFormat);
@@ -462,6 +503,7 @@ public abstract class MainController {
 				selectedAlbum = referenceEqualAlbum;
 
 				try {
+					// No that's not an SQL request in controller code :|
 					ResultSet tmpRs = SendSQLRequest.sendSQL(sqlRequest);
 				} catch (SQLException ex) {
 					System.out.println("Bild schon in Album.");
@@ -476,37 +518,48 @@ public abstract class MainController {
 			});
 		}
 
+		/**
+		 * This method sets visuals and functionality for each cell.
+		 * 
+		 * @author Phillip Persch
+		 * @param item the album the cell belongs to
+		 * @param empty tells if the cell is empty
+		 */
 		@Override
 		protected void updateItem(Album item, boolean empty) {
 			super.updateItem(item, empty);
-			if (!empty) {
-				contextMenu = new ContextMenu();
-
-				// don't allow user to rename or delete album "All Images"
-				if (!getItem().getName().equals("All Images")) {
-					MenuItem delete = new MenuItem("Delete");
-
-					delete.setOnAction(event -> {
-						try {
-							SendSQLRequest.deleteAlbum(this.getItem());
-							selectedAlbum = database.getAlbums().get(0);
-							initializeListView();
-							if (MainController.this instanceof MainControllerGalleryMode) {
-								MainControllerGalleryMode mc = (MainControllerGalleryMode) MainController.this;
-								mc.initializeTilePane();
-							}
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
-					});
-
-					MenuItem rename = new MenuItem("Rename");
-					contextMenu.getItems().addAll(rename, delete);
-				}
-				this.textProperty().bind(this.itemProperty().get().nameProperty());
-				setContextMenu(contextMenu);
+			if (empty) {
+				return;
 			}
-		}
+			
+			contextMenu = new ContextMenu();
+
+			// don't allow user to rename or delete album "All Images"
+			if (!getItem().getName().equals("All Images")) {
+				MenuItem delete = new MenuItem("Delete");
+
+				
+				// action for delete menu item
+				delete.setOnAction(event -> {
+					try {
+						SendSQLRequest.deleteAlbum(this.getItem());
+						selectedAlbum = database.getAlbums().get(0);
+						initializeListView();
+						if (MainController.this instanceof MainControllerGalleryMode) {
+							MainControllerGalleryMode mc = (MainControllerGalleryMode) MainController.this;
+							mc.initializeTilePane();
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				});
+				
+				contextMenu.getItems().addAll(delete);
+			}
+			this.textProperty().bind(this.itemProperty().get().nameProperty());
+			setContextMenu(contextMenu);
+			}
+		
 
 	}
 }
