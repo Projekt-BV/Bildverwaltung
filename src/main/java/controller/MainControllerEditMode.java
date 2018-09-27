@@ -588,13 +588,13 @@ public class MainControllerEditMode extends MainController implements Initializa
 			System.err.println("Failed while saving the image");
 		}
 		
-		System.out.println(path);
-		String selectIdRequest = "SELECT ID FROM fotos WHERE Pfad=" + "'file:///" + path + "'";
+		String selectIdRequest  = "SELECT ID FROM fotos WHERE Pfad=" + "'file:///" + path + "'";
+		String countRowsRequest = "SELECT COUNT(*) FROM fotos WHERE Pfad=" + "'file:///" + path + "'";
 		
-		ResultSetMetaData meta;
+		ResultSet rs;
 		try {
-			meta = SendSQLRequest.sendSQL(selectIdRequest).getMetaData();
-			if(meta.getColumnCount() >= 1) {
+			rs = SendSQLRequest.sendSQL(countRowsRequest);
+			if(rs.next() && rs.getInt(1) > 0) {
 				//Bild wurde ueberschrieben, der Pfad existiert schon in der DB
 				return;
 			}
@@ -605,7 +605,6 @@ public class MainControllerEditMode extends MainController implements Initializa
 			
 			//Welche ID hat das neue Bild?
 			ResultSet set = SendSQLRequest.sendSQL(selectIdRequest);
-			
 			int id = -1; 
 			while(set.next()) {
 				id = set.getInt(1);
