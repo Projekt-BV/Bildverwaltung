@@ -112,7 +112,7 @@ public abstract class MainController {
 	
 	// Fields
 	Database database = new Database();
-	static Album selectedAlbum;
+	public static Album selectedAlbum;
 	static boolean didSwitchBack = true;
 	protected ImageContainer clickedOnImage;
 	protected static String currentLanguage = "en";

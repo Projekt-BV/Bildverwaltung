@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import controller.MainController;
 import controller.MainControllerGalleryMode;
 import database.SendSQLRequest;
 import javafx.application.Application;
@@ -68,6 +69,7 @@ public class FileImport extends Application {
         	String sqlrequest ="INSERT INTO fotos (Datum,Fotoname,Pfad) VALUES" + "('" + date + "','"+ file.getName() +"', 'file://" +file.toURI().getPath()+ "');";
         	tmpRs = SendSQLRequest.sendSQL(sqlrequest);
         	String foo= "select id from fotos where fotoname='"+file.getName()+"';";
+        	String foo2 = "";
         	tmpRs = SendSQLRequest.sendSQL(foo);
         	
         	
@@ -77,12 +79,14 @@ public class FileImport extends Application {
     	    while(tmpRs.next())
     	    {
     	        // eine zeile ausgeben
-    	        for(int i=1; i<=cols; i++)
+    	        for(int i=1; i<=cols; i++) {
     	            //System.out.print(tmpRs.getString(i)+"\t");
     	        	foo = "INSERT INTO albumfoto (AlbumID, FotoID) VALUES"+ "(1, '"+ tmpRs.getString(i)+ "');";
-    	 
+    	        	foo2 = "INSERT INTO albumfoto (AlbumID, FotoID) VALUES("+ MainController.selectedAlbum.getId() + ", '"+ tmpRs.getString(i)+ "');";
+    	        }
     	    }
     	    tmpRs = SendSQLRequest.sendSQL(foo);
+    	    tmpRs = SendSQLRequest.sendSQL(foo2);
         } catch (SQLException ex) {
             Logger.getLogger(
                 FileImport.class.getName()).log(
