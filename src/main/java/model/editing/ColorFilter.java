@@ -21,10 +21,9 @@ public class ColorFilter {
 	
 	/**
 	 * Colorfilters an image. See class documentation for the number and its referenced color
-	 * @author Julian Einspenner
 	 * @param img is the image which is going to be colorfiltered
 	 * @param color is the color the image should have after filtering (possible strings: red, green, blue, yellow, violet, aqua)
-	 * @return
+	 * @return The filtered image
 	 */
 	public static Image filterCoulours(Image img, int color) {
 		BufferedImage bimg = SwingFXUtils.fromFXImage(img, null);
@@ -75,7 +74,11 @@ public class ColorFilter {
 		return SwingFXUtils.toFXImage(bimg, null);
 	}
 		
-		
+	/**
+	 * Filters an image red
+	 * @param colors is the Color-Array if the images pixels
+	 * @return the filtered colors
+	 */
 	public static Color[] makeItRed(Color[] colors) {
 		for(int i = 0; i < colors.length; i++) {
 			int red = colors[i].getRed();
@@ -84,6 +87,11 @@ public class ColorFilter {
 		return colors;
 	}
 	
+	/**
+	 * Filters an image green
+	 * @param colors is the Color-Array if the images pixels
+	 * @return the filtered colors
+	 */
 	private static Color[] makeItGreen(Color[] colors) {
 		for(int i = 0; i < colors.length; i++) {
 			int green = colors[i].getGreen();
@@ -92,6 +100,11 @@ public class ColorFilter {
 		return colors;
 	}
 	
+	/**
+	 * Filters an image blue
+	 * @param colors is the Color-Array if the images pixels
+	 * @return the filtered colors
+	 */
 	public static Color[] makeItBlue(Color[] colors) {
 		for(int i = 0; i < colors.length; i++) {
 			int blue = colors[i].getBlue();
@@ -100,6 +113,11 @@ public class ColorFilter {
 		return colors;
 	}
 	
+	/**
+	 * Filters an image yellow
+	 * @param colors is the Color-Array if the images pixels
+	 * @return the filtered colors
+	 */
 	private static Color[] makeItYellow(Color[] colors) {
 		for(int i = 0; i < colors.length; i++) {
 			int red = colors[i].getRed();
@@ -109,6 +127,11 @@ public class ColorFilter {
 		return colors;
 	}
 	
+	/**
+	 * Filters an image violet
+	 * @param colors is the Color-Array if the images pixels
+	 * @return the filtered colors
+	 */
 	private static Color[] makeItViolet(Color[] colors) {
 		for(int i = 0; i < colors.length; i++) {
 			int red = colors[i].getRed();
@@ -118,6 +141,11 @@ public class ColorFilter {
 		return colors;
 	}
 	
+	/**
+	 * Filters an image aqua
+	 * @param colors is the Color-Array if the images pixels
+	 * @return the filtered colors
+	 */
 	public static Color[] makeItAqua(Color[] colors) {
 		for(int i = 0; i < colors.length; i++) {
 			int green = colors[i].getGreen();

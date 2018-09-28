@@ -11,8 +11,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  * This class defines albums which have a name, an ID and a collection of images.
- * 
- * @author philpsc
+ * @author Phillip Persch
  */
 public class Album {
 
@@ -23,8 +22,6 @@ public class Album {
 
 	/**
 	 * Constructor for album objects including a non-empty collection of images.
-	 * 
-	 * @author Phillip Persch
 	 * @param name name of the album
 	 * @param id ID of the album
 	 * @param images ArrayList of ImageContainer objects
@@ -38,8 +35,6 @@ public class Album {
 
 	/**
 	 * Convenience constructor with an empty collection of images.
-	 * 
-	 * @author Phillip Persch	
 	 * @param name
 	 * @param id
 	 */
@@ -52,8 +47,6 @@ public class Album {
 	
 	/**
 	 * This method sorts this album's images by date (new to old)
-	 * 
-	 * @author Phillip Persch
 	 */
 	void sortByDate() {
 		images = images.stream()
@@ -63,8 +56,6 @@ public class Album {
 
 	/**
 	 * Getter for field name.
-	 * 
-	 * @author Phillip Persch
 	 * @return the album's name as a String.
 	 */
 	public String getName() {
@@ -73,8 +64,6 @@ public class Album {
 
 	/**
 	 * Setter for field name.
-	 * 
-	 * @author Phillip Persch
 	 * @param name the new name
 	 */
 	public void setName(String name) {
@@ -83,8 +72,6 @@ public class Album {
 
 	/**
 	 * This method returns the nameProperty of this album.
-	 * 
-	 * @author Phillip Persch
 	 * @return observable property of the name, used for binding to other properties
 	 */
 	public final StringProperty nameProperty() {
@@ -93,8 +80,6 @@ public class Album {
 
 	/**
 	 * Getter for field Id.
-	 * 
-	 * @author Phillip Persch
 	 * @return the album's ID
 	 */
 	public int getId() {
@@ -103,8 +88,6 @@ public class Album {
 
 	/**
 	 * Setter for field Id.
-	 * 
-	 * @author Phillip Persch
 	 * @param id the new ID
 	 */
 	public void setId(int id) {
@@ -113,8 +96,6 @@ public class Album {
 
 	/**
 	 * Getter for field images.
-	 * 
-	 * @author Phillip Persch
 	 * @return this album's images
 	 */
 	public ArrayList<ImageContainer> getImages() {
@@ -123,8 +104,6 @@ public class Album {
 
 	/**
 	 * Setter for field images.
-	 * 
-	 * @author Phillip Persch
 	 * @param images the new images
 	 */
 	public void setImages(ArrayList<ImageContainer> images) {
@@ -133,8 +112,6 @@ public class Album {
 	
 	/**
 	 * This method defines how album objects are displayed as Strings.
-	 * 
-	 * @author Phillip Persch
 	 */
 	public String toString() {
 		return this.getName();

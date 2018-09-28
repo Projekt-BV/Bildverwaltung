@@ -11,19 +11,15 @@ import database.SendSQLRequest;
 
 /**
  * This class defines a database which has a collection of albums
- *  
- * @author philpsc 
+ * @author Phillip Persch
  */
 public class Database {
 	
 	private ArrayList<Album> albums;
-	
 
 	/**
 	 * This method reloads the entire list of albums from the database.
 	 * It is called too often in this project. ;)
-	 * 
-	 * @author Phillip Persch
 	 */
 	public void reloadDatabaseContents() {
 		ResultSet albumsResultSet; 
@@ -78,8 +74,6 @@ public class Database {
 	
 	/**
 	 * This method sorts the database's albums alphabetically
-	 * 
-	 * @author Phillip Persch
 	 */
 	private void sortByName() {
 		albums = albums.stream()
@@ -100,8 +94,6 @@ public class Database {
 	
 	/**
 	 * Getter for field albums.
-	 * 
-	 * @author Phillip Persch
 	 * @return this database's albums
 	 */
 	public ArrayList<Album> getAlbums() {
@@ -110,8 +102,6 @@ public class Database {
 
 	/**
 	 * Setter for field albums.
-	 * 
-	 * @author Phillip Persch
 	 * @param albums the new albums
 	 */
 	public void setAlbums(ArrayList<Album> albums) {

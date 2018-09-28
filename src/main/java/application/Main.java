@@ -11,6 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * Main class of this software. Starts and initializes the GUI and its procedure
+ * @author Tobias Reinert
+ */
 public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {

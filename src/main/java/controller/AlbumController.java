@@ -30,7 +30,6 @@ public class AlbumController extends MainController implements Initializable {
 	
 	/**
 	 * This method closes the window and lets the user return to the main screen.
-	 * @author Mario Anklam, Phillip Persch
 	 * @throws ParseException
 	 */
 	@FXML
@@ -48,7 +47,6 @@ public class AlbumController extends MainController implements Initializable {
 	
 	/**
 	 * This method adds an album to the database.
-	 * @author Mario Anklam, Phillip Persch
 	 * @throws SQLException
 	 */
 	@FXML
@@ -71,7 +69,6 @@ public class AlbumController extends MainController implements Initializable {
 
 	/**
 	 * This method initializes the controller.
-	 * @author Phillip Persch
 	 * @param arg0 inhereted from superclass
 	 * @param arg1 inhereted from superclass
 	 */
@@ -84,7 +81,6 @@ public class AlbumController extends MainController implements Initializable {
 
 	/**
 	 * This method gives the albumcontroller an instance of MainController.
-	 * @author Phillip Persch     *
 	 * @param mainController the instance of MainController that wants to add albums
 	 */
 	public void injectMainController(MainController mainController) {

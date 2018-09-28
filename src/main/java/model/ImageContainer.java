@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * Wrapper class for handling images
  * 
- * @author philpsc
+ * @author Phillip Persch
  */
 public class ImageContainer implements Serializable {
 
@@ -27,7 +27,6 @@ public class ImageContainer implements Serializable {
 	/**
 	 * Constructor for ImageContainer objects
 	 * 
-	 * @author Phillip Persch
 	 * @throws ParseException
 	 * @param id
 	 * @param name 
@@ -54,7 +53,6 @@ public class ImageContainer implements Serializable {
 	/**
 	 * Convenience constructor for ImageContainer objects without a tag list.
 	 * 
-	 * @author Phillip Persch
 	 * @throws ParseException
 	 * @param id
 	 * @param name 
@@ -79,7 +77,6 @@ public class ImageContainer implements Serializable {
 	/**
 	 * Getter for the field date.
 	 * 
-	 * @author Phillip Persch
 	 * @return the imageContainers date
 	 */
 	public Date getDate() {
@@ -89,7 +86,6 @@ public class ImageContainer implements Serializable {
 	/**
 	 * Setter for the field date using a Date.
 	 * 
-	 * @author Phillip Persch
 	 * @param date the new date
 	 */
 	public void setDate(Date date) {
@@ -100,7 +96,6 @@ public class ImageContainer implements Serializable {
 	/**
 	 * Setter for the field date using a String
 	 * 
-	 * @author Phillip Persch
 	 * @param date a String representing the new date
 	 */
 	public void setDate(String date) {
@@ -114,7 +109,6 @@ public class ImageContainer implements Serializable {
 	/**
 	 * Getter for the field name.
 	 * 
-	 * @author Phillip Persch
 	 * @return the imageContainer's name
 	 */
 	public String getName() {
@@ -134,7 +128,6 @@ public class ImageContainer implements Serializable {
 	/**
 	 * Getter for the field location
 	 * 
-	 * @author Phillip Persch
 	 * @return the imageContainer's geolocation
 	 */
 	public String getLocation() {
@@ -144,7 +137,6 @@ public class ImageContainer implements Serializable {
 	/**
 	 * Setter for the field location
 	 * 
-	 * @author Phillip Persch
 	 * @param location the new location
 	 */
 	public void setLocation(String location) {
@@ -154,7 +146,6 @@ public class ImageContainer implements Serializable {
 	/**
 	 * Setter for the field path
 	 * 
-	 * @author Phillip Persch
 	 * @param path the new path
 	 */
 	public void setPath(String path) {
@@ -164,7 +155,6 @@ public class ImageContainer implements Serializable {
 	/**
 	 * Getter for the field tags
 	 * 
-	 * @author Phillip Persch
 	 * @return the imageContainer's tag list
 	 */
 	public ArrayList<String> getTags() {
@@ -174,7 +164,6 @@ public class ImageContainer implements Serializable {
 	/**
 	 * Setter for the field tags.
 	 * 
-	 * @author Phillip Persch
 	 * @param tags the new tag list
 	 */
 	public void setTags(ArrayList<String> tags) {
@@ -184,7 +173,6 @@ public class ImageContainer implements Serializable {
 	/**
 	 * Getter for the field Id.
 	 * 
-	 * @author Phillip Persch
 	 * @return the imageContainer's ID
 	 */
 	public int getId() {
@@ -194,7 +182,6 @@ public class ImageContainer implements Serializable {
 	/**
 	 * Getter for the field Path.
 	 * 
-	 * @author Phillip Persch
 	 * @return the path where the imageContainer is stored
 	 */
 	public String getPath() {

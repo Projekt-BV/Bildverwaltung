@@ -43,7 +43,6 @@ import model.editing.Resizer;
 
 /**
  * This class manages the gallery scene. (first main scene)
- * 
  * @author Phillip Persch, Julian Einspenner, Mario Anklam, Tobias Reinert
  */
 public class MainControllerGalleryMode extends MainController implements Initializable {	
@@ -65,7 +64,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 	/**
 	 * This method initializes the controller.
-	 * @author Phillip Persch
 	 * @param arg0 inhereted from superclass
 	 * @param arg1 inhereted from superclass
 	 */
@@ -81,8 +79,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	/**
 	 * Method to initialize the tilePane containing each album's images.
 	 * This method does way too much.
-	 * 
-	 * @author: Phillip Persch
 	 */
 	@FXML
 	void initializeTilePane() {
@@ -177,8 +173,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	/**
 	 * This method handles the click on an image in the tile pane.
 	 * The result is the transition to the edit scene.
-	 * 
-	 * @author Phillip Persch
 	 * @param e the mouse click on an image that triggered this method call
 	 * @throws IOException
 	 */
@@ -223,8 +217,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	
 	/**
 	 * This method causes the scene to switch to the edit scene.
-	 * 
-	 * @author Phillip Persch
 	 * @param e the mouse event that triggered the scene switch
 	 * @throws IOException
 	 */
@@ -240,8 +232,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 	/**
 	 * This method should get called whenever the gallery scene needs to be reloaded.
-	 * 
-	 * @author Phillip Persch
 	 */	
 	public void reloadMainPage() {
 		initializeListView();
@@ -254,8 +244,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	/**
 	 * This method handles the start of the drag and drop event.
 	 * It determines which image has been selected an initiates the procedure.
-	 * 
-	 * @author Phillip Persch
 	 * @param e the start of the drag and drop event
 	 */
 	@FXML
@@ -277,8 +265,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 	/**
 	 * This method gets called when something is dragged over the tile pane, but not yet dropped.
-	 * 
-	 * @author Phillip Persch
 	 * @param e the event of the mouse being dragged over the tile pane
 	 */
 	@FXML
@@ -300,8 +286,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	 * For example:
 	 * text field's text: "Xmas"
 	 * new image names: "Xmas", "Xmas1", "Xmas2"...
-	 * 
-	 * @author Phillip Persch
 	 */
 	@FXML
 	private void renameAllButtonPressed() {
@@ -320,8 +304,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	 * 2) delete from all albums: deletes the image from the entire database
 	 * 
 	 * There is no operation to delete images from the file system.
-	 * 
-	 * @author Phillip Persch, Tobias Reinert
 	 */
 	private void initializeContextMenu() {
 		Properties config;
@@ -373,8 +355,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 
 	/**
 	 * This method shows the context menu over the selected image when right clicked.
-	 * 
-	 * @author Phillip Persch
 	 * @param e right mouse click 
 	 */
 	@FXML
@@ -389,7 +369,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	/**
 	 * Filters the displayed images in gallery. Checks if the tags contain the
 	 * keyword or the date is between two other dates
-	 * @author Julian Einspenner
 	 */
 	@FXML
 	private void filterButtonPressed() {
@@ -426,7 +405,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	 * Converts from LocalDate() to Date()
 	 * @param dateToConvert is the LocalDate object to convert
 	 * @return is the new Date
-	 * @author Julian Einspenner
 	 */
 	private Date convertToDateViaSqlDate(LocalDate dateToConvert) {
 		if(dateToConvert == null ) {
@@ -440,7 +418,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	 * @param keyword is the keyword to filter
 	 * @param idSet is a Set of image ID's. Will be stocked up, if filter matches
 	 * @return the idSet
-	 * @author Julian Einspenner
 	 */
 	private TreeSet<Integer> filterByKeyword(String keyword, TreeSet<Integer> idSet){
 		for (ImageContainer ic : selectedAlbum.getImages()) {
@@ -460,7 +437,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	 * @param max the "to"-Date
 	 * @param idSet is a Set of image ID's. Will be stocked up, if filter matches
 	 * @return the idSet
-	 * @author Julian Einspenner
 	 */
 	private TreeSet<Integer> filterByDate(Date min, Date max, TreeSet<Integer> idSet) {
 		for (ImageContainer ic : selectedAlbum.getImages()) {
@@ -479,7 +455,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	 * @param max the "to"-Date
 	 * @param idSet is a Set of image ID's. Will be stocked up, if filter matches
 	 * @return the idSet
-	 * @author Julian Einspenner
 	 */
 	private TreeSet<Integer> filterByKeywordAndDate(String keyword, Date min, Date max, TreeSet<Integer> idSet) {
 		for (ImageContainer ic : selectedAlbum.getImages()) {
@@ -498,8 +473,6 @@ public class MainControllerGalleryMode extends MainController implements Initial
 	
 	/**
 	 * This method puts the images that match the filter criteria into the tile pane.
-	 * 
-	 * @author Phillip Persch
 	 * @param idSet a set of image IDs, representing imageContainers who meet the filter criteria
 	 */
 	private void filterGalleryImages(TreeSet<Integer> idSet) {

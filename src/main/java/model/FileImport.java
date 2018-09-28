@@ -98,7 +98,6 @@ public class FileImport extends Application {
     /**
      * Passes the FileImport object an instance of the MainControllerGalleryMode that called it.
      * 
-     * @author Phillip Persch
      * @param mainControllerGalleryMode the instance of MainControllerGalleryMode that requested a file import
      */
 	public void injectMainController(MainControllerGalleryMode mainControllerGalleryMode) {

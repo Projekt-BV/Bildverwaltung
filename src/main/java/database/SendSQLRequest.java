@@ -79,8 +79,7 @@ public class SendSQLRequest {
 	/**
 	 * Fuehrt eine SELECT Sql-Anweissung durch
 	 * 
-	 * @param sqlRequest
-	 *            SQL-Anweissung
+	 * @param sqlRequest SQL-Anweissung
 	 * @return ResultSet
 	 * 
 	 */
@@ -112,7 +111,6 @@ public class SendSQLRequest {
 	/**
 	 * Ueberprueft Datenbank ob Pfade noch gueltig sind -> löscht fehlerhafte
 	 * Einträge
-	 * 
 	 * @throws SQLException
 	 */
 	public static void checkTabelles() throws SQLException {
@@ -164,8 +162,7 @@ public class SendSQLRequest {
 	/**
 	 * Entfernt uebergebens Album aus der DB
 	 * 
-	 * @param album
-	 *            Zulöschendes Album
+	 * @param album Zulöschendes Album
 	 * @throws SQLException
 	 */
 	public static void deleteAlbum(Album album) throws SQLException {
@@ -177,7 +174,6 @@ public class SendSQLRequest {
 	}
 
 	/**
-	 * 
 	 * @param album
 	 * @param ic
 	 * @throws SQLException
@@ -192,7 +188,6 @@ public class SendSQLRequest {
 
 	/**
 	 * Löscht ein Bild aus der Datenbank
-	 * 
 	 * @param ic
 	 * @throws SQLException
 	 */

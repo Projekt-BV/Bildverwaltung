@@ -30,8 +30,6 @@ public class SqlRunner {
 		
 		con = DriverManager.getConnection(url, user, password);
 			
-			System.out.println("Verbindung zu " + url + " wurde hergestellt.");
-		
 			// create statement object
 			statement = con.createStatement();
 			String line = null;

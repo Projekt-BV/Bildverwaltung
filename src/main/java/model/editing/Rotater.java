@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 /**
  * This class is able to rotate a Buffered Image
  * @author Julian Einspenner
- *
  */
 public class Rotater {
 

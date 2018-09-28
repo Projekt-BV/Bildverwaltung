@@ -19,6 +19,13 @@ public class Cutter {
 	private static double imageWidth;
 	private static double imageHeight;
 	
+	/**
+	 * Initializes data to calculate from coordinates by clicking on the image to the correct position of the pixelArray
+	 * @param fitWidth width of the drawable are of the imageView
+	 * @param fitHeight height of the drawable are of the imageView
+	 * @param imageWidth width of the image
+	 * @param imageHeight height of the image
+	 */
 	public static void initValues(double fitWidth, double fitHeight, double imageWidth, double imageHeight) {
 		Cutter.fitWidth = fitWidth;
 		Cutter.fitHeight = fitHeight;
@@ -26,6 +33,10 @@ public class Cutter {
 		Cutter.imageHeight = imageHeight;
 	}
 	
+	/**
+	 * Used to cut an image with a compressed width
+	 * @param e is the mouse event for getting the coordinates of the click at the imageView
+	 */
 	public static void cutCaseOne(MouseEvent e) {
 		double compressFactor = imageHeight / fitHeight;
 		double rightestCoord = imageWidth / compressFactor;
@@ -35,6 +46,10 @@ public class Cutter {
 		y1 = (int) (e.getY() / fitHeight * imageHeight);
 	}
 	
+	/**
+	 * Used to cut an image with a compressed height
+	 * @param e is the mouse event for getting the coordinates of the click at the imageView
+	 */
 	public static void cutCaseTwo(MouseEvent e) {
 		double compressFactor = imageWidth / fitWidth;
 		double lowestCoord = imageHeight / compressFactor;
@@ -43,11 +58,19 @@ public class Cutter {
 		x1 = (int) (e.getX() / fitWidth * imageWidth);
 	}
 	
+	/**
+	 * Used to cut an image with a compressed width AND height
+	 * @param e is the mouse event for getting the coordinates of the click at the imageView
+	 */
 	public static void cutCaseThree(MouseEvent e) {
 		x1 = (int)(e.getX() / fitWidth * imageWidth);   
 		y1 = (int)(e.getY() / fitHeight * imageHeight); 
 	}
 	
+	/**
+	 * Small images with coordinate == position in pixel Array. No conversion is needed
+	 * @param e is the mouse event for getting the coordinates of the click at the imageView
+	 */
 	public static void cutCaseFour(MouseEvent e) {
 		if(imageHeight >= imageWidth) {
 			Cutter.cutCaseOne(e);
@@ -98,5 +121,4 @@ public class Cutter {
 		
 		return SwingFXUtils.toFXImage(bimg2, null);
 	}
-	
 }

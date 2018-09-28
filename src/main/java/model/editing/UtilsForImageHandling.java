@@ -2,11 +2,14 @@ package model.editing;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * Utils class for pixel operations
+ * @author Julian Einspenner
+ */
 public class UtilsForImageHandling {
 
 	/**
 	 * Generates a pixel array
-	 * @author Julian Einspenner
 	 * @param is your picture source
 	 * @return the array 
 	 */
@@ -25,5 +28,4 @@ public class UtilsForImageHandling {
 		}
 		return pixels;
 	}
-	
 }

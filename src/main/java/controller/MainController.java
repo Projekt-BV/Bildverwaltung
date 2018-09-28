@@ -120,7 +120,6 @@ public abstract class MainController {
 
 	/**
 	 * Method to initialize the listView containing the album names.
-	 * 
 	 * @throws ParseException
 	 */
 	public void initializeListView() {
@@ -150,8 +149,6 @@ public abstract class MainController {
 	
 	/**
 	 * Getter for field database.
-	 * 
-	 * @author Phillip Persch
 	 * @return the database this controller works with
 	 */
 	public Database getDatabase() {
@@ -183,7 +180,6 @@ public abstract class MainController {
 	
 	/**
 	 * This method exits the program.
-	 * @author Phillip Persch
 	 */
 	@FXML
 	private void exit() {
@@ -210,8 +206,6 @@ public abstract class MainController {
 	/**
 	 * This method opens a new stage for adding albums to the database.
 	 * The new stage is managed by an instance of AlbumController.
-	 * 
-	 * @author Mario Anklam, Phillip Persch, Tobias Reinert
 	 * @throws IOException
 	 */
 	@FXML
@@ -246,7 +240,6 @@ public abstract class MainController {
 
 	/**
 	 * This method deletes the selected album from the database.
-	 * 
 	 * @param e the event that triggers the deletion of an album
 	 * @throws SQLException
 	 * @throws IOException
@@ -275,8 +268,6 @@ public abstract class MainController {
 
 	/**
 	 * This method puts the window to fullscreen or maximized, depending on the class of the caller
-	 * 
-	 * @author Phillip Persch
 	 * @throws IOException
 	 */
 	@FXML
@@ -310,8 +301,6 @@ public abstract class MainController {
 
 	/**
 	 * This method asks for the new name, calls the renameImage function in EditMetaData and refreshes the model from the database
-	 * 
-	 * @author Phillip Persch
 	 */
 	protected void initializeRenameDialog() {
 		RenameImage ri = new RenameImage();
@@ -377,8 +366,6 @@ public abstract class MainController {
 
 	/**
 	 * Allows to switch between languages
-	 * 
-	 * @author Tobias Reinert
 	 * @throws IOException
 	 */
 	@FXML
@@ -473,8 +460,6 @@ public abstract class MainController {
 
 	/**
 	 * This class defines custom cells for the listView.
-	 *  
-	 * @author Phillip Persch
 	 */
 	class AlbumListCell extends ListCell<Album> {
 
@@ -522,8 +507,6 @@ public abstract class MainController {
 
 		/**
 		 * This method sets visuals and functionality for each cell.
-		 * 
-		 * @author Phillip Persch
 		 * @param item the album the cell belongs to
 		 * @param empty tells if the cell is empty
 		 */
