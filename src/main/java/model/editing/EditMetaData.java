@@ -16,7 +16,6 @@ public class EditMetaData {
 	/**
 	 * This function generates the SQL-Statements to save an images metadata to the
 	 * database
-	 * @author Julian Einspenner
 	 * @param title is the name of the image
 	 * @param location is the location where this photo was shot
 	 * @param date is a time stamp of the image
@@ -52,7 +51,6 @@ public class EditMetaData {
 
 	/**
 	 * Generates the SQL-Statement for setting title, date and location
-	 * @author Julian Einspenner
 	 * @param title name of the image
 	 * @param date time stamp of the image
 	 * @param location location of the image
@@ -65,7 +63,6 @@ public class EditMetaData {
 
 	/**
 	 * Generates the SQL-Statement for deleting an images tags
-	 * @author Julian Einspenner
 	 * @param id is the unique identifier of the image in database
 	 * @return is the SQL-Statement
 	 */
@@ -78,7 +75,6 @@ public class EditMetaData {
 	 * This method renames an image.
 	 * If the corresponding text field is not empty, it are renamed to:
 	 * the textfield's text + an incrementing integer.
-	 * @author Phillip Persch
 	 * @param imageContainer the image to be renamed
 	 * @param newName the new name
 	 * @return is true only if the renaming was successful
