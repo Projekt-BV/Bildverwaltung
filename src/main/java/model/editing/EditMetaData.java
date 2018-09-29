@@ -9,7 +9,7 @@ import model.ImageContainer;
 
 /**
  * Class to edit metadata of displayed images
- * @author Julian Einspenner, Phillip Persch
+ * @author Raphaela Wagner, Julian Einspenner, Phillip Persch
  */
 public class EditMetaData {
 

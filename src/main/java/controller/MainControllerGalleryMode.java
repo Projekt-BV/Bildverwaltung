@@ -43,7 +43,7 @@ import model.editing.Resizer;
 
 /**
  * This class manages the gallery scene. (first main scene)
- * @author Phillip Persch, Julian Einspenner, Mario Anklam, Tobias Reinert
+ * @author Phillip Persch, Julian Einspenner, Mario Anklam, Tobias Reinert, Raphaela Wagner
  */
 public class MainControllerGalleryMode extends MainController implements Initializable {	
 	

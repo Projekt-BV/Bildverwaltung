@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 
 /**
  * Class makes it possible to resize an image
- * @author Julian Einspenner
+ * @author Thomas Spanier, Julian Einspenner
  */
 public class Resizer {
 

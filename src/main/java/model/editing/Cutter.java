@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 
 /**
  * Class for cutting an image to select a preferred area of it
- * @author Julian Einspenner
+ * @author Raphaeala Wagner
  */
 public class Cutter {
 	

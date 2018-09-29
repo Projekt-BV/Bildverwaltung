@@ -11,7 +11,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  * This class defines albums which have a name, an ID and a collection of images.
- * @author Phillip Persch
+ * @author Phillip Persch, Aude Takam Nana
  */
 public class Album {
 

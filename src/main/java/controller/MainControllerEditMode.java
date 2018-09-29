@@ -53,7 +53,7 @@ import model.editing.Rotater;
 /**
  * This class manages the edit image scene. (second main scene)
  * 
- * @author Julian Einspenner, Phillip Persch, Mario Anklam, Tobias Reinert 
+ * @author Julian Einspenner, Phillip Persch, Mario Anklam, Tobias Reinert, Thomas Spanier
  */
 public class MainControllerEditMode extends MainController implements Initializable {
 

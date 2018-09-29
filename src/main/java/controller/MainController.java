@@ -41,7 +41,7 @@ import model.editing.RenameImage;
  * This abstract class gives the basis for both main scenes of the app (gallery scene and edit scene).
  * It offers all the functionalities, that both controllers have in common, to reduce redundant code.
  * 
- * @author Phillip Persch, Tobias Reinert, Mario Anklam, Julian Einspenner
+ * @author Phillip Persch, Tobias Reinert, Mario Anklam, Raphaela Wagner, Aude Takam Nana
  */
 public abstract class MainController {
 

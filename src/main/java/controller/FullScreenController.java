@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 /**
  * This class manages the fullscreen scene while displaying one large image.
- * @author Phillip Persch
+ * @author Aude Takam Nana
  */
 public class FullScreenController implements Initializable {
 

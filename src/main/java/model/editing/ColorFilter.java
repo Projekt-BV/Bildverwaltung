@@ -15,7 +15,7 @@ import java.awt.Color;
  * 5 -> Yellow
  * 6 -> Violet
  * 7 -> Aqua
- * @author Julian Einspenner
+ * @author Julian Einspenner, Aude Takam Nana
  */
 public class ColorFilter {
 	
