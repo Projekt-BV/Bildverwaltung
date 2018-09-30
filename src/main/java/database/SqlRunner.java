@@ -8,6 +8,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * This Class creates Database and the tables for the aplication
+ *
+ */
 public class SqlRunner {
 	public static void main(String[] args) {
 		try {

@@ -12,6 +12,12 @@ import java.sql.Statement;
 import model.Album;
 import model.ImageContainer;
 
+/**
+ * This class manage the conection with the database and sends SQL-Requests
+ * 
+ *
+ */
+
 public class SendSQLRequest {
 
 	private static final String url = "jdbc:mariadb://localhost:3306/prog3_db";

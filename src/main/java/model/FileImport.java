@@ -18,6 +18,11 @@ import javafx.application.Application;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * This class manage the file import to the database
+ *
+ */
+
 public class FileImport extends Application {
 		 
     private MainControllerGalleryMode mainController;
